@@ -13,9 +13,14 @@
 			
 			\begin{packed_enum}
 				
-				\item Dionik 1
-				\item Dionik 2				
-				\item ...
+				\item Roditelji
+				\item Zaposlenici u zdravstvenim ustanovama
+					\begin{packed_enum}
+						\item Liječnici obiteljske medicine
+						\item Pedijatri
+					\end{packed_enum}				
+				\item Administrator
+				\item Razvojni tim
 				
 			\end{packed_enum}
 			
@@ -23,30 +28,78 @@
 			
 			
 			\begin{packed_enum}
-				\item  \underbar{Aktor 1 (inicijator) može:}
+				\item  \underbar{Neregistrirani/neprijavljeni korisnik (inicijator) može:}
 				
 				\begin{packed_enum}
 					
-					\item funkcionalnost 1
-					\item funkcionalnost 2
-					\begin{packed_enum}
-						
-						\item  podfunkcionalnost 1 
-						\item  podfunkcionalnost 2
-				
-					\end{packed_enum}
-					\item  funkcionalnost 3
+					\item pročitati opis stranice
+					\item se registrirati u sustav, za što mu je potreban OIB te lozinka
+					\item se prijaviti u sustav, za što mu je potreban OIB te lozinka
 					
 				\end{packed_enum}
 			
-				\item  \underbar{Aktor 2 (sudionik) može:}
+				\item  \underbar{Roditelj (inicijator) može:}
 				
 				\begin{packed_enum}
 					
-					\item funkcionalnost 1
-					\item funkcionalnost 2
+					\item pregledavati i mijenjati svoje osobne podatke na svom profilu (adresa, mail poslodavca, broj mobitela)
+					\item pregledavati i mijenjati osobne podatke svoje djece na njihovim profilima (adresa, mail škole/vrtića)
+					\item pregledavati obavijesti o odobrenom bolovanju od strane liječnika ili poslanoj ispričnici u školu djeteta
+					\item učitati nalaz dobiven temeljem usluge u privatnoj ustanovi te za njega zatražiti povratnu informaciju od liječnika ili pedijatra
+					\item pregledavati obavijesti o pristiglim nalazima iz laboratorija
+					\item pregledavati potvrde o naručivanju na određeni pregled za sebe ili svoju djecu s prikazanom lokacijom pregleda
+					\item pregledavati povijest posjeta liječniku i dijagnoze za sebe i svoju djecu
+				\end{packed_enum}
+				
+				\item  \underbar{Liječnik obiteljske medicine (inicijator) može:}
+				
+				\begin{packed_enum}
+					
+					\item pregledavati popis pacijenata prijavljenih kod njega (roditelja)
+					\item evidentirati pregled pacijenta te događaje na njemu te utvrditi bolest čime se šalje mail poslodavcu
+					\item odobriti preporuku za bolovanje za roditelja koju je izdao pedijatar
+					\item poslati obavijest roditelju o pristiglom nalazu iz laboratorija
+					\item pregledavati nalaze koji su u sustav učitani od strane roditelja te odgovoriti na njih
+					\item naručiti pacijenta na specijalistički pregled
+				\end{packed_enum}
+				
+				\item  \underbar{Pedijatar (inicijator) može:}
+				
+				\begin{packed_enum}
+					
+					\item pregledavati popis sve neprijavljene djece i prijaviti ih kod sebe
+					\item pregledavati popis sve djece prijavljene kod njega
+					\item izdati preporuku za bolovanje roditelju čije je dijete bolesno
+					\item evidentirati pregled djeteta te događaje na njemu te utvrditi bolest čime se šalje ispričnica u školu
+					\item poslati obavijest roditelju o pristiglom nalazu iz laboratorija
+					\item pregledavati nalaze koji su u sustav učitani od strane roditelja te odgovoriti na njih
+					\item naručiti dijete na specijalistički pregled
 					
 				\end{packed_enum}
+				
+				\item  \underbar{Administrator (inicijator) može:}
+				
+				\begin{packed_enum}
+					
+					\item vidjeti popis svih registriranih korisnika i njihovih osobnih podataka
+					\item brisati korisnike
+					\item mijenjati ulogu korisnika (liječnik obiteljske medicine, pedijatar, roditelj)
+					\item unijeti registre djece i roditelja (za svaku osobu ime, prezime i OIB)
+					\item registriranom roditelju pridijeliti liječnika obiteljske medicine
+					\item registriranog roditelja povezati s djetetom čiji podaci postoje u sustavu
+					
+				\end{packed_enum}
+				
+				\item  \underbar{Baza podataka (sudionik):}
+				
+				\begin{packed_enum}
+					
+					\item pohranjuje podatke o svim registriranim korisnicima i njihovim ulogama
+					\item pohranjuje podatke o postojećim ustanovama i pregledima koje je moguće obaviti u svakoj
+					
+				\end{packed_enum}
+				
+				
 			\end{packed_enum}
 			
 			\eject 
@@ -61,40 +114,312 @@
 					\textit{Funkcionalne zahtjeve razraditi u obliku obrazaca uporabe. Svaki obrazac je potrebno razraditi prema donjem predlošku. Ukoliko u nekom koraku može doći do odstupanja, potrebno je to odstupanje opisati i po mogućnosti ponuditi rješenje kojim bi se tijek obrasca vratio na osnovni tijek.}\\
 					
 
-					\noindent \underbar{\textbf{UC$<$broj obrasca$>$ -$<$ime obrasca$>$}}
+					\noindent \underbar{\textbf{UC1 - Registracija}}
 					\begin{packed_item}
 	
-						\item \textbf{Glavni sudionik: }$<$sudionik$>$
-						\item  \textbf{Cilj:} $<$cilj$>$
-						\item  \textbf{Sudionici:} $<$sudionici$>$
-						\item  \textbf{Preduvjet:} $<$preduvjet$>$
+						\item \textbf{Glavni sudionik: }Korisnik
+						\item  \textbf{Cilj:} Stvoriti korisnički račun za pristup sustavu
+						\item  \textbf{Sudionici:} Baza podataka
+						\item  \textbf{Preduvjet:} Administrator je u bazi podataka unio osnovne informacije o korisniku (ime, prezime, OIB)
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
 	
-							\item $<$opis korak jedan$>$
-							\item $<$opis korak dva$>$
-							\item $<$opis korak tri$>$
-							\item $<$opis korak četiri$>$
-							\item $<$opis korak pet$>$
+							\item Korisnik na početnoj stranici stisne na opciju za registraciju.
+							\item Korisnik unosi svoj OIB te željenu lozinku
+							\item Korisnik prima obavijest o uspješnoj registraciji
 						\end{packed_enum}
 						
 						\item  \textbf{Opis mogućih odstupanja:}
 						
 						\item[] \begin{packed_item}
 	
-							\item[2.a] $<$opis mogućeg scenarija odstupanja u koraku 2$>$
+							\item[2.a] Odabir OIB-a za koji je zabilježeno da se osoba već registrirala u sustav
 							\item[] \begin{packed_enum}
 								
-								\item $<$opis rješenja mogućeg scenarija korak 1$>$
-								\item $<$opis rješenja mogućeg scenarija korak 2$>$
+								\item Sustav obavještava korisnika o neuspjeloj registraciji i prikaže mu poruku greške
+								
 								
 							\end{packed_enum}
-							\item[2.b] $<$opis mogućeg scenarija odstupanja u koraku 2$>$
-							\item[3.a] $<$opis mogućeg scenarija odstupanja  u koraku 3$>$
+							
 							
 						\end{packed_item}
 					\end{packed_item}
+					
+					\noindent \underbar{\textbf{UC2 - Prijava u sustav}}
+					\begin{packed_item}
+						
+						\item \textbf{Glavni sudionik: }Korisnik
+						\item  \textbf{Cilj:} Dobiti pristup korisničkom sučelju
+						\item  \textbf{Sudionici:} Baza podataka
+						\item  \textbf{Preduvjet:} Korisnik je registriran
+						\item  \textbf{Opis osnovnog tijeka:}
+						
+						\item[] \begin{packed_enum}
+							
+							\item Korisnik na početnoj stranici stisne na opciju za prijavu u sustav.
+							\item Korisnik unosi svoj OIB te odgovarajuću lozinku
+							\item Korisnik prima obavijest o uspješnoj prijavi i preusmjeren je na stranicu svog profila
+						\end{packed_enum}
+						
+						\item  \textbf{Opis mogućih odstupanja:}
+						
+						\item[] \begin{packed_item}
+							
+							\item[2.a] OIB nije registriran u sustav ili lozinka ne odgovara navedenom OIB-u.
+							\item[] \begin{packed_enum}
+								
+								\item Sustav obavještava korisnika o neuspjeloj prijavi i prikaže mu poruku greške.
+		
+								
+							\end{packed_enum}
+							
+						\end{packed_item}
+					\end{packed_item}
+					
+					\noindent \underbar{\textbf{UC3 - Pregled opisa aplikacije}}
+					\begin{packed_item}
+						
+						\item \textbf{Glavni sudionik: }Korisnik
+						\item  \textbf{Cilj:} Pregledati osnovne informacije o aplikaciji.
+						\item  \textbf{Sudionici:} Baza podataka
+						\item  \textbf{Preduvjet:} -
+						\item  \textbf{Opis osnovnog tijeka:}
+						
+						\item[] \begin{packed_enum}
+							
+							\item Korisnik otvori početnu stranicu aplikacije.
+							\item Na početnoj stranici se prikazuju opis i svrha aplikacije te se nude opcije registracije i prijave u sustav (ako korisnik nije prijavljen).
+						\end{packed_enum}
+						
+					
+					\end{packed_item}
+					
+					\noindent \underbar{\textbf{UC4.1 - Pregled profila}}
+					\begin{packed_item}
+						
+						\item \textbf{Glavni sudionik: }Roditelj
+						\item  \textbf{Cilj:} Pregledati svoj profil i osobne podatke na njemu
+						\item  \textbf{Sudionici:} Baza podataka
+						\item  \textbf{Preduvjet:} Roditelj je prijavljen
+						\item  \textbf{Opis osnovnog tijeka:}
+						
+						\item[] \begin{packed_enum}
+							
+							\item Roditelj odabere opciju "Pregled profila" te u izborniku odabere opciju "Moj profil" (nakon prijave se automatski preusmjerava na stranicu profila).
+							\item Aplikacija prikazuje osobne podatke roditelja (ime, prezime, OIB, adresa, mail poslodavca, broj mobitela, liječnik obiteljske medicine).
+						\end{packed_enum}
+						
+						
+					\end{packed_item}
+					
+					\noindent \underbar{\textbf{UC4.2 - Pregled profila djeteta}}
+					\begin{packed_item}
+						
+						\item \textbf{Glavni sudionik: }Roditelj
+						\item  \textbf{Cilj:} Pregledati profil djeteta i osobne podatke na njemu
+						\item  \textbf{Sudionici:} Baza podataka
+						\item  \textbf{Preduvjet:} Roditelj je prijavljen te je administrator povezao roditeljima s njegovom djecom koja postoje u sustavu.
+						\item  \textbf{Opis osnovnog tijeka:}
+						
+						\item[] \begin{packed_enum}
+							
+							\item Roditelj odabere opciju "Pregled profila" te u izborniku odabere ime djeteta čiji profil želi pregledati.
+							\item Aplikacija prikazuje osobne podatke djeteta (ime, prezime, OIB, adresa, mail škole/vrtića, pedijatar)
+						\end{packed_enum}
+						
+						\item  \textbf{Opis mogućih odstupanja:}
+						
+						\item[] \begin{packed_item}
+							
+							\item[1.a] Dijete još nije povezano s roditeljem u sustavu.
+							\item[] \begin{packed_enum}
+								
+								\item Roditelj neće imati opciju pregleda profila tog djeteta.
+								
+								
+							\end{packed_enum}
+						
+							
+						\end{packed_item}
+					\end{packed_item}
+					
+					\noindent \underbar{\textbf{UC5.1 - Promjena osobnih podataka}}
+					\begin{packed_item}
+						
+						\item \textbf{Glavni sudionik: }Roditelj
+						\item  \textbf{Cilj:} Ažurirati osobne podatke koje roditelj smije mijenjati (adresa, mail poslodavca, broj mobitela)
+						\item  \textbf{Sudionici:} Baza podataka
+						\item  \textbf{Preduvjet:} Roditelj je prijavljen
+						\item  \textbf{Opis osnovnog tijeka:}
+						
+						\item[] \begin{packed_enum}
+							
+							\item Roditelj otvori stranicu sa svojim profilom.
+							\item Na stranici profila roditelj bira opciju za promjenu podataka.
+							\item Roditelj sprema podatke.
+							\item Baza podataka se ažurira.
+						\end{packed_enum}
+						
+						\item  \textbf{Opis mogućih odstupanja:}
+						
+						\item[] \begin{packed_item}
+							
+							\item[2.a] Roditelj promijeni svoje osobne podatke ali ne odabere opciju "Spremi promjene".
+							\item[] \begin{packed_enum}
+								
+								\item Sustav obavještava roditelja da nije spremio podatke kada roditelj pokuša izaći iz prozora.
+							\end{packed_enum}
+							
+						\end{packed_item}
+					\end{packed_item}
+					
+					\noindent \underbar{\textbf{UC5.2 - Promjena osobnih podataka djeteta}}
+					\begin{packed_item}
+						
+						\item \textbf{Glavni sudionik: }Roditelj
+						\item  \textbf{Cilj:} Ažurirati osobne podatke o dietetu koje roditelj smije mijenjati (adresa, mail škole/vrtića)
+						\item  \textbf{Sudionici:} Baza podataka
+						\item  \textbf{Preduvjet:} Roditelj je prijavljen i dijete je povezano s roditeljem u sustavu
+						\item  \textbf{Opis osnovnog tijeka:}
+						
+						\item[] \begin{packed_enum}
+							
+							\item Roditelj otvori stranicu sa profilom odgovarajućeg djeteta.
+							\item Na stranici profila djeteta bira opciju za promjenu podataka.
+							\item Roditelj sprema podatke.
+							\item Baza podataka se ažurira.
+						\end{packed_enum}
+						
+						\item  \textbf{Opis mogućih odstupanja:}
+						
+						\item[] \begin{packed_item}
+							
+							\item[2.a] Roditelj promijeni osobne podatke dijeteta ali ne odabere opciju "Spremi promjene".
+							\item[] \begin{packed_enum}
+								
+								\item Sustav obavještava roditelja da nije spremio podatke kada roditelj pokuša izaći iz prozora.
+							\end{packed_enum}
+							
+						\end{packed_item}
+					\end{packed_item}
+					
+					\noindent \underbar{\textbf{UC6 - Učitavanje nalaza u sustav}}
+					\begin{packed_item}
+						
+						\item \textbf{Glavni sudionik: }Roditelj
+						\item  \textbf{Cilj:} Učitati postojeći nalaz u sustav i poslati ga liječniku ili pedijatru na pregled
+						\item  \textbf{Sudionici:} Baza podataka
+						\item  \textbf{Preduvjet:} Roditelj je prijavljen
+						\item  \textbf{Opis osnovnog tijeka:}
+						
+						\item[] \begin{packed_enum}
+							
+							\item Roditelj na stranici bira opciju "Učitati nalaz".
+							\item Roditelj učita nalaz u sustav i odabere na koga se odnosi nalaz (na njega ili na jedno njegovo dijete).
+							\item Roditelj odabere opciju "Pošalji" čime se nalaz šalje liječniku obiteljske medicine (ako se nalaz odnosi na roditelja) ili odgovarajućem pedijatru (ako se nalaz odnosi na dijete).
+							\item Baza podataka se ažurira.
+						\end{packed_enum}
+						
+						\item  \textbf{Opis mogućih odstupanja:}
+						
+						\item[] \begin{packed_item}
+							
+							\item[2.a] Roditelj učita nalaz i odabere osobu na koju se nalaz odnosi ali ne odabere opciju "Pošalji".
+							\item[] \begin{packed_enum}
+								
+								\item Sustav obavještava roditelja da nije poslao podatke kada roditelj pokuša izaći iz prozora.
+							\end{packed_enum}
+							
+							\item[3.a] Roditelj odabere opciju "Pošalji", no nije odabrao na koju osobu se odnosi nalaz.
+							\item[] \begin{packed_enum}
+								
+								\item Sustav obavještava roditelja da nije unio sve potrebne podatke i ostaje na trenutnoj stranici.
+							\end{packed_enum}
+							
+						\end{packed_item}
+					\end{packed_item}
+					
+						\noindent \underbar{\textbf{UC7 - Pregled podataka o naručenom pregledu}}
+					\begin{packed_item}
+						
+						\item \textbf{Glavni sudionik: }Roditelj
+						\item  \textbf{Cilj:} Pregledati podatke o naručenom pregledu: na koga se odnosi pregled i mjesta gdje je moguće obaviti pregled
+						\item  \textbf{Sudionici:} Baza podataka
+						\item  \textbf{Preduvjet:} Roditelj je prijavljen
+						\item  \textbf{Opis osnovnog tijeka:}
+						
+						\item[] \begin{packed_enum}
+							
+							\item Roditelj na stranici bira opciju "Obavijesti".
+							\item Roditelj odabere jednu od obavijesti s naslovom "[NARUČEN PREGLED]".
+							\item Nakon odabira neke od odgovarajućih obavijesti, roditelj može vidjeti na koga se odnosi pregled i koja je vrsta pregleda te može na prikazanom OpenStreetMap pregledu vidjeti u kojim najbližim zdravstvenim ustanovama (s obzirom na adresu roditelja) se pregled može obaviti.
+						\end{packed_enum}
+						
+						\item  \textbf{Opis mogućih odstupanja:}
+						
+						\item[] \begin{packed_item}
+							
+							\item[3.a] Roditelj nije unio svoju adresu u sustav.
+							\item[] \begin{packed_enum}
+								
+								\item Sustav obavještava roditelja da za prikaz mogućih zdravstvenih institucija na mapi roditelj mora ažurirati podatak o svojoj adresi na svom profilu.
+							\end{packed_enum}
+							
+							
+						\end{packed_item}
+					\end{packed_item}
+					
+					\noindent \underbar{\textbf{UC8 - Pregled podataka o odobrenom bolovanju}}
+					\begin{packed_item}
+						
+						\item \textbf{Glavni sudionik: }Roditelj
+						\item  \textbf{Cilj:} Pregledati podatke o odobrenom bolovanju: razlog bolovanja i trajanje bolovanja
+						\item  \textbf{Sudionici:} Baza podataka
+						\item  \textbf{Preduvjet:} Roditelj je prijavljen
+						\item  \textbf{Opis osnovnog tijeka:}
+						
+						\item[] \begin{packed_enum}
+							
+							\item Roditelj na stranici bira opciju "Obavijesti".
+							\item Roditelj odabere jednu od obavijesti s naslovom "[BOLOVANJE]".
+							\item Nakon odabira neke od odgovarajućih obavijesti, roditelj može vidjeti razlog bolovanja (bolest roditelja ili bolest djeteta), trajanje bolovanja te informacija da je odgovarajući mail poslan poslodavcu.
+						\end{packed_enum}
+						
+						\item  \textbf{Opis mogućih odstupanja:}
+						
+						\item[] \begin{packed_item}
+							
+							\item[3.a] Roditelj nije unio mail adresu svog poslodavca.
+							\item[] \begin{packed_enum}
+								
+								\item Unutar obavijesti će biti naznačeno da mail nije poslan poslodavcu jer roditelj u sustav nije unio taj mail.
+							\end{packed_enum}
+							
+							
+						\end{packed_item}
+					\end{packed_item}
+					
+					
+					\noindent \underbar{\textbf{UC9 - Pregled obavijesti o poslanom mailu vrtiću/školi}}
+					\begin{packed_item}
+						
+						\item \textbf{Glavni sudionik: }Roditelj
+						\item  \textbf{Cilj:} Pregledati obavijesti o poslanoj ispričnici vrtiću ili školi
+						\item  \textbf{Sudionici:} Baza podataka
+						\item  \textbf{Preduvjet:} Roditelj je prijavljen, roditelj je na profilu djeteta unio podatak o mail adresi vrtića ili škole
+						\item  \textbf{Opis osnovnog tijeka:}
+						
+						\item[] \begin{packed_enum}
+							
+							\item Roditelj na stranici bira opciju "Obavijesti".
+							\item Roditelj odabere jednu od obavijesti s naslovom "[POSLANA ISPRIČNICA]".
+							\item Nakon odabira neke od odgovarajućih obavijesti, roditelj može vidjeti na koji mail je poslana ispričnica i zbog bolesti kojeg djeteta.
+						\end{packed_enum}
+						
+						
+					\end{packed_item}
+						
 				
 					
 				\subsubsection{Dijagrami obrazaca uporabe}
