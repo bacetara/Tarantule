@@ -287,7 +287,7 @@
 					\begin{packed_item}
 						
 						\item \textbf{Glavni sudionik: }Roditelj
-						\item  \textbf{Cilj:} Ažurirati osobne podatke o dietetu koje roditelj smije mijenjati (adresu, mail škole/vrtića)
+						\item  \textbf{Cilj:} Ažurirati osobne podatke o djetetu koje roditelj smije mijenjati (adresu, mail škole/vrtića)
 						\item  \textbf{Sudionici:} Baza podataka
 						\item  \textbf{Preduvjet:} Roditelj je prijavljen, administrator je povezao roditelja s djetetom
 						\item  \textbf{Opis osnovnog tijeka:}
@@ -326,7 +326,7 @@
 						\item[] \begin{packed_enum}
 							
 							\item Roditelj na početnoj stranici bira opciju "Moj profil".
-							\item Roditelj na svojoj stranici bira opciju "Ućitaj nalaz".
+							\item Roditelj na svojoj stranici bira opciju "Učitaj nalaz".
 							\item Roditelj učita nalaz u sustav i opiše ga ili postavlja pitanje ako to želi.
 							\item Roditelj odabere opciju "Pošalji" čime se nalaz šalje liječniku obiteljske medicine.
 							\item Baza podataka se ažurira.
@@ -484,7 +484,18 @@
 							\item Roditelj odabere jednu od obavijesti s naslovom "[POSLANA ISPRIČNICA]".
 							\item Nakon odabira neke od odgovarajućih obavijesti, roditelj može vidjeti na koji mail je poslana ispričnica.
 						\end{packed_enum}
+						\item  \textbf{Opis mogućih odstupanja:}
 						
+						\item[] \begin{packed_item}
+							
+							\item[2.a] Roditelj nije unio mail adresu vrtića/škole na profilu djeteta.
+							\item[] \begin{packed_enum}
+								
+								\item Ispričnica neće biti poslana (a time roditelj neće nikada ni dobiti obavijest o poslanoj ispričnici).
+							\end{packed_enum}
+							
+							
+						\end{packed_item}
 						
 					\end{packed_item}
 					
@@ -493,6 +504,7 @@
 						
 						\item \textbf{Glavni sudionik: }Roditelj
 						\item  \textbf{Cilj:} Pregledati podatke o prošlim pregledima i dijagnozama
+						\item  \textbf{Sudionici:} Baza podataka
 						\item  \textbf{Preduvjet:} Roditelj je prijavljen
 						\item  \textbf{Opis osnovnog tijeka:}
 						
@@ -511,6 +523,7 @@
 						
 						\item \textbf{Glavni sudionik: }Roditelj
 						\item  \textbf{Cilj:} Pregledati podatke o prošlim pregledima i dijagnozama
+						\item  \textbf{Sudionici:} Baza podataka
 						\item  \textbf{Preduvjet:} Roditelj je prijavljen, administrator je povezao roditelja s djetetom
 						\item  \textbf{Opis osnovnog tijeka:}
 						
@@ -529,6 +542,7 @@
 						
 						\item \textbf{Glavni sudionik: }Roditelj
 						\item  \textbf{Cilj:} Odgovoriti na poruku koju je primio od liječnika
+						\item  \textbf{Sudionici:} Baza podataka
 						\item  \textbf{Preduvjet:} Roditelj je prijavljen u sustav, roditelj je prijavljen kod liječnika, liječnik je poslao poruku
 						\item  \textbf{Opis osnovnog tijeka:}
 						
@@ -561,6 +575,7 @@
 						
 						\item \textbf{Glavni sudionik: }Roditelj
 						\item  \textbf{Cilj:} Odgovoriti na poruku koju je primio od pedijatra u vezi svog djeteta
+						\item  \textbf{Sudionici:} Baza podataka
 						\item  \textbf{Preduvjet:} Roditelj je prijavljen u sustav, administrator je povezao dijete s roditeljem, dijete je prijavljeno kod pedijatra, pedijatar je poslao poruku
 						\item  \textbf{Opis osnovnog tijeka:}
 						
@@ -593,6 +608,7 @@
 						
 						\item \textbf{Glavni sudionik: }Pedijatar
 						\item  \textbf{Cilj:} Pregledati popis djece prijavljene kod njega
+						\item  \textbf{Sudionici:} Baza podataka
 						\item  \textbf{Preduvjet:} Pedijatar je prijavio djecu kod sebe ili je administrator povezao dijete s pedijatrom
 						\item  \textbf{Opis osnovnog tijeka:}
 						
@@ -609,6 +625,7 @@
 						
 						\item \textbf{Glavni sudionik: }Pedijatar
 						\item  \textbf{Cilj:} Pregledati popis neprijavljene djece i prijaviti ih kod sebe
+						\item  \textbf{Sudionici:} Baza podataka
 						\item  \textbf{Preduvjet:} Administrator je unio podatke o djeci, pedijatar je prijavljen u sustav
 						\item  \textbf{Opis osnovnog tijeka:}
 						
@@ -627,6 +644,7 @@
 						
 						\item \textbf{Glavni sudionik: }Pedijatar
 						\item  \textbf{Cilj:} Upisati podatak o obavljenom pregledu djeteta
+						\item  \textbf{Sudionici:} Baza podataka
 						\item  \textbf{Preduvjet:} Pedijatar je prijavljen u sustav, dijete je prijavljeno kod pedijatra
 						\item  \textbf{Opis osnovnog tijeka:}
 						
@@ -660,6 +678,7 @@
 						
 						\item \textbf{Glavni sudionik: }Pedijatar
 						\item  \textbf{Cilj:} Izdati preporuku za bolovanje roditelju bolesnog djeteta
+						\item  \textbf{Sudionici:} Baza podataka
 						\item  \textbf{Preduvjet:} Pedijatar je prijavljen u sustav, dijete je prijavljeno kod pedijatra
 						\item  \textbf{Opis osnovnog tijeka:}
 						
@@ -692,6 +711,7 @@
 						
 						\item \textbf{Glavni sudionik: }Pedijatar
 						\item  \textbf{Cilj:} Roditelju djeteta poslati laboratorijski nalaz djeteta
+						\item  \textbf{Sudionici:} Baza podataka
 						\item  \textbf{Preduvjet:} Pedijatar je prijavljen u sustav, dijete je prijavljeno kod pedijatra
 						\item  \textbf{Opis osnovnog tijeka:}
 						
@@ -724,6 +744,7 @@
 						
 						\item \textbf{Glavni sudionik: }Pedijatar
 						\item  \textbf{Cilj:} Pregledati nalaze djeteta koje su roditelji učitali u sustav
+						\item  \textbf{Sudionici:} Baza podataka
 						\item  \textbf{Preduvjet:} Pedijatar je prijavljen u sustav, dijete je prijavljeno kod pedijatra, pedijatar je primio obavijest o učitanom nalazu
 						\item  \textbf{Opis osnovnog tijeka:}
 						
@@ -742,6 +763,7 @@
 						
 						\item \textbf{Glavni sudionik: }Pedijatar
 						\item  \textbf{Cilj:} Odgovoriti na poruku roditelja u vezi djeteta
+						\item  \textbf{Sudionici:} Baza podataka
 						\item  \textbf{Preduvjet:} Pedijatar je prijavljen u sustav, dijete je prijavljeno kod pedijatra, pedijatar je primio obavijest o učitanom nalazu
 						\item  \textbf{Opis osnovnog tijeka:}
 						
@@ -774,6 +796,7 @@
 						
 						\item \textbf{Glavni sudionik: }Pedijatar
 						\item  \textbf{Cilj:} Naručiti dijete na specijalistički pregled
+						\item  \textbf{Sudionici:} Baza podataka
 						\item  \textbf{Preduvjet:} Pedijatar je prijavljen u sustav, dijete je prijavljeno kod pedijatra
 						\item  \textbf{Opis osnovnog tijeka:}
 						
@@ -806,6 +829,7 @@
 						
 						\item \textbf{Glavni sudionik: }Liječnik obiteljske medicine
 						\item  \textbf{Cilj:} Pregledati popis roditelja prijavljenih kod njega
+						\item  \textbf{Sudionici:} Baza podataka
 						\item  \textbf{Preduvjet:} Liječnik je prijavio roditelja kod sebe ili je administrator povezao roditelja s liječnikom
 						\item  \textbf{Opis osnovnog tijeka:}
 						
@@ -822,6 +846,7 @@
 						
 						\item \textbf{Glavni sudionik: }Liječnik obiteljske medicine
 						\item  \textbf{Cilj:} Pregledati popis neprijavljenih roditelja i prijaviti ih kod sebe
+						\item  \textbf{Sudionici:} Baza podataka
 						\item  \textbf{Preduvjet:} Administrator je unio podatke o roditeljima, liječnik je prijavljen u sustav
 						\item  \textbf{Opis osnovnog tijeka:}
 						
@@ -840,6 +865,7 @@
 						
 						\item \textbf{Glavni sudionik: }Liječnik obiteljske medicine
 						\item  \textbf{Cilj:} Upisati podatak o obavljenom pregledu roditelja
+						\item  \textbf{Sudionici:} Baza podataka
 						\item  \textbf{Preduvjet:} Liječnik je prijavljen u sustav, roditelj je prijavljeno kod liječnika
 						\item  \textbf{Opis osnovnog tijeka:}
 						
@@ -874,6 +900,7 @@
 						
 						\item \textbf{Glavni sudionik: }Liječnik obiteljske medicine
 						\item  \textbf{Cilj:} Odobriti preporuku za bolovanje roditelju bolesnog djeteta koju je izdao pedijatar
+						\item  \textbf{Sudionici:} Baza podataka
 						\item  \textbf{Preduvjet:} Liječnik je prijavljen u sustav, pedijatar je izdao preporuku za bolovanje roditelju zbog bolesti djeteta
 						\item  \textbf{Opis osnovnog tijeka:}
 						
@@ -894,6 +921,7 @@
 						
 						\item \textbf{Glavni sudionik: }Liječnik obiteljske medicine
 						\item  \textbf{Cilj:} Izdati preporuku za bolovanje bolesnom roditelju
+						\item  \textbf{Sudionici:} Baza podataka
 						\item  \textbf{Preduvjet:} Liječnik je prijavljen u sustav, roditelj je prijavljen kod pedijatra
 						\item  \textbf{Opis osnovnog tijeka:}
 						
@@ -926,6 +954,7 @@
 						
 						\item \textbf{Glavni sudionik: }Liječnik obiteljske medicine
 						\item  \textbf{Cilj:} Roditelju poslati njegov laboratorijski nalaz 
+						\item  \textbf{Sudionici:} Baza podataka
 						\item  \textbf{Preduvjet:} Liječnik je prijavljen u sustav, roditelj je prijavljen kod liječnika
 						\item  \textbf{Opis osnovnog tijeka:}
 						
@@ -958,6 +987,7 @@
 						
 						\item \textbf{Glavni sudionik: }Liječnik obiteljske medicine
 						\item  \textbf{Cilj:} Pregledati nalaze koje je pojedini pacijent (roditelj) učitao u sustav
+						\item  \textbf{Sudionici:} Baza podataka
 						\item  \textbf{Preduvjet:} Liječnik je prijavljen u sustav, roditelj je prijavljen kod liječnika, liječnik je primio obavijest o učitanom nalazu
 						\item  \textbf{Opis osnovnog tijeka:}
 						
@@ -976,6 +1006,7 @@
 						
 						\item \textbf{Glavni sudionik: }Liječnik obiteljske medicine
 						\item  \textbf{Cilj:} Odgovoriti na poruku koju je poslao pacijent (roditelj)
+						\item  \textbf{Sudionici:} Baza podataka
 						\item  \textbf{Preduvjet:} Liječnik je prijavljen u sustav, roditelj je prijavljen kod liječnika, liječnik je primio poruku
 						\item  \textbf{Opis osnovnog tijeka:}
 						
@@ -1008,6 +1039,7 @@
 						
 						\item \textbf{Glavni sudionik: }Liječnik obiteljske medicine
 						\item  \textbf{Cilj:} Naručiti roditelja na specijalistički pregled
+						\item  \textbf{Sudionici:} Baza podataka
 						\item  \textbf{Preduvjet:} Liječnik je prijavljen u sustav, roditelj je prijavljen kod liječnika
 						\item  \textbf{Opis osnovnog tijeka:}
 						
@@ -1040,6 +1072,7 @@
 						
 						\item \textbf{Glavni sudionik: }Administrator
 						\item  \textbf{Cilj:} Pregledati sve roditelje i djecu koji su već upisani u sustav
+						\item  \textbf{Sudionici:} Baza podataka
 						\item  \textbf{Preduvjet:} Administrator je prijavljen
 						\item  \textbf{Opis osnovnog tijeka:}
 						
@@ -1070,6 +1103,7 @@
 						
 						\item \textbf{Glavni sudionik: }Administrator
 						\item  \textbf{Cilj:} Prijaviti novu osobu u sustav
+						\item  \textbf{Sudionici:} Baza podataka
 						\item  \textbf{Preduvjet:} Administrator je prijavljen
 						\item  \textbf{Opis osnovnog tijeka:}
 						
@@ -1102,6 +1136,7 @@
 						\item \textbf{Glavni sudionik: }Administrator
 						\item  \textbf{Cilj:} Prijaviti novu osobu u sustav
 						\item  \textbf{Preduvjet:} Administrator je prijavljen, roditelj djeteta kojeg dodajemo već postoji u sustavu.
+						\item  \textbf{Sudionici:} Baza podataka
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
@@ -1133,6 +1168,7 @@
 						
 						\item \textbf{Glavni sudionik: }Administrator
 						\item  \textbf{Cilj:} Prijaviti novu osobu u sustav
+						\item  \textbf{Sudionici:} Baza podataka
 						\item  \textbf{Preduvjet:} Administrator je prijavljen, osoba je prijavljena u sustavu
 						\item  \textbf{Opis osnovnog tijeka:}
 						
