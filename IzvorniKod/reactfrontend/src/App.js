@@ -1,24 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
+import Login from "./Pages/Login";
+import Home from "./Pages/Home"
 
 function App() {
     return (
-        <>
-            <div className="header">
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Login />} />
 
-                <div className="logo"> logo </div>
-                <div className="gumbi">
-                    <div className="register">registracija</div>
-                    <div className="login">prijava</div>
-                </div>
-
-            </div>
-
-            <div className="textbox">
-                Dobro bošli na aplikaciju <i style={{ color: '#65B58A' }}>Ozdravi</i>.. platformu koja sjedinjuje moderne doktore i roditelje djece koja će uskoro ozdraviti.
-            </div>
-            </>
+            </Routes>
+        </BrowserRouter>
 
     );
 }
