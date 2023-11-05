@@ -346,7 +346,7 @@
 						\end{packed_item}
 					\end{packed_item}
 					
-						\noindent \underbar{\textbf{UC6.2 - Učitavanje nalaza djetata u sustav}}
+						\noindent \underbar{\textbf{UC6.2 - Učitavanje nalaza djeteta u sustav}}
 					\begin{packed_item}
 						
 						\item \textbf{Glavni sudionik: }Roditelj
@@ -1142,7 +1142,7 @@
 						\item[] \begin{packed_enum}
 							
 							\item Administrator na početnoj stranici bira opciju "Dodaj dijete".
-							\item Administrator upisuje ime, prezime, OIB djeteta, OIB roditelja (iz liste postojećih OIB-a roditelja u sustavu) i datum rođenja roditelja.
+							\item Administrator upisuje ime, prezime, OIB djeteta, OIB roditelja (iz liste postojećih OIB-a roditelja u sustavu) i datum rođenja djeteta.
 							\item Administrator odabere opciju "Dodaj".
 						\end{packed_enum}
 						
@@ -1237,20 +1237,29 @@
 				
 				\textbf{\textit{dio 1. revizije}}\\
 				
+					\textbf{Obrazac uporabe UC6.2 - Učitavanje nalaza djeteta u sustav, UC14 - Upis podataka o pregledu djeteta obavljenom kod pedijatra i dijagnoza, UC15 - Izdavanje preporuke za bolovanje za roditelja bolesnog djeteta, UC16 - Slanje nalaza iz laboratorija djeteta, Pregled učitanih nalaza djeteta od strane roditelja, UC23 - Odobrenje preporuke za bolovanje za roditelja bolesnog djeteta}\\
+				
+				
+				Ulogirani roditelj učitava simptome svog bolesnog djeteta u web aplikaciju koja ga prosljeđuje pedijatru koji dijete naručuje na pregled te nakon pregleda roditelju šalje laboratorijski nalaz te po mogućnosti šalje ispričnicu za školu/vrtić roditelju te preporuku za bolovanje liječniku. Ako liječnik odobri bolovanje roditelju, preko aplikacije mu pošalje potvrdu.
+				
 				\begin{figure}[H]
 					\includegraphics[width=\textwidth]{slike/SDrplW.PNG} %veličina u odnosu na širinu linije
 					\caption{Sekvencijski dijagram koji opisuje osnovnu mehaniku naručivanja djeteta i roditelja na pregled}
 					\label{fig:promjene7} %label mora biti drugaciji za svaku sliku
 				\end{figure}
 				
-				Referenciranje slike \ref{fig:promjene7} u tekstu.
+				
+				\textbf{Obrazac uporabe UC30.1 - Prijavljivanje novog roditelja u sustav, UC30.2 - Prijavljivanje novog djeteta u sustav}\\
+				
+				Administrator se ulogirava u sustav i na početnoj stranici bira opciju dodaj roditelja te upisuje njegovo ime, prezime, OIB i datum rođenja. Pritiskom na opciju dodaj u bazu podataka se taj roditelj dodaje. Potom Administrator pokuša upisati novo dijete upisom njegovog imena, prezimena OIB-a, datuma rođenja djeteta te iz liste koja mu se aplikaciji proslijedi iz baze podataka odabere OIB roditelja djeteta kojeg želi upisati u sustav. Potom odabere opciju Dodaj te se baza podataka obnovi.
+				\eject
+				
 				\begin{figure}[H]
 					\includegraphics[width=\textwidth]{slike/SDadminapp.PNG} %veličina u odnosu na širinu linije
-					\caption{Sekvencijski dijagram koji opisuje osnovne mehanike upisivanja novih roditelja i nove djece u bazu podataka}
+					\caption{Sekvencijski dijagram za UC30.1 i UC30.2}
 					\label{fig:promjene8} %label mora biti drugaciji za svaku sliku
 				\end{figure}
 				
-				Referenciranje slike \ref{fig:promjene8} u tekstu.
 				
 				
 				\textbf{Obrazac uporabe UC5.1 - Promjena osobnih podataka roditelja, UC5.2 - Promjena osobnih podataka djeteta}\\
