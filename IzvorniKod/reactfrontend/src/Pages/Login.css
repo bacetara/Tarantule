@@ -1,0 +1,35 @@
+input{
+    border-radius:3px;
+    height: 20px;
+    border: none;
+
+}
+
+.container{
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform:translate(-50%, -50%);
+    background: #d9d9d9;
+    padding: 5px;
+
+    display: flex;
+    height: 200px;
+    width: 300px;
+    flex-direction: column;
+    flex-wrap: wrap;
+    flex-flow: column;
+    justify-content: space-around;
+    align-self: center;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.loginbutton{
+    background: #dbdcf7;
+    width: fit-content;
+    align-self: center;
+    padding: 5px;
+    border-radius: 7px;
+    border: none;
+}
