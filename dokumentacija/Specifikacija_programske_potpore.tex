@@ -1209,6 +1209,39 @@
 				
 				\textit{Nacrtati sekvencijske dijagrame koji modeliraju najvažnije dijelove sustava (max. 4 dijagrama). Ukoliko postoji nedoumica oko odabira, razjasniti s asistentom. Uz svaki dijagram napisati detaljni opis dijagrama.}
 				\eject
+				
+				
+				\textbf{Obrazac uporabe UC5.1 - Promjena osobnih podataka roditelja, UC5.2 - Promjena osobnih podataka djeteta}\\
+			
+				
+				Klijent se ulogirava u sustav unosom OIB-a i korisničke lozinke. Nakon provjere postoji li korisnički profil s danim podatcima u bazi, popis dostupnih profila se dohvaća iz baze i ispisuje korisniku. Korisnik odabire profil (vlastiti ili djetetov) te poslužitelj dohvaća podatke iz baze i ispisuje korisnički profil. Odabirom opcije "Pregled osobnih podataka" poslužitelj će iz baze dohvatiti osobne podatke korisnika te ih ispisati na ekran. Korisnik potom uređuje podatke te odabirom opcije "spremi" promjene pohranjuje u bazu. Preglednik će zatim dohvatiti početnu stranicu profila i prikazati ju korisniku.
+				\eject
+				
+				\begin{figure}[H]
+					\includegraphics[scale=0.6]{dijagrami/OsobniPodatci.PNG} %veličina slike u odnosu na originalnu datoteku i pozicija slike
+					\centering
+					\caption{Sekvencijski dijagram za UC5.1 i UC5.2}
+					\label{fig:sekvencijski1}
+				\end{figure}
+				
+				\eject
+				
+				
+				
+					\textbf{Obrazac uporabe UC13 - Prijava novog djeteta kod pedijatra, UC21 - Prijava novog roditelja kod liječnika}\\
+				
+				
+				Liječnik (pedijatar) se ulogirava u sustav unosom OIB-a i korisničke lozinke. Preglednik poziva bazu i provjerava postoji li korisnički profil u bazi nakon čega iz baze dohvaća upisane pacijente dotičnog korisnika te ih ispisuje na ekran. Korisnik odabire opciju "Prijavi novo(g) dijete/roditelja". Preglednik iz baze dohvaća popis neupisanih pacijenata te ih ispisuje na ekran. Odabirom pacijenta preglednik u bazu upisuje novog pacijenta liječniku/pedijatru, dohvaća osvježenu tablicu upisanih pacijenata te korisniku ispisuje početnu stranicu s upisanim pacijentima.
+				
+				
+				\begin{figure}[H]
+					\includegraphics[scale=0.6]{dijagrami/UpisNovogPacijenta.PNG} %veličina slike u odnosu na originalnu datoteku i pozicija slike
+					\centering
+					\caption{Sekvencijski dijagram za UC13 i UC21}
+					\label{fig:sekvencijski2}
+				\end{figure}
+				
+				\eject
 	
 		\section{Ostali zahtjevi}
 		
