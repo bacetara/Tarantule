@@ -21,11 +21,27 @@
 			
 		\textit{Potrebno je opisati koju vrstu i implementaciju baze podataka ste odabrali, glavne komponente od kojih se sastoji i slično.}
 		
+		Za našu web aplikaciju koristiti ćemo relacijsku bazu podataka koja je industrijski standard te najjednostavniji način za rješenje našeg problema. Osnovni element baze je relacija čija su obilježja njeno ime i atributi. Glavna zadaća naše baze je spajanje njenih korisnika i sustava s korisnikom, bilo kroz poruke ili kroz razne obrasce.
+		Entitet ove baze podataka su:
+		
+			\begin{packed_item}
+				\item Roditelj
+				\item Dijete
+				\item Zaposlenik
+				\item Račun
+				\item Poruka
+				\item Bolest
+				\item Bolnice
+			\end{packed_item}
+		
+		
 			\subsection{Opis tablica}
 			
 
 				\textit{Svaku tablicu je potrebno opisati po zadanom predlošku. Lijevo se nalazi točno ime varijable u bazi podataka, u sredini se nalazi tip podataka, a desno se nalazi opis varijable. Svjetlozelenom bojom označite primarni ključ. Svjetlo plavom označite strani ključ}
 				
+				
+				\textbf{Roditelj} Ovaj entitet sadrži sve informacije o roditelju spremljenom u aplikaciji. Njegovi atributi su: OIB, ime, prezime, email njegovog poslodavca, datum rođenja, adresa stanovanja i OIB njihovog zadanog liječnika. Email poslodavca i mjesto stanovanja mogu biti prazni. Ovaj entitet je u \textit{One-to-Many} vezi s entitetom Dijete preko OIB-a,\textit{One-to-Many} vezi s doktorom preko OIB-a, \textit{One-to-One} vezi s računom preko OIB-a, \textit{Many-to-Many} vezi s Poruka preko OIB-a.
 				
 				\begin{longtblr}[
 					label=none,
@@ -35,15 +51,121 @@
 						colspec={|X[6,l]|X[6, l]|X[20, l]|}, 
 						rowhead = 1,
 					} %definicija širine tablice, širine stupaca, poravnanje i broja redaka naslova tablice
-					\hline \SetCell[c=3]{c}{\textbf{korisnik - ime tablice}}	 \\ \hline[3pt]
-					\SetCell{LightGreen}IDKorisnik & INT	&  	Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod  	\\ \hline
-					korisnickoIme	& VARCHAR &   	\\ \hline 
-					email & VARCHAR &   \\ \hline 
-					ime & VARCHAR	&  		\\ \hline 
-					\SetCell{LightBlue} primjer	& VARCHAR &   	\\ \hline 
+					\hline \SetCell[c=3]{c}{\textbf{Roditelj}}	 \\ \hline[3pt]
+					\SetCell{LightGreen}OIB & INT	&  	OIB roditelja  	\\ \hline
+					ime	& VARCHAR & ime roditelja   	\\ \hline 
+					prezime & VARCHAR & prezime roditelja   \\ \hline 
+					mail & VARCHAR	& email poslodavca roditelja (opcionalno)  \\ \hline
+					datum & DATETIME & datum rođenja roditelja   \\ \hline
+					mjesto & VARCHAR & adresa stanovanja (opcionalno)   \\ \hline   
+					\SetCell{LightBlue} OIBzap	& INT & OIB liječnika  	\\ \hline 
 				\end{longtblr}
 				
+				\textbf{Dijete} Ovaj entitet sadrži sve informacije o djetetu spremljenom u aplikaciji. Njegovi atributi su: OIB, ime, prezime, email njegovog poslodavca, datum rođenja, adresa stanovanja, OIB njihovog zadanog liječnika i OIB roditelja. Email vrtića i mjesto stanovanja mogu biti prazni. Ovaj entitet je u \textit{Many-to-One} vezi s entitetom Roditelj preko OIB-a,\textit{One-to-Many} vezi s doktorom preko OIB-a, \textit{Many-to-Many} vezi s Poruka preko OIB-a.
 				
+				\begin{longtblr}[
+					label=none,
+					entry=none
+					]{
+						width = \textwidth,
+						colspec={|X[6,l]|X[6, l]|X[20, l]|}, 
+						rowhead = 1,
+					} %definicija širine tablice, širine stupaca, poravnanje i broja redaka naslova tablice
+					\hline \SetCell[c=3]{c}{\textbf{Dijete}}	 \\ \hline[3pt]
+					\SetCell{LightGreen}OIB & INT	&  	OIB djeteta  	\\ \hline
+					ime	& VARCHAR & ime djeteta   	\\ \hline 
+					prezime & VARCHAR & prezime djeteta   \\ \hline 
+					mail & VARCHAR	& email vrtića djeteta (opcionalno)  \\ \hline
+					datum & DATETIME & datum rođenja djeteta   \\ \hline
+					mjesto & VARCHAR & adresa stanovanja (opcionalno)   \\ \hline   
+					\SetCell{LightBlue} OIBzap	& INT & OIB pedijatra	\\ \hline
+					\SetCell{LightBlue} OIBrod	& INT & OIB roditelja	\\ \hline 
+				\end{longtblr}
+				
+				\textbf{Zaposlenik} Ovaj entitet sadrži sve informacije o zdravstvenom zaposleniku spremljenom u aplikaciji. Njegovi atributi su: OIB, ime, prezime i uloga. Uloga može biti ili liječnik ili pedijatar. Ovaj entitet je u \textit{One-to-Many} vezi s entitetom Roditelj preko OIB-a,\textit{One-to-Many} vezi s Dijete preko OIB-a,\textit{One-to-One} vezi s računom preko OIB-a, \textit{Many-to-Many} vezi s Poruka preko OIB-a.
+				
+				\begin{longtblr}[
+					label=none,
+					entry=none
+					]{
+						width = \textwidth,
+						colspec={|X[6,l]|X[6, l]|X[20, l]|}, 
+						rowhead = 1,
+					} %definicija širine tablice, širine stupaca, poravnanje i broja redaka naslova tablice
+					\hline \SetCell[c=3]{c}{\textbf{Zaposlenik}}	 \\ \hline[3pt]
+					\SetCell{LightGreen}OIB & INT	&  	OIB zaposlenika 	\\ \hline
+					ime	& VARCHAR & ime zaposlenika   	\\ \hline 
+					prezime & VARCHAR & prezime zaposlenika   \\ \hline 
+					uloga & VARCHAR	& profesija (liječnik ili pedijatar)  \\ \hline
+				\end{longtblr}
+				
+				\textbf{Račun} Ovaj entitet sadrži sve informacije o računu korisnika spremljenom u aplikaciji. Njegovi atributi su: OIB, lozinka, povlaštenost. Ako je administratorksi račun onda je atribut povlaštenost jednak 1, ako ne onda je 0. Ovaj entitet je u \textit{One-to-One} vezi s entitetom Roditelj preko OIB-a,\textit{One-to-Many} vezi s Dijete preko OIB-a,\textit{One-to-One} vezi s računom preko OIB-a.
+				
+				\begin{longtblr}[
+					label=none,
+					entry=none
+					]{
+						width = \textwidth,
+						colspec={|X[6,l]|X[6, l]|X[20, l]|}, 
+						rowhead = 1,
+					} %definicija širine tablice, širine stupaca, poravnanje i broja redaka naslova tablice
+					\hline \SetCell[c=3]{c}{\textbf{Račun}}	 \\ \hline[3pt]
+					\SetCell{LightBlue}OIB & INT	&  	OIB korisnika računa 	\\ \hline
+					šifra	& VARCHAR & šifra računa  	\\ \hline 
+					povlaštenost & INT & administratorska prava (0 ili 1)   \\ \hline 
+				\end{longtblr}
+				
+				\textbf{Poruka} Ovaj entitet sadrži sve informacije o porukama spremljenima u aplikaciji. Njegovi atributi su: id, OIBpoš, OIBpri, naslov, tijelo, prilog, tip, dijagnoza. Prilog i dijagnoza mogu biti prazne, ovisno o tipu poruke. Ovaj entitet je u \textit{Many-to-Many} vezama s entitetima Roditelj i Zaposlenik preko OIB-a,\textit{One-to-One} vezi s entitetom Bolest preko id-a.
+				
+				\begin{longtblr}[
+					label=none,
+					entry=none
+					]{
+						width = \textwidth,
+						colspec={|X[6,l]|X[6, l]|X[20, l]|}, 
+						rowhead = 1,
+					} %definicija širine tablice, širine stupaca, poravnanje i broja redaka naslova tablice
+					\hline \SetCell[c=3]{c}{\textbf{Poruka}}	 \\ \hline[3pt]
+					\SetCell{LightGreen}id & INT	&  	identifikacijski ključ poruke	\\ \hline
+					\SetCell{LightBlue} OIBpoš	& INT & OIB pošiljatelja	\\ \hline
+					\SetCell{LightBlue} OIBpri	& INT & OIB primatelja	\\ \hline
+					naslov	& VARCHAR & naslov poruke  	\\ \hline
+					tijelo	& VARCHAR & tekstualni sadržaj poruke  	\\ \hline
+					prilog	& VARCHAR & link na poslanu sliku unutar datotečnog sustava aplikacije (opcionalno)	\\ \hline
+					tip	& VARCHAR & tip poslane poruke (standardna,ispričnica itd.)	\\ \hline
+					\SetCell{LightBlue}dijagnoza	& INT & id dijagnosticirane bolesti (opcionalno)	\\ \hline      
+				\end{longtblr}
+				
+				\textbf{Bolest} Ovaj entitet sadrži sve informacije o bolestima spremljenima u aplikaciji. Njegovi atributi su: id i naziv. Ovaj entitet je u \textit{Many-to-Many} vezama s entitetom Bolnica id-a bolnice,\textit{One-to-One} vezi s entitetom Poruka preko id-a bolesti.
+				
+				\begin{longtblr}[
+					label=none,
+					entry=none
+					]{
+						width = \textwidth,
+						colspec={|X[6,l]|X[6, l]|X[20, l]|}, 
+						rowhead = 1,
+					} %definicija širine tablice, širine stupaca, poravnanje i broja redaka naslova tablice
+					\hline \SetCell[c=3]{c}{\textbf{Bolest}}	 \\ \hline[3pt]
+					\SetCell{LightGreen}id & INT	&  	identifikacijski ključ bolesti	\\ \hline
+					naziv	& VARCHAR & naziv bolesti	\\ \hline   
+				\end{longtblr}
+				
+				\textbf{Bolest} Ovaj entitet sadrži sve informacije o bolnici spremljenima u aplikaciji. Njegovi atributi su: id,naziv i adresa. Ovaj entitet je u \textit{Many-to-Many} vezama s entitetom Bolest preko id-a bolesti.
+				
+				\begin{longtblr}[
+					label=none,
+					entry=none
+					]{
+						width = \textwidth,
+						colspec={|X[6,l]|X[6, l]|X[20, l]|}, 
+						rowhead = 1,
+					} %definicija širine tablice, širine stupaca, poravnanje i broja redaka naslova tablice
+					\hline \SetCell[c=3]{c}{\textbf{Bolest}}	 \\ \hline[3pt]
+					\SetCell{LightGreen}id & INT	&  	identifikacijski ključ bolesti	\\ \hline
+					naziv	& VARCHAR & naziv bolnice	\\ \hline
+					adresa	& VARCHAR & adresa bolnice	\\ \hline    
+				\end{longtblr}
 			
 			\subsection{Dijagram baze podataka}
 				\textit{ U ovom potpoglavlju potrebno je umetnuti dijagram baze podataka. Primarni i strani ključevi moraju biti označeni, a tablice povezane. Bazu podataka je potrebno normalizirati. Podsjetite se kolegija "Baze podataka".}
