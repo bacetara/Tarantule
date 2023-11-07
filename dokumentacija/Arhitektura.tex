@@ -41,7 +41,7 @@
 				\textit{Svaku tablicu je potrebno opisati po zadanom predlošku. Lijevo se nalazi točno ime varijable u bazi podataka, u sredini se nalazi tip podataka, a desno se nalazi opis varijable. Svjetlozelenom bojom označite primarni ključ. Svjetlo plavom označite strani ključ}
 				
 				
-				\textbf{Roditelj} Ovaj entitet sadrži sve informacije o roditelju spremljenom u aplikaciji. Njegovi atributi su: OIB, ime, prezime, email njegovog poslodavca, datum rođenja, adresa stanovanja i OIB njihovog zadanog liječnika. Email poslodavca i mjesto stanovanja mogu biti prazni. Ovaj entitet je u \textit{One-to-Many} vezi s entitetom Dijete preko OIB-a,\textit{One-to-Many} vezi s doktorom preko OIB-a, \textit{One-to-One} vezi s računom preko OIB-a, \textit{Many-to-Many} vezi s Poruka preko OIB-a.
+				\textbf{Roditelj} Ovaj entitet sadrži sve informacije o roditelju spremljenom u aplikaciji. Njegovi atributi su: OIB, ime, prezime, email njegovog poslodavca, datum rođenja, adresa stanovanja i OIB njihovog zadanog liječnika. Email poslodavca i mjesto stanovanja mogu biti prazni. Ovaj entitet je u \textit{One-to-Many} vezi s entitetom Dijete preko OIB-a,\textit{Many-to-One} vezi s doktorom preko OIB-a, \textit{One-to-One} vezi s računom preko OIB-a, \textit{Many-to-Many} vezi s Poruka preko OIB-a.
 				
 				\begin{longtblr}[
 					label=none,
@@ -151,7 +151,7 @@
 					naziv	& VARCHAR & naziv bolesti	\\ \hline   
 				\end{longtblr}
 				
-				\textbf{Bolest} Ovaj entitet sadrži sve informacije o bolnici spremljenima u aplikaciji. Njegovi atributi su: id,naziv i adresa. Ovaj entitet je u \textit{Many-to-Many} vezama s entitetom Bolest preko id-a bolesti.
+				\textbf{Bolnica} Ovaj entitet sadrži sve informacije o bolnici spremljenima u aplikaciji. Njegovi atributi su: id,naziv i adresa. Ovaj entitet je u \textit{Many-to-Many} vezama s entitetom Bolest preko id-a bolesti.
 				
 				\begin{longtblr}[
 					label=none,
@@ -161,7 +161,7 @@
 						colspec={|X[6,l]|X[6, l]|X[20, l]|}, 
 						rowhead = 1,
 					} %definicija širine tablice, širine stupaca, poravnanje i broja redaka naslova tablice
-					\hline \SetCell[c=3]{c}{\textbf{Bolest}}	 \\ \hline[3pt]
+					\hline \SetCell[c=3]{c}{\textbf{Bolnica}	 \\ \hline[3pt]
 					\SetCell{LightGreen}id & INT	&  	identifikacijski ključ bolesti	\\ \hline
 					naziv	& VARCHAR & naziv bolnice	\\ \hline
 					adresa	& VARCHAR & adresa bolnice	\\ \hline    
