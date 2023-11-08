@@ -39,16 +39,22 @@ body {
     flex-wrap: wrap;
 }
 
-.register{
+.gumb {
     text-decoration: none;
-    background-color: #92b9dc;
     margin: 2%;
     text-align: center;
     min-width: 40%;
     padding: 5px;
     border-radius: 10px;
     font-size: 1rem;
+}
 
+#register.gumb {
+    background-color: #92b9dc;
+}
+
+#login.gumb {
+    background-color: #65B58A;
 }
 
 .link_na_stranicu{
@@ -56,23 +62,12 @@ body {
     color: black;
 }
 
-.login{
-    background-color: #65B58A;
-    margin: 2%;
-    min-width: 40%;
-    text-align: center;
-    height: 100%;
-    padding: 5px;
-    border-radius: 10px;
-}
+
 
 .link_na_stranicu:hover{
     color: white;
 }
 
-.link_na_stranicu:hover{
-    color: white;
-}
 
 .textbox {
     position: absolute;
