@@ -132,10 +132,10 @@
 						
 						\item[] \begin{packed_enum}
 	
-							\item Korisnik na početnoj stranici odabire opciju Registriraj se.
+							\item Korisnik na početnoj stranici odabire opciju "Registriraj se".
 							\item Sustav otvara ekran registracije.
 							\item Korisnik unosi svoj OIB te željenu lozinku
-							\item Korisnik potvrđuje unos podataka odabirom akcije Potvrdi.
+							\item Korisnik potvrđuje unos podataka odabirom akcije "Potvrdi".
 							\item Sustav provjerava i utvrđuje da je unos uspješan te obavještava korisnika o uspješnoj registraciji.
 						\end{packed_enum}
 						
@@ -143,7 +143,7 @@
 						
 						\item[] \begin{packed_item}
 	
-							\item[4.a] Korisnik odabere opciju Odustani.
+							\item[4.a] Korisnik odabere opciju "Odustani".
 							\item[] \begin{packed_enum}
 								
 								\item Sustav korisnika vraća na početnu stranicu (korak 1)
@@ -174,10 +174,10 @@
 						
 						\item[] \begin{packed_enum}
 							
-							\item Korisnik na početnoj stranici odabire opciju Prijavi se.
+							\item Korisnik na početnoj stranici odabire opciju "Prijavi se".
 							\item Sustav otvara ekran prijave.
 							\item Korisnik unosi svoj OIB te odgovarajuću lozinku.
-							\item Korisnik odabere opciju Potvrdi.
+							\item Korisnik odabere opciju "Potvrdi".
 							\item Sustav provjerava ispravnost unesenih podataka i utvrđuje da je unos uspješan te prikazuje korisniku ekran njegovih profila.
 						\end{packed_enum}
 						
@@ -185,7 +185,7 @@
 						
 						\item[] \begin{packed_item}
 							
-							\item[4.a] Korisnik odabere opciju Odustani.
+							\item[4.a] Korisnik odabere opciju "Odustani".
 							\item[] \begin{packed_enum}
 								
 								\item Sustav korisnika vraća na početnu stranicu (korak 1).
@@ -300,7 +300,7 @@
 						
 						\item[] \begin{packed_item}
 							
-							\item[7.a] Roditelj promijeni osobne podatke ali odabere opciju Odustani.
+							\item[7.a] Roditelj promijeni osobne podatke ali odabere opciju "Odustani".
 							\item[] \begin{packed_enum}
 								
 								\item Sustav neće pohraniti obavljene promjene i vratit će roditelja na pregled profila (korak 4).
@@ -316,7 +316,7 @@
 						
 						\item \textbf{Glavni sudionik: }Roditelj
 						\item  \textbf{Cilj:} Učitati postojeći nalaz u sustav i poslati ga liječniku ili pedijatru na pregled
-						\item  \textbf{Sudionici:} Baza podataka, liječnik obiteljske medicine, pedijatar
+						\item  \textbf{Sudionici:} Baza podataka, liječnik obiteljske medicine/pedijatar
 						\item  \textbf{Preduvjet:} Roditelj je prijavljen, administrator je povezao roditelja s djetetom
 						\item  \textbf{Opis osnovnog tijeka:}
 						
@@ -336,7 +336,7 @@
 						
 						\item[] \begin{packed_item}
 							
-							\item[6.a] Roditelj učita nalaz ali odabere opciju Odustani.
+							\item[6.a] Roditelj učita nalaz ali odabere opciju "Odustani".
 							\item[] \begin{packed_enum}
 								
 								\item Nalaz se neće poslati i sustav će vratit roditelja na pregled poruka na profilu.
@@ -401,7 +401,7 @@
 						
 						\item[] \begin{packed_item}
 							
-							\item[34.a] Roditelj nije unio mail adresu svog poslodavca.
+							\item[4.a] Roditelj nije unio mail adresu svog poslodavca.
 							\item[] \begin{packed_enum}
 								
 								\item Unutar obavijesti će biti naznačeno da mail nije poslan poslodavcu jer roditelj u sustav nije unio taj mail.
@@ -465,31 +465,35 @@
 					
 				
 					
-					\noindent \underbar{\textbf{UC11.1 - Traži dodatna pojašnjenja liječnika}}
+					\noindent \underbar{\textbf{UC11 - Traži dodatna pojašnjenja liječnika ili pedijatra}}
 					\begin{packed_item}
 						
 						\item \textbf{Glavni sudionik: }Roditelj
-						\item  \textbf{Cilj:} Odgovoriti na poruku koju je primio od liječnika
-						\item  \textbf{Sudionici:} Baza podataka, liječnik obiteljske medicine
-						\item  \textbf{Preduvjet:} Roditelj je prijavljen u sustav, roditelj je prijavljen kod liječnika, liječnik je poslao poruku
+						\item  \textbf{Cilj:} Odgovoriti na poruku koju je primio od liječnika ili pedijatra
+						\item  \textbf{Sudionici:} Baza podataka, liječnik obiteljske medicine/pedijatar
+						\item  \textbf{Preduvjet:} Roditelj je prijavljen u sustav, roditelj je prijavljen kod liječnika/dijete je prijavljeno kod pedijatra, liječnik je poslao poruku/pedijatar je poslao poruku, administrator je povezao dijete s roditeljem
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
 							
-							\item Roditelj na početnoj stranici odabere opciju "Moj Profil".
-							\item Roditelj bira jednu od poruka koju je primio od liječnika.
-							\item Roditelj odabere opciju "Odgovori" i sastavlja svoj odgovor.
-							\item Roditelj odabere opciju "Pošalji".
+							\item Roditelj na početnoj stranici odabere profil osobe za koju želi tražiti dodatna objašnjenja.
+							\item Sustav roditelju vraća pregled poruka profila.
+							\item Roditelj bira jednu od poruka koju je primio od liječnika ili pedijatra (ovisno o profilu).
+							\item Sustav roditelju vraća pregled poruke.
+							\item Roditelj odabere opciju "Odgovori".
+							\item Sustav roditelju vraća novi prozor u kojem roditelj može utipkati svoje pitanje.
+							\item Roditelj utpika svoju poruku i odabere opciju "Pošalji".
+							\item Poruka se pošalje liječniku ili pedijatru i sustav roditelja vrati na pregled poruka profila.
 						\end{packed_enum}
 						
 						\item  \textbf{Opis mogućih odstupanja:}
 						
 						\item[] \begin{packed_item}
 							
-							\item[4.a] Roditelj nije odabrao opciju "Pošalji".
+							\item[7.a] Roditelj odabere opciju "Odustani".
 							\item[] \begin{packed_enum}
 								
-								\item Odgovor neće biti poslan.
+								\item Odgovor neće biti poslan i sustav vraća roditelja na pregled poruka profila.
 							\end{packed_enum}
 							
 							
@@ -498,38 +502,7 @@
 						
 					\end{packed_item}
 					
-						\noindent \underbar{\textbf{UC11.2 - Traženje dodatnih pojašnjenja od pedijatra}}
-					\begin{packed_item}
-						
-						\item \textbf{Glavni sudionik: }Roditelj
-						\item  \textbf{Cilj:} Odgovoriti na poruku koju je primio od pedijatra u vezi svog djeteta
-						\item  \textbf{Sudionici:} Baza podataka, pedijatar
-						\item  \textbf{Preduvjet:} Roditelj je prijavljen u sustav, administrator je povezao dijete s roditeljem, dijete je prijavljeno kod pedijatra, pedijatar je poslao poruku
-						\item  \textbf{Opis osnovnog tijeka:}
-						
-						\item[] \begin{packed_enum}
-							
-							\item Roditelj na početnoj stranici odabere profil odgovarajućeg djeteta.
-							\item Roditelj bira jednu od poruka koju je primio od pedijatra.
-							\item Roditelj odabere opciju "Odgovori" i sastavlja svoj odgovor.
-							\item Roditelj odabere opciju "Pošalji".
-						\end{packed_enum}
-						
-						\item  \textbf{Opis mogućih odstupanja:}
-						
-						\item[] \begin{packed_item}
-							
-							\item[4.a] Roditelj nije odabrao opciju "Pošalji".
-							\item[] \begin{packed_enum}
-								
-								\item Odgovor neće biti poslan.
-							\end{packed_enum}
-							
-							
-						\end{packed_item}
-						
-						
-					\end{packed_item}
+					
 					
 					\noindent \underbar{\textbf{UC12 - Pregledaj popis djece prijavljene kod pedijatra}}
 					\begin{packed_item}
@@ -537,7 +510,7 @@
 						\item \textbf{Glavni sudionik: }Pedijatar
 						\item  \textbf{Cilj:} Pregledati popis djece prijavljene kod njega
 						\item  \textbf{Sudionici:} Baza podataka
-						\item  \textbf{Preduvjet:} Pedijatar je prijavio djecu kod sebe ili je administrator povezao dijete s pedijatrom
+						\item  \textbf{Preduvjet:} Pedijatar je prijavio djecu kod sebe ili je administrator povezao dijete s pedijatrom, pedijatar je prijavljen u sustav
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
@@ -560,8 +533,9 @@
 						\item[] \begin{packed_enum}
 							
 							\item Pedijatar na početnoj stranici bira opciju "Prijavi novo dijete".
+							\item Sustav pedijatru vraća popis djece koja još nisu prijavljena kod nekog pedijatra.
 							\item Pedijatar u popisu neprijavljene djece pronalazi dijete koje želi prijaviti kod sebe i odabere opciju "Prijavi".
-							\item Dijete se sada nalazi u popisu prijavljene djece na početnoj stranici.
+							\item Sustav bilježi da je to dijete sada prijavljeno kod tog pedijatra i vraća pedijatra na popis djece prijavljene kod njega.
 						\end{packed_enum}
 						
 						
@@ -579,19 +553,22 @@
 						\item[] \begin{packed_enum}
 							
 							\item Pedijatar na početnoj stranici iz popisa djece prijavljene kod njega bira dijete čiji pregled želi unijeti.
+							\item Sustav pedijatru vraća pregled poruka s profilom djeteta.
 							\item Pedijatar bira opciju "Dijagnoza".
+							\item Sustav pedijatru vraća prozor u kojem pedijatar može unijeti podatke o pregledu.
 							\item Pedijatar opiše pregled i dijagnozu te opcionalno može odabrati šalje li se ispričnica i preporuka za bolovanje roditelja.
 							\item Pedijatar bira opciju "Pošalji".
+							\item Pregled je zabilježen i sustav vraća pedijatra na pregled poruka s profilom djeteta.
 						\end{packed_enum}
 						
 						\item  \textbf{Opis mogućih odstupanja:}
 						
 						\item[] \begin{packed_item}
 							
-							\item[4.a] Pedijatar nije odabrao opciju "Pošalji".
+							\item[6.a] Pedijatar bira opciju "Odustani".
 							\item[] \begin{packed_enum}
 								
-								\item Podaci neće biti upisani.
+								\item Podaci neće biti upisani i sustav vraća pedijatra na pregled poruka s profilom djeteta.
 							\end{packed_enum}
 							
 							
@@ -613,19 +590,22 @@
 						\item[] \begin{packed_enum}
 							
 							\item Pedijatar na početnoj stranici iz popisa djece prijavljene kod njega bira dijete čijem roditelju želi izdati preporuku za bolovanje.
+							\item Sustav pedijatru vraća pregled poruka s profilom djeteta.
 							\item Pedijatar bira opciju "Dijagnoza".
+							\item Sustav pedijatru vraća prozor u kojem može opisati dijagnozu djeteta.
 							\item Pedijatar opiše razlog izdavanja preporuke te bira opciju "Preporuka za bolovanje roditelja" i opciju "Ispričnica školi/vrtiću".
 							\item Pedijatar bira opciju "Pošalji".
+							\item Sustav pošalje poruku liječniku, a pedijatra vraća na pregled poruka s profilom djeteta.
 						\end{packed_enum}
 						
 						\item  \textbf{Opis mogućih odstupanja:}
 						
 						\item[] \begin{packed_item}
 							
-							\item[4.a] Pedijatar nije odabrao opciju "Pošalji".
+							\item[6.a] Pedijatar bira opciju "Odustani".
 							\item[] \begin{packed_enum}
 								
-								\item Preporuka neće biti upisana.
+								\item Preporuka neće biti upisana i sustav vraća pedijatra na pregled poruka s profilom djeteta.
 							\end{packed_enum}
 							
 							
@@ -646,19 +626,22 @@
 						\item[] \begin{packed_enum}
 							
 							\item Pedijatar na početnoj stranici iz popisa djece prijavljene kod njega bira dijete čiji pregled želi unijeti.
+							\item Sustav pedijatru vraća pregled poruka s profilom djeteta.
 							\item Pedijatar bira opciju "Nalaz iz laboratorija".
+							\item Sustav pedijatru vraća prozor u kojem pedijatar može opisati te priložiti nalaz.
 							\item Pedijatar opiše nalaz te može priložiti dokument biranjem opcije "Prilog" te opcionalno može odabrati šalje li se ispričnica i preporuka za bolovanje roditelja.
 							\item Pedijatar bira opciju "Pošalji".
+							\item Sustav šalje poruku roditelju i pedijatra vraća na pregled poruka s profilom djeteta.
 						\end{packed_enum}
 						
 						\item  \textbf{Opis mogućih odstupanja:}
 						
 						\item[] \begin{packed_item}
 							
-							\item[4.a] Pedijatar nije odabrao opciju "Pošalji".
+							\item[6.a] Pedijatar bira opciju "Odustani".
 							\item[] \begin{packed_enum}
 								
-								\item Nalaz neće biti poslan.
+								\item Nalaz neće biti poslan i sustav vraća pedijatra na pregled poruka s profilom djeteta.
 							\end{packed_enum}
 							
 							
@@ -679,7 +662,9 @@
 						\item[] \begin{packed_enum}
 							
 							\item Pedijatar na početnoj stranici iz popisa djece prijavljene kod njega bira dijete čije nalaze želi vidjeti.
-							\item Pedijatar bira jednu od obavijesti s naslovom [UČITAN NALAZ].
+							\item Sustav pedijatru vraća pregled poruka s profilom djeteta.
+							\item Pedijatar bira jednu od poruka s naslovom "[UČITAN NALAZ]".
+							\item Sustav pedijatru vraća pregled odabrane poruke.
 							\item Pedijatar može pregledati nalaz te dodatna pitanja ili informacije koje je roditelj priložio.
 						\end{packed_enum}
 						
@@ -698,19 +683,23 @@
 						\item[] \begin{packed_enum}
 							
 							\item Pedijatar na početnoj stranici iz popisa djece prijavljene kod njega bira dijete za koje postoji poruka poslana od strane roditelja koja očekuje odgovor.
-							\item Pedijatar odabere jednu od poruka koju je poslao roditelj
-							\item Pedijatar odabere opciju "Odgovori" i sastavlja svoj odgovor.
+							\item Sustav pedijatru vraća pregled poruka s profilom djeteta.
+							\item Pedijatar odabere jednu od poruka koju je poslao roditelj.
+							\item Sustav pedijatru vraća pregled poruke.
+							\item Pedijatar odabere opciju "Odgovori".
+							\item Sustav pedijatru vraća prozor u kojem pedijatar može utipkati svoj odgovor.
 							\item Pedijatar odabere opciju "Pošalji".
+							\item Sustav pošalje poruku roditelju i pedijatra vraća na pregled poruka s profilom djeteta.
 						\end{packed_enum}
 						
 						\item  \textbf{Opis mogućih odstupanja:}
 						
 						\item[] \begin{packed_item}
 							
-							\item[4.a] Pedijatar nije odabrao opciju "Pošalji".
+							\item[7.a] Pedijatar odabere opciju "Odustani".
 							\item[] \begin{packed_enum}
 								
-								\item Odgovor neće biti poslan.
+								\item Odgovor neće biti poslan i sustav vraća pedijatra na pregled poruka s profilom djeteta.
 							\end{packed_enum}
 							
 							
@@ -731,19 +720,22 @@
 						\item[] \begin{packed_enum}
 							
 							\item Pedijatar na početnoj stranici iz popisa djece prijavljene kod njega bira dijete koje želi naručiti na specijalistički pregled.
-							\item Pedijatar odabere opciju "Naručivanje specijalističkog pregleda.
+							\item Sustav pedijatru vraća pregled poruka s profilom djeteta.
+							\item Pedijatar odabere opciju "Naručivanje specijalističkog pregleda".
+							\item Sustav pedijatru vraća prozor u kojem pedijatar bira vrstu pregleda te može utipkati napomenu.
 							\item Pedijatar odabere vrstu pregleda te dodaje napomenu ako to želi.
 							\item Pedijatar odabere opciju "Pošalji".
+							\item Sustav šalje poruku roditelju i pedijatra vraća na pregled poruka s profilom djeteta.
 						\end{packed_enum}
 						
 						\item  \textbf{Opis mogućih odstupanja:}
 						
 						\item[] \begin{packed_item}
 							
-							\item[4.a] Pedijatar nije odabrao opciju "Pošalji".
+							\item[6.a] Pedijatar bira opciju "Odustani".
 							\item[] \begin{packed_enum}
 								
-								\item Dijete neće biti naručeno.
+								\item Dijete neće biti naručeno i sustav vraća pedijatra na pregled poruka s profilom djeteta.
 							\end{packed_enum}
 							
 							
@@ -781,14 +773,15 @@
 						\item[] \begin{packed_enum}
 							
 							\item Liiečnik na početnoj stranici bira opciju "Prijavi novog pacijenta".
+							\item Sustav liječniku vraća popis roditelja koji još nisu prijavljeni kod nekog liječnika.
 							\item Liječnik u popisu neprijavljenih roditelja pronalazi osobu koje želi prijaviti kod sebe i odabere opciju "Prijavi".
-							\item Roditelj se sada nalazi u popisu prijavljenih pacijenata na početnoj stranici.
+							\item Sustav zabilježi da je roditelj sada prijavljen kod tog liječnika i vraća liječnika na popis roditelja prijavljenih kod njega.
 						\end{packed_enum}
 						
 						
 					\end{packed_item}
 					
-					\noindent \underbar{\textbf{UC22 - Upiši podatake o pregledu roditelja obavljenom kod liječnika i dijagnozu}}
+					\noindent \underbar{\textbf{UC22 - Upiši podatke o pregledu roditelja obavljenom kod liječnika i dijagnozu}}
 					\begin{packed_item}
 						
 						\item \textbf{Glavni sudionik: }Liječnik obiteljske medicine
@@ -800,19 +793,22 @@
 						\item[] \begin{packed_enum}
 							
 							\item Liječnik na početnoj stranici iz popisa roditelja prijavljenih kod njega bira roditelja čiji pregled želi unijeti.
+							\item Sustav liječniku vraća pregled poruka s profilom roditelja.
 							\item Liječnik bira opciju "Dijagnoza".
+							\item Sustav liječniku vraća prozor u kojem liječnik može upisati podatke o pregledu.
 							\item Liječnik opiše pregled i dijagnozu te opcionalno može odabrati izdaje li se bolovanje za roditelja.
 							\item Liječnik bira opciju "Pošalji".
+							\item Sustav šalje poruku roditelju i liječnika vraća na pregled roditelja prijavljenih kod njega.
 						\end{packed_enum}
 						
 						\item  \textbf{Opis mogućih odstupanja:}
 						
 						\item[] \begin{packed_item}
 							
-							\item[4.a] Liječnik nije odabrao opciju "Pošalji".
+							\item[6.a] Liječnik bira opciju "Odustani".
 							\item[] \begin{packed_enum}
 								
-								\item Pregled neće biti upisan.
+								\item Pregled neće biti upisan i sustav će vratiti liječnika na pregled roditelja upisanih kod njega.
 							\end{packed_enum}
 							
 							
@@ -835,9 +831,22 @@
 						\item[] \begin{packed_enum}
 							
 							\item Liječnik na početnoj stranici iz popisa roditelja prijavljenih kod njega bira roditelja za kojeg želi odobriti preporuku za bolovanje.
-							\item Liječnik bira poruku s naslovom [PREPORUKA BOLOVANJA].
+							\item Sustav liječniku vraća pregled poruka s profilom roditelja.
+							\item Liječnik bira poruku s naslovom "[PREPORUKA BOLOVANJA]".
+							\item Sustav liječniku vraća pregled poruke.
 							\item Liječnik u novootvorenom prozoru bira opciju "Omogući bolovanje".
+							\item Bolovanje se odobri roditelju i sustav vraća liječnika na pregled poruka s profilom roditelja.
 						\end{packed_enum}
+						\item[] \begin{packed_item}
+							
+							\item[5.a] Liječnik odabere opciju "Odbij".
+							\item[] \begin{packed_enum}
+								
+								\item Bolovanje se neće odobriti roditelju i sustav vraća liječnika na pregled poruka s profilom roditelja.
+							\end{packed_enum}
+							
+							
+						\end{packed_item}
 						
 						
 						
@@ -856,19 +865,22 @@
 						\item[] \begin{packed_enum}
 							
 							\item Liječnik na početnoj stranici iz popisa roditelja prijavljenih kod njega bira roditelja kojem želi propisati bolovanje.
+							\item Sustav liječniku vraća pregled poruka s profilom roditelja.
 							\item Liječnik bira opciju "Dijagnoza".
+							\item Sustav liječniku vraća prozor u kojem liječnik može upisati razloge propisivanja bolovanja.
 							\item Liječnik opiše razlog propisivanja bolovanja te bira opciju "Bolovanje".
 							\item Liječnik bira opciju "Pošalji".
+							\item Sustav pošalje poruku roditelju te liječnika vraća na pregled poruka s profilom roditelja.
 						\end{packed_enum}
 						
 						\item  \textbf{Opis mogućih odstupanja:}
 						
 						\item[] \begin{packed_item}
 							
-							\item[4.a] Liječnik nije odabrao opciju "Pošalji".
+							\item[6.a] Liječnik odabere opciju "Odustani".
 							\item[] \begin{packed_enum}
 								
-								\item Preporuka za bolovanje neće biti izdana.
+								\item Preporuka za bolovanje neće biti izdana i sustav vraća liječnika na pregled roditelja upisanih kod njega.
 							\end{packed_enum}
 							
 							
@@ -889,19 +901,22 @@
 						\item[] \begin{packed_enum}
 							
 							\item Liječnik na početnoj stranici iz popisa roditelja prijavljenih kod njega bira roditelja čiji nalaz želi unijeti.
+							\item Sustav liječniku vraća pregled poruka s profilom roditelja.
 							\item Liječnik bira opciju "Nalaz iz laboratorija".
+							\item Sustav liječniku vraća prozor u kojem liječnik može opisati i priložiti nalaz.
 							\item Liječnik opiše nalaz te može priložiti dokument biranjem opcije "Prilog" te opcionalno može odabrati i opciju za izdavanje bolovanja.
 							\item Liječnik bira opciju "Pošalji".
+							\item Sustav pošalje poruku roditelji i vraća liječnika na pregled poruka s profilom roditelja.
 						\end{packed_enum}
 						
 						\item  \textbf{Opis mogućih odstupanja:}
 						
 						\item[] \begin{packed_item}
 							
-							\item[4.a] Liječnik nije odabrao opciju "Pošalji".
+							\item[6.a] Liječnik odabere opciju "Odustani".
 							\item[] \begin{packed_enum}
 								
-								\item Nalaz neće biti poslan.
+								\item Nalaz neće biti poslan i sustav vraća liječnika na pregled poruka s profilom roditelja.
 							\end{packed_enum}
 							
 							
@@ -922,7 +937,9 @@
 						\item[] \begin{packed_enum}
 							
 							\item Liječnik na početnoj stranici iz popisa roditelja prijavljenih kod njega bira onog čije nalaze želi vidjeti.
-							\item Liječnik bira jednu od obavijesti s naslovom [UČITAN NALAZ].
+							\item Sustav liječniku vraća pregled poruka s profilom roditelja.
+							\item Liječnik bira jednu od obavijesti s naslovom "[UČITAN NALAZ]".
+							\item Sustav liječniku vraća pregled poruke.
 							\item Liječnik može pregledati nalaz te dodatna pitanja ili informacije koje je roditelj priložio.
 						\end{packed_enum}
 						
@@ -941,19 +958,22 @@
 						\item[] \begin{packed_enum}
 							
 							\item Liječnik na početnoj stranici iz popisa roditelja prijavljenih kod njega bira roditelja na čiju poruku želi odgovoriti.
-							\item Liječnik bira jednu od poruka koju je primio od roditelja-
+							\item Sustav liječniku vraća pregled poruka s profilom roditelja.
+							\item Liječnik bira jednu od poruka koju je primio od roditelja.
+							\item Sustav liječniku vraća pregled poruke.
 							\item Liječnik odabere opciju "Odgovori" i sastavlja svoj odgovor.
 							\item Liječnik odabere opciju "Pošalji".
+							\item Sustav pošalje roditelju poruku i vraća liječnika na pregled poruka s profilom roditelja.
 						\end{packed_enum}
 						
 						\item  \textbf{Opis mogućih odstupanja:}
 						
 						\item[] \begin{packed_item}
 							
-							\item[3.a] Liječnik nije odabrao opciju "Pošalji".
+							\item[6.a] Liječnik nije odabrao opciju "Pošalji".
 							\item[] \begin{packed_enum}
 								
-								\item Odgovor neće biti poslan.
+								\item Odgovor neće biti poslan i sustav vraća roditelja na pregled poruka s profilom roditelja.
 							\end{packed_enum}
 							
 							
@@ -974,19 +994,22 @@
 						\item[] \begin{packed_enum}
 							
 							\item Liječnik na početnoj stranici iz popisa roditelja prijavljenih kod njega bira roditelja kojeg želi naručiti na specijalistički pregled.
-							\item Liječnik odabere opciju "Naručivanje specijalističkog pregleda.
+							\item Sustav liječniku vrača pregled poruka s profilom roditelja.
+							\item Liječnik odabere opciju "Naručivanje specijalističkog pregleda".
+							\item Sustav liječniku vraća prozor u kojem liječnik može odabrati vrstu pregleda te dodati napomenu.
 							\item Liječnik odabere vrstu pregleda te dodaje napomenu ako to želi.
 							\item Liječnik odabere opciju "Pošalji".
+							\item Sustav pošalje poruku roditelju i vraća liječnika na pregled poruka s profilom roditelja.
 						\end{packed_enum}
 						
 						\item  \textbf{Opis mogućih odstupanja:}
 						
 						\item[] \begin{packed_item}
 							
-							\item[4.a] Liječnik nije odabrao opciju "Pošalji".
+							\item[6.a] Liječnik odabere opciju "Odustani".
 							\item[] \begin{packed_enum}
 								
-								\item Roditelj neće biti naručen na pregled.
+								\item Roditelj neće biti naručen na pregled i sustav vraća liječnika na pregled poruka s profilom roditelja.
 							\end{packed_enum}
 							
 							
@@ -1013,7 +1036,7 @@
 						
 						\item[] \begin{packed_item}
 							
-							\item[4.a] Administrator još nije nijednu osobu prijavio u sustav.
+							\item[1.a] Administrator još nije nijednu osobu prijavio u sustav.
 							\item[] \begin{packed_enum}
 								
 								\item Lista prijavljenih je prazna.
@@ -1038,18 +1061,21 @@
 						\item[] \begin{packed_enum}
 							
 							\item Administrator na početnoj stranici bira opciju "Dodaj roditelja".
+							\item Sustav administratoru vraća novi prozor u kojem se mogu upisati podaci roditelja.
 							\item Administrator upisuje ime, prezime, OIB i datum rođenja roditelja.
 							\item Administrator odabere opciju "Dodaj".
+							\item Baza podataka se ažurira.
+							\item Sustav vraća administratora na popis svih prijavljenih osoba.
 						\end{packed_enum}
 						
 						\item  \textbf{Opis mogućih odstupanja:}
 						
 						\item[] \begin{packed_item}
 							
-							\item[3.a] Administrator ne odabere opciju "Dodaj".
+							\item[4.a] Administrator odabere opciju "Odustani".
 							\item[] \begin{packed_enum}
 								
-								\item Roditelj neće biti dodan.
+								\item Roditelj neće biti dodan i sustav vraća administratora na popis prijavljenih osoba.
 							\end{packed_enum}
 							
 							
@@ -1070,8 +1096,11 @@
 						\item[] \begin{packed_enum}
 							
 							\item Administrator na početnoj stranici bira opciju "Dodaj dijete".
+							\item Sustav administratoru vraća novi prozor u kojem se mogu upisati podaci djeteta.
 							\item Administrator upisuje ime, prezime, OIB djeteta, OIB roditelja (iz liste postojećih OIB-a roditelja u sustavu) i datum rođenja djeteta.
 							\item Administrator odabere opciju "Dodaj".
+							\item Baza podataka se ažurira.
+							\item Sustav vraća administratora na popis svih prijavljenih osoba.
 						\end{packed_enum}
 						
 						\item  \textbf{Opis mogućih odstupanja:}
@@ -1079,10 +1108,10 @@
 						\item[] \begin{packed_item}
 							
 							
-							\item[3.a] Administrator ne odabere opciju "Dodaj".
+							\item[4.a] Administrator odabere opciju "Odustani".
 							\item[] \begin{packed_enum}
 								
-								\item Dijete neće biti dodano.
+								\item Dijete neće biti dodano i sustav vraća administratora na popis prijavljenih osoba.
 							\end{packed_enum}
 							
 							
@@ -1103,18 +1132,21 @@
 						\item[] \begin{packed_enum}
 							
 							\item Administrator na početnoj stranici bira iz liste prijavljenih osobu čije osobne podatke želi promijeniti.
+							\item Sustav administratoru vraća prozor u kojem se nalaze osobni podaci osobe.
 							\item Administrator u novootvorenom prozoru može mijenjati podatke osobe: ime, prezime, OIB, adresu, mail poslodavca/vrtića te može osobi pridijeliti liječnika/pedijatra.
 							\item Administrator odabere opciju "Pohrani".
+							\item Baza podataka se ažurira.
+							\item Sustav vraća administratora na popis prijavljenih osoba.
 						\end{packed_enum}
 						
 						\item  \textbf{Opis mogućih odstupanja:}
 						
 						\item[] \begin{packed_item}
 							
-							\item[3.a] Administrator ne odabere opciju "Pohrani".
+							\item[4.a] Administrator odabere opciju "Odustani".
 							\item[] \begin{packed_enum}
 								
-								\item Promjene neće biti pohranjene.
+								\item Promjene neće biti pohranjene i sustav vraća administratora na popis prijavljenih osoba.
 							\end{packed_enum}
 							
 							
