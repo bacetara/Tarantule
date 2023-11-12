@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
+@Table(name="osoba", schema="public")
 public class Osoba {
     @Id
     @NotNull
@@ -19,11 +20,13 @@ public class Osoba {
 
     private String mail;
 
+    @Column(name = "datumrod")
     private Date datumRod;
 
     private String adresa;
 
     @NotNull
+    @Column(name = "adminprava")
     private Integer adminPrava;
 
     private String lozinka;
@@ -31,11 +34,99 @@ public class Osoba {
     @NotNull
     private String uloga;
 
-    /*@ManyToOne
-    @JoinColumn(name = "rodOib", referencedColumnName = "oib")
+    @ManyToOne
+    @JoinColumn(name = "rodoib", referencedColumnName = "oib")
     private Osoba roditelj;
 
     @ManyToOne
-    @JoinColumn(name = "dokOib", referencedColumnName = "oib")
-    private Osoba doktor;*/
+    @JoinColumn(name = "dokoib", referencedColumnName = "oib")
+    private Osoba doktor;
+
+    public Long getOib() {
+        return oib;
+    }
+
+    public void setOib(Long oib) {
+        this.oib = oib;
+    }
+
+    public String getIme() {
+        return ime;
+    }
+
+    public void setIme(String ime) {
+        this.ime = ime;
+    }
+
+    public String getPrezime() {
+        return prezime;
+    }
+
+    public void setPrezime(String prezime) {
+        this.prezime = prezime;
+    }
+
+    public String getMail() {
+        return mail;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
+    }
+
+    public Date getDatumRod() {
+        return datumRod;
+    }
+
+    public void setDatumRod(Date datumRod) {
+        this.datumRod = datumRod;
+    }
+
+    public String getAdresa() {
+        return adresa;
+    }
+
+    public void setAdresa(String adresa) {
+        this.adresa = adresa;
+    }
+
+    public Integer getAdminPrava() {
+        return adminPrava;
+    }
+
+    public void setAdminPrava(Integer adminPrava) {
+        this.adminPrava = adminPrava;
+    }
+
+    public String getLozinka() {
+        return lozinka;
+    }
+
+    public void setLozinka(String lozinka) {
+        this.lozinka = lozinka;
+    }
+
+    public String getUloga() {
+        return uloga;
+    }
+
+    public void setUloga(String uloga) {
+        this.uloga = uloga;
+    }
+
+    public Osoba getRoditelj() {
+        return roditelj;
+    }
+
+    public void setRoditelj(Osoba roditelj) {
+        this.roditelj = roditelj;
+    }
+
+    public Osoba getDoktor() {
+        return doktor;
+    }
+
+    public void setDoktor(Osoba doktor) {
+        this.doktor = doktor;
+    }
 }
