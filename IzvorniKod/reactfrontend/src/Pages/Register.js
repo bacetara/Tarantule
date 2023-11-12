@@ -67,7 +67,7 @@ const Register = ()  => {
 
 
     return (
-        <form className="container">
+        <form className="container" onSubmit={onSubmit}>
             <div className="text">OIB
             </div>
             <div>

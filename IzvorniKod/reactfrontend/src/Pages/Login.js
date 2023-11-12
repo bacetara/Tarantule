@@ -66,7 +66,7 @@ const Login = ()  => {
 
 
     return (
-        <form className="container">
+        <form className="container" onChange={onSubmit}>
             <div className="text">OIB
             </div>
             <div>
