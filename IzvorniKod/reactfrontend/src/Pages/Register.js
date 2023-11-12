@@ -46,7 +46,7 @@ const Register = ()  => {
             body: JSON.stringify(data)
         };
 
-        return fetch('/register', options)
+        return fetch('/api/register', options)
             .then(response => {
                 if(response.ok) {
                     return response.json();
