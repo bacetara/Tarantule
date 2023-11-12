@@ -92,12 +92,7 @@ body {
     .register {
         min-width: 50%;
     }
-
-    .textbox {
-        align-self: center;
-        font-size: 1.5rem;
-        top: 60%;
-    }
+    
 
     .login {
         min-width: 50%;
