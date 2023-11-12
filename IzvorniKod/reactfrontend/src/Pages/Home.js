@@ -11,7 +11,7 @@ export default function home() {
 
                 <FontAwesomeIcon className="logo" icon={faStaffSnake} style={{color: "#65b58a",}} />
                 <div className="gumbi">
-                    <div className="gumb" id="register" > <Link className="link_na_stranicu" to="/login">registracija</Link></div>
+                    <div className="gumb" id="register" > <Link className="link_na_stranicu" to="/register">registracija</Link></div>
                     <div className="gumb" id="login"> <Link className="link_na_stranicu" to="/login">prijava</Link> </div>
                 </div>
 

@@ -2,7 +2,7 @@ import React from 'react';
 import './Login.css'
 import {useNavigate} from "react-router-dom";
 
-const Login = ()  => {
+const Register = ()  => {
     const [loginForm, setLoginForm] = React.useState({oib : '', password: ''});
     const [error, setError] = React.useState('');
 
@@ -32,6 +32,7 @@ const Login = ()  => {
     function onSubmit(e){
         e.preventDefault();
         setError("");
+
         const data = {
             oib: loginForm.oib,
             password: loginForm.password
@@ -45,12 +46,12 @@ const Login = ()  => {
             body: JSON.stringify(data)
         };
 
-        return fetch('/login', options)
+        return fetch('/register', options)
             .then(response => {
                 if(response.ok) {
                     return response.json();
                 }else{
-                    setError("Neuspjela prijava.");
+                    setError("Neuspjela registracija.");
                 }
             })
             .then(data => {
@@ -81,14 +82,14 @@ const Login = ()  => {
             </div>
             <div className="loginbuttons">
                 <button  className="loginbutton" onClick={handleClick}>
-                odustani
-            </button>
+                    odustani
+                </button>
                 <button type="submit" disabled={!isValid()} className="loginbutton" onMouseOver={errorcheck}>
-                prijava
-            </button>
+                    registracija
+                </button>
             </div>
 
         </form>
     );
 };
-export default Login;
+export default Register;

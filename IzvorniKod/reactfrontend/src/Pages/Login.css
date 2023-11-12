@@ -33,3 +33,17 @@ input{
     border-radius: 7px;
     border: none;
 }
+
+.loginbuttons{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.loginbuttons  button:hover{
+    color: white;
+    cursor: pointer;
+}
+
+.error{
+    color: red;
+}
