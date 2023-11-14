@@ -10,7 +10,8 @@ import java.util.Date;
 public class Osoba {
     @Id
     @NotNull
-    private Long oib;
+    @Column(columnDefinition = "CHAR(11)")
+    private String oib;
 
     @NotNull
     private String ime;
@@ -42,11 +43,11 @@ public class Osoba {
     @JoinColumn(name = "dokoib", referencedColumnName = "oib")
     private Osoba doktor;
 
-    public Long getOib() {
+    public String getOib() {
         return oib;
     }
 
-    public void setOib(Long oib) {
+    public void setOib(String oib) {
         this.oib = oib;
     }
 
