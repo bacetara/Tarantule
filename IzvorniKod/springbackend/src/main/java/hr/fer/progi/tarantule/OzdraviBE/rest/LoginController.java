@@ -2,8 +2,13 @@ package hr.fer.progi.tarantule.OzdraviBE.rest;
 
 import hr.fer.progi.tarantule.OzdraviBE.domain.Osoba;
 import hr.fer.progi.tarantule.OzdraviBE.service.OsobaService;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,21 +19,28 @@ public class LoginController {
     @Autowired
     private OsobaService osobaService;
 
-    private record LoginData(String oib, String password) {
-
-    }
-
-    private record LoginResponse(String role) {
-
-    }
+    private PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
 
     @PostMapping(
             path="",
             consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE},
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public LoginResponse login(LoginData data) {
-        return new LoginResponse("parent");
+    public Osoba login(LoginDTO data) {
+        Osoba o;
+        try {
+            o = osobaService.fetch(data.oib());
+        }
+        catch (EntityNotFoundException e) {
+            throw new BadCredentialsException("Invalid login");
+        }
+
+        if (passwordEncoder.matches(data.password(), o.getLozinkaHash())) {
+            return o;
+        }
+        else {
+            throw new BadCredentialsException("Invalid login");
+        }
     }
 
     @GetMapping("getAll")
