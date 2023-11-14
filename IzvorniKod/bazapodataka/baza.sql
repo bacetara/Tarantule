@@ -24,7 +24,7 @@ CREATE TABLE pregled
 
 CREATE TABLE Osoba
 (
-  OIB INT NOT NULL,
+  OIB CHAR(11) NOT NULL,
   Ime VARCHAR NOT NULL,
   Prezime VARCHAR NOT NULL,
   mail VARCHAR,
@@ -33,8 +33,8 @@ CREATE TABLE Osoba
   adminPrava INT NOT NULL,
   lozinka VARCHAR,
   Uloga VARCHAR NOT NULL,
-  rodOIB INT,
-  dokOIB INT,
+  rodOIB CHAR(11),
+  dokOIB CHAR(11),
   PRIMARY KEY (OIB),
   FOREIGN KEY (rodOIB) REFERENCES Osoba(OIB),
   FOREIGN KEY (dokOIB) REFERENCES Osoba(OIB)
@@ -47,16 +47,16 @@ CREATE TABLE Poruka
   tijelo VARCHAR NOT NULL,
   prilog VARCHAR,
   tip VARCHAR NOT NULL,
-  priOIB INT NOT NULL,
-  pošOIB INT NOT NULL,
+  priOIB CHAR(11) NOT NULL,
+  pošOIB CHAR(11) NOT NULL,
   dijagnozaID INT,
   PRIMARY KEY (id),
   FOREIGN KEY (priOIB) REFERENCES Osoba(OIB),
   FOREIGN KEY (pošOIB) REFERENCES Osoba(OIB),
   FOREIGN KEY (dijagnozaID) REFERENCES Bolest(idBolest)
 );--data import
-INSERT INTO Osoba (OIB,Ime,Prezime,mail,datumRod,adresa,adminPrava,lozinka,Uloga,rodOIB,dokOIB) values (101,'Iva','Ivić',NULL,'2001-01-01',NULL,0,'lozinka','doktor',NULL,NULL);
-INSERT INTO Osoba (OIB,Ime,Prezime,mail,datumRod,adresa,adminPrava,lozinka,Uloga,rodOIB,dokOIB) values (100,'Ivan','Ivanić',NULL,'2002-10-01',NULL,0,'password','roditelj',NULL,101);
-INSERT INTO Osoba (OIB,Ime,Prezime,mail,datumRod,adresa,adminPrava,lozinka,Uloga,rodOIB,dokOIB) values (102,'Roko','Luk',NULL,'2020-10-10',NULL,0,'test','dijete',100,NULL);
+INSERT INTO Osoba (OIB,Ime,Prezime,mail,datumRod,adresa,adminPrava,lozinka,Uloga,rodOIB,dokOIB) values ('12345678900','Iva','Ivić',NULL,'2001-01-01',NULL,0,'lozinka','doktor',NULL,NULL);
+INSERT INTO Osoba (OIB,Ime,Prezime,mail,datumRod,adresa,adminPrava,lozinka,Uloga,rodOIB,dokOIB) values ('01020304050','Ivan','Ivanić',NULL,'2002-10-01',NULL,0,'password','roditelj',NULL,'12345678900');
+INSERT INTO Osoba (OIB,Ime,Prezime,mail,datumRod,adresa,adminPrava,lozinka,Uloga,rodOIB,dokOIB) values ('75289754123','Roko','Luk',NULL,'2020-10-10',NULL,0,'test','dijete','01020304050',NULL);
 
 
