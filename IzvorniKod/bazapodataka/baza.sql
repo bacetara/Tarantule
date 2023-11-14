@@ -62,7 +62,7 @@ INSERT INTO Osoba (OIB,Ime,Prezime,mail,datumRod,adresa,adminPrava,lozinkaHash,U
 -- pass: password
 INSERT INTO Osoba (OIB,Ime,Prezime,mail,datumRod,adresa,adminPrava,lozinkaHash,Uloga,rodOIB,dokOIB) values ('01020304050','Ivan','Ivanić',NULL,'2002-10-01',NULL,0,'{bcrypt}$2a$10$Uw.wBcBCB5GwdHxynwqRUup3QtGW8pwjJOJ4TxB9G0Hz3vEy4J4fa','roditelj',NULL,'12345678900');
 
--- pass: test
-INSERT INTO Osoba (OIB,Ime,Prezime,mail,datumRod,adresa,adminPrava,lozinkaHash,Uloga,rodOIB,dokOIB) values ('75289754123','Roko','Luk',NULL,'2020-10-10',NULL,0,'{bcrypt}$2a$10$SiyCv1Yb4ee0ukffcw5fNu9zzVFHBOK1k6p5AEHIDA2wo/NKKJqZG','dijete','01020304050',NULL);
+-- pass: testtest
+INSERT INTO Osoba (OIB,Ime,Prezime,mail,datumRod,adresa,adminPrava,lozinkaHash,Uloga,rodOIB,dokOIB) values ('75289754123','Roko','Luk',NULL,'2020-10-10',NULL,0,'{bcrypt}$2a$10$1Mu63rlA9IZtJ0lMk1iS9.yGnqUoh95VlApCiJT30EuqnALMwfALO','dijete','01020304050',NULL);
 
 
