@@ -37,6 +37,12 @@ public class LoginController {
             o = osobaService.fetch(data.oib());
         }
         catch (EntityNotFoundException e) {
+            // OIB doesn't exist
+            throw new BadCredentialsException("Invalid login");
+        }
+
+        if (o.getLozinkaHash() == null) {
+            // user not registered
             throw new BadCredentialsException("Invalid login");
         }
 
@@ -44,6 +50,7 @@ public class LoginController {
             return o;
         }
         else {
+            // wrong password
             throw new BadCredentialsException("Invalid login");
         }
     }
