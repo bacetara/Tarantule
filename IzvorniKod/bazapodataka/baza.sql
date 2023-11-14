@@ -31,7 +31,7 @@ CREATE TABLE Osoba
   datumRod DATE,
   adresa VARCHAR,
   adminPrava INT NOT NULL,
-  lozinka VARCHAR,
+  lozinkaHash VARCHAR,
   Uloga VARCHAR NOT NULL,
   rodOIB CHAR(11),
   dokOIB CHAR(11),
@@ -55,8 +55,14 @@ CREATE TABLE Poruka
   FOREIGN KEY (pošOIB) REFERENCES Osoba(OIB),
   FOREIGN KEY (dijagnozaID) REFERENCES Bolest(idBolest)
 );--data import
-INSERT INTO Osoba (OIB,Ime,Prezime,mail,datumRod,adresa,adminPrava,lozinka,Uloga,rodOIB,dokOIB) values ('12345678900','Iva','Ivić',NULL,'2001-01-01',NULL,0,'lozinka','doktor',NULL,NULL);
-INSERT INTO Osoba (OIB,Ime,Prezime,mail,datumRod,adresa,adminPrava,lozinka,Uloga,rodOIB,dokOIB) values ('01020304050','Ivan','Ivanić',NULL,'2002-10-01',NULL,0,'password','roditelj',NULL,'12345678900');
-INSERT INTO Osoba (OIB,Ime,Prezime,mail,datumRod,adresa,adminPrava,lozinka,Uloga,rodOIB,dokOIB) values ('75289754123','Roko','Luk',NULL,'2020-10-10',NULL,0,'test','dijete','01020304050',NULL);
+
+-- pass: lozinka
+INSERT INTO Osoba (OIB,Ime,Prezime,mail,datumRod,adresa,adminPrava,lozinkaHash,Uloga,rodOIB,dokOIB) values ('12345678900','Iva','Ivić',NULL,'2001-01-01',NULL,0,'{bcrypt}$2a$10$sPH1dIHBj/sfZ/GV.TOovuXEppH4OpKMJYGMekmFbjK7Bv1EaY.Mu','doktor',NULL,NULL);
+
+-- pass: password
+INSERT INTO Osoba (OIB,Ime,Prezime,mail,datumRod,adresa,adminPrava,lozinkaHash,Uloga,rodOIB,dokOIB) values ('01020304050','Ivan','Ivanić',NULL,'2002-10-01',NULL,0,'{bcrypt}$2a$10$Uw.wBcBCB5GwdHxynwqRUup3QtGW8pwjJOJ4TxB9G0Hz3vEy4J4fa','roditelj',NULL,'12345678900');
+
+-- pass: test
+INSERT INTO Osoba (OIB,Ime,Prezime,mail,datumRod,adresa,adminPrava,lozinkaHash,Uloga,rodOIB,dokOIB) values ('75289754123','Roko','Luk',NULL,'2020-10-10',NULL,0,'{bcrypt}$2a$10$SiyCv1Yb4ee0ukffcw5fNu9zzVFHBOK1k6p5AEHIDA2wo/NKKJqZG','dijete','01020304050',NULL);
 
 

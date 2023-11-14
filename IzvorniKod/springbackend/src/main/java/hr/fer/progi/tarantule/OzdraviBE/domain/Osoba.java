@@ -30,7 +30,8 @@ public class Osoba {
     @Column(name = "adminprava")
     private Integer adminPrava;
 
-    private String lozinka;
+    @Column(name = "lozinkahash")
+    private String lozinkaHash;
 
     @NotNull
     private String uloga;
@@ -99,12 +100,12 @@ public class Osoba {
         this.adminPrava = adminPrava;
     }
 
-    public String getLozinka() {
-        return lozinka;
+    public String getLozinkaHash() {
+        return lozinkaHash;
     }
 
-    public void setLozinka(String lozinka) {
-        this.lozinka = lozinka;
+    public void setLozinkaHash(String lozinkaHash) {
+        this.lozinkaHash = lozinkaHash;
     }
 
     public String getUloga() {
