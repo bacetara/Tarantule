@@ -49,17 +49,23 @@ const Login = ()  => {
             .then(response => {
                 if(response.ok) {
                     return response.json();
-                }else{
+                } else {
                     setError("Neuspjela prijava.");
                 }
             })
             .then(data => {
                 if(data.role === 'admin'){
                     navigate('/admin');
-                }else if (data.role === 'parent'){
+                }else if (data.role === 'roditelj'){
                     navigate('/addparent')
-                }else if (data.role === '/child'){
+                }else if (data.role === '/dijete'){
                     navigate('/addchild')
+                } else if (data.role === 'doktor') {
+                    navigate('/addparent');
+                    console.log("doktor ulogiran")
+                } else if (data.role === 'pedijatar') {
+                    navigate('/addparent');
+                    console.log("pedijatar ulogiran")
                 }
             });
     }
