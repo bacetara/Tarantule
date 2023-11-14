@@ -27,7 +27,7 @@ public class LoginController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public Map<String, String> login(@RequestBody LoginDTO data) {
+    public Osoba login(@RequestBody LoginDTO data) {
         if (data.oib() == null || data.password() == null) {
             throw new BadCredentialsException("Invalid login");
         }
@@ -41,12 +41,7 @@ public class LoginController {
         }
 
         if (passwordEncoder.matches(data.password(), o.getLozinkaHash())) {
-            String role = switch (o.getUloga()) {
-                case "roditelj" -> "parent";
-                case "dijete" -> "child";
-                default -> o.getUloga();
-            };
-            return Collections.singletonMap("role", role);
+            return o;
         }
         else {
             throw new BadCredentialsException("Invalid login");
