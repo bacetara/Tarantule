@@ -1,0 +1,14 @@
+.dobrodoslica{
+
+    display: flex;
+
+    justify-content: space-around;
+}
+.box{
+    position: absolute;
+    top: 30%;
+}
+p{
+    font-size: 2rem;
+    text-align: center;
+}

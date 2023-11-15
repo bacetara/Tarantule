@@ -1,5 +1,5 @@
 import *  as React from "react";
-
+import './User.css'
 export default function User() {
 
     const [user, setUser] = React.useState({oib : '', ime : '', prezime : '', mail : '', datumRod : '', adresa : '', adminPrava : '', lozinkaHash : '', uloga : '', roditelj : '', doktor : ''});
@@ -11,9 +11,11 @@ export default function User() {
     }, []);
 
     return (
-        <>
+        <div className="dobrodoslica">
+            <div className="box">
             <p>Dobro došli {user.ime} {user.prezime}</p>
-            <p>Tvoja uloga je {user.uloga}</p>
-        </>
+            <p>Vaša uloga je :{user.uloga}</p>
+            </div>
+        </div>
     )
 }
