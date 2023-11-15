@@ -1,4 +1,4 @@
-FROM openjdk:17-alpine AS builder
+FROM openjdk:21-jdk AS builder
 
 COPY ../.mvn .mvn
 COPY ../mvnw .
@@ -8,7 +8,7 @@ RUN chmod +x mvnw
 
 RUN ./mvnw clean package
 
-FROM openjdk:17-alpine
+FROM openjdk:21-jdk
 
 ## package installation goes here
 
