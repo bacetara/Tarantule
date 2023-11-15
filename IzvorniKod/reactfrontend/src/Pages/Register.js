@@ -41,7 +41,7 @@ const Register = ()  => {
         const options = {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify(data)
         };
@@ -56,11 +56,7 @@ const Register = ()  => {
             })
             .then(data => {
                 if (data) {
-                    return (
-                        <>
-                            <p>Dobro došli {data.ime} {data.prezime}</p>
-                            <p>Vaša uloga je {data.uloga}</p>
-                        </>);
+                    navigate("/user");
                 }
             })
             .catch(error => {

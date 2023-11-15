@@ -6,6 +6,7 @@ import AdminPocetna from "./Pages/Admin/AdminPocetna"
 import DodajRoditelja from "./Pages/Admin/DodajRoditelja"
 import DodajDijete from "./Pages/Admin/DodajDijete"
 import Register from "./Pages/Register";
+import User from "./Pages/User";
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
                 <Route path="/admin" element={<AdminPocetna />} />
                 <Route path="/addparent" element={<DodajRoditelja />} />
                 <Route path="/addchild" element={<DodajDijete />} />
+                <Route path="/user" element={<User />}/>
 
 
             </Routes>

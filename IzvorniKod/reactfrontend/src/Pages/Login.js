@@ -55,11 +55,7 @@ const Login = ()  => {
             })
             .then(data => {
                 if (data) {
-                    return (
-                        <>
-                            <p>Dobro došli {data.ime} {data.prezime}</p>
-                            <p>Vaša uloga je {data.uloga}</p>
-                        </>);
+                    navigate("/user");
                 }
             })
             .catch(error => {
