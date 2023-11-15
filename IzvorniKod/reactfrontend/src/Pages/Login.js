@@ -55,19 +55,11 @@ const Login = ()  => {
             })
             .then(data => {
                 if (data) {
-                    if(data.uloga === 'admin'){
-                        navigate('/admin');
-                    }else if (data.uloga === 'roditelj'){
-                        navigate('/addparent')
-                    }else if (data.uloga === '/dijete'){
-                        navigate('/addchild')
-                    } else if (data.uloga === 'doktor') {
-                        navigate('/addparent');
-                        console.log("doktor ulogiran")
-                    } else if (data.uloga === 'pedijatar') {
-                        navigate('/addparent');
-                        console.log("pedijatar ulogiran")
-                    }
+                    return (
+                        <>
+                            <p>Dobro došli {data.ime} {data.prezime}</p>
+                            <p>Vaša uloga je {data.uloga}</p>
+                        </>);
                 }
             })
             .catch(error => {
