@@ -11,4 +11,6 @@ public interface OsobaService {
     Osoba fetch(String oib);
 
     Optional<Osoba> findByOib(String oib);
+
+    Osoba updateOsoba(Osoba osoba);
 }

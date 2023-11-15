@@ -6,6 +6,7 @@ import hr.fer.progi.tarantule.OzdraviBE.service.OsobaService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
 import java.util.List;
 import java.util.Optional;
@@ -29,5 +30,22 @@ public class OsobaServiceJpa implements OsobaService {
     public Osoba fetch(String oib) {
         return findByOib(oib)
                 .orElseThrow(() -> new EntityNotFoundException("No such Osoba with oib=" + oib));
+    }
+
+    @Override
+    public Osoba updateOsoba(Osoba osoba) {
+        validate(osoba);
+
+        if (!osobaRepository.existsById(osoba.getOib())) {
+            throw new EntityNotFoundException("OIB already exists: "+ osoba.getOib());
+        }
+
+        return osobaRepository.save(osoba);
+    }
+
+    private void validate(Osoba osoba) {
+        Assert.isTrue(!"admin".equals(osoba.getUloga()), "Giving admin role is not allowed");
+
+        // todo: ...
     }
 }

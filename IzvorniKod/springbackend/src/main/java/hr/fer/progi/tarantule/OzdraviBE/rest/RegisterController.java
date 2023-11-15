@@ -8,15 +8,14 @@ import org.springframework.http.MediaType;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/login")
-public class LoginController {
+@RequestMapping("/api/register")
+public class RegisterController {
     @Autowired
     private OsobaService osobaService;
 
@@ -27,9 +26,9 @@ public class LoginController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public Osoba login(@RequestBody LoginDTO data) {
+    public Osoba register(@RequestBody LoginDTO data) {
         if (data.oib() == null || data.password() == null) {
-            throw new BadCredentialsException("Invalid login");
+            throw new BadCredentialsException("Invalid credentials");
         }
 
         Osoba o;
@@ -37,26 +36,22 @@ public class LoginController {
             o = osobaService.fetch(data.oib());
         }
         catch (EntityNotFoundException e) {
-            // OIB doesn't exist
-            throw new BadCredentialsException("Invalid login");
+            // OIB doesn't exist in database
+            throw new BadCredentialsException("Invalid credentials");
         }
 
-        if (o.getLozinkaHash() == null) {
-            // user not registered
-            throw new BadCredentialsException("Invalid login");
+        if (o.getLozinkaHash() != null) {
+            // user already registered
+            throw new BadCredentialsException("Invalid credentials");
         }
 
-        if (passwordEncoder.matches(data.password(), o.getLozinkaHash())) {
-            return o;
+        if (data.password().length() < 5) {
+            // password length too short
+            throw new BadCredentialsException("Invalid credentials");
         }
-        else {
-            // wrong password
-            throw new BadCredentialsException("Invalid login");
-        }
-    }
 
-    @GetMapping("getAll")
-    public List<Osoba> getAllOsoba() {
-        return osobaService.listAll();
+        o.setLozinkaHash(passwordEncoder.encode(data.password()));
+
+        return osobaService.updateOsoba(o);
     }
 }
