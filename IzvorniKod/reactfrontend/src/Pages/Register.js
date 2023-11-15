@@ -55,12 +55,18 @@ const Register = ()  => {
                 }
             })
             .then(data => {
-                if(data.role === 'admin'){
+                if(data.uloga === 'admin'){
                     navigate('/admin');
-                }else if (data.role === 'parent'){
+                }else if (data.uloga === 'roditelj'){
                     navigate('/addparent')
-                }else if (data.role === '/child'){
+                }else if (data.uloga === '/dijete'){
                     navigate('/addchild')
+                } else if (data.uloga === 'doktor') {
+                    navigate('/addparent');
+                    console.log("doktor ulogiran")
+                } else if (data.uloga === 'pedijatar') {
+                    navigate('/addparent');
+                    console.log("pedijatar ulogiran")
                 }
             });
     }

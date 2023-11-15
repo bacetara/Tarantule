@@ -55,16 +55,16 @@ const Login = ()  => {
             })
             .then(data => {
                 console.log(data);
-                if(data.role === 'admin'){
+                if(data.uloga === 'admin'){
                     navigate('/admin');
-                }else if (data.role === 'roditelj'){
+                }else if (data.uloga === 'roditelj'){
                     navigate('/addparent')
-                }else if (data.role === '/dijete'){
+                }else if (data.uloga === '/dijete'){
                     navigate('/addchild')
-                } else if (data.role === 'doktor') {
+                } else if (data.uloga === 'doktor') {
                     navigate('/addparent');
                     console.log("doktor ulogiran")
-                } else if (data.role === 'pedijatar') {
+                } else if (data.uloga === 'pedijatar') {
                     navigate('/addparent');
                     console.log("pedijatar ulogiran")
                 }
