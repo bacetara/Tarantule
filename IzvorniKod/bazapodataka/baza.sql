@@ -66,7 +66,7 @@ INSERT INTO Osoba (OIB,Ime,Prezime,mail,datumRod,adresa,adminPrava,lozinkaHash,U
 INSERT INTO Osoba (OIB,Ime,Prezime,mail,datumRod,adresa,adminPrava,lozinkaHash,Uloga,rodOIB,dokOIB) values ('75289754123','Roko','Luk',NULL,'2020-10-10',NULL,0,'{bcrypt}$2a$10$1Mu63rlA9IZtJ0lMk1iS9.yGnqUoh95VlApCiJT30EuqnALMwfALO','dijete','01020304050',NULL);
 --pedijatar bez pacijenata 
 INSERT INTO Osoba (OIB,Ime,Prezime,mail,datumRod,adresa,adminPrava,lozinkaHash,Uloga,rodOIB,dokOIB) values ('98602316389','Krešimir','Vukić',NULL,'1995-05-09',NULL,0,NULL,'pedijatar',NULL,NULL);
---ADMIN,roditelj s doktrom bez dijece
+--ADMIN,roditelj s doktrom bez djece
 INSERT INTO Osoba (OIB,Ime,Prezime,mail,datumRod,adresa,adminPrava,lozinkaHash,Uloga,rodOIB,dokOIB) values ('34365097959','Domagoj','Hranilović',NULL,'1968-02-12',NULL,1,NULL,'roditelj',NULL,'12345678900');
 --pedijatar s više pacijenata
 INSERT INTO Osoba (OIB,Ime,Prezime,mail,datumRod,adresa,adminPrava,lozinkaHash,Uloga,rodOIB,dokOIB) values ('04693058344','Jelena','Markušić',NULL,'1978-03-11',NULL,0,NULL,'pedijatar',NULL,NULL);
