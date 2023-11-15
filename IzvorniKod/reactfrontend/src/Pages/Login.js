@@ -48,13 +48,13 @@ const Login = ()  => {
         return fetch('/api/login', options)
             .then(response => {
                 if (response.status === 400) {
-                    setError("Neuspjela registracija.");
+                    setError("Neuspjela prijava.");
                     throw new Error("status 400!")
                 } else
                     return response.json();
             })
             .then(data => {
-                if (data.success) {
+                if (data) {
                     if(data.uloga === 'admin'){
                         navigate('/admin');
                     }else if (data.uloga === 'roditelj'){
