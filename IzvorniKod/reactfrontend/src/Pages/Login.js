@@ -47,11 +47,11 @@ const Login = ()  => {
 
         return fetch('/api/login', options)
             .then(response => {
-                if(response.status === 400) {
+                if (response.status === 400) {
                     setError("Neuspjela registracija.");
-                }
-
-                return response.json();
+                    throw new Error("status 400!")
+                } else
+                    return response.json();
             })
             .then(data => {
                 if (data.success) {
@@ -69,6 +69,9 @@ const Login = ()  => {
                         console.log("pedijatar ulogiran")
                     }
                 }
+            })
+            .catch(error => {
+                console.error (error);
             });
     }
 
