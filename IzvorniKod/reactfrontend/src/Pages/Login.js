@@ -47,26 +47,27 @@ const Login = ()  => {
 
         return fetch('/api/login', options)
             .then(response => {
-                if(response.ok) {
-                    return response.json();
-                } else {
-                    setError("Neuspjela prijava.");
+                if(response.status === 400) {
+                    setError("Neuspjela registracija.");
                 }
+
+                return response.json();
             })
             .then(data => {
-                console.log(data);
-                if(data.uloga === 'admin'){
-                    navigate('/admin');
-                }else if (data.uloga === 'roditelj'){
-                    navigate('/addparent')
-                }else if (data.uloga === '/dijete'){
-                    navigate('/addchild')
-                } else if (data.uloga === 'doktor') {
-                    navigate('/addparent');
-                    console.log("doktor ulogiran")
-                } else if (data.uloga === 'pedijatar') {
-                    navigate('/addparent');
-                    console.log("pedijatar ulogiran")
+                if (data.success) {
+                    if(data.uloga === 'admin'){
+                        navigate('/admin');
+                    }else if (data.uloga === 'roditelj'){
+                        navigate('/addparent')
+                    }else if (data.uloga === '/dijete'){
+                        navigate('/addchild')
+                    } else if (data.uloga === 'doktor') {
+                        navigate('/addparent');
+                        console.log("doktor ulogiran")
+                    } else if (data.uloga === 'pedijatar') {
+                        navigate('/addparent');
+                        console.log("pedijatar ulogiran")
+                    }
                 }
             });
     }
