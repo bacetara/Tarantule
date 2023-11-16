@@ -1,14 +1,5 @@
 \chapter{Arhitektura i dizajn sustava}
 		
-		\textbf{\textit{dio 1. revizije}}\\
-
-		\textit{ Potrebno je opisati stil arhitekture te identificirati: podsustave, preslikavanje na radnu platformu, spremišta podataka, mrežne protokole, globalni upravljački tok i sklopovsko-programske zahtjeve. Po točkama razraditi i popratiti odgovarajućim skicama:}
-	\begin{itemize}
-		\item 	\textit{izbor arhitekture temeljem principa oblikovanja pokazanih na predavanjima (objasniti zašto ste baš odabrali takvu arhitekturu)}
-		\item 	\textit{organizaciju sustava s najviše razine apstrakcije (npr. klijent-poslužitelj, baza podataka, datotečni sustav, grafičko sučelje)}
-		\item 	\textit{organizaciju aplikacije (npr. slojevi frontend i backend, MVC arhitektura) }		
-	\end{itemize}
-	
 		Arhitektura se može podijeliti na nekoliko podsustava:
 		 \begin{itemize}
 			\item Poslužitelj frontenda
@@ -49,9 +40,6 @@
 				
 		\section{Baza podataka}
 			
-			\textbf{\textit{dio 1. revizije}}\\
-			
-		\textit{Potrebno je opisati koju vrstu i implementaciju baze podataka ste odabrali, glavne komponente od kojih se sastoji i slično.}
 		
 		Za našu web aplikaciju koristiti ćemo relacijsku bazu podataka koja je industrijski standard te najjednostavniji način za rješenje našeg problema. Osnovni element baze je relacija čija su obilježja njeno ime i atributi. Glavna zadaća naše baze je spajanje njenih korisnika i sustava s korisnikom, bilo kroz poruke ili kroz razne obrasce. Postoji jedna tablica veza s nazivom Pregled.
 		Entiteti ove baze podataka su:
@@ -65,9 +53,6 @@
 		
 		
 			\subsection{Opis tablica}
-			
-
-				\textit{Svaku tablicu je potrebno opisati po zadanom predlošku. Lijevo se nalazi točno ime varijable u bazi podataka, u sredini se nalazi tip podataka, a desno se nalazi opis varijable. Svjetlozelenom bojom označite primarni ključ. Svjetlo plavom označite strani ključ}
 				
 				
 				\textbf{Osoba} Ovaj entitet sadrži sve informacije o pojedinoj osobi spremljenoj u aplikaciji. Budući da ovaj entitet modelira i građane i zdravstvene zaposlenike ima mnogo opcionalnih atributa. Atributi entiteta su: OIB, ime, prezime,lozinka, email ustanove, datum rođenja, adresa stanovanja, administratorska prava,uloga, OIB roditelja i OIB zadanog doktora. Moguće uloge su: 'roditelj','dijete','pedijatar','doktor'. Email ustanove, datum rođenja, adresa stanovanja, lozinka, OIB roditelja i OIB doktora mogu biti prazni. Ovaj entitet je u \textit{Many-to-One} vezi s entitetom Osoba s ulogom roditelj preko atributa rodOIB,\textit{Many-to-One} vezi s entitetom Osoba s ulogom liječnik preko dokOIB, \textit{One-to-Many} vezi s Poruka preko OIB-a gdje jedan entitet Poruka zahtjeva dva entiteta Osoba.
@@ -164,7 +149,6 @@
 				\end{longtblr}
 			
 			\subsection{Dijagram baze podataka}
-				\textit{ U ovom potpoglavlju potrebno je umetnuti dijagram baze podataka. Primarni i strani ključevi moraju biti označeni, a tablice povezane. Bazu podataka je potrebno normalizirati. Podsjetite se kolegija "Baze podataka".}
 				
 				\begin{figure}[H]
 					\includegraphics[width=\textwidth]{slike/dijagramBazeHigh.png} %veličina u odnosu na širinu linije
