@@ -13,8 +13,8 @@ export default function User() {
     return (
         <div className="dobrodoslica">
             <div className="box">
-            <p>Dobro došli {user.ime} {user.prezime}</p>
-            <p>Vaša uloga je :{user.uloga}</p>
+            <p>Dobro došli</p>
+
             </div>
         </div>
     )
