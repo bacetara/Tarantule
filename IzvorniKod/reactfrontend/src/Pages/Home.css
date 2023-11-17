@@ -1,0 +1,100 @@
+body {
+    display: flex;
+    flex-flow: column;
+    background: white;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+}
+
+
+.header {
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    background: #112a47;
+    align-content: center;
+
+    width: 100%;
+    min-height: 10%;
+    flex-wrap: wrap;
+}
+
+.header .logo {
+    margin: 5px;
+    align-self: center;
+    min-height: 50px;
+    min-width: 80px;
+}
+
+/*----*/
+.gumbi{
+    width: 30%;
+    margin: 5px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    align-content: center;
+    align-self: center;
+    flex-wrap: wrap;
+}
+
+.gumb {
+    text-decoration: none;
+    margin: 2%;
+    text-align: center;
+    min-width: 40%;
+    padding: 5px;
+    border-radius: 10px;
+    font-size: 1rem;
+}
+
+#register.gumb {
+    background-color: #92b9dc;
+}
+
+#login.gumb {
+    background-color: #65B58A;
+}
+
+.link_na_stranicu{
+    text-decoration: none;
+    color: black;
+}
+
+
+
+.link_na_stranicu:hover{
+    color: white;
+}
+
+
+.textbox {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+
+    font-size: 2rem;
+
+}
+
+@media screen and (max-width: 720px) {
+    body {
+        flex-flow: column;
+        flex-wrap: wrap;
+    }
+    .gumbi {
+        flex-flow: column;
+    }
+
+    .register {
+        min-width: 50%;
+    }
+    
+
+    .login {
+        min-width: 50%;
+    }
+}
