@@ -1,13 +1,36 @@
 \chapter{Arhitektura i dizajn sustava}
 		
-		\textbf{\textit{dio 1. revizije}}\\
-
-		\textit{ Potrebno je opisati stil arhitekture te identificirati: podsustave, preslikavanje na radnu platformu, spremišta podataka, mrežne protokole, globalni upravljački tok i sklopovsko-programske zahtjeve. Po točkama razraditi i popratiti odgovarajućim skicama:}
-	\begin{itemize}
-		\item 	\textit{izbor arhitekture temeljem principa oblikovanja pokazanih na predavanjima (objasniti zašto ste baš odabrali takvu arhitekturu)}
-		\item 	\textit{organizaciju sustava s najviše razine apstrakcije (npr. klijent-poslužitelj, baza podataka, datotečni sustav, grafičko sučelje)}
-		\item 	\textit{organizaciju aplikacije (npr. slojevi frontend i backend, MVC arhitektura) }		
-	\end{itemize}
+		Arhitektura se može podijeliti na nekoliko podsustava:
+		 \begin{itemize}
+			\item Poslužitelj frontenda
+			\item Frontend (prvi dio web aplikacije)
+			\item Poslužitelj backenda
+			\item Backend (drugi dio web aplikacije)
+			\item Baza podataka 
+		\end{itemize}
+		
+		\begin{figure}[H]
+			\includegraphics[width=\textwidth]{slike/arhitekturaSustava.PNG} %veličina u odnosu na širinu linije
+			\caption{Arhitektura sustava}
+			\label{fig:promjene9} %label mora biti drugaciji za svaku sliku
+		\end{figure}
+		
+		 \underbar{\textit{Web preglednik}} je program koji omogućuje korisnicima pregled web sadržaja, a to uključuje web stranice i njihov raznolik sadržaj (slike, dijagrami...). Web preglednik je i okolina u kojoj se mogu izvršiti skripte (potrebno npr. kod client-side renderinga). Jedna od glavnih funkcionalnosti web preglednika je slanje zahtjeva prema web poslužiteljima.
+		 	
+		 \underbar{\textit{Frontend poslužitelj}} je poslužitelj koji komunicira s web preglednikom klijenta preko HTTP (\textit{engl. Hyper Text Transfer Protocol}) protokola. Na frontend poslužitelju se nalazi frontend dio web aplikacije čije dijelove frontend poslužitelj vraća klijentu na zahtjev (npr. pri početnom otvaranju stranice).
+		 
+		 \underbar{\textit{Backend poslužitelj}} je poslužitelj na kojem se nalazi backend dio aplikacije. Backend poslužitelj omogućuje slanje i primanje zahtjeva backend dijelu aplikacije. Backend poslužitelj preko HTTP protokola komunicira s frontendom ili web preglednikom klijenta. Ovaj poslužitelj komunicira i s poslužiteljem baze podataka preko TCP (eng. Transmission Control Protocol) protokola.
+		 
+		 \underbar{\textit{Web aplikacija}} dijeli se na frontend i backend. Zadaća frontend dijela je oblikovanje prikaza podataka, a potrebne podatke može zatražiti od backenda. Zadaća backend dijela je dohvaćanje podataka iz baze te njihova obrada i prosljeđivanje frontendu u određenom obliku. Komunikacija između frontenda, backenda, baze i web preglednika odvija se preko zahtjeva.
+		 
+		 \underbar{\textit{Baza podataka}} sadrži sve informacije o korisničkim računima, korisnicima te porukama koje korisnici šalju unutar web aplikacije.\\
+		 	
+		 Razvojni okvir koji smo odabrali za razvijanje backend dijela aplikacije jest Spring (programski jezik Java). Za razvoj frontend dijela aplikacije odlučili smo se za razvojni okvir React (programski jezik JavaScript). Odabrano razvojno okruženje je IntelliJ IDEA. Baza podataka napravljena je koristeći PostgreSQL.\\
+		 
+		 Arhitektura web aplikacije temelji se na single-page application principu kojeg omogućuje razvojni okvir React. Pri početnom otvaranju web aplikacije, web preglednik korisnika uputi zahtjev frontend serveru koji mu vraća sve odgovarajuće datoteke potrebne za prikaz stranice u pregledniku (koristi se princip client-side rendering). Ovisno o prosljeđenim podacima, web preglednik prilikom obrađivanja ulaznih podataka korisnika (klik na pojedini gumb, otvaranje nove stranice) šalje zahtjeve backend serveru (ako su potrebni određeni podaci za prikaz React komponente) ili frontend serveru (za dohvat datoteka potrebnih za prikaz novog dijela stranice).
+		 
+		  	
+		  
 
 	
 		
@@ -17,15 +40,22 @@
 				
 		\section{Baza podataka}
 			
-			\textbf{\textit{dio 1. revizije}}\\
-			
-		\textit{Potrebno je opisati koju vrstu i implementaciju baze podataka ste odabrali, glavne komponente od kojih se sastoji i slično.}
+		
+		Za našu web aplikaciju koristiti ćemo relacijsku bazu podataka koja je industrijski standard te najjednostavniji način za rješenje našeg problema. Osnovni element baze je relacija čija su obilježja njeno ime i atributi. Glavna zadaća naše baze je spajanje njenih korisnika i sustava s korisnikom, bilo kroz poruke ili kroz razne obrasce. Postoji jedna tablica veza s nazivom Pregled.
+		Entiteti ove baze podataka su:
+		
+			\begin{packed_item}
+				\item Osoba
+				\item Poruka
+				\item Bolest
+				\item Bolnica
+			\end{packed_item}
+		
 		
 			\subsection{Opis tablica}
-			
-
-				\textit{Svaku tablicu je potrebno opisati po zadanom predlošku. Lijevo se nalazi točno ime varijable u bazi podataka, u sredini se nalazi tip podataka, a desno se nalazi opis varijable. Svjetlozelenom bojom označite primarni ključ. Svjetlo plavom označite strani ključ}
 				
+				
+				\textbf{Osoba} Ovaj entitet sadrži sve informacije o pojedinoj osobi spremljenoj u aplikaciji. Budući da ovaj entitet modelira i građane i zdravstvene zaposlenike ima mnogo opcionalnih atributa. Atributi entiteta su: OIB, ime, prezime,lozinka, email ustanove, datum rođenja, adresa stanovanja, administratorska prava,uloga, OIB roditelja i OIB zadanog doktora. Moguće uloge su: 'roditelj','dijete','pedijatar','doktor'. Email ustanove, datum rođenja, adresa stanovanja, lozinka, OIB roditelja i OIB doktora mogu biti prazni. Ovaj entitet je u \textit{Many-to-One} vezi s entitetom Osoba s ulogom roditelj preko atributa rodOIB,\textit{Many-to-One} vezi s entitetom Osoba s ulogom liječnik preko dokOIB, \textit{One-to-Many} vezi s Poruka preko OIB-a gdje jedan entitet Poruka zahtjeva dva entiteta Osoba.
 				
 				\begin{longtblr}[
 					label=none,
@@ -35,30 +65,159 @@
 						colspec={|X[6,l]|X[6, l]|X[20, l]|}, 
 						rowhead = 1,
 					} %definicija širine tablice, širine stupaca, poravnanje i broja redaka naslova tablice
-					\hline \SetCell[c=3]{c}{\textbf{korisnik - ime tablice}}	 \\ \hline[3pt]
-					\SetCell{LightGreen}IDKorisnik & INT	&  	Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod  	\\ \hline
-					korisnickoIme	& VARCHAR &   	\\ \hline 
-					email & VARCHAR &   \\ \hline 
-					ime & VARCHAR	&  		\\ \hline 
-					\SetCell{LightBlue} primjer	& VARCHAR &   	\\ \hline 
+					\hline \SetCell[c=3]{c}{\textbf{Osoba}}	 \\ \hline[3pt]
+					\SetCell{LightGreen}OIB & INT	&  	OIB osobe  	\\ \hline
+					ime	& VARCHAR & ime osobe   	\\ \hline 
+					prezime & VARCHAR & prezime osobe   \\ \hline 
+					mail & VARCHAR	& email ustanove (opcionalno)  \\ \hline
+					datumRod & DATETIME & datum rođenja osobe (opcionalno)  \\ \hline
+					adresa & VARCHAR & adresa stanovanja (opcionalno)   \\ \hline    
+					adminPrava & INT & administratorska prava (0 ili 1)   \\ \hline
+					lozinka	& VARCHAR & šifra računa osobe (opcionalno)	\\ \hline
+					uloga	& VARCHAR & uloga osobe	\\ \hline
+					\SetCell{LightBlue} rodOIB	& INT & OIB roditelja	\\ \hline
+					\SetCell{LightBlue} dokOIB	& INT & OIB doktora  	\\ \hline 
 				\end{longtblr}
 				
 				
+				
+				\textbf{Poruka} Ovaj entitet sadrži sve informacije o porukama spremljenima u aplikaciji. Njegovi atributi su: id, OIBpoš, OIBpri, naslov, tijelo, prilog, tip, dijagnoza. Prilog i dijagnoza mogu biti prazne, ovisno o tipu poruke. Ovaj entitet je u \textit{Many-to-One} vezi s entitetom Osoba preko OIB-a te su potrebna 2 različita OIB-a,\textit{Many-to-One} vezi s entitetom Bolest preko id-a.
+				
+				\begin{longtblr}[
+					label=none,
+					entry=none
+					]{
+						width = \textwidth,
+						colspec={|X[6,l]|X[6, l]|X[20, l]|}, 
+						rowhead = 1,
+					} %definicija širine tablice, širine stupaca, poravnanje i broja redaka naslova tablice
+					\hline \SetCell[c=3]{c}{\textbf{Poruka}}	 \\ \hline[3pt]
+					\SetCell{LightGreen}id & INT	&  	identifikacijski ključ poruke	\\ \hline
+					\SetCell{LightBlue} priOIB	& INT & OIB pošiljatelja	\\ \hline
+					\SetCell{LightBlue} pošOIB	& INT & OIB primatelja	\\ \hline
+					naslov	& VARCHAR & naslov poruke  	\\ \hline
+					tijelo	& VARCHAR & tekstualni sadržaj poruke  	\\ \hline
+					prilog	& VARCHAR & link na poslanu sliku unutar datotečnog sustava aplikacije (opcionalno)	\\ \hline
+					tip	& VARCHAR & tip poslane poruke (standardna,ispričnica itd.)	\\ \hline
+					\SetCell{LightBlue}dijagnozaID	& INT & id dijagnosticirane bolesti (opcionalno)	\\ \hline      
+				\end{longtblr}
+				
+				\textbf{Bolest} Ovaj entitet sadrži sve informacije o bolestima spremljenima u aplikaciji. Njegovi atributi su: id i naziv. Ovaj entitet je u \textit{Many-to-Many} vezama s entitetom Bolnica id-a bolnice,\textit{One-to-One} vezi s entitetom Poruka preko id-a bolesti.
+				
+				\begin{longtblr}[
+					label=none,
+					entry=none
+					]{
+						width = \textwidth,
+						colspec={|X[6,l]|X[6, l]|X[20, l]|}, 
+						rowhead = 1,
+					} %definicija širine tablice, širine stupaca, poravnanje i broja redaka naslova tablice
+					\hline \SetCell[c=3]{c}{\textbf{Bolest}}	 \\ \hline[3pt]
+					\SetCell{LightGreen}idBolest & INT	&  	identifikacijski ključ bolesti	\\ \hline
+					naziv	& VARCHAR & naziv bolesti	\\ \hline   
+				\end{longtblr}
+				
+				\textbf{Bolnica} Ovaj entitet sadrži sve informacije o bolnici spremljenima u aplikaciji. Njegovi atributi su: id,naziv i adresa. Ovaj entitet je u \textit{Many-to-Many} vezama s entitetom Bolest preko id-a bolesti.
+				
+				\begin{longtblr}[
+					label=none,
+					entry=none
+					]{
+						width = \textwidth,
+						colspec={|X[6,l]|X[6, l]|X[20, l]|}, 
+						rowhead = 1,
+					} %definicija širine tablice, širine stupaca, poravnanje i broja redaka naslova tablice
+					\hline \SetCell[c=3]{c}{\textbf{Bolnica}}	 \\ \hline[3pt]
+					\SetCell{LightGreen}idBolnica & INT	&  	identifikacijski ključ bolnice	\\ \hline
+					naziv	& VARCHAR & naziv bolnice	\\ \hline
+					adresa	& VARCHAR & adresa bolnice	\\ \hline    
+				\end{longtblr}
+				
+				\textbf{Pregled} Ova tablica sadrži sve veze između entiteta Bolest i Bolnica spremljene u aplikaciji koji su u \textit{Many-to-Many} vezi. Atributi teblice su: idBolest i idBolnica. 
+				
+				\begin{longtblr}[
+					label=none,
+					entry=none
+					]{
+						width = \textwidth,
+						colspec={|X[6,l]|X[6, l]|X[20, l]|}, 
+						rowhead = 1,
+					} %definicija širine tablice, širine stupaca, poravnanje i broja redaka naslova tablice
+					\hline \SetCell[c=3]{c}{\textbf{Pregled}}	 \\ \hline[3pt]
+					\SetCell{LightBlue}idBolest & INT	&  	identifikacijski ključ bolesti	\\ \hline
+					\SetCell{LightBlue}idBolnica	& INT & identifikacijski ključ bolnice  \\ \hline
+				\end{longtblr}
 			
 			\subsection{Dijagram baze podataka}
-				\textit{ U ovom potpoglavlju potrebno je umetnuti dijagram baze podataka. Primarni i strani ključevi moraju biti označeni, a tablice povezane. Bazu podataka je potrebno normalizirati. Podsjetite se kolegija "Baze podataka".}
+				
+				\begin{figure}[H]
+					\includegraphics[width=\textwidth]{slike/dijagramBazeHigh.png} %veličina u odnosu na širinu linije
+					\caption{Dijagram baze podataka}
+					\label{fig:promjene10} %label mora biti drugaciji za svaku sliku
+				\end{figure}
 			
 			\eject
 			
 			
 		\section{Dijagram razreda}
 		
-			\textit{Potrebno je priložiti dijagram razreda s pripadajućim opisom. Zbog preglednosti je moguće dijagram razlomiti na više njih, ali moraju biti grupirani prema sličnim razinama apstrakcije i srodnim funkcionalnostima.}\\
+			\begin{figure}[H]
+				\includegraphics[width=\textwidth]{dijagrami/classDiagram1.png} %veličina u odnosu na širinu linije
+				\caption{Dijagram razreda}
+				\label{fig:promjene10} %label mora biti drugaciji za svaku sliku
+			\end{figure}
+			\
+
+			\textit{Razred }\textbf{Osoba}
+			 predstavlja entitet Osoba baze podataka. 
+			Sadrži sve njegove atribute odgovarajućih tipova s pripadnim integritetskim ograničenjima, kao i gettere i settere za sve njih kako bi im Springov ORM mogao pristupiti.
+
+			\textit{Sučelje }\textbf{OsobaRepository}
+			 daje sučelje za pristup entitetu Osoba u bazi podataka preko JPA.
+
+			\textit{Sučelje }\textbf{OsobaService}
+			 opisuje operacije kojima se pristupa entitetu Osoba, 
+			ne oslanjajući se na konkretnu implementaciju (tj. na Repository),
+			što je u skladu sa objektnom paradigmom i omogućuje primjenu dependency injectiona.
 			
-			\textbf{\textit{dio 1. revizije}}\\
-			
-			\textit{Prilikom prve predaje projekta, potrebno je priložiti potpuno razrađen dijagram razreda vezan uz \textbf{generičku funkcionalnost} sustava. Ostale funkcionalnosti trebaju biti idejno razrađene u dijagramu sa sljedećim komponentama: nazivi razreda, nazivi metoda i vrste pristupa metodama (npr. javni, zaštićeni), nazivi atributa razreda, veze i odnosi između razreda.}\\
-			
+			\textit{Razred }\textbf{OsobaServiceJpa}
+			 predstavlja konkretnu implementaciju sučelja OsobaService koja entitetu Osoba
+			pristupa preko repozitorija (tipa OsobaRepository) na kojeg pamti referencu.
+
+			\textit{Razred }\textbf{LoginController}
+			 služi za obradu zahtjeva za prijavu (login).
+			Pamti referencu na apstraktni OsobaService kako bi mogao raditi operacije nad bazom Osoba.
+			Također mora imati referencu na objekt tipa PasswordEncoder čiji je zadatak primijeniti hash algoritam
+			na dobivenu lozinku kako bi se mogla usporediti sa hashem koji je spremljen u bazi. Članske funkcije 
+			ove klase izvršavaju se prilikom primanja HTTP zahtjeva, što vrijedi općenito za Controller klase
+			(tj. njihove objekte) u Springu. Članska funkcija login će na POST zahtjev s odgovarajućim podatcima
+			obaviti prijavu korisnika. Članska funkcija getAllOsoba postoji isključivo za svrhe testiranja i ona će na GET zahtjev vratiti popis svih osoba
+			u JSON formatu. 
+
+			\textit{Razred }\textbf{RegisterController}
+			 služi za obradu zahtjeva za registraciju (register).
+			Isto kao i razred LoginController, drži referencu na OsobaService radi pristupa bazi i na PasswordEncoder
+			kako bi dobivene lozinke mogao hashirati prije spremanja u bazu. Članska funkcija register će na POST
+			zahtjev s odgovarajućim podatcima pokušati izvršiti registraciju novog korisnika. 
+
+			\textit{Zapis }\textbf{LoginDTO}
+			 je pomoćni Data Transfer Object zapis, koji, kao što mu ime nalaže, služi za pakiranje
+			dobivenih podataka pri prijavi ili registraciji u Java objekt. 
+
+			\textit{Razred }\textbf{RestExceptionHandler}
+			 služi za hvatanje iznimki koje mogu biti bačene prilikom obrade HTTP zahtjeva u Controllerima i ovisno o iznimki
+			vraća pravilan HTTP odgovor (npr. odgovor ne smije biti 500 ako se dogodi iznimka pri obradi zahtjeva jer je korisnika
+			unio nepravilne podatke). Članska funkcija handleInvalidPassword će uhvatiti iznimke uzrokovane
+			pogrešnim podatcima za prijavu ili registraciju i vratiti HTTP odgovor sa smislenom porukom.
+
+			\textit{Razred }\textbf{WebSecurityBasic}
+			 služi za konfiguriranje sigurnosnih postavki. U ovom trenutku su one najosnovnije.
+
+			\textit{Razred }\textbf{OzdraviBeApplication}
+			 je automatski generiran od strane Springa i sadrži ulaznu točku za izvršavanje programa.
+
+			\
+
 			\textbf{\textit{dio 2. revizije}}\\			
 			
 			\textit{Prilikom druge predaje projekta dijagram razreda i opisi moraju odgovarati stvarnom stanju implementacije}
