@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 
 const DodajRoditelja = () => {
     return (
-        <div className="containerdodajroditelja">
+        <form className="containerdodajroditelja">
             <div>NOVI RODITELJ</div>
             <div className="info"><label>IME: </label><input name="firstname" type="text"   /></div>
             <div className="info"><label>PREZIME: </label><input name="lastname" type="text"   /></div>
@@ -13,7 +13,7 @@ const DodajRoditelja = () => {
             <div className="addPerson"> <Link className="link_na_stranicu" to="/admin">Dodaj osobu</Link> </div>
 
 
-        </div>
+        </form>
     );
 };
 export default DodajRoditelja;

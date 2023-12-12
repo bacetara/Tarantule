@@ -7,6 +7,7 @@ import DodajRoditelja from "./Pages/Admin/DodajRoditelja"
 import DodajDijete from "./Pages/Admin/DodajDijete"
 import Register from "./Pages/Register";
 import User from "./Pages/User";
+import PregledajOsobu from "./Pages/Admin/PregledajOsobu";
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
                 <Route path="/addparent" element={<DodajRoditelja />} />
                 <Route path="/addchild" element={<DodajDijete />} />
                 <Route path="/user" element={<User />}/>
+                <Route path="/viewperson" element={<PregledajOsobu />}/>
 
 
             </Routes>
