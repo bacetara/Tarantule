@@ -12,6 +12,7 @@ import LijecnikPocetna from "./Pages/Doctor/LijecnikPocetna";
 import DodavanjePacijenta2 from "./Pages/Doctor/DodavanjePacijenta2";
 import PedijatarPocetna from "./Pages/Pediatrician/PedijatarPocetna";
 import DodavanjePacijenta1 from "./Pages/Pediatrician/DodavanjePacijenta1";
+import AzuriranjePodataka from "./Pages/Parent/AzuriranjePodataka";
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
                 <Route path="/addPatient2" element={<DodavanjePacijenta2 />}/>
                 <Route path="/pediatrician" element={<PedijatarPocetna />}/>
                 <Route path="/addPatient1" element={<DodavanjePacijenta1 />}/>
+                <Route path="/updateInfo" element={<AzuriranjePodataka />}/>
             </Routes>
         </BrowserRouter>
 
