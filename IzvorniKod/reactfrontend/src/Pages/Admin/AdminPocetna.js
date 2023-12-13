@@ -10,7 +10,7 @@ export default function AdminPocetna() {
                         {/*{items.map((item, index) => (
                             <li key={index}>{item}</li>
                         ))}*/}
-                        <li><Link className="link_na_stranicu" to="/Informacije">OIB ime prezime</Link></li>
+                        <li><Link className="link_na_stranicu" to="/Information">OIB ime prezime</Link></li>
                     </ul>
                 </div>
 
