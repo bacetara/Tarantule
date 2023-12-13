@@ -138,6 +138,13 @@
 								
 							\end{packed_enum}
 							
+							\item[5.a] Korisnik je unio krivi format traženih podataka (kriva duljina ili format OIB-a ili lozinke).
+							\item[] \begin{packed_enum}
+								
+								\item Sustav obaviještava korisnika da je došlo do greške.
+								\item Sustav korisnika vraća na stranicu registracije (korak 2).
+							\end{packed_enum}
+							
 							\item[5.a] Odabir OIB-a za koji je zabilježeno da se osoba već registrirala u sustav
 							\item[] \begin{packed_enum}
 								
@@ -178,6 +185,13 @@
 								\item Sustav korisnika vraća na početnu stranicu (korak 1).
 		
 								
+							\end{packed_enum}
+							
+								\item[5.a] Korisnik je unio krivi format traženih podataka (kriva duljina ili format OIB-a ili lozinke).
+							\item[] \begin{packed_enum}
+								
+								\item Sustav obaviještava korisnika da je došlo do greške.
+								\item Sustav korisnika vraća na stranicu registracije (korak 2).
 							\end{packed_enum}
 							
 							\item[5.a] Sustav provjerava podatke i utvrđuje da je uneseni par OIB - lozinka netočan.
@@ -329,6 +343,12 @@
 								\item Nalaz se neće poslati i sustav će vratit roditelja na pregled poruka na profilu.
 							\end{packed_enum}
 							
+							\item[6.a] Roditelj nije prijavljen ni kod jednog liječnika ili dijete nije prijavljeno ni kod jednog pedijatra.
+							\item[] \begin{packed_enum}
+								
+								\item Nalaz se neće poslati i sustav će vratit roditelja na pregled poruka na profilu.
+							\end{packed_enum}
+							
 							
 						\end{packed_item}
 					\end{packed_item}
@@ -446,6 +466,19 @@
 							\item Roditelj odabere jednu od poruka s naslovom "[OBAVLJENI PREGLED]".
 							\item Sustav vraća pregled poruke roditelju - roditelj može vidjeti informacije o obavljenom pregledu te dijagnozi.
 						\end{packed_enum}
+						
+						\item  \textbf{Opis mogućih odstupanja:}
+						
+						\item[] \begin{packed_item}
+							
+							\item[3.a] Roditelj ili dijete nisu obavili nijedan pregled ili pregled čije informacije želimo vidjeti još nije zapisan u sustav od strane liječnika ili pedijatra.
+							\item[] \begin{packed_enum}
+								
+								\item Roditelju se neće prikazati nijedna poruka s naslovom [OBAVLJENI PREGLED], tj. neće se prikazati poruka koja odgovara pregledu čine informacije želi vidjeti.
+							\end{packed_enum}
+							
+							
+						\end{packed_item}
 						
 						
 					\end{packed_item}

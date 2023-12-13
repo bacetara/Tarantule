@@ -27,9 +27,21 @@
 		 	
 		 Razvojni okvir koji smo odabrali za razvijanje backend dijela aplikacije jest Spring (programski jezik Java). Za razvoj frontend dijela aplikacije odlučili smo se za razvojni okvir React (programski jezik JavaScript). Odabrano razvojno okruženje je IntelliJ IDEA. Baza podataka napravljena je koristeći PostgreSQL.\\
 		 
+		 Za razvoj backenda se koristio razvojni okvir Spring MVC (Model - Pogled - Nadglednik) koji je dio Springa. Backend je po tome organiziran u 3 sloja koja međusobno komuniciraju:
+		 \begin{itemize}
+		 	\item Controller
+		 	\item Service
+		 	\item Repository
+		 \end{itemize} 
+		 \underbar{Controller} predstavlja vanjsko sučelje web aplikacije. Ovaj sloj prihvaća nadolazeće HTTP zahtjeve, poziva potrebne usluge koristeći razrede Service te vraća odgovor klijentu. \\
+		 \underbar{Service} ostvaruje funkcionalnosti koje nudi aplikacija, predstavlja logiku programa. Ostvaruje usluge, a pritom može koristiti i druge Service razrede te može zatražiti podatke od sloja Repository.\\
+		 \underbar{Repository} omogućuje komunikaciju s bazom podataka te izvlačenje podataka iz nje. Korišteno je sučelje JpaRepository koje omogućuje da se s bazom komunicira bez SQL upita - umjesto njih se koriste i modeli domene podataka. To su razredi koji predstavljaju strukturu tablica baze (entities).\\
+		 Prilikom korištenja Spring MVC-a, klijentska strana predstavlja pogled, Controller sloj predstavlja nadglednika, a model je ostvaren slojevima Service i Repository. \\
+		 
+		 
 		 Arhitektura web aplikacije temelji se na single-page application principu kojeg omogućuje razvojni okvir React. Pri početnom otvaranju web aplikacije, web preglednik korisnika uputi zahtjev frontend serveru koji mu vraća sve odgovarajuće datoteke potrebne za prikaz stranice u pregledniku (koristi se princip client-side rendering). Ovisno o prosljeđenim podacima, web preglednik prilikom obrađivanja ulaznih podataka korisnika (klik na pojedini gumb, otvaranje nove stranice) šalje zahtjeve backend serveru (ako su potrebni određeni podaci za prikaz React komponente) ili frontend serveru (za dohvat datoteka potrebnih za prikaz novog dijela stranice).
 		 
-		  	
+		 
 		  
 
 	
