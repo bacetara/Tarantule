@@ -13,7 +13,6 @@ import DodavanjePacijenta2 from "./Pages/Doctor/DodavanjePacijenta2";
 import PedijatarPocetna from "./Pages/Pediatrician/PedijatarPocetna";
 import DodavanjePacijenta1 from "./Pages/Pediatrician/DodavanjePacijenta1";
 import AzuriranjePodataka from "./Pages/Parent/AzuriranjePodataka";
-import ComposeEmail from "./Pages/Messages/ComposeEmail";
 import PediatricianEmail from "./Pages/Messages/PediatricianEmail";
 
 
@@ -34,7 +33,6 @@ function App() {
                 <Route path="/pediatrician" element={<PedijatarPocetna />}/>
                 <Route path="/addPatient1" element={<DodavanjePacijenta1 />}/>
                 <Route path="/updateInfo" element={<AzuriranjePodataka />}/>
-                <Route path="/email" element={<ComposeEmail/>}/>
                 <Route path="/pediatricianEmail" element={<PediatricianEmail/>}/>
             </Routes>
         </BrowserRouter>

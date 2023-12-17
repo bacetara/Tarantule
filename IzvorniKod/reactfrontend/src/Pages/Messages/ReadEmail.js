@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
 import './Message.css'
+import ComposeEmail from "./ComposeEmail";
 import {useNavigate} from 'react-router-dom';
 
-const ComposeEmail = ({email}) => {
+const ReadEmail = ({email}) => {
 
-    console.log(email);
     const history = useNavigate();
     const [emailData, setEmailData] = useState({
         // Initialize state for form fields
@@ -13,6 +13,7 @@ const ComposeEmail = ({email}) => {
         title: email.title || '',
         messageBody: email.messageBody || '',
     });
+    const [createReplyEmail, setCreateReplyEmail] = useState(false);
 
     const handleChange = (e) => {
         // Update the state when the user types in any of the textarea or input fields
@@ -23,29 +24,16 @@ const ComposeEmail = ({email}) => {
     };
 
     const handleBack = () => {
-        history(0);
+        history(0)
     }
-    function sendMessage(e) {
-        e.preventDefault();
 
-        const data = {
-            pošiljatelj: emailData.receiver,
-            naslov: emailData.title,
-            tijelo: emailData.messageBody
-        };
-
-        const options = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        };
-    }
+    const createReply = () => {
+        setCreateReplyEmail(true);
+    };
 
     return (
         <>
-            <form className="message" onSubmit={sendMessage}>
+            <div className="message">
                 <div className="inputs" id="receiverField">
                     <label htmlFor="receiver">Primatelj</label>
                     <input type="text" name="receiver" id="receiver" value={email.receiver} onChange={handleChange}/>
@@ -61,11 +49,19 @@ const ComposeEmail = ({email}) => {
 
                 <div className="inputs" id="messageButtons">
                     <button id="reject" type="button" onClick={handleBack}>zatvori</button>
-                    <button id="sendMessage" type="submit">pošalji</button>
+                    <button id="createReply" type="button" onClick={createReply}>odgovori</button>
                 </div>
-            </form>
+
+            </div>
+
+            {createReplyEmail && <ComposeEmail email={{
+                sender: emailData.receiver,
+                receiver: emailData.sender,
+                title: 'Reply: ' + emailData.title,
+                messageBody: emailData.messageBody + '\n------------------------------\n',
+            }}/> }
         </>
     );
 }
 
-export default ComposeEmail;
+export default ReadEmail;
