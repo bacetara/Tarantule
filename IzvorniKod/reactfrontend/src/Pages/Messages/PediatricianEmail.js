@@ -82,7 +82,7 @@ const PediatricianEmail = () => {
                 </div>
 
                 <button id="attachment" type="button">prilog</button>
-                <textarea id="messageBody" name="messageBody" onChange={handleChange}/>
+                <textarea className="inputs" id="messageBody" name="messageBody" onChange={handleChange}/>
 
                 <div className="inputs" id="messageButtons">
                     <label className="check"> ispričnica

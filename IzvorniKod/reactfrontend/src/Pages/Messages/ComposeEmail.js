@@ -57,7 +57,7 @@ const ComposeEmail = ({email}) => {
                 </div>
 
                 <button id="attachment" type="button">prilog</button>
-                <textarea id="messageBody" name="messageBody" value={email.messageBody} onChange={handleChange}/>
+                <textarea className="inputs" id="messageBody" name="messageBody" value={email.messageBody} onChange={handleChange}/>
 
                 <div className="inputs" id="messageButtons">
                     <button id="reject" type="button" onClick={handleBack}>zatvori</button>
