@@ -7,6 +7,7 @@ const PediatricianEmail = () => {
         receiver: 'automatski 09320940390',
         sender: 'taj pedijatar',
         title: '',
+        disease: '',
         messageBody: '',
         ispricnica: false,
         bolovanje: false,
@@ -18,6 +19,8 @@ const PediatricianEmail = () => {
             ...emailData,
             [e.target.name]: e.target.value,
         });
+
+        //console.log(emailData);
     };
 
     const handleCheckBoxChange = (checkBoxId) => {
@@ -26,6 +29,8 @@ const PediatricianEmail = () => {
              [checkBoxId]: !emailData[checkBoxId],
         })
     };
+
+
 
     function sendMessage(e) {
         e.preventDefault();
@@ -60,7 +65,20 @@ const PediatricianEmail = () => {
 
                 <div className="inputs" id="titleField">
                     <label htmlFor="title">Naslov</label>
-                    <input type="text" name="title" id="title" onChange={handleChange}/>
+                    <select name="title" id="title" value={emailData.title} onChange={handleChange}>
+                        <option value="dijagnoza">Dijagnoza</option>
+                        <option value="specijalist">Specijalistički pregled</option>
+                        <option value="nalaz">Nalaz iz laboratorija</option>
+                    </select>
+                </div>
+
+                <div className={emailData.title === 'specijalist' ? "inputs" : "hiddenField"} id="diseaseField">
+                    <label htmlFor="disease">Bolest</label>
+                    <select name="disease" id="disease" value={emailData.title} onChange={handleChange}>
+                        <option value="bolest1">Bolest 1</option>
+                        <option value="bolest2">Bolest 2</option>
+                        <option value="bolest3">Bolest 3</option>
+                    </select>
                 </div>
 
                 <button id="attachment" type="button">prilog</button>
