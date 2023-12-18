@@ -1,0 +1,125 @@
+.message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform:translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+
+    background-color: #d9d9d9;
+    border-radius: 5px;
+
+    display: flex;
+    flex-wrap: wrap;
+    flex-flow: column;
+
+    justify-content: space-evenly;
+
+}
+
+.message .inputs {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 10%;
+    margin: 0.5rem 1rem;
+}
+
+.message .hiddenField {
+    visibility: hidden;
+}
+
+.message .inputs input {
+    width: 60%;
+    height: 100%;
+}
+
+.message .inputs select {
+    width: 50%;
+    height: 100%;
+    border: none;
+    border-radius: 2px;
+    padding: 1px 2px;
+}
+
+#attachment {
+    background-color: rgba(84, 199, 84, 0.89);
+    border: rgba(84, 199, 84, 0.89);
+    border-radius: 2px;
+    min-width: 15%;
+    padding: 1%;
+    margin: 1rem;
+    align-self: end;
+}
+
+#attachment:hover{
+    background-color: rgba(40, 103, 40, 0.89);
+    color: white;
+}
+
+#messageBody {
+    height: 50%;
+    border-radius: 2px;
+    border: white;
+
+    margin-bottom: 10px;
+}
+
+#messageButtons {
+    justify-content: end;
+}
+#messageButtons button {
+    border-radius: 2px;
+    min-width: 15%;
+    padding: 1%;
+    margin: 3px;
+    background-color: #A7B8D8;
+    border-color: #A7B8D8;
+}
+
+#messageButtons #reject {
+    background-color: #3d4e70;
+    border-color: #3d4e70;
+    color: white;
+}
+
+
+@media screen and (max-width: 720px) {
+    .message {
+        min-width: 80%;
+        min-height: 90%;
+    }
+
+    .message .inputs {
+        display: flex;
+        flex-flow: column;
+        align-items: start;
+    }
+
+    .message .inputs label {
+        margin-bottom: 2px;
+    }
+    .message .inputs input {
+        width: 100%;
+        height: 60%;
+    }
+
+    #messageButtons {
+        height: 25%;
+    }
+
+    #messageButtons button{
+        min-width: 40%;
+        align-self: end;
+        justify-content: center;
+    }
+
+    #messageButtons .check {
+        align-items: center;
+        display: flex;
+    }
+
+
+}
+
+
