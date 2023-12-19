@@ -10,7 +10,7 @@ export default function PedijatarPocetna() {
                         {/*{items.map((item, index) => (
                             <li key={index}>{item}</li>
                         ))}*/}
-                        <li><Link className="link_na_stranicu" to="/PRIKAZMEJLOVATOGPACIJENTA">OIB ime prezime</Link></li>
+                        <li><Link className="link_na_stranicu" to="/pediatricianInbox">OIB ime prezime</Link></li>
                     </ul>
                 </div>
 

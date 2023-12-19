@@ -42,7 +42,7 @@ export default function User() {
         <Container>
             {openingEmail ?
                 (<ListContainer items={selectedEmail} listAll={false}/>) :
-                (<ListContainer items={emails} listAll={true} onClick={openEmail}/>)}
+                (<ListContainer items={emails} listAll={true} myfunc={openEmail}/>)}
 
         </Container>
 

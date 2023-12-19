@@ -39,3 +39,7 @@
 .PediatricianMessage:hover{
     text-decoration: underline;
 }
+
+.nevidljivo {
+    visibility: hidden !important;
+}

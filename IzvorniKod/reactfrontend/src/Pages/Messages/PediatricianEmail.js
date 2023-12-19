@@ -1,7 +1,9 @@
 import React, {useState} from 'react';
 import './Message.css'
+import {useNavigate} from 'react-router-dom';
 
-const PediatricianEmail = () => {
+const PediatricianEmail = ({sender, receiver}) => {
+    const history = useNavigate();
     const [emailData, setEmailData] = useState({
         // Initialize state for form fields
         receiver: 'automatski 09320940390',
@@ -13,6 +15,9 @@ const PediatricianEmail = () => {
         bolovanje: false,
     });
 
+    const handleBack = () => {
+        history(0);
+    }
     const handleChange = (e) => {
         // Update the state when the user types in any of the textarea or input fields
         setEmailData({
@@ -55,12 +60,12 @@ const PediatricianEmail = () => {
             <form className="message" onSubmit={sendMessage}>
                 <div className="inputs" id="receiverField">
                     <label htmlFor="receiver">Primatelj (OIB)</label>
-                    <input type="text" name="receiver" id="receiver" onChange={handleChange} value={emailData.receiver} readOnly={true}/>
+                    <input type="text" name="receiver" id="receiver" onChange={handleChange} value={receiver.oib} readOnly={true}/>
                 </div>
 
                 <div className="inputs" id="senderField">
                     <label htmlFor="sender">Pošiljatelj</label>
-                    <input type="text" name="sender" id="sender" onChange={handleChange} value={emailData.sender} readOnly={true}/>
+                    <input type="text" name="sender" id="sender" onChange={handleChange} value={sender.oib} readOnly={true}/>
                 </div>
 
                 <div className="inputs" id="titleField">
@@ -74,7 +79,7 @@ const PediatricianEmail = () => {
 
                 <div className={emailData.title === 'specijalist' ? "inputs" : "hiddenField"} id="diseaseField">
                     <label htmlFor="disease">Bolest</label>
-                    <select name="disease" id="disease" value={emailData.title} onChange={handleChange}>
+                    <select name="disease" id="disease" value={emailData.disease} onChange={handleChange}>
                         <option value="bolest1">Bolest 1</option>
                         <option value="bolest2">Bolest 2</option>
                         <option value="bolest3">Bolest 3</option>
@@ -97,7 +102,7 @@ const PediatricianEmail = () => {
                                onChange={() => handleCheckBoxChange('bolovanje')}/>
                     </label>
 
-                    <button id="reject" type="button">zatvori</button>
+                    <button id="reject" type="button" onClick={handleBack}>zatvori</button>
                     <button id="sendMessage" type="submit">pošalji</button>
                 </div>
             </form>
