@@ -30,10 +30,11 @@
 .InboxContainer > :last-child{
     border-bottom: 2px solid black
 }
-.DoctorMessage{
+.Message{
     height: 85px;
     background-color:#9AADDF;
+    border-radius: 10px;
 }
-.DoctorMessage:hover{
+.Message:hover{
     text-decoration: underline;
 }

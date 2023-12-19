@@ -1,5 +1,4 @@
 import './RoditeljPocetna.css';
-
 export default function RoditeljPocetna() {
 	return (
 		<div className="infocontainer">
