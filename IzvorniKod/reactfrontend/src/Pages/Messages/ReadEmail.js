@@ -36,16 +36,16 @@ const ReadEmail = ({email}) => {
             <div className="message">
                 <div className="inputs" id="receiverField">
                     <label htmlFor="receiver">Primatelj</label>
-                    <input type="text" name="receiver" id="receiver" value={email.receiver} onChange={handleChange}/>
+                    <input type="text" name="receiver" id="receiver" value={emailData.receiver} onChange={handleChange} readOnly={true}/>
                 </div>
 
                 <div className="inputs" id="titleField">
                     <label htmlFor="title">Naslov</label>
-                    <input type="text" name="title" id="title" value={email.title} onChange={handleChange}/>
+                    <input type="text" name="title" id="title" value={emailData.title} onChange={handleChange} readOnly={true}/>
                 </div>
 
                 <button id="attachment" type="button">prilog</button>
-                <textarea className="inputs" id="messageBody" name="messageBody" value={email.messageBody} onChange={handleChange}/>
+                <textarea className="inputs" id="messageBody" name="messageBody" value={emailData.messageBody} onChange={handleChange} readOnly={true}/>
 
                 <div className="inputs" id="messageButtons">
                     <button id="reject" type="button" onClick={handleBack}>zatvori</button>
