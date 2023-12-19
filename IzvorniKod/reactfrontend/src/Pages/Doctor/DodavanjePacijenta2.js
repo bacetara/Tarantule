@@ -1,11 +1,12 @@
 import '../Admin/AdminPocetna.css'
 import {Outlet, Link} from "react-router-dom";
+import Container from "../Container";
 
 export default function DodavanjePacijenta2() {
     return (
         <>
-            <div className="containeradmin">
-                <div className="listContainerDodavanje">
+            <Container>
+                <div className="listContainer">
                     <ul>
                         {/*{items.map((item, index) => (
                             <li key={index}>{item}</li>
@@ -28,7 +29,7 @@ export default function DodavanjePacijenta2() {
                 </div>
 
 
-            </div>
+            </Container>
 
             <Outlet/>
         </>
