@@ -22,10 +22,12 @@ export default function InboxDijete({selectedUser}) {
 
     const openEmail = (email) => {
         setSelectedEmail(email);
+        setCreateEmail(false);
     }
 
     const newEmail = () => {
         setCreateEmail(true);
+        setSelectedEmail(null);
     }
 
     return(

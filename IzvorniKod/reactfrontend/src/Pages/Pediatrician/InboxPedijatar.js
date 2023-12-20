@@ -21,10 +21,12 @@ export default function InboxPedijatar() {
     ];
     const openEmail = (email) => {
         setSelectedEmail(email);
+        setCreateEmail(false);
     }
 
     const newEmail = () => {
         setCreateEmail(true);
+        setSelectedEmail(null);
     }
 
     return(
