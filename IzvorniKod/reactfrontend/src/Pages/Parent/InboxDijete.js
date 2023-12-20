@@ -1,21 +1,43 @@
 import './Inbox.css'
+import Container from "../Container";
+import {useState} from "react";
+import ListContainer from "../ListContainer";
+import PediatricianEmail from "../Messages/PediatricianEmail";
+import ComposeEmail from "../Messages/ComposeEmail";
+import * as React from "react";
 
-export default function InboxDijete(){
+export default function InboxDijete() {
+    const [selectedEmail, setSelectedEmail] = useState(null);
+    const [createEmail, setCreateEmail] = useState(false);
+    const emails = [
+        { sender: 'john@example.com', receiver:'netko@mail.com', title: 'prvi mail', messageBody: 'Hi, let\'s discuss the agenda for tomorrow\'s meeting.', id:1 },
+        { sender: 'john1111@example.com', receiver:'netko2@mail.com', title: 'drugi mail', messageBody: 'Bok ja sam drugi mail', id:2 },
+        { sender: 'john12213123@example.com', receiver:'netko3333@mail.com', title: 'treci mail', messageBody: 'Hi, ja sam treci mail.' , id: 3}
+    ];
+    const pediatrician = {oib: 9090909, name: "Ivan", surname: "Lucić"};
+    const child = {oib: 999902020202, name: "Jakov", surname: "Župančić"};
+
+    const openEmail = (email) => {
+        setSelectedEmail(email);
+    }
+
+    const newEmail = () => {
+        setCreateEmail(true);
+    }
+
     return(
-        <div className="MainContainer">
-            <div className="InboxContainer">
-                <div className="EmailContainer">prvimaildijete</div>
-                <div className="EmailContainer">drugimaildijete</div>
-                <div className="EmailContainer">trecimaildijete</div>
-                <div className="EmailContainer">cetvrtimaildijete</div>
-                <div className="EmailContainer">petimaildijete</div>
+        <Container>
+            {selectedEmail != null ?
+                (<ListContainer items={selectedEmail} listAll={false}/>) :
+                createEmail === false ?
+                    (<ListContainer items={emails} listAll={true} myfunc={openEmail}/>) :
+                    (<div className="listContainer"><ComposeEmail email={{sender: child.oib, receiver: pediatrician.oib}}/></div>)}
 
-            </div>
             <div className="AdditionalInfo">
                 <p> placeholder za sliku</p>
-                <button className="Message">naruči</button>
+                <button className={createEmail ? "nevidljivo" :"Message"} onClick={newEmail}>naruči</button>
 
             </div>
-        </div>
+        </Container>
     )
 }

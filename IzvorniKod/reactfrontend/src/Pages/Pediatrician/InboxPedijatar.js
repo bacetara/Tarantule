@@ -4,6 +4,9 @@ import ListContainer from "../ListContainer";
 import {useState} from "react";
 import * as React from "react";
 import PediatricianEmail from "../Messages/PediatricianEmail";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faArrowRightFromBracket, faStaffSnake, faUserDoctor} from "@fortawesome/free-solid-svg-icons";
+import {Link} from "react-router-dom";
 
 export default function InboxPedijatar() {
     const pediatrician = {oib: 9090909, name: "Ivan", surname: "Lucić"};
@@ -24,6 +27,21 @@ export default function InboxPedijatar() {
     }
 
     return(
+        <>
+        <div className="header">
+
+            <div className="logOut">
+                <FontAwesomeIcon id="logOutIcon" icon={faArrowRightFromBracket} style={{color: "white"}} />
+                <p id="logOutText">log out</p>
+            </div>
+
+            <div className="profileName">
+                {pediatrician.name} {pediatrician.surname}
+            </div>
+
+        </div>
+
+
         <Container>
             {selectedEmail != null ?
                 (<ListContainer items={selectedEmail} listAll={false}/>) :
@@ -32,9 +50,12 @@ export default function InboxPedijatar() {
                     (<div className="listContainer"><PediatricianEmail sender={pediatrician} receiver={patient}/></div>)}
 
             <div className="AdditionalInfo">
-                <p> placeholder za sliku</p>
-                <button className={createEmail ? "nevidljivo" :"PediatricianMessage"} onClick={newEmail}>nova poruka</button>
+                <div className="profilePhoto">
+                    <FontAwesomeIcon id="profileIcon" icon={faUserDoctor} />
+                </div>
+                <button className={createEmail ? "nevidljivo" :"Message"} onClick={newEmail}>nova poruka</button>
             </div>
         </Container>
+            </>
     )
 }

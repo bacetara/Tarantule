@@ -15,7 +15,7 @@
 .AdditionalInfo{
     display: flex;
     flex-direction: column;
-    margin-left: 2.5%;
+    margin: 1%;
     flex:1;
 
 }

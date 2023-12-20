@@ -77,6 +77,10 @@
     border-color: #A7B8D8;
 }
 
+#messageButtons button:hover {
+    cursor: pointer;
+}
+
 #messageButtons #reject {
     background-color: #3d4e70;
     border-color: #3d4e70;
