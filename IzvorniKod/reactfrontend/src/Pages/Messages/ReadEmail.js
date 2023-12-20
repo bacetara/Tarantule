@@ -48,6 +48,7 @@ const ReadEmail = ({email}) => {
                 <textarea className="inputs" id="messageBody" name="messageBody" value={emailData.messageBody} onChange={handleChange} readOnly={true}/>
 
                 <div className="inputs" id="messageButtons">
+                    {email.type === 'bolovanje' &&  <button id="odobriBolovanje" type="button" > Odobri bolovanje </button>}
                     <button id="reject" type="button" onClick={handleBack}>zatvori</button>
                     <button id="createReply" type="button" onClick={createReply}>odgovori</button>
                 </div>

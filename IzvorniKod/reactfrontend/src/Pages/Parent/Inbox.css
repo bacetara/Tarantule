@@ -50,4 +50,10 @@
 .profilePhoto #profileIcon{
     height: 100%;
     width: 100%;
+    text-decoration: none;
+    color: black;
+}
+
+.profilePhoto #profileIcon:hover{
+    color: #9AADDF;
 }

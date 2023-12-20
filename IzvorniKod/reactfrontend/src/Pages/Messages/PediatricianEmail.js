@@ -90,11 +90,12 @@ const PediatricianEmail = ({sender, receiver}) => {
                 <textarea className="inputs" id="messageBody" name="messageBody" onChange={handleChange}/>
 
                 <div className="inputs" id="messageButtons">
-                    <label className="check"> ispričnica
+
+                    {sender.role === 'pediatrician' && <label className="check"> ispričnica
                         <input id="ispricnica" type="checkbox"
                                checked={emailData.ispricnica}
                                onChange={() => handleCheckBoxChange('ispricnica')}/>
-                    </label>
+                    </label>}
 
                     <label className="check"> bolovanje roditelja
                         <input id="bolovanje" type="checkbox"
