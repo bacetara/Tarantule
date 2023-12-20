@@ -2,9 +2,10 @@ import './Inbox.css'
 import Container from "../Container";
 import {useState} from "react";
 import ListContainer from "../ListContainer";
-import PediatricianEmail from "../Messages/PediatricianEmail";
 import ComposeEmail from "../Messages/ComposeEmail";
 import * as React from "react";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faArrowRightFromBracket} from "@fortawesome/free-solid-svg-icons";
 
 export default function InboxDijete() {
     const [selectedEmail, setSelectedEmail] = useState(null);
@@ -26,6 +27,20 @@ export default function InboxDijete() {
     }
 
     return(
+        <>
+            <div className="header">
+
+                <div className="logOut">
+                    <FontAwesomeIcon id="logOutIcon" icon={faArrowRightFromBracket} style={{color: "white"}} />
+                    <p id="logOutText">log out</p>
+                </div>
+
+                <div className="profileName">
+                    {child.name} {child.surname}
+                </div>
+
+            </div>
+
         <Container>
             {selectedEmail != null ?
                 (<ListContainer items={selectedEmail} listAll={false}/>) :
@@ -34,10 +49,11 @@ export default function InboxDijete() {
                     (<div className="listContainer"><ComposeEmail email={{sender: child.oib, receiver: pediatrician.oib}}/></div>)}
 
             <div className="AdditionalInfo">
-                <p> placeholder za sliku</p>
                 <button className={createEmail ? "nevidljivo" :"Message"} onClick={newEmail}>naruči</button>
 
             </div>
         </Container>
+
+            </>
     )
 }
