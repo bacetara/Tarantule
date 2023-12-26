@@ -14,10 +14,8 @@ import PedijatarPocetna from "./Pages/Pediatrician/PedijatarPocetna";
 import DodavanjePacijenta1 from "./Pages/Pediatrician/DodavanjePacijenta1";
 import AzuriranjePodataka from "./Pages/Parent/AzuriranjePodataka";
 import RoditeljPocetna from './Pages/Parent/RoditeljPocetna';
-import InboxRoditelj from "./Pages/Parent/InboxRoditelj";
-import InboxDijete from "./Pages/Parent/InboxDijete";
-import InboxPedijatar from "./Pages/Pediatrician/InboxPedijatar"
-import InboxDoktor from "./Pages/Doctor/InboxDoktor"
+import InboxUser from "./Pages/Parent/InboxUser";
+import InboxMedic from "./Pages/Pediatrician/InboxMedic"
 import PediatricianEmail from "./Pages/Messages/PediatricianEmail";
 
 
@@ -26,6 +24,8 @@ function App() {
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<Home />} />
+                <Route path="/inbox/:oib" element={<InboxUser/>} />
+                <Route  path="/:role/:oib" element={<InboxMedic />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/admin" element={<AdminPocetna />} />
@@ -39,10 +39,6 @@ function App() {
                 <Route path="/addPatient1" element={<DodavanjePacijenta1 />}/>
                 <Route path="/updateInfo" element={<AzuriranjePodataka />}/>
                 <Route path="/parentInfo" element={<RoditeljPocetna />} />
-                <Route path="/parentInbox" element={<InboxRoditelj />} />
-                <Route path="/childInbox" element={<InboxDijete />} />
-                <Route path="/pediatricianInbox" element={<InboxPedijatar />} />
-                <Route path="/doctorInbox" element={<InboxDoktor />} />
                 <Route path="/pediatricianEmail" element={<PediatricianEmail/>}/>
             </Routes>
         </BrowserRouter>

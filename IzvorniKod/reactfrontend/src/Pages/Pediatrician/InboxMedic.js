@@ -9,7 +9,7 @@ import {faArrowRightFromBracket, faHouse, faUserDoctor} from "@fortawesome/free-
 import ReadEmail from "../Messages/ReadEmail";
 
 
-export default function InboxPedijatar() {
+export default function InboxMedic() {
     const user = {oib: 9090909, name: "Ivan", surname: "Lucić", role: 'pediatrician'};
     const patient = {oib: 999902020202, name: "Jakov", surname: "Župančić"};
     const [selectedEmail, setSelectedEmail] = useState(null);
@@ -70,7 +70,7 @@ export default function InboxPedijatar() {
 
             <div className="AdditionalInfo">
                 <div className="profilePhoto">
-                    <FontAwesomeIcon id="profileIcon" icon={faUserDoctor} />
+                    <FontAwesomeIcon id="profileIcon2" icon={faUserDoctor} />
                 </div>
                 <button className={createEmail ? "nevidljivo" :"Message"} onClick={newEmail}>nova poruka</button>
             </div>

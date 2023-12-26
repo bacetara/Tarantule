@@ -16,7 +16,7 @@ body {
     align-content: center;
 
     width: auto;
-    min-height: 10%;
+    min-height: 10vh;
     flex-wrap: wrap;
 }
 

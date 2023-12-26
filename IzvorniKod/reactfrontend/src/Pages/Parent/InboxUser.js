@@ -1,15 +1,17 @@
 import './Inbox.css'
 import Container from "../Container";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import ListContainer from "../ListContainer";
 import ComposeEmail from "../Messages/ComposeEmail";
 import * as React from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowRightFromBracket, faHouse, faUser} from "@fortawesome/free-solid-svg-icons";
 import ReadEmail from "../Messages/ReadEmail";
-import {Link} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 
-export default function InboxDijete({selectedUser}) {
+export default function InboxUser() {
+    const { oib } = useParams();
+    console.log(oib);
     const [selectedEmail, setSelectedEmail] = useState(null);
     const [createEmail, setCreateEmail] = useState(false);
     const emails = [
@@ -18,7 +20,27 @@ export default function InboxDijete({selectedUser}) {
         { sender: 'john12213123@example.com', receiver:'netko3333@mail.com', title: 'treci mail', messageBody: 'Hi, ja sam treci mail.' , id: 3, type: 'obicna'}
     ];
     const pediatrician = {oib: 9090909, name: "Ivan", surname: "Lucić"};
-    const child = {oib: 999902020202, name: "Jakov", surname: "Župančić"};
+    const child = {oib: oib, name: "Jakov", surname: "Župančić"};
+
+    /*useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch(`/api/profile/${oib}`);
+                if (response.ok) {
+                    const data = await response.json();
+                    setProfileData(data);
+                } else {
+                    // Handle error
+                    console.error('Error fetching profile data');
+                }
+            } catch (error) {
+                // Handle fetch error
+                console.error('Error fetching profile data:', error);
+            }
+        };
+
+        fetchData();
+    }, [oib]);*/
 
     const openEmail = (email) => {
         setSelectedEmail(email);
