@@ -245,6 +245,14 @@
 			
 			\textit{Potrebno je priložiti dijagram stanja i opisati ga. Dovoljan je jedan dijagram stanja koji prikazuje \textbf{značajan dio funkcionalnosti} sustava. Na primjer, stanja korisničkog sučelja i tijek korištenja neke ključne funkcionalnosti jesu značajan dio sustava, a registracija i prijava nisu. }
 			
+			Dijagram stanja opisuje dinamičko ponašanje dijela sustava. Na slici \ref{fig:dijagramstanja} prikazan je dijagram stanja za prijavljenog roditelja. Roditelju se nakon prijave prikazuje popis profila kojima može pristupati (profil roditelja i profili njegove djece). Odabirom pojedinog profila aplikacija roditelju prikaže poruke tog profila. Klikom na gumb za prikaz osobnih podataka profila, aplikacija roditelju pokaže iste te roditelj ima daljnju opciju promjene podataka. Ako roditelj na stranici s prikazanim porukama profila odabere pojedinu poruku, otvori se novi prozor u kojem se prikazuje poruka te karta ako se radi o obavijesti za naručeni pregled. Roditelj može na svaku poruku odgovoriti te mu se tada otvori novi prozor za sastavljanje poruke u kojem je automatski postavljen i primatelj poruke. Roditelju se prozor za sastavljanje poruke otvara i ako na stranici gdje su prikazane poruke tog profila klikne na gumb za učitavanje nalaza. Roditelj se u svakom trenutku može odjaviti ili vratiti na stranicu s popisom dostupnih profila.
+			
+			\begin{figure}[H]
+				\includegraphics[width=\textwidth]{dijagrami/Dijagram stanja.PNG} %veličina u odnosu na širinu linije
+				\caption{Dijagram stanja}
+				\label{fig:dijagramstanja} %label mora biti drugaciji za svaku sliku
+			\end{figure}
+			
 			
 			\eject 
 		
@@ -253,6 +261,14 @@
 			\textbf{\textit{dio 2. revizije}}\\
 			
 			 \textit{Potrebno je priložiti dijagram aktivnosti s pripadajućim opisom. Dijagram aktivnosti treba prikazivati značajan dio sustava.}
+			 
+			 Dijagram aktivnosti primjenjuje se za modeliranje upravljačkog i podatkovnog toka. Na slici \ref{fig:dijagramaktivnosti} prikazan je dijagram aktivnosti za upisivanje podataka o obavljenom pregledu kod pedijatra. Nakon što pedijatar upiše podatke za prijavu u sustav, web aplikacija iz baze podataka izvlači potrebne informacije za provjeru ispravnosti podataka. Ako su podaci neispravni, prikazuje se poruka greške, a ako su ispravni web aplikacija prijavljenom pedijatru prikaže popis djece prijavljene kod njega. Pedijatar potom bira dijete za kojeg želi upisati pregled (preduvjet za to je da je dijete prijavljeno kod njega). Nakon odabira djeteta web aplikacija pedijatru prikaže poruke s profilom tog djeteta. Pedijatar sad može odabrati opciju za unos pregleda nakon čega se otvara novi prozor u kojem pedijatar može unijeti potrebne podatke. Kada je gotov s unosom podataka, pedijatar bira opciju za slanje dijagnoze. Web aplikacija novostvorenu poruku koja sadrži podatke o pregledu pohranjuje u bazu, a pedijatru se opet prikažu poruke s profilom djeteta.
+			 
+			 \begin{figure}[H]
+			 	\includegraphics[width=\textwidth]{dijagrami/Dijagram aktivnosti.PNG} %veličina u odnosu na širinu linije
+			 	\caption{Dijagram aktivnosti}
+			 	\label{fig:dijagramaktivnosti} %label mora biti drugaciji za svaku sliku
+			 \end{figure}
 			
 			\eject
 		\section{Dijagram komponenti}
