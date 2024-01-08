@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import './Message.css'
 import {useNavigate} from 'react-router-dom';
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faArrowRightFromBracket} from "@fortawesome/free-solid-svg-icons";
 
 const PediatricianEmail = ({sender, receiver}) => {
     const history = useNavigate();
@@ -57,15 +59,27 @@ const PediatricianEmail = ({sender, receiver}) => {
 
     return(
         <>
+            <div className="header">
+                <div className="backOptions">
+                    <div className="logOut">
+                        <FontAwesomeIcon id="logOutIcon" icon={faArrowRightFromBracket} style={{color: "white"}}/>
+                        <p id="logOutText">log out</p>
+                    </div>
+                </div>
+
+                <div className="profileName">pediatrician [989898899]</div>
+            </div>
             <form className="message" onSubmit={sendMessage}>
                 <div className="inputs" id="receiverField">
                     <label htmlFor="receiver">Primatelj (OIB)</label>
-                    <input type="text" name="receiver" id="receiver" onChange={handleChange} value={receiver.oib} readOnly={true}/>
+                    <input type="text" name="receiver" id="receiver" onChange={handleChange} value={receiver.oib}
+                           readOnly={true}/>
                 </div>
 
                 <div className="inputs" id="senderField">
                     <label htmlFor="sender">Pošiljatelj</label>
-                    <input type="text" name="sender" id="sender" onChange={handleChange} value={sender.oib} readOnly={true}/>
+                    <input type="text" name="sender" id="sender" onChange={handleChange} value={sender.oib}
+                           readOnly={true}/>
                 </div>
 
                 <div className="inputs" id="titleField">

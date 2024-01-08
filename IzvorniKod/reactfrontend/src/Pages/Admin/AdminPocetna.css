@@ -36,10 +36,12 @@ a {
 }
 
 .addChild {
+    white-space: nowrap;
     justify-content: space-around;
     background-color: #DBDCF7;
     display: flex;
     margin-bottom: 15%;
+    margin-right: 15%;
     text-align: center;
     padding: 15%;
     border-radius: 10px;
@@ -50,6 +52,8 @@ a {
     display: flex;
     text-align: center;
     padding: 15%;
+    margin-bottom: 15%;
+    margin-right: 4%;
     justify-content: space-around;
     border-radius: 10px;
 }

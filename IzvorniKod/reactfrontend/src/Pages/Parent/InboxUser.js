@@ -64,7 +64,7 @@ export default function InboxUser() {
 
                     <div className="logOut">
                         <FontAwesomeIcon icon={faHouse} style={{color: "#fcfcfd",}} />
-                        <p id="logOutText"> switch profiles</p>
+                        <p id="logOutText" > switch profiles</p>
                     </div>
                 </div>
 

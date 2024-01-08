@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import './Message.css'
 import {useNavigate} from 'react-router-dom';
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faArrowRightFromBracket} from "@fortawesome/free-solid-svg-icons";
 
 const ComposeEmail = ({email}) => {
 
@@ -46,10 +48,21 @@ const ComposeEmail = ({email}) => {
 
     return (
         <>
+            <div className="header">
+                <div className="backOptions">
+                    <div className="logOut">
+                        <FontAwesomeIcon id="logOutIcon" icon={faArrowRightFromBracket} style={{color: "white"}}/>
+                        <p id="logOutText">log out</p>
+                    </div>
+                </div>
+
+                <div className="profileName">pediatrician [989898899]</div>
+            </div>
             <form className="message" onSubmit={sendMessage}>
                 <div className="inputs" id="receiverField">
                     <label htmlFor="receiver">Primatelj</label>
-                    <input type="text" name="receiver" id="receiver" value={emailData.receiver} onChange={handleChange}/>
+                    <input type="text" name="receiver" id="receiver" value={emailData.receiver}
+                           onChange={handleChange}/>
                 </div>
 
                 <div className="inputs" id="titleField">
@@ -58,7 +71,8 @@ const ComposeEmail = ({email}) => {
                 </div>
 
                 <button id="attachment" type="button">prilog</button>
-                <textarea className="inputs" id="messageBody" name="messageBody" value={emailData.messageBody} onChange={handleChange}/>
+                <textarea className="inputs" id="messageBody" name="messageBody" value={emailData.messageBody}
+                          onChange={handleChange}/>
 
                 <div className="inputs" id="messageButtons">
                     <button id="reject" type="button" onClick={handleBack}>zatvori</button>
