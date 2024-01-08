@@ -1,14 +1,7 @@
 \chapter{Specifikacija programske potpore}
 		
 	\section{Funkcionalni zahtjevi}
-			
-			\textbf{\textit{dio 1. revizije}}\\
-			
-			\textit{Navesti \textbf{dionike} koji imaju \textbf{interes u ovom sustavu} ili  \textbf{su nositelji odgovornosti}. To su prije svega korisnici, ali i administratori sustava, naručitelji, razvojni tim.}\\
-				
-			\textit{Navesti \textbf{aktore} koji izravno \textbf{koriste} ili \textbf{komuniciraju sa sustavom}. Oni mogu imati inicijatorsku ulogu, tj. započinju određene procese u sustavu ili samo sudioničku ulogu, tj. obavljaju određeni posao. Za svakog aktora navesti funkcionalne zahtjeve koji se na njega odnose.}\\
-			
-			
+					
 			\noindent \textbf{Dionici:}
 			
 			\begin{packed_enum}
@@ -114,13 +107,7 @@
 			
 				
 			\subsection{Obrasci uporabe}
-				
-				\textbf{\textit{dio 1. revizije}}
-				
-				\subsubsection{Opis obrazaca uporabe}
-					\textit{Funkcionalne zahtjeve razraditi u obliku obrazaca uporabe. Svaki obrazac je potrebno razraditi prema donjem predlošku. Ukoliko u nekom koraku može doći do odstupanja, potrebno je to odstupanje opisati i po mogućnosti ponuditi rješenje kojim bi se tijek obrasca vratio na osnovni tijek.}\\
-					
-
+										
 					\noindent \underbar{\textbf{UC1 - Registriraj se}}
 					\begin{packed_item}
 	
@@ -149,6 +136,13 @@
 								\item Sustav korisnika vraća na početnu stranicu (korak 1)
 								
 								
+							\end{packed_enum}
+							
+							\item[5.a] Korisnik je unio krivi format traženih podataka (kriva duljina ili format OIB-a ili lozinke).
+							\item[] \begin{packed_enum}
+								
+								\item Sustav obaviještava korisnika da je došlo do greške.
+								\item Sustav korisnika vraća na stranicu registracije (korak 2).
 							\end{packed_enum}
 							
 							\item[5.a] Odabir OIB-a za koji je zabilježeno da se osoba već registrirala u sustav
@@ -191,6 +185,13 @@
 								\item Sustav korisnika vraća na početnu stranicu (korak 1).
 		
 								
+							\end{packed_enum}
+							
+								\item[5.a] Korisnik je unio krivi format traženih podataka (kriva duljina ili format OIB-a ili lozinke).
+							\item[] \begin{packed_enum}
+								
+								\item Sustav obaviještava korisnika da je došlo do greške.
+								\item Sustav korisnika vraća na stranicu registracije (korak 2).
 							\end{packed_enum}
 							
 							\item[5.a] Sustav provjerava podatke i utvrđuje da je uneseni par OIB - lozinka netočan.
@@ -342,6 +343,12 @@
 								\item Nalaz se neće poslati i sustav će vratit roditelja na pregled poruka na profilu.
 							\end{packed_enum}
 							
+							\item[6.a] Roditelj nije prijavljen ni kod jednog liječnika ili dijete nije prijavljeno ni kod jednog pedijatra.
+							\item[] \begin{packed_enum}
+								
+								\item Nalaz se neće poslati i sustav će vratit roditelja na pregled poruka na profilu.
+							\end{packed_enum}
+							
 							
 						\end{packed_item}
 					\end{packed_item}
@@ -459,6 +466,19 @@
 							\item Roditelj odabere jednu od poruka s naslovom "[OBAVLJENI PREGLED]".
 							\item Sustav vraća pregled poruke roditelju - roditelj može vidjeti informacije o obavljenom pregledu te dijagnozi.
 						\end{packed_enum}
+						
+						\item  \textbf{Opis mogućih odstupanja:}
+						
+						\item[] \begin{packed_item}
+							
+							\item[3.a] Roditelj ili dijete nisu obavili nijedan pregled ili pregled čije informacije želimo vidjeti još nije zapisan u sustav od strane liječnika ili pedijatra.
+							\item[] \begin{packed_enum}
+								
+								\item Roditelju se neće prikazati nijedna poruka s naslovom [OBAVLJENI PREGLED], tj. neće se prikazati poruka koja odgovara pregledu čine informacije želi vidjeti.
+							\end{packed_enum}
+							
+							
+						\end{packed_item}
 						
 						
 					\end{packed_item}
@@ -1161,7 +1181,7 @@
 				\subsubsection{Dijagrami obrazaca uporabe}
 					\textbf{\textit{dio 1. revizije}}\\
 						\begin{figure}[H]
-						\includegraphics[width=\textwidth]{slike/UCroditelj.PNG} %veličina u odnosu na širinu linije
+						\includegraphics[width=\textwidth]{dijagrami/UCroditelj.PNG} %veličina u odnosu na širinu linije
 						\caption{UML dijagram koji opisuje obrasce uporabe korisnika i roditelja}
 						\label{fig:promjene3} %label mora biti drugaciji za svaku sliku
 					\end{figure}
@@ -1169,7 +1189,7 @@
 					Referenciranje slike \ref{fig:promjene3} u tekstu.
 					
 					\begin{figure}[H]
-						\includegraphics[width=\textwidth]{slike/UCliječnik.PNG} %veličina u odnosu na širinu linije
+						\includegraphics[width=\textwidth]{dijagrami/UClijecnik.PNG} %veličina u odnosu na širinu linije
 						\caption{UML dijagram koji opisuje obrasce uporabe liječnika}
 						\label{fig:promjene4} %label mora biti drugaciji za svaku sliku
 					\end{figure}
@@ -1177,7 +1197,7 @@
 					Referenciranje slike \ref{fig:promjene4} u tekstu.
 					
 					\begin{figure}[H]
-						\includegraphics[width=\textwidth]{slike/UCpedijatar.PNG} %veličina u odnosu na širinu linije
+						\includegraphics[width=\textwidth]{dijagrami/UCpedijatar.PNG} %veličina u odnosu na širinu linije
 						\caption{UML dijagram koji opisuje obrasce uporabe pedijatra}
 						\label{fig:promjene5} %label mora biti drugaciji za svaku sliku
 					\end{figure}
@@ -1185,7 +1205,7 @@
 					Referenciranje slike \ref{fig:promjene5} u tekstu.
 					
 					\begin{figure}[H]
-						\includegraphics[width=\textwidth]{slike/UCadmin.PNG} %veličina u odnosu na širinu linije
+						\includegraphics[width=\textwidth]{dijagrami/UCadmin.PNG} %veličina u odnosu na širinu linije
 						\caption{UML dijagram koji opisuje obrasce uporabe administratora}
 						\label{fig:promjene6} %label mora biti drugaciji za svaku sliku
 					\end{figure}
@@ -1200,13 +1220,15 @@
 					\textbf{Obrazac uporabe UC6.2 - Učitavanje nalaza djeteta u sustav, UC14 - Upis podataka o pregledu djeteta obavljenom kod pedijatra i dijagnoza, UC15 - Izdavanje preporuke za bolovanje za roditelja bolesnog djeteta, UC16 - Slanje nalaza iz laboratorija djeteta, Pregled učitanih nalaza djeteta od strane roditelja, UC23 - Odobrenje preporuke za bolovanje za roditelja bolesnog djeteta}\\
 				
 				
-				Ulogirani roditelj učitava simptome svog bolesnog djeteta u web aplikaciju koja ga prosljeđuje pedijatru koji dijete naručuje na pregled te nakon pregleda roditelju šalje laboratorijski nalaz te po mogućnosti šalje ispričnicu za školu/vrtić roditelju te preporuku za bolovanje liječniku. Ako liječnik odobri bolovanje roditelju, preko aplikacije mu pošalje potvrdu.
+				Ulogirani roditelj učitava nalaz svog bolesnog djeteta u web aplikaciju koja ga prosljeđuje pedijatru koji dijete naručuje na pregled te nakon pregleda roditelju šalje laboratorijski nalaz te po mogućnosti šalje ispričnicu za školu/vrtić roditelju te preporuku za bolovanje liječniku. Ako liječnik odobri bolovanje roditelju, preko aplikacije mu pošalje potvrdu.
 				
 				\begin{figure}[H]
-					\includegraphics[width=\textwidth]{slike/SDrplW.PNG} %veličina u odnosu na širinu linije
+					\includegraphics[width=\textwidth]{dijagrami/SDrplW.PNG} %veličina u odnosu na širinu linije
 					\caption{Sekvencijski dijagram koji opisuje osnovnu mehaniku naručivanja djeteta i roditelja na pregled}
 					\label{fig:promjene7} %label mora biti drugaciji za svaku sliku
 				\end{figure}
+				
+				\eject
 				
 				
 				\textbf{Obrazac uporabe UC30.1 - Prijavljivanje novog roditelja u sustav, UC30.2 - Prijavljivanje novog djeteta u sustav}\\
@@ -1215,11 +1237,12 @@
 				\eject
 				
 				\begin{figure}[H]
-					\includegraphics[width=\textwidth]{slike/SDadminapp.PNG} %veličina u odnosu na širinu linije
+					\includegraphics[width=\textwidth]{dijagrami/UpisNoveOsobeUSustavAdmin.PNG} %veličina u odnosu na širinu linije
 					\caption{Sekvencijski dijagram za UC30.1 i UC30.2}
 					\label{fig:promjene8} %label mora biti drugaciji za svaku sliku
 				\end{figure}
 				
+				\eject
 				
 				
 				\textbf{Obrazac uporabe UC5.1 - Promjena osobnih podataka roditelja, UC5.2 - Promjena osobnih podataka djeteta}\\
@@ -1255,11 +1278,17 @@
 				\eject
 	
 		\section{Ostali zahtjevi}
-		
-			\textbf{\textit{dio 1. revizije}}\\
-		 
-			 \textit{Nefunkcionalni zahtjevi i zahtjevi domene primjene dopunjuju funkcionalne zahtjeve. Oni opisuju \textbf{kako se sustav treba ponašati} i koja \textbf{ograničenja} treba poštivati (performanse, korisničko iskustvo, pouzdanost, standardi kvalitete, sigurnost...). Primjeri takvih zahtjeva u Vašem projektu mogu biti: podržani jezici korisničkog sučelja, vrijeme odziva, najveći mogući podržani broj korisnika, podržane web/mobilne platforme, razina zaštite (protokoli komunikacije, kriptiranje...)... Svaki takav zahtjev potrebno je navesti u jednoj ili dvije rečenice.}
 			 
+			 \begin{itemize}
+			 	\item Responzivnost stranice (prilagođena za rad na mobilnom uređaju, tabletu, PC-ju)
+			 	\item Aplikacija mora biti jednostavna za korištenje
+			 	\item Sučelje je pregledno i intuitivno
+			 	\item Sustav treba omogući istovremeni rad više korisnika
+			 	\item Korisnici stranici pristupaju pomoću OIB-a i korisničke lozinke 
+			 	\item Korisnička lozinka mora sadržavati minimalno 5 znakova kako bi bila valjana
+			 	\item Aplikacija je na hrvatskom jeziku te podržava unos i prikaz znakova hrvatske abecede
+			 	\item Sustav treba biti implementiran koristeći objektno orijentirane jezike
+			 \end{itemize}
 			 
 			 
 	
