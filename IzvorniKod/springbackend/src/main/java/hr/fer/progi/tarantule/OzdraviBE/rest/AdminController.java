@@ -1,6 +1,8 @@
 package hr.fer.progi.tarantule.OzdraviBE.rest;
 
 import hr.fer.progi.tarantule.OzdraviBE.domain.Osoba;
+import hr.fer.progi.tarantule.OzdraviBE.rest.dto.AddChildDTO;
+import hr.fer.progi.tarantule.OzdraviBE.rest.dto.AddParentDTO;
 import hr.fer.progi.tarantule.OzdraviBE.service.NoSuchOsobaException;
 import hr.fer.progi.tarantule.OzdraviBE.service.OsobaService;
 import jakarta.persistence.EntityNotFoundException;
@@ -8,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-import javax.swing.text.html.parser.Entity;
 import java.util.List;
 
 @RestController
@@ -42,11 +43,47 @@ public class AdminController {
     }
 
     @GetMapping(path = "listAll")
-    public List<Osoba> listAll(@RequestParam(name = "type", required = false) String type) {
+    public List<Osoba> listAll(
+            @RequestParam(name = "type", required = false) String type,
+            @RequestParam(name = "unregistered", defaultValue = "false", required = false) boolean unregistered) {
         if (type == null) {
-            return osobaService.listRegistered();
+            return (unregistered ? osobaService.listAll() : osobaService.listRegistered());
         }
 
-        return osobaService.findByType(type);
+        return osobaService.findByType(type).stream().filter((o) -> unregistered || o.getLozinkaHash() != null).toList();
+    }
+
+    @PutMapping(path = "addParent", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void addParent(@RequestBody AddParentDTO parentData) {
+        Osoba o = new Osoba();
+        o.setOib(parentData.oib());
+        o.setIme(parentData.ime());
+        o.setPrezime(parentData.prezime());
+        o.setDatumRod(parentData.datumRod());
+        o.setUloga("roditelj");
+
+        osobaService.createOsoba(o);
+    }
+
+    @PutMapping(path = "addChild", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void addChild(@RequestBody AddChildDTO childData) {
+        if (childData.rodOib() == null) {
+            throw new IllegalArgumentException("Parent OIB must be given!");
+        }
+
+        Osoba roditelj = osobaService.findByOib(childData.rodOib()).orElse(null);
+        if (roditelj == null) {
+            throw new NoSuchOsobaException();
+        }
+
+        Osoba o = new Osoba();
+        o.setOib(childData.oib());
+        o.setIme(childData.ime());
+        o.setPrezime(childData.prezime());
+        o.setDatumRod(childData.datumRod());
+        o.setUloga("dijete");
+        o.setRoditelj(roditelj);
+
+        osobaService.createOsoba(o);
     }
 }
