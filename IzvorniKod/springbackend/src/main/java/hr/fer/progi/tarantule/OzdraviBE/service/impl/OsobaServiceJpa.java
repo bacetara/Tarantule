@@ -2,6 +2,7 @@ package hr.fer.progi.tarantule.OzdraviBE.service.impl;
 
 import hr.fer.progi.tarantule.OzdraviBE.dao.OsobaRepository;
 import hr.fer.progi.tarantule.OzdraviBE.domain.Osoba;
+import hr.fer.progi.tarantule.OzdraviBE.service.OsobaAlreadyExistsException;
 import hr.fer.progi.tarantule.OzdraviBE.service.OsobaService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +48,7 @@ public class OsobaServiceJpa implements OsobaService {
         validate(osoba);
 
         if (!osobaRepository.existsById(osoba.getOib())) {
-            throw new EntityNotFoundException("OIB already exists: "+ osoba.getOib());
+            throw new EntityNotFoundException("OIB doesn't exist: "+ osoba.getOib());
         }
 
         return osobaRepository.save(osoba);
@@ -58,6 +59,17 @@ public class OsobaServiceJpa implements OsobaService {
         Osoba o = fetch(oib);
         osobaRepository.delete(o);
         return o;
+    }
+
+    @Override
+    public Osoba createOsoba(Osoba osoba) {
+        validate(osoba);
+
+        if (osobaRepository.existsById(osoba.getOib())) {
+            throw new OsobaAlreadyExistsException("OIB already exists: "+ osoba.getOib());
+        }
+
+        return osobaRepository.save(osoba);
     }
 
     private void validate(Osoba osoba) {

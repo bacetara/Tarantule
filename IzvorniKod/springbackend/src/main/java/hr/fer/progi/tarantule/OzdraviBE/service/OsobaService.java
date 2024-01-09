@@ -18,5 +18,7 @@ public interface OsobaService {
 
     Osoba deleteOsoba(String oib);
 
+    Osoba createOsoba(Osoba osoba);
+
     List<Osoba> findByType(String type);
 }
