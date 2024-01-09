@@ -276,3 +276,11 @@
 			\textbf{\textit{dio 2. revizije}}\\
 		
 			 \textit{Potrebno je priložiti dijagram komponenti s pripadajućim opisom. Dijagram komponenti treba prikazivati strukturu cijele aplikacije.}
+			 
+			 Dijagram komponenti strukturni je UML dijagram koji je dio specifikacije arhitekture programske potpore. Prikazuje organizaciju i međuovisnost između implementacijskih komponenata. Na slici \ref{fig:dijagramkomponenti} prikazan je dijagram komponenti aplikacije. React komponente frontenda preko REST zahtjeva šalju upite backend dijelu. Zahtjev prvo dolazi do Controllers razreda koji je zaštićen zahvaljujući WebSecurityBasic implementaciji. Data transfer object (DTO) omogućuje lagan pristup podacima koji su poslani u sklopu REST zahtjeva backendu. Controllers razredi preko Service implementacija mogu pozvati potrebne usluge. Service preko Repository-ja može pristupati podacima u bazi. Controllers razredi u sebi sadrže referencu na sučelje Service, a ne na konkretnu implementaciju. Tako i Service razredi u sebi sadrže referencu na sučelje Repository. To omogućuje tzv. dependency injection (Spring automatski spaja na odgovarajuću implementaciju). Radi lakšeg rada s entitetima iz baze, framework se automatski pobrine za object relational mapping. Domain klase predstavljaju strukture i atribute entiteta iz baze. SQL baza podataka nudi sučelje za dohvat podataka.
+			 
+			 \begin{figure}[H]
+			 	\includegraphics[width=\textwidth]{dijagrami/Dijagram komponenti.PNG} %veličina u odnosu na širinu linije
+			 	\caption{Dijagram komponenti}
+			 	\label{fig:dijagramkomponenti} %label mora biti drugaciji za svaku sliku
+			 \end{figure}
