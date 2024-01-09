@@ -43,8 +43,6 @@ public class LoginController {
 
     AuthenticationManager authenticationManager = authenticationManager(userDetailsService(), passwordEncoder());
 
-    private PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-
     @PostMapping(
             path="",
             consumes = MediaType.APPLICATION_JSON_VALUE,
@@ -59,45 +57,13 @@ public class LoginController {
 
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(data.oib(), data.password()));
 
-
         SecurityContext context = securityContextHolderStrategy.createEmptyContext();
         context.setAuthentication(authentication);
         securityContextHolderStrategy.setContext(context);
         securityContextRepository.saveContext(context, request, response);
 
-
-
         System.out.println(authentication.getName());
-        /*try {
-            o = osobaService.fetch(data.oib());
-        }
-        catch (EntityNotFoundException e) {
-            // OIB doesn't exist
-            throw new BadCredentialsException("Invalid login");
-        }*/
-
-        /*System.out.println("Soo for " + data.oib());
-        Authentication authenticationRequest =
-                UsernamePasswordAuthenticationToken.unauthenticated(data.oib(), data.password());
-        Authentication authenticationResponse =
-                this.authenticationManager(userDetailsService(), passwordEncoder()).authenticate(authenticationRequest);
-        System.out.println(authenticationResponse.isAuthenticated());
-        SecurityContext context = SecurityContextHolder.createEmptyContext();
-
-        context.setAuthentication(authenticationResponse);
-
-        System.out.println("Setting context");
-
-        SecurityContextHolder.setContext(context);
-        //request.getSession(true).setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, context);
-        System.out.println("Right before the end " + ((MyUserDetails)(context.getAuthentication().getPrincipal())).getOsoba());
-        return ((MyUserDetails)(context.getAuthentication().getPrincipal())).getOsoba();*/
-
     }
-
-
-
-
 
     @GetMapping("getAll")
     public List<Osoba> getAllOsoba() {
@@ -106,8 +72,8 @@ public class LoginController {
 
     @GetMapping("")
     public String getCurrent(HttpServletRequest request, HttpServletResponse response) {
-        return ((HttpSessionSecurityContextRepository)securityContextRepository).loadContext(new HttpRequestResponseHolder(
-                request, response)).getAuthentication().getName();
+        return ((HttpSessionSecurityContextRepository)securityContextRepository).loadContext(
+                new HttpRequestResponseHolder(request, response)).getAuthentication().getName();
     }
 
     public AuthenticationManager authenticationManager(
@@ -142,11 +108,9 @@ public class LoginController {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 
-
-    public class MyUserDetails implements UserDetails
-    {
-
+    public static class MyUserDetails implements UserDetails {
         Osoba o;
+
         @Override
         public Collection<? extends GrantedAuthority> getAuthorities() {
             HashSet<GrantedAuthority> hs = new HashSet<>();
@@ -192,6 +156,4 @@ public class LoginController {
             return o;
         }
     }
-
-
 }
