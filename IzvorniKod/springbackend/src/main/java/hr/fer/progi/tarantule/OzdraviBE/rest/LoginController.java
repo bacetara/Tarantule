@@ -1,8 +1,8 @@
 package hr.fer.progi.tarantule.OzdraviBE.rest;
 
 import hr.fer.progi.tarantule.OzdraviBE.domain.Osoba;
+import hr.fer.progi.tarantule.OzdraviBE.rest.dto.LoginDTO;
 import hr.fer.progi.tarantule.OzdraviBE.service.OsobaService;
-import jakarta.persistence.EntityNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
