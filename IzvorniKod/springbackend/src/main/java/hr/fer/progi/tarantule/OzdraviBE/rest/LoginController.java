@@ -65,11 +65,6 @@ public class LoginController {
         System.out.println(authentication.getName());
     }
 
-    @GetMapping("getAll")
-    public List<Osoba> getAllOsoba() {
-        return osobaService.listAll();
-    }
-
     @GetMapping("")
     public String getCurrent(HttpServletRequest request, HttpServletResponse response) {
         return ((HttpSessionSecurityContextRepository)securityContextRepository).loadContext(
