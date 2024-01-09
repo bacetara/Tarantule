@@ -22,6 +22,16 @@ public class OsobaServiceJpa implements OsobaService {
     }
 
     @Override
+    public List<Osoba> listRegistered() {
+        return osobaRepository.listRegistered();
+    }
+
+    @Override
+    public List<Osoba> findByType(String type) {
+        return osobaRepository.findByType(type);
+    }
+
+    @Override
     public Optional<Osoba> findByOib(String oib) {
         return osobaRepository.findById(oib);
     }
@@ -41,6 +51,13 @@ public class OsobaServiceJpa implements OsobaService {
         }
 
         return osobaRepository.save(osoba);
+    }
+
+    @Override
+    public Osoba deleteOsoba(String oib) {
+        Osoba o = fetch(oib);
+        osobaRepository.delete(o);
+        return o;
     }
 
     private void validate(Osoba osoba) {
