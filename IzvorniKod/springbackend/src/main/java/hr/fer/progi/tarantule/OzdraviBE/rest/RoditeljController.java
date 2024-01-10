@@ -22,6 +22,7 @@ public class RoditeljController {
         p.setNaslov(messageData.naslov());
         p.setTijelo(messageData.tijelo());
         p.setPrilog(messageData.prilog());
+        p.setTip(messageData.tip());
         p.setDijagnozaID(messageData.dijagnozaID());
         p.setPrioib(messageData.prioib());
         p.setPosoib(messageData.posoib());

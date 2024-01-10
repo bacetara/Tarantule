@@ -22,14 +22,14 @@ public class Poruka {
     @NotNull
     private String tip;
 
-    private String dijagnozaID;
+    private Integer dijagnozaID;
 
     @NotNull
-    @Column(columnDefinition = "CHAR(11)")
+    @Column(columnDefinition = "CHAR(11)", name = "prioib")
     private String prioib;
 
     @NotNull
-    @Column(columnDefinition = "CHAR(11)")
+    @Column(columnDefinition = "CHAR(11)", name = "pošoib")
     private String posoib;
 
 
@@ -74,11 +74,11 @@ public class Poruka {
         this.tip = tip;
     }
 
-    public String getDijagnozaID() {
+    public Integer getDijagnozaID() {
         return dijagnozaID;
     }
 
-    public void setDijagnozaID(String dijagnozaID) {
+    public void setDijagnozaID(Integer dijagnozaID) {
         this.dijagnozaID = dijagnozaID;
     }
 
