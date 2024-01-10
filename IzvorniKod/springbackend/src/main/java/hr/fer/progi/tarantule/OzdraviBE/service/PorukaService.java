@@ -9,13 +9,13 @@ import java.util.Optional;
 public interface PorukaService {
     List<Poruka> listAll();
 
-    Poruka fetch(String iid);
+    Poruka fetch(Integer id);
 
-    Optional<Poruka> findById(String id);
+    Optional<Poruka> findById(Integer id);
 
     Poruka updatePoruka(Poruka poruka);
 
-    Poruka deletePoruka(String id);
+    Poruka deletePoruka(Integer id);
 
     Poruka createPoruka(Poruka poruka);
 
