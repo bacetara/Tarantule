@@ -1,4 +1,4 @@
-package hr.fer.progi.tarantule.OzdraviBE.service;
+package hr.fer.progi.tarantule.OzdraviBE.service.exceptions;
 
 import java.io.Serial;
 

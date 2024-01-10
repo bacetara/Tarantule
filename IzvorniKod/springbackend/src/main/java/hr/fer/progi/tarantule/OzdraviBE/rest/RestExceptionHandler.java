@@ -1,8 +1,7 @@
 package hr.fer.progi.tarantule.OzdraviBE.rest;
 
-import hr.fer.progi.tarantule.OzdraviBE.service.NoSuchOsobaException;
-import hr.fer.progi.tarantule.OzdraviBE.service.OsobaAlreadyExistsException;
-import jakarta.persistence.EntityNotFoundException;
+import hr.fer.progi.tarantule.OzdraviBE.service.exceptions.NoSuchOsobaException;
+import hr.fer.progi.tarantule.OzdraviBE.service.exceptions.OsobaAlreadyExistsException;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;

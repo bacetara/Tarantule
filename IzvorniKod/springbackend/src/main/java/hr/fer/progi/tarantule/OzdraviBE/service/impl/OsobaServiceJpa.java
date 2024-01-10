@@ -2,7 +2,7 @@ package hr.fer.progi.tarantule.OzdraviBE.service.impl;
 
 import hr.fer.progi.tarantule.OzdraviBE.dao.OsobaRepository;
 import hr.fer.progi.tarantule.OzdraviBE.domain.Osoba;
-import hr.fer.progi.tarantule.OzdraviBE.service.OsobaAlreadyExistsException;
+import hr.fer.progi.tarantule.OzdraviBE.service.exceptions.OsobaAlreadyExistsException;
 import hr.fer.progi.tarantule.OzdraviBE.service.OsobaService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
