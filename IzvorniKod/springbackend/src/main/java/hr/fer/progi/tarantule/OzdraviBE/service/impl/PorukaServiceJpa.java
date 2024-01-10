@@ -2,6 +2,7 @@ package hr.fer.progi.tarantule.OzdraviBE.service.impl;
 
 import hr.fer.progi.tarantule.OzdraviBE.dao.PorukaRepository;
 import hr.fer.progi.tarantule.OzdraviBE.domain.Poruka;
+import hr.fer.progi.tarantule.OzdraviBE.service.exceptions.PorukaAlreadyExistsException;
 import hr.fer.progi.tarantule.OzdraviBE.service.PorukaService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,8 +40,15 @@ public class PorukaServiceJpa implements PorukaService {
     }
 
     public Poruka createPoruka(Poruka poruka) {
-        // todo: ...
-        return poruka;
+        validate(poruka);
+
+        if (porukaRepository.existsById(poruka.getId())) {
+            throw new PorukaAlreadyExistsException("Message with ID already exists: " + poruka.getId());
+        }
+
+        System.out.println("Creating poruka with id " + poruka.getId());
+
+        return porukaRepository.save(poruka);
     }
 
     public List<Poruka> findByType(String type) {
