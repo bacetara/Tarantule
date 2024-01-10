@@ -20,4 +20,8 @@ public interface PorukaService {
     Poruka createPoruka(Poruka poruka);
 
     List<Poruka> findByType(String type);
+
+    List<Poruka> findBySender(String senderOIB);
+
+    List<Poruka> findByRecipient(String recipientOIB);
 }

@@ -52,8 +52,17 @@ public class PorukaServiceJpa implements PorukaService {
     }
 
     public List<Poruka> findByType(String type) {
-        // todo: ...
-        return null;
+        return porukaRepository.findByType(type);
+    }
+
+    @Override
+    public List<Poruka> findBySender(String senderOIB) {
+        return porukaRepository.findBySender(senderOIB);
+    }
+
+    @Override
+    public List<Poruka> findByRecipient(String recipientOIB) {
+        return porukaRepository.findByRecipient(recipientOIB);
     }
 
     private void validate(Poruka poruka) {
