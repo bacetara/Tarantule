@@ -20,7 +20,6 @@ public class RoditeljController {
     @Autowired
     private OsobaService osobaService;
 
-    @PutMapping(path = "newMessage", consumes = MediaType.APPLICATION_JSON_VALUE)
 
 
 }
