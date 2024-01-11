@@ -18,7 +18,6 @@ public class RoditeljController {
     @PutMapping(path = "newMessage", consumes = MediaType.APPLICATION_JSON_VALUE)
     public void addMessage(@RequestBody AddMessageDTO messageData) {
         Poruka p = new Poruka();
-        p.setId(messageData.id());
         p.setNaslov(messageData.naslov());
         p.setTijelo(messageData.tijelo());
         p.setPrilog(messageData.prilog());

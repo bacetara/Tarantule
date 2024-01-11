@@ -24,4 +24,8 @@ public interface PorukaService {
     List<Poruka> findBySender(String senderOIB);
 
     List<Poruka> findByRecipient(String recipientOIB);
+
+    List<Poruka> findByOib(String OIB);
+
+    Integer findMaxId();
 }

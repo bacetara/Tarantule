@@ -9,6 +9,7 @@ public class Poruka {
 
     @Id
     @NotNull
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     @NotNull

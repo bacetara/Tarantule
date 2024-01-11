@@ -65,6 +65,16 @@ public class PorukaServiceJpa implements PorukaService {
         return porukaRepository.findByRecipient(recipientOIB);
     }
 
+    @Override
+    public List<Poruka> findByOib(String OIB) {
+        return porukaRepository.findByOib(OIB);
+    }
+    @Override
+    public Integer findMaxId(){
+        return porukaRepository.findMaxId();
+    }
+
+
     private void validate(Poruka poruka) {
         // todo: ...
     }
