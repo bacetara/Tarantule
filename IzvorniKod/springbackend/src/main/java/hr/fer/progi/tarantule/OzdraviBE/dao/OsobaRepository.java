@@ -16,4 +16,6 @@ public interface OsobaRepository extends JpaRepository<Osoba, String> {
 
     @Query("select o from Osoba o where o.lozinkaHash != null")
     List<Osoba> listRegistered();
+
+    List<Osoba> findOsobaByRoditeljOib(String roditeljOib);
 }

@@ -27,6 +27,8 @@ public class OsobaServiceJpa implements OsobaService {
         return osobaRepository.listRegistered();
     }
 
+
+
     @Override
     public List<Osoba> findByType(String type) {
         return osobaRepository.findByType(type);
@@ -35,6 +37,11 @@ public class OsobaServiceJpa implements OsobaService {
     @Override
     public Optional<Osoba> findByOib(String oib) {
         return osobaRepository.findById(oib);
+    }
+
+    @Override
+    public List<Osoba> findByParent(String parentOib) {
+        return osobaRepository.findOsobaByRoditeljOib(parentOib);
     }
 
     @Override

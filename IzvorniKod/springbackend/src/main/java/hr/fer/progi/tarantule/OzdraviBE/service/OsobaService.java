@@ -21,4 +21,6 @@ public interface OsobaService {
     Osoba createOsoba(Osoba osoba);
 
     List<Osoba> findByType(String type);
+
+    List<Osoba> findByParent(String parentOib);
 }
