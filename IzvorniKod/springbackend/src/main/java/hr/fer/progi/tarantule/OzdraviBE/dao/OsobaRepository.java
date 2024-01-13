@@ -18,4 +18,8 @@ public interface OsobaRepository extends JpaRepository<Osoba, String> {
     List<Osoba> listRegistered();
 
     List<Osoba> findOsobaByRoditeljOib(String roditeljOib);
+
+    List<Osoba> findOsobaByDoktorOib(String doktorOib);
+
+    List<Osoba> findOsobaByUlogaAndDoktorNull(String uloga);
 }

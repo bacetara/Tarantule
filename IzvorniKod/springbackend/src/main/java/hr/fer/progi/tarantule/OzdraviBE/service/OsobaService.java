@@ -23,4 +23,8 @@ public interface OsobaService {
     List<Osoba> findByType(String type);
 
     List<Osoba> findByParent(String parentOib);
+
+    List<Osoba> findByDoctor(String doctorOib);
+
+    List<Osoba> findUnassigned(String role);
 }

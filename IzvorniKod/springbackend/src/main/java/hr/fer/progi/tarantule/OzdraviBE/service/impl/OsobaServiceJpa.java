@@ -45,6 +45,16 @@ public class OsobaServiceJpa implements OsobaService {
     }
 
     @Override
+    public List<Osoba> findByDoctor(String doctorOib) {
+        return osobaRepository.findOsobaByDoktorOib(doctorOib);
+    }
+
+    @Override
+    public List<Osoba> findUnassigned(String role) {
+        return osobaRepository.findOsobaByUlogaAndDoktorNull(role);
+    }
+
+    @Override
     public Osoba fetch(String oib) {
         return findByOib(oib)
                 .orElseThrow(() -> new EntityNotFoundException("No such Osoba with oib=" + oib));
