@@ -42,12 +42,6 @@ public class PorukaServiceJpa implements PorukaService {
     public Poruka createPoruka(Poruka poruka) {
         validate(poruka);
 
-        if (porukaRepository.existsById(poruka.getId())) {
-            throw new PorukaAlreadyExistsException("Message with ID already exists: " + poruka.getId());
-        }
-
-        System.out.println("Creating poruka with id " + poruka.getId());
-
         return porukaRepository.save(poruka);
     }
 
