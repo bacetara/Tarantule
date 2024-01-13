@@ -38,6 +38,10 @@ public class RoditeljController {
     @GetMapping(path = "me", produces = MediaType.APPLICATION_JSON_VALUE)
     public GetParentDTO getParent(HttpServletRequest request, HttpServletResponse response) {
         Osoba o = SecurityHelper.getAuthenticatedOsoba(request);
+        if (o == null) {
+            return null;
+        }
+
         return new GetParentDTO(o, osobaService.findByParent(o.getOib()));
     }
 
