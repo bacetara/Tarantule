@@ -1,13 +1,21 @@
 package hr.fer.progi.tarantule.OzdraviBE.rest;
 
+import hr.fer.progi.tarantule.OzdraviBE.domain.Bolest;
 import hr.fer.progi.tarantule.OzdraviBE.domain.Osoba;
 import hr.fer.progi.tarantule.OzdraviBE.rest.dto.AddChildDTO;
 import hr.fer.progi.tarantule.OzdraviBE.rest.dto.AddParentDTO;
 import hr.fer.progi.tarantule.OzdraviBE.service.exceptions.NoSuchOsobaException;
 import hr.fer.progi.tarantule.OzdraviBE.service.OsobaService;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Role;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,6 +26,7 @@ public class AdminController {
     @Autowired
     private OsobaService osobaService;
 
+    @Secured("admin")
     @GetMapping("viewPerson/{oib}")
     public Osoba getOsoba(@PathVariable("oib") String oib) {
         try {
@@ -28,6 +37,7 @@ public class AdminController {
         }
     }
 
+    @Secured("admin")
     @PostMapping(path = "viewPerson/{oib}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public void postOsoba(@PathVariable("oib") String oib, @RequestBody(required = false) Osoba newData) {
         if (osobaService.findByOib(oib).isEmpty()) {
@@ -42,17 +52,23 @@ public class AdminController {
         osobaService.updateOsoba(newData);
     }
 
+    @Secured("admin")
     @GetMapping(path = "listAll")
     public List<Osoba> listAll(
             @RequestParam(name = "type", required = false) String type,
-            @RequestParam(name = "unregistered", defaultValue = "false", required = false) boolean unregistered) {
+            @RequestParam(name = "unregistered", defaultValue = "false", required = false) boolean unregistered,
+            HttpServletRequest request, HttpServletResponse response) {
         if (type == null) {
             return (unregistered ? osobaService.listAll() : osobaService.listRegistered());
         }
 
+        System.out.println("tu sam u listAll");
+        System.out.println(request.getUserPrincipal().getName());
+
         return osobaService.findByType(type).stream().filter((o) -> unregistered || o.getLozinkaHash() != null).toList();
     }
 
+    @Secured("admin")
     @PutMapping(path = "addParent", consumes = MediaType.APPLICATION_JSON_VALUE)
     public void addParent(@RequestBody AddParentDTO parentData) {
         Osoba o = new Osoba();
@@ -65,6 +81,7 @@ public class AdminController {
         osobaService.createOsoba(o);
     }
 
+    @Secured("admin")
     @PutMapping(path = "addChild", consumes = MediaType.APPLICATION_JSON_VALUE)
     public void addChild(@RequestBody AddChildDTO childData) {
         if (childData.rodOib() == null) {
