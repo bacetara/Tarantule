@@ -4,15 +4,18 @@ package hr.fer.progi.tarantule.OzdraviBE.rest;
 import hr.fer.progi.tarantule.OzdraviBE.domain.Osoba;
 import hr.fer.progi.tarantule.OzdraviBE.domain.Poruka;
 import hr.fer.progi.tarantule.OzdraviBE.rest.dto.AddMessageDTO;
+import hr.fer.progi.tarantule.OzdraviBE.rest.dto.GetChildDTO;
 import hr.fer.progi.tarantule.OzdraviBE.rest.dto.GetParentDTO;
 import hr.fer.progi.tarantule.OzdraviBE.service.OsobaService;
 import hr.fer.progi.tarantule.OzdraviBE.service.PorukaService;
+import hr.fer.progi.tarantule.OzdraviBE.service.exceptions.InvalidAuthorizationException;
 import hr.fer.progi.tarantule.OzdraviBE.service.exceptions.NoSuchOsobaException;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -39,7 +42,7 @@ public class RoditeljController {
     public GetParentDTO getParent(HttpServletRequest request, HttpServletResponse response) {
         Osoba o = SecurityHelper.getAuthenticatedOsoba(request);
         if (o == null) {
-            return null;
+            throw new InvalidAuthorizationException();
         }
 
         return new GetParentDTO(o, osobaService.findByParent(o.getOib()));
@@ -63,16 +66,27 @@ public class RoditeljController {
 
     @Secured("roditelj")
     @GetMapping("child/{oib}")
-    public List<Poruka> findByOibChild(@PathVariable("oib") String oib) {
-            return porukaService.findByOib(oib);
+    public GetChildDTO findByOibChild(@PathVariable("oib") String oib, HttpServletRequest request, HttpServletResponse response) {
+        Osoba o = SecurityHelper.getAuthenticatedOsoba(request);
+        if (o == null) {
+            throw new InvalidAuthorizationException();
+        }
 
+        Osoba c = osobaService.findByOib(oib).orElseThrow(() -> new AccessDeniedException("You don't have access to this OIB"));
+        if (!c.getUloga().equals("dijete") ||
+            !o.getOib().equals(c.getRoditelj().getOib())) {
+            throw new AccessDeniedException("You don't have access to this OIB");
+        }
+
+        return new GetChildDTO(porukaService.findByOib(oib), c.getDoktor());
     }
 
     @Secured("roditelj")
     @GetMapping("{oib}")
-    public List<Poruka> findByOibParent(@PathVariable("oib") String oib) {
-        return porukaService.findByOib(oib);
+    public List<Poruka> findByOibParent(@PathVariable("oib") String oib, HttpServletRequest request, HttpServletResponse response) {
 
+
+        return porukaService.findByOib(oib);
     }
 
 }
