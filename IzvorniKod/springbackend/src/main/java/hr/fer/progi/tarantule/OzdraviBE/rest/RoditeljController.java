@@ -84,7 +84,15 @@ public class RoditeljController {
     @Secured("roditelj")
     @GetMapping("{oib}")
     public List<Poruka> findByOibParent(@PathVariable("oib") String oib, HttpServletRequest request, HttpServletResponse response) {
+        Osoba o = SecurityHelper.getAuthenticatedOsoba(request);
+        if (o == null) {
+            throw new InvalidAuthorizationException();
+        }
 
+        Osoba p = osobaService.findByOib(oib).orElseThrow(() -> new AccessDeniedException("You don't have access to this OIB"));
+        if (!p.getUloga().equals("roditelj") || !o.getOib().equals(p.getOib())) {
+            throw new AccessDeniedException("You don't have access to this OIB");
+        }
 
         return porukaService.findByOib(oib);
     }
