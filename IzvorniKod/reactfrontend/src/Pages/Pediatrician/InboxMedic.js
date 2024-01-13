@@ -7,6 +7,7 @@ import PediatricianEmail from "../Messages/PediatricianEmail";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowRightFromBracket, faHouse, faUserDoctor} from "@fortawesome/free-solid-svg-icons";
 import ReadEmail from "../Messages/ReadEmail";
+import {Link} from "react-router-dom";
 
 
 export default function InboxMedic() {
@@ -41,7 +42,7 @@ export default function InboxMedic() {
 
                 <div className="logOut">
                     <FontAwesomeIcon icon={faHouse} style={{color: "#fcfcfd",}} />
-                    <p id="logOutText"> switch profiles</p>
+                    <Link to={user.role==="pediatrician" ? "/pediatrician" : "/doctor"} id="logOutText">switch profiles</Link>
                 </div>
             </div>
 
