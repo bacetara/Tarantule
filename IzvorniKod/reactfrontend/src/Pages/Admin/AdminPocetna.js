@@ -19,6 +19,13 @@ export default function AdminPocetna() {
                 <div className="profileName">admin [989898899]</div>
             </div>
             <Container>
+                <div className="buttons">
+                    <div className="addParent"><Link className="link_na_stranicu" to="/addchild">Dodaj dijete</Link>
+                    </div>
+                    <div className="addParent"><Link className="link_na_stranicu" to="/addparent">Dodaj roditelja</Link>
+                    </div>
+                </div>
+
                 <div className="listContainer">
                     <ul>
                         {/*{items.map((item, index) => (
@@ -27,12 +34,7 @@ export default function AdminPocetna() {
                         <li><Link className="link_na_stranicu" to="/Information">OIB ime prezime</Link></li>
                     </ul>
                 </div>
-                <div className="buttons">
-                    <div className="addParent"><Link className="link_na_stranicu" to="/addchild">Dodaj dijete</Link>
-                    </div>
-                    <div className="addParent"><Link className="link_na_stranicu" to="/addparent">Dodaj roditelja</Link>
-                    </div>
-                </div>
+
             </Container>
 
             <Outlet/>

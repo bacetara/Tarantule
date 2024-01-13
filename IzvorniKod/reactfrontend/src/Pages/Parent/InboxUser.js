@@ -75,6 +75,16 @@ export default function InboxUser() {
             </div>
 
         <Container>
+
+            <div className="AdditionalInfo">
+                <div className="profilePhoto">
+                    <Link to="/updateInfo">
+                        <FontAwesomeIcon id="profileIcon" icon={faUser} />
+                    </Link>
+                </div>
+                <button className={createEmail ? "nevidljivo" :"Message"} onClick={newEmail}>naruči</button>
+            </div>
+
             {selectedEmail != null ? (
                 //treba promijenit za specijalista da se mail s kartom iscrta!!!
                 <div className="listContainer">
@@ -86,14 +96,6 @@ export default function InboxUser() {
                     (<ListContainer items={emails} myfunc={openEmail}/>) :
                     (<div className="listContainer"><ComposeEmail email={{sender: child.oib, receiver: pediatrician.oib}}/></div>)}
 
-            <div className="AdditionalInfo">
-                <div className="profilePhoto">
-                    <Link to="/updateInfo">
-                        <FontAwesomeIcon id="profileIcon" icon={faUser} />
-                    </Link>
-                </div>
-                <button className={createEmail ? "nevidljivo" :"Message"} onClick={newEmail}>naruči</button>
-            </div>
         </Container>
 
             </>

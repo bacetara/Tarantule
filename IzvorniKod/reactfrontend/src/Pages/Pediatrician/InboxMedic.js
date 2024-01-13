@@ -54,6 +54,14 @@ export default function InboxMedic() {
 
 
         <Container>
+
+            <div className="AdditionalInfo">
+                <div className="profilePhoto">
+                    <FontAwesomeIcon id="profileIcon2" icon={faUserDoctor} />
+                </div>
+                <button className={createEmail ? "nevidljivo" :"Message"} onClick={newEmail}>nova poruka</button>
+            </div>
+
             {selectedEmail != null ? (
                 //treba promijenit za specijalista da se mail s kartom iscrta!!!
                     <div className="listContainer">
@@ -68,12 +76,7 @@ export default function InboxMedic() {
                         <PediatricianEmail sender={user} receiver={patient}/>
                     </div>)}
 
-            <div className="AdditionalInfo">
-                <div className="profilePhoto">
-                    <FontAwesomeIcon id="profileIcon2" icon={faUserDoctor} />
-                </div>
-                <button className={createEmail ? "nevidljivo" :"Message"} onClick={newEmail}>nova poruka</button>
-            </div>
+
         </Container>
             </>
     )

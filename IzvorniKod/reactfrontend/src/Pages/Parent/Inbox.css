@@ -64,3 +64,22 @@
     text-decoration: none;
     color: black;
 }
+
+@media screen and (max-width: 720px) {
+    .AdditionalInfo{
+        flex-direction: row;
+        justify-content: start;
+        height: 10%;
+    }
+
+    .profilePhoto {
+        height: 100%;
+        padding: 0;
+    }
+
+    .Message {
+        height: 50%;
+    }
+
+}
+
