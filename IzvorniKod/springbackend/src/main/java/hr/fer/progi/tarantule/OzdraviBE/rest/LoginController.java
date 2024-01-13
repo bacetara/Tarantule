@@ -67,8 +67,13 @@ public class LoginController {
 
     @GetMapping("")
     public String getCurrent(HttpServletRequest request, HttpServletResponse response) {
-        return ((HttpSessionSecurityContextRepository)securityContextRepository).loadContext(
-                new HttpRequestResponseHolder(request, response)).getAuthentication().getName();
+        try {
+            return ((HttpSessionSecurityContextRepository) securityContextRepository).loadContext(
+                    new HttpRequestResponseHolder(request, response)).getAuthentication().getName();
+        }
+        catch (NullPointerException e) {
+            return "unauthorized";
+        }
     }
 
     public AuthenticationManager authenticationManager(
