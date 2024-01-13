@@ -41,6 +41,7 @@ public class RoditeljController {
         return new GetParentDTO(o, osobaService.findByParent(o.getOib()));
     }
 
+    @Secured("roditelj")
     @PutMapping(path = "newMessage", consumes = MediaType.APPLICATION_JSON_VALUE)
     public void addMessage(@RequestBody AddMessageDTO messageData) {
         Poruka p = new Poruka();
@@ -56,12 +57,14 @@ public class RoditeljController {
         porukaService.createPoruka(p);
     }
 
+    @Secured("roditelj")
     @GetMapping("child/{oib}")
     public List<Poruka> findByOibChild(@PathVariable("oib") String oib) {
             return porukaService.findByOib(oib);
 
     }
 
+    @Secured("roditelj")
     @GetMapping("{oib}")
     public List<Poruka> findByOibParent(@PathVariable("oib") String oib) {
         return porukaService.findByOib(oib);
