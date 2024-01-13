@@ -4,10 +4,21 @@
     flex-direction: column;
 }
 .child{
-    flex:1;
     position: relative;
-    margin: 20px;
-    background-color: gray;
+    margin: 1%;
+    background-color: #d9d9d9;
+    border-radius: 1%;
+    display: flex;
+    align-items: center;
+    font-size: 1.2rem;
+    padding: 2%;
+}
+
+@media  screen and (max-width: 720px){
+    .child{
+        flex: 1;
+    }
+
 }
 
 
