@@ -67,6 +67,7 @@
 
 #messageButtons {
     justify-content: end;
+    flex-direction: row;
 }
 #messageButtons button {
     border-radius: 2px;
@@ -114,10 +115,13 @@
 
     #messageButtons {
         height: 25%;
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
     }
 
     #messageButtons button{
-        min-width: 40%;
+        min-width: 30%;
         align-self: end;
         justify-content: center;
     }

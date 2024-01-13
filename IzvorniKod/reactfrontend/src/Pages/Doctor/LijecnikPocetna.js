@@ -21,6 +21,11 @@ export default function LijecnikPocetna() {
 
 
             <Container>
+                <div className="buttons">
+                    <div className="addParent"><Link className="link_na_stranicu" to="/addPatient2">Dodaj
+                        pacijenta</Link></div>
+                </div>
+
                 <div className="listContainer">
                     <ul>
                         {/*{items.map((item, index) => (
@@ -28,12 +33,6 @@ export default function LijecnikPocetna() {
                         ))}*/}
                         <li><Link className="link_na_stranicu" to="/doctor/${oib_pacijenta}">OIB ime prezime</Link></li>
                     </ul>
-                </div>
-
-
-                <div className="buttons">
-                    <div className="addChild"><Link className="link_na_stranicu" to="/addPatient2">Dodaj
-                        pacijenta</Link></div>
                 </div>
             </Container>
 

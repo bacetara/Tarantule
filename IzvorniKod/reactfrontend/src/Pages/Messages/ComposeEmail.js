@@ -48,16 +48,7 @@ const ComposeEmail = ({email}) => {
 
     return (
         <>
-            <div className="header">
-                <div className="backOptions">
-                    <div className="logOut">
-                        <FontAwesomeIcon id="logOutIcon" icon={faArrowRightFromBracket} style={{color: "white"}}/>
-                        <p id="logOutText">log out</p>
-                    </div>
-                </div>
 
-                <div className="profileName">pediatrician [989898899]</div>
-            </div>
             <form className="message" onSubmit={sendMessage}>
                 <div className="inputs" id="receiverField">
                     <label htmlFor="receiver">Primatelj</label>

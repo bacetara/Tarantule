@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import './RoditeljPocetna.css';
 import json from './../../testing.json';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons';
+import {faArrowRightFromBracket, faUser, faUserDoctor} from '@fortawesome/free-solid-svg-icons';
 import * as React from 'react';
 export default function RoditeljPocetna() {
 	useEffect(() => {
@@ -31,6 +31,9 @@ export default function RoditeljPocetna() {
 					(record) =>
 						record.rodOIB === '01020304050' && (
 							<div className="child" key={record.OIB}>
+								<div className="profile">
+									<FontAwesomeIcon id="profileIcon3" icon={faUser} />
+								</div>
 								{/* Use the Link component for routing */}
 								<Link className="link_na_stranicu" to={`/inbox/${record.OIB}`}>
 									{`${record.Ime} ${record.Prezime}`}

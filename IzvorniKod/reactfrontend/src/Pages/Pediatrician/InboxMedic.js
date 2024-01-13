@@ -7,6 +7,7 @@ import PediatricianEmail from "../Messages/PediatricianEmail";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowRightFromBracket, faHouse, faUserDoctor} from "@fortawesome/free-solid-svg-icons";
 import ReadEmail from "../Messages/ReadEmail";
+import {Link} from "react-router-dom";
 
 
 export default function InboxMedic() {
@@ -41,7 +42,7 @@ export default function InboxMedic() {
 
                 <div className="logOut">
                     <FontAwesomeIcon icon={faHouse} style={{color: "#fcfcfd",}} />
-                    <p id="logOutText"> switch profiles</p>
+                    <Link to={user.role==="pediatrician" ? "/pediatrician" : "/doctor"} id="logOutText">switch profiles</Link>
                 </div>
             </div>
 
@@ -54,6 +55,14 @@ export default function InboxMedic() {
 
 
         <Container>
+
+            <div className="AdditionalInfo">
+                <div className="profilePhoto">
+                    <FontAwesomeIcon id="profileIcon2" icon={faUserDoctor} />
+                </div>
+                <button className={createEmail ? "nevidljivo" :"Message"} onClick={newEmail}>nova poruka</button>
+            </div>
+
             {selectedEmail != null ? (
                 //treba promijenit za specijalista da se mail s kartom iscrta!!!
                     <div className="listContainer">
@@ -68,12 +77,7 @@ export default function InboxMedic() {
                         <PediatricianEmail sender={user} receiver={patient}/>
                     </div>)}
 
-            <div className="AdditionalInfo">
-                <div className="profilePhoto">
-                    <FontAwesomeIcon id="profileIcon2" icon={faUserDoctor} />
-                </div>
-                <button className={createEmail ? "nevidljivo" :"Message"} onClick={newEmail}>nova poruka</button>
-            </div>
+
         </Container>
             </>
     )

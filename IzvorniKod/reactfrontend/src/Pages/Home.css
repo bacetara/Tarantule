@@ -39,6 +39,7 @@ body {
     font-size: 1rem;
     color: white;
     margin: 0 10px;
+    text-decoration: none;
 }
 
 .header .backOptions {
@@ -102,6 +103,7 @@ body {
 
 .link_na_stranicu:hover{
     color: white;
+    cursor: pointer;
 }
 
 

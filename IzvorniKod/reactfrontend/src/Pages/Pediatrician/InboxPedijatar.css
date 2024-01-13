@@ -43,3 +43,11 @@
 .nevidljivo {
     visibility: hidden !important;
 }
+
+
+@media screen and (max-width: 720px) {
+    .AdditionalInfo{
+        flex-direction: row;
+    }
+
+}

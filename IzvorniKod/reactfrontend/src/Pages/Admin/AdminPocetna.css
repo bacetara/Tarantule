@@ -18,17 +18,16 @@
     height: 100%;
     width: 80%;
     border-radius: 10px;
-    /*position: relative;*/
 
-    /* Adjust other styles as needed */
 }
 
 .buttons {
     display: flex;
     flex-direction: column;
     width: 15%;
+    margin-left: 1%;
+    margin-top: 1%;
 
-    /* Adjust other styles as needed */
 }
 
 a {
@@ -40,8 +39,7 @@ a {
     justify-content: space-around;
     background-color: #DBDCF7;
     display: flex;
-    margin-bottom: 15%;
-    margin-right: 15%;
+    margin: 15%;
     text-align: center;
     padding: 15%;
     border-radius: 10px;
@@ -53,7 +51,6 @@ a {
     text-align: center;
     padding: 15%;
     margin-bottom: 15%;
-    margin-right: 4%;
     justify-content: space-around;
     border-radius: 10px;
 }
@@ -74,4 +71,15 @@ a {
     height: 100%;
     width: 100%;
     border-radius: 10px;
+}
+
+@media screen and (max-width: 720px){
+    .buttons {
+        flex-direction: row;
+    }
+
+    .addParent {
+        margin: 10%;
+    }
+
 }

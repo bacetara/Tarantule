@@ -61,3 +61,24 @@ li:hover {
     right: 0;
     font-weight: bold;
 }
+
+@media screen and (max-width: 720px) {
+    li {
+        justify-content: space-between;
+    }
+
+    #emailTitle {
+        text-align: end;
+        padding-right: 1%;
+    }
+
+    .containerOutlet {
+        flex-flow: column;
+    }
+
+    .listContainer {
+        width: 100%;
+        margin: 0;
+    }
+
+}

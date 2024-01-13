@@ -3,8 +3,15 @@ import {Link} from "react-router-dom";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowRightFromBracket} from "@fortawesome/free-solid-svg-icons";
 import * as React from "react";
+import {useNavigate } from 'react-router-dom';
 
 const AzuriranjePodataka= () => {
+    const navigate = useNavigate();
+
+    const handleClick = () => {
+        navigate(-1);
+    };
+
     return (
         <>
             <div className="header">
@@ -28,11 +35,11 @@ const AzuriranjePodataka= () => {
                 <div className="info"><label>MAIL USTANOVE: </label><input name="email" type="text"/></div>
 
                 <div className="buttons_horizontal">
-                    <div className="addChild">
-                        <Link className="link_na_stranicu" to="/parentInfo">Odustani</Link>
+                    <div className="addChild" onClick={handleClick}>
+                        <span className="link_na_stranicu">Odustani</span>
                     </div>
-                    <div className="addChild">
-                        <Link className="link_na_stranicu" to="/parentInfo">Ažuriraj</Link>
+                    <div className="addChild" onClick={handleClick}>
+                        <span className="link_na_stranicu">Ažuriraj</span>
                     </div>
                 </div>
 

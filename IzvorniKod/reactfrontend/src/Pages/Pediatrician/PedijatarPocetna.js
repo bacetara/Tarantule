@@ -20,6 +20,10 @@ export default function PedijatarPocetna() {
             </div>
 
             <Container>
+                <div className="buttons">
+                    <div className="addParent" > <Link className="link_na_stranicu" to="/addPatient1">Dodaj pacijenta</Link></div>
+                </div>
+
                 <div className="listContainer">
                     <ul>
                         {/*{items.map((item, index) => (
@@ -29,12 +33,6 @@ export default function PedijatarPocetna() {
                     </ul>
                 </div>
 
-
-
-
-                <div className="buttons">
-                    <div className="addChild" > <Link className="link_na_stranicu" to="/addPatient1">Dodaj pacijenta</Link></div>
-                </div>
             </Container>
 
             <Outlet/>
