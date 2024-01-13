@@ -1,5 +1,6 @@
 package hr.fer.progi.tarantule.OzdraviBE.rest;
 
+import hr.fer.progi.tarantule.OzdraviBE.service.exceptions.InvalidAuthorizationException;
 import hr.fer.progi.tarantule.OzdraviBE.service.exceptions.NoSuchOsobaException;
 import hr.fer.progi.tarantule.OzdraviBE.service.exceptions.OsobaAlreadyExistsException;
 import org.springframework.core.Ordered;
@@ -21,6 +22,15 @@ public class RestExceptionHandler {
     protected ResponseEntity<?> handleInvalidPassword(Exception e, WebRequest req) {
         Map<String, String> properties = new HashMap<>();
         properties.put("message", "Invalid credentials");
+        properties.put("status", "400");
+        properties.put("error", "Bad request");
+        return new ResponseEntity<>(properties, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(InvalidAuthorizationException.class)
+    protected ResponseEntity<?> handleInvalidAuth(Exception e, WebRequest req) {
+        Map<String, String> properties = new HashMap<>();
+        properties.put("message", "Invalid authentication");
         properties.put("status", "400");
         properties.put("error", "Bad request");
         return new ResponseEntity<>(properties, HttpStatus.BAD_REQUEST);
