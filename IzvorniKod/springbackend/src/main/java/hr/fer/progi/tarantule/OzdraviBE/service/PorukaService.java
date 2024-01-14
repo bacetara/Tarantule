@@ -25,6 +25,8 @@ public interface PorukaService {
 
     List<Poruka> findByRecipient(String recipientOIB);
 
+    List<Poruka> findBetween(String oib1, String oib2);
+
     List<Poruka> findByOib(String OIB);
 
     Integer findMaxId();
