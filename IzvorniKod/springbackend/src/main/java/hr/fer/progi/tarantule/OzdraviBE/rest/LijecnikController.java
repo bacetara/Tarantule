@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
@@ -57,6 +58,22 @@ public class LijecnikController {
     @GetMapping("unassigned")
     public List<Osoba> getUnassignedPatients(HttpServletRequest request, HttpServletResponse response) {
         return osobaService.findUnassigned("roditelj");
+    }
+
+    @Secured("doktor")
+    @GetMapping("inbox/{oib}")
+    public List<Poruka> findByOibParent(@PathVariable("oib") String oib, HttpServletRequest request, HttpServletResponse response) {
+        Osoba o = SecurityHelper.getAuthenticatedOsoba(request);
+        if (o == null) {
+            throw new InvalidAuthorizationException();
+        }
+
+        Osoba p = osobaService.findByOib(oib).orElseThrow(() -> new AccessDeniedException("You don't have access to this OIB"));
+        if (!p.getUloga().equals("roditelj") || !p.getDoktor().getOib().equals(o.getOib())) {
+            throw new AccessDeniedException("You don't have access to this OIB");
+        }
+
+        return porukaService.findBetween(o.getOib(), p.getOib());
     }
 
     @Secured("doktor")
