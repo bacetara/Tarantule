@@ -45,7 +45,7 @@ const Login = ()  => {
             body: JSON.stringify(data)
         };
 
-        return fetch('/api/login', options)
+        /*return fetch('/api/login', options)
             .then(response => {
                 if (response.status === 400) {
                     setError("Neuspjela prijava.");
@@ -55,7 +55,35 @@ const Login = ()  => {
             })
             .then(data => {
                 if (data) {
+                    console.log("kjfhkhla")
                     navigate("/user");
+                }
+            })
+            .catch(error => {
+                console.error (error);
+            });*/
+        return fetch('/api/login', options)
+            .then(response => {
+                if (response.status === 200) {
+                    return response.json();
+                } else {
+                    setError("Neuspjela prijava.");
+                    throw new Error("status 400!")
+                }
+            })
+            .then(data => {
+                if (data) {
+                    console.log(data.uloga)
+                    if(data.uloga === "roditelj"){
+                        navigate("/parentInfo");
+                    }else if(data.uloga === "admin"){
+                        navigate("/admin")
+                    }else if(data.uloga === "pedijatar"){
+                        navigate("/pediatrician")
+                    }else if(data.uloga === "doktor"){
+                        navigate("/doctor")
+                    }
+
                 }
             })
             .catch(error => {

@@ -48,15 +48,23 @@ const Register = ()  => {
 
         return fetch('/api/register', options)
             .then(response => {
-                if (response.status === 400) {
-                    setError("Neuspjela registracija.");
-                    throw new Error("status 400!")
-                } else
+                if (response.status === 200) {
                     return response.json();
+                } else {
+                    setError("Neuspjela prijava.");
+                    throw new Error("status 400!")
+                }
             })
             .then(data => {
-                if (data) {
-                    navigate("/user");
+                console.log(data.uloga)
+                if(data.uloga === "roditelj"){
+                    navigate("/parentInfo");
+                }else if(data.uloga === "admin"){
+                    navigate("/admin")
+                }else if(data.uloga === "pedijatar"){
+                    navigate("/pediatrician")
+                }else if(data.uloga === "doktor"){
+                    navigate("/doctor")
                 }
             })
             .catch(error => {
