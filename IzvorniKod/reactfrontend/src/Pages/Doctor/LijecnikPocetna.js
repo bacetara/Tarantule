@@ -12,7 +12,7 @@ export default function LijecnikPocetna() {
     useEffect(() => {
         fetch('api/doctor/me')
             .then(data => data.json())
-            .then(data => setParents(data))
+            .then(data => setParents(data.pacijenti))
     }, []);
     return (
         <>

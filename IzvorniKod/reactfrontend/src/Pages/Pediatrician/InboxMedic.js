@@ -16,17 +16,26 @@ export default function InboxMedic() {
     const [medical, setMedical] = useState(null); //loged in user == doctor/pediatrician
     const [selectedEmail, setSelectedEmail] = useState(null);
     const [createEmail, setCreateEmail] = useState(false);
-    const emails = [
+    const [emails, setEmails] = useState(null);
+    /*const emails = [
         { sender: 'john@example.com', receiver:'netko@mail.com', title: 'prvi mail', messageBody: 'Hi, let\'s discuss the agenda for tomorrow\'s meeting.', id:1, type: 'obicna' },
         { sender: 'john1111@example.com', receiver:'netko2@mail.com', title: 'drugi mail', messageBody: 'Bok ja sam drugi mail', id:2, type: 'bolovanje'},
         { sender: 'john12213123@example.com', receiver:'netko3333@mail.com', title: 'treci mail', messageBody: 'Hi, ja sam treci mail.' , id: 3, type: 'obicna'}
-    ];
+    ];*/
 
     useEffect(() => {
-        fetch('/api/doctor/me')
+        fetch(`/api/doctor/inbox/${oib}`)
             .then(data => data.json())
-            .then(data => console.log(data))
-    }, []);
+            .then(data => {
+                setEmails(data);
+            })
+
+        fetch(`/api/doctor/me`)
+            .then(data => data.json())
+            .then(data => {
+                setMedical(data.doktor);
+            })
+    }, [oib]);
 
 
 
@@ -52,13 +61,13 @@ export default function InboxMedic() {
 
                 <div className="logOut">
                     <FontAwesomeIcon icon={faHouse} style={{color: "#fcfcfd",}} />
-                    <Link to={user.role==="pediatrician" ? "/pediatrician" : "/doctor"} id="logOutText">switch profiles</Link>
+                    <Link to={user && user.role==="pedijatar" ? "/pediatrician" : "/doctor"} id="logOutText">switch profiles</Link>
                 </div>
             </div>
 
 
             <div className="profileName">
-                {patient.name} {patient.surname} [{patient.oib}]
+
             </div>
 
         </div>
@@ -81,10 +90,10 @@ export default function InboxMedic() {
                         {selectedEmail.type === 'bolovanje' && <ReadEmail email={selectedEmail}/>}
                     </div>
                 ) :
-                createEmail === false ?
-                    (<ListContainer items={emails} myfunc={openEmail}/>) :
+                createEmail === false ? emails ?
+                    (<ListContainer items={emails} myfunc={openEmail}/>) : null :
                     (<div className="listContainer">
-                        <PediatricianEmail sender={user} receiver={patient}/>
+                        <PediatricianEmail sender={medical ? medical: ""} receiver={oib ? oib : ""}/>
                     </div>)}
 
 

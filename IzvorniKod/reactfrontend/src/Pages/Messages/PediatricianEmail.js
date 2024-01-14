@@ -63,7 +63,7 @@ const PediatricianEmail = ({sender, receiver}) => {
             <form className="message" onSubmit={sendMessage}>
                 <div className="inputs" id="receiverField">
                     <label htmlFor="receiver">Primatelj (OIB)</label>
-                    <input type="text" name="receiver" id="receiver" onChange={handleChange} value={receiver.oib}
+                    <input type="text" name="receiver" id="receiver" onChange={handleChange} value={receiver}
                            readOnly={true}/>
                 </div>
 
@@ -96,7 +96,7 @@ const PediatricianEmail = ({sender, receiver}) => {
 
                 <div className="inputs" id="messageButtons">
 
-                    {sender.role === 'pediatrician' && <label className="check"> ispričnica
+                    {sender.role === 'pedijatar' && <label className="check"> ispričnica
                         <input id="ispricnica" type="checkbox"
                                checked={emailData.ispricnica}
                                onChange={() => handleCheckBoxChange('ispricnica')}/>
