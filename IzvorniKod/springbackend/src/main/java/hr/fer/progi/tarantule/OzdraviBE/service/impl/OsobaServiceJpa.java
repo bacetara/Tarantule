@@ -90,8 +90,6 @@ public class OsobaServiceJpa implements OsobaService {
     }
 
     private void validate(Osoba osoba) {
-        Assert.isTrue(!"admin".equals(osoba.getUloga()), "Giving admin role is not allowed");
-
         // todo: ...
     }
 }
