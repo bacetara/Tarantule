@@ -4,6 +4,7 @@ import hr.fer.progi.tarantule.OzdraviBE.domain.Bolest;
 import hr.fer.progi.tarantule.OzdraviBE.domain.Osoba;
 import hr.fer.progi.tarantule.OzdraviBE.rest.dto.AddChildDTO;
 import hr.fer.progi.tarantule.OzdraviBE.rest.dto.AddParentDTO;
+import hr.fer.progi.tarantule.OzdraviBE.service.exceptions.InvalidAuthorizationException;
 import hr.fer.progi.tarantule.OzdraviBE.service.exceptions.NoSuchOsobaException;
 import hr.fer.progi.tarantule.OzdraviBE.service.OsobaService;
 import jakarta.persistence.EntityNotFoundException;
@@ -25,6 +26,17 @@ import java.util.List;
 public class AdminController {
     @Autowired
     private OsobaService osobaService;
+
+    @Secured("admin")
+    @GetMapping("me")
+    public Osoba getUser(HttpServletRequest request, HttpServletResponse response) {
+        Osoba o = SecurityHelper.getAuthenticatedOsoba(request);
+        if (o == null) {
+            throw new InvalidAuthorizationException();
+        }
+
+        return o;
+    }
 
     @Secured("admin")
     @GetMapping("viewPerson/{oib}")
