@@ -4,6 +4,7 @@ import hr.fer.progi.tarantule.OzdraviBE.domain.Osoba;
 import hr.fer.progi.tarantule.OzdraviBE.domain.Poruka;
 import hr.fer.progi.tarantule.OzdraviBE.rest.dto.AddBolovanjeMessageDTO;
 import hr.fer.progi.tarantule.OzdraviBE.rest.dto.AddMessageDTO;
+import hr.fer.progi.tarantule.OzdraviBE.rest.dto.GetDoctorDTO;
 import hr.fer.progi.tarantule.OzdraviBE.service.OsobaService;
 import hr.fer.progi.tarantule.OzdraviBE.service.PorukaService;
 import hr.fer.progi.tarantule.OzdraviBE.service.exceptions.InvalidAuthorizationException;
@@ -45,13 +46,13 @@ public class LijecnikController {
 
     @Secured("doktor")
     @GetMapping("me")
-    public List<Osoba> getPatients(HttpServletRequest request, HttpServletResponse response) {
+    public GetDoctorDTO getDoctor(HttpServletRequest request, HttpServletResponse response) {
         Osoba o = SecurityHelper.getAuthenticatedOsoba(request);
         if (o == null) {
             throw new InvalidAuthorizationException();
         }
 
-        return osobaService.findByDoctor(o.getOib());
+        return new GetDoctorDTO(o, osobaService.findByDoctor(o.getOib()));
     }
 
     @Secured("doktor")
