@@ -32,7 +32,7 @@ function App() {
                 <Route path="/addparent" element={<DodajRoditelja />} />
                 <Route path="/addchild" element={<DodajDijete />} />
                 <Route path="/user" element={<User />}/>
-                <Route path="/information" element={<PregledajOsobu />}/>
+                <Route path="/information/:oib" element={<PregledajOsobu />}/>
                 <Route path="/doctor" element={<LijecnikPocetna />}/>
                 <Route path="/addPatient2" element={<DodavanjePacijenta2 />}/>
                 <Route path="/pediatrician" element={<PedijatarPocetna />}/>
