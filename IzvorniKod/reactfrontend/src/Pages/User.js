@@ -20,11 +20,11 @@ export default function User() {
     console.log(isNewMailVisible);
     console.log(openingEmail);
 
-    /*React.useEffect(() => {
+    React.useEffect(() => {
         fetch('/api/user')
         .then(data => data.json())
         .then(user => setUser(user))
-    }, []);*/
+    }, []);
 
     const createNewMail = () => {
         setNewMailVisible(true);
