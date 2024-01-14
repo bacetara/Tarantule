@@ -6,9 +6,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faArrowRightFromBracket, faUser, faUserDoctor} from '@fortawesome/free-solid-svg-icons';
 import * as React from 'react';
 export default function RoditeljPocetna() {
-	useEffect(() => {
-		console.log(json);
-	}, []); // Empty dependency array means this effect runs once when the component mounts
+	const [user, setUser] = React.useState(null);
+	React.useEffect(() => {
+        fetch('api/parent/me ')
+        .then(data => data.json())
+        .then(user => setUser(user));
+		console.log('Fetched user data:', user);
+
+    }, []);
 
 	return (
 		<>
@@ -27,19 +32,30 @@ export default function RoditeljPocetna() {
 				<div className="profileName">Roditelj [904238734]</div>
 			</div>
 			<div className="infocontainer">
-				{json.map(
-					(record) =>
-						record.rodOIB === '01020304050' && (
-							<div className="child" key={record.OIB}>
+				{user && (
+					<>
+						{/* Display information about the parent */}
+						<div className="parent" key={user.roditelj.oib}>
+							<div className="profile">
+								<FontAwesomeIcon id="profileIcon3" icon={faUser} />
+							</div>
+							<Link className="link_na_stranicu" to={`/inbox/${user.roditelj.oib}`}>
+								{`${user.roditelj.ime} ${user.roditelj.prezime}`}
+							</Link>
+						</div>
+
+						{/* Display information about children */}
+						{user.djeca.map(child => (
+							<div className="child" key={child.oib}>
 								<div className="profile">
-									<FontAwesomeIcon id="profileIcon3" icon={faUser} />
+									<FontAwesomeIcon id="profileIcon3" icon={faChild} />
 								</div>
-								{/* Use the Link component for routing */}
-								<Link className="link_na_stranicu" to={`/inbox/${record.OIB}`}>
-									{`${record.Ime} ${record.Prezime}`}
+								<Link className="link_na_stranicu" to={`/inbox/${child.oib}`}>
+									{`${child.ime} ${child.prezime}`}
 								</Link>
 							</div>
-						)
+						))}
+					</>
 				)}
 			</div>
 		</>
