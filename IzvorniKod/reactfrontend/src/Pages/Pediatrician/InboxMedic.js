@@ -67,7 +67,7 @@ export default function InboxMedic() {
 
 
             <div className="profileName">
-
+                {medical ? medical.ime: ""} {medical ? medical.prezime : ""} [{medical ? medical.oib : ""}]
             </div>
 
         </div>
@@ -85,9 +85,9 @@ export default function InboxMedic() {
             {selectedEmail != null ? (
                 //treba promijenit za specijalista da se mail s kartom iscrta!!!
                     <div className="listContainer">
-                        {selectedEmail.type === 'obicna' && <ReadEmail email={selectedEmail} />}
-                        {selectedEmail.type === 'specialist' && <ReadEmail email={selectedEmail} />}
-                        {selectedEmail.type === 'bolovanje' && <ReadEmail email={selectedEmail}/>}
+                        {selectedEmail.tip === '1' && <ReadEmail email={selectedEmail} user={medical}/>}
+                        {selectedEmail.tip === '4' && <ReadEmail email={selectedEmail} user={medical}/>}
+                        {selectedEmail.tip === '3' && <ReadEmail email={selectedEmail} user={medical}/>}
                     </div>
                 ) :
                 createEmail === false ? emails ?
