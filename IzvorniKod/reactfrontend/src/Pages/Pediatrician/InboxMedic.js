@@ -1,18 +1,19 @@
 import './InboxPedijatar.css'
 import Container from "../Container";
 import ListContainer from "../ListContainer";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import * as React from "react";
 import PediatricianEmail from "../Messages/PediatricianEmail";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowRightFromBracket, faHouse, faUserDoctor} from "@fortawesome/free-solid-svg-icons";
 import ReadEmail from "../Messages/ReadEmail";
-import {Link} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 
 
 export default function InboxMedic() {
-    const user = {oib: 9090909, name: "Ivan", surname: "Lucić", role: 'pediatrician'};
-    const patient = {oib: 999902020202, name: "Jakov", surname: "Župančić"};
+    const { oib } = useParams();
+    const [user, setUser] = useState(null); //parent's/child's profile
+    const [medical, setMedical] = useState(null); //loged in user == doctor/pediatrician
     const [selectedEmail, setSelectedEmail] = useState(null);
     const [createEmail, setCreateEmail] = useState(false);
     const emails = [
@@ -20,6 +21,15 @@ export default function InboxMedic() {
         { sender: 'john1111@example.com', receiver:'netko2@mail.com', title: 'drugi mail', messageBody: 'Bok ja sam drugi mail', id:2, type: 'bolovanje'},
         { sender: 'john12213123@example.com', receiver:'netko3333@mail.com', title: 'treci mail', messageBody: 'Hi, ja sam treci mail.' , id: 3, type: 'obicna'}
     ];
+
+    useEffect(() => {
+        fetch('/api/doctor/me')
+            .then(data => data.json())
+            .then(data => console.log(data))
+    }, []);
+
+
+
     const openEmail = (email) => {
         setSelectedEmail(email);
         setCreateEmail(false);

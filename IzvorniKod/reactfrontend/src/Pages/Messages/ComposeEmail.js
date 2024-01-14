@@ -31,19 +31,40 @@ const ComposeEmail = ({email}) => {
     function sendMessage(e) {
         e.preventDefault();
 
+
         const data = {
-            pošiljatelj: emailData.receiver,
             naslov: emailData.title,
-            tijelo: emailData.messageBody
+            tijelo: emailData.messageBody,
+            prilog: null,
+            tip: 1,
+            prioib: emailData.receiver,
+            posoib: emailData.sender,
+            dijagnozaID: null
         };
 
+        console.log("data");
+        console.log(JSON.stringify(data));
         const options = {
-            method: 'POST',
+            method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(data)
         };
+
+        fetch('/api/parent/newMessage', options)
+            .then(response => {
+                if (response.ok)
+                    console.log("uspjeh");
+                else
+                    console.log("neuspjeh");
+
+                handleBack();
+            })
+            .catch(error => {
+                console.error('Error sending message:', error);
+            })
+
     }
 
     return (

@@ -11,36 +11,56 @@ import {Link, useParams} from "react-router-dom";
 
 export default function InboxUser() {
     const { oib } = useParams();
-    console.log(oib);
     const [selectedEmail, setSelectedEmail] = useState(null);
     const [createEmail, setCreateEmail] = useState(false);
-    const emails = [
-        { sender: 'john@example.com', receiver:'netko@mail.com', title: 'prvi mail', messageBody: 'Hi, let\'s discuss the agenda for tomorrow\'s meeting.', id:1, type: 'obicna' },
-        { sender: 'john1111@example.com', receiver:'netko2@mail.com', title: 'drugi mail', messageBody: 'Bok ja sam drugi mail', id:2, type: 'obicna' },
-        { sender: 'john12213123@example.com', receiver:'netko3333@mail.com', title: 'treci mail', messageBody: 'Hi, ja sam treci mail.' , id: 3, type: 'obicna'}
-    ];
-    const pediatrician = {oib: 9090909, name: "Ivan", surname: "Lucić"};
-    const child = {oib: oib, name: "Jakov", surname: "Župančić"};
+    const [info, setInfo] = useState(null);
+    const [user, setUser] = useState(null);
+    const [medical, setMedical] = useState({});
+    const [emails, setEmails] = useState({});
 
-    /*useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await fetch(`/api/profile/${oib}`);
-                if (response.ok) {
-                    const data = await response.json();
-                    setProfileData(data);
+
+    useEffect(() => {
+        fetch('/api/parent/me')
+            .then(data => data.json())
+            .then(data => {
+                setInfo(data);
+
+                if (data.roditelj.oib === oib) {
+                    setUser(data.roditelj);
                 } else {
-                    // Handle error
-                    console.error('Error fetching profile data');
+                    for (var i = 0; i < data.djeca.length; i++) {
+                        if (data.djeca[i].oib === oib) {
+                            setUser(data.djeca[i]);
+                            break;
+                        }
+                    }
                 }
-            } catch (error) {
-                // Handle fetch error
-                console.error('Error fetching profile data:', error);
-            }
-        };
 
-        fetchData();
-    }, [oib]);*/
+                if (user) {
+                    setMedical(user.doktor);
+                }
+
+            })
+
+    }, [oib, user]);
+
+    useEffect(() => {
+        if (user) {
+            fetch(user.uloga === "roditelj" ? `/api/parent/${oib}` : `/api/parent/child/${oib}`)
+                .then(data => data.json())
+                .then(data => {
+                    if (data)
+                        setEmails(data)
+                    console.log(emails)
+                })
+                .catch(error => {
+                    console.error('Error fetching child data:', error);
+                });
+        }
+    }, [emails, oib, user]);
+
+
+
 
     const openEmail = (email) => {
         setSelectedEmail(email);
@@ -52,8 +72,13 @@ export default function InboxUser() {
         setSelectedEmail(null);
     }
 
+
+
     return(
+
+
         <>
+
             <div className="header">
 
                 <div className="backOptions">
@@ -69,7 +94,7 @@ export default function InboxUser() {
                 </div>
 
                 <div className="profileName">
-                    {child.name} {child.surname} [{child.oib}]
+                    {user ? user.ime  : ""} {user ? user.prezime : ""} [{user ? user.oib : ""}]
                 </div>
 
             </div>
@@ -88,16 +113,16 @@ export default function InboxUser() {
             {selectedEmail != null ? (
                 //treba promijenit za specijalista da se mail s kartom iscrta!!!
                 <div className="listContainer">
-                    {selectedEmail.type === 'obicna' && <ReadEmail email={selectedEmail} />}
-                    {selectedEmail.type === 'specialist' && <ReadEmail email={selectedEmail} />}
-                    {selectedEmail.type === 'bolovanje' && <ReadEmail email={selectedEmail}/>}
+                    {selectedEmail.tip === "1" && <ReadEmail email={selectedEmail} user={user}/>}
+                    {selectedEmail.tip === "4" && <ReadEmail email={selectedEmail} user={user}/>}
+                    {selectedEmail.tip === "3" && <ReadEmail email={selectedEmail} user={user}/>}
                 </div>
             ) :createEmail === false ?
                     (<ListContainer items={emails} myfunc={openEmail}/>) :
-                    (<div className="listContainer"><ComposeEmail email={{sender: child.oib, receiver: pediatrician.oib}}/></div>)}
+                    (<div className="listContainer"><ComposeEmail email={{sender: user ? user.oib : "", receiver: medical ? medical.oib : ""}}/></div>)}
 
         </Container>
 
-            </>
+        </>
     )
 }

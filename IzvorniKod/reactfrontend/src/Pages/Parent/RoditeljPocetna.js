@@ -13,7 +13,7 @@ export default function RoditeljPocetna() {
         .then(user => setUser(user));
 		console.log('Fetched user data:', user);
 
-    }, []);
+    }, [user]);
 
 	return (
 		<>
@@ -35,12 +35,12 @@ export default function RoditeljPocetna() {
 				{user && (
 					<>
 						{/* Display information about the parent */}
-						<div className="parent" key={user.roditelj.oib}>
+						<div className="child" key={user.roditelj.oib}>
 							<div className="profile">
 								<FontAwesomeIcon id="profileIcon3" icon={faUser} />
 							</div>
 							<Link className="link_na_stranicu" to={`/inbox/${user.roditelj.oib}`}>
-								{`${user.roditelj.ime} ${user.roditelj.prezime}`}
+								{`${user.roditelj.ime} ${user.roditelj.prezime}`} (my profile)
 							</Link>
 						</div>
 
@@ -48,7 +48,7 @@ export default function RoditeljPocetna() {
 						{user.djeca.map(child => (
 							<div className="child" key={child.oib}>
 								<div className="profile">
-									<FontAwesomeIcon id="profileIcon3" icon={faChild} />
+									<FontAwesomeIcon id="profileIcon3" icon={faUser} />
 								</div>
 								<Link className="link_na_stranicu" to={`/inbox/${child.oib}`}>
 									{`${child.ime} ${child.prezime}`}

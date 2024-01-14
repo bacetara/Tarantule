@@ -7,12 +7,13 @@ export default function ListContainer({items, myfunc}) {
         <div className="listContainer">
             {
                 <ul>
-                    {items.map((email) => (
+                    {items.length > 0 ?
+                        items.map((email) => (
                         <li key={email.id} onClick={() => myfunc(email)}>
-                            <span id="emailSender"> {email.sender} </span>
-                            <span id="emailTitle">[{email.title}]</span>
+                            <span id="emailSender"> {email.posoib} </span>
+                            <span id="emailTitle">{email.naslov}</span>
                         </li>
-                    ))}
+                    )) : ""}
                 </ul>
             }
 
