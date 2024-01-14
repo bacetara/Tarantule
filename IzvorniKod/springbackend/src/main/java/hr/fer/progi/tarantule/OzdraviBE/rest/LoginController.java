@@ -48,7 +48,7 @@ public class LoginController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public void login(@RequestBody LoginDTO data, HttpServletRequest request, HttpServletResponse response) {
+    public Osoba login(@RequestBody LoginDTO data, HttpServletRequest request, HttpServletResponse response) {
         if (data.oib() == null || data.password() == null) {
             throw new BadCredentialsException("Invalid login");
         }
@@ -62,7 +62,14 @@ public class LoginController {
         securityContextHolderStrategy.setContext(context);
         securityContextRepository.saveContext(context, request, response);
 
-        System.out.println(authentication.getName());
+        Osoba o = SecurityHelper.getAuthenticatedOsoba(request);
+        if (o == null) {
+            System.out.println("ne valja");
+            return null;
+        }
+        else {
+            return o;
+        }
     }
 
     @GetMapping("")
