@@ -68,6 +68,10 @@ public class PorukaServiceJpa implements PorukaService {
         return porukaRepository.findMaxId();
     }
 
+    @Override
+    public List<Poruka> findBetween(String oib1, String oib2) {
+        return porukaRepository.findBetweenPersons(oib1, oib2);
+    }
 
     private void validate(Poruka poruka) {
         // todo: ...

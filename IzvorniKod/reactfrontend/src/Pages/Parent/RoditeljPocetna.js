@@ -6,9 +6,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faArrowRightFromBracket, faUser, faUserDoctor} from '@fortawesome/free-solid-svg-icons';
 import * as React from 'react';
 export default function RoditeljPocetna() {
-	const [user, setUser] = React.useState(null);
+	const [user, setUser] = React.useState({});
 	React.useEffect(() => {
-        fetch('api/parent/me ')
+        fetch('/api/parent/me')
         .then(data => data.json())
         .then(user => setUser(user));
 		console.log('Fetched user data:', user);
@@ -34,8 +34,10 @@ export default function RoditeljPocetna() {
 			<div className="infocontainer">
 				{user && (
 					<>
+
 						{/* Display information about the parent */}
 						<div className="child" key={user.roditelj.oib}>
+
 							<div className="profile">
 								<FontAwesomeIcon id="profileIcon3" icon={faUser} />
 							</div>
@@ -44,11 +46,13 @@ export default function RoditeljPocetna() {
 							</Link>
 						</div>
 
-						{/* Display information about children */}
+						{/!* Display information about children *!/}
 						{user.djeca.map(child => (
 							<div className="child" key={child.oib}>
 								<div className="profile">
+
 									<FontAwesomeIcon id="profileIcon3" icon={faUser} />
+
 								</div>
 								<Link className="link_na_stranicu" to={`/inbox/${child.oib}`}>
 									{`${child.ime} ${child.prezime}`}
