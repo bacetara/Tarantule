@@ -18,6 +18,7 @@ import PediatricianEmail from "./Pages/Messages/PediatricianEmail";
 import DoctorParentSite from "./Pages/Doctor/doctorParentSite";
 import ParentSite from "./Pages/Parent/PersonalSite";
 import ChildSite from "./Pages/Parent/ChildSite";
+import PediatricianChildSite from "./Pages/Pediatrician/pediatricianChildSite";
 
 function App() {
     return (
@@ -27,6 +28,7 @@ function App() {
                 <Route path="/inbox/:oib" element={<ParentSite/>} />
                 <Route path="/inbox/child/:oib" element={<ChildSite/>} />
                 <Route  path="/doctor/:oib" element={<DoctorParentSite />} />
+                <Route path="/pediatrician/:oib" element={<PediatricianChildSite/>}/>
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/admin" element={<AdminPocetna />} />

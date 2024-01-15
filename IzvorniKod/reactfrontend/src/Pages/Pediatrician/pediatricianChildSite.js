@@ -20,8 +20,13 @@ export default function PediatricianChildSite() {
             .then(data => data.json())
             .then(data => {
                 setMedical(data.doktor);
+                for (var i = 0; i < data.pacijenti.length; i++) {
+                    if (data.pacijenti[i].oib === oib) {
+                        setUser(data.pacijenti[i]);
+                    }
+                }
             })
-    }, [path]);
+    }, [oib, path]);
 
     return(
         <InboxMedic user={user} medical={medical} emails={emails}/>
