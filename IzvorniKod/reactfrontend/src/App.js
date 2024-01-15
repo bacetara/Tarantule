@@ -38,7 +38,7 @@ function App() {
                 <Route path="/addPatient2" element={<DodavanjePacijenta2 />}/>
                 <Route path="/pediatrician" element={<PedijatarPocetna />}/>
                 <Route path="/addPatient1" element={<DodavanjePacijenta1 />}/>
-                <Route path="/updateInfo" element={<AzuriranjePodataka />}/>
+                <Route path="/updateInfo/:oib" element={<AzuriranjePodataka />}/>
                 <Route path="/parentInfo" element={<RoditeljPocetna />} />
                 <Route path="/pediatricianEmail" element={<PediatricianEmail/>}/>
             </Routes>
