@@ -7,7 +7,7 @@ export default function DoctorParentSite() {
     const path = `/api/doctor/inbox/${oib}`;
     const [user, setUser] = useState(null); //parent's/child's profile
     const [medical, setMedical] = useState(null); //loged in user == doctor/pediatrician
-   const [emails, setEmails] = useState(null);
+    const [emails, setEmails] = useState(null);
 
     useEffect(() => {
         fetch(path)

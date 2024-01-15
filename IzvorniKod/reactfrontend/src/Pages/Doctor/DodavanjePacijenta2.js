@@ -4,8 +4,16 @@ import Container from "../Container";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowRightFromBracket} from "@fortawesome/free-solid-svg-icons";
 import * as React from "react";
+import {useState} from "react";
 
 export default function DodavanjePacijenta2() {
+    const [unassigned, setUnassigned] = useState([]);
+    const [selected, setSelected] = useState({});
+
+    function selectUser() {
+
+    }
+
     return (
         <>
             <div className="header">
