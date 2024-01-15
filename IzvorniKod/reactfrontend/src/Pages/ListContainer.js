@@ -2,7 +2,6 @@ import React from "react";
 import './Container.css'
 
 export default function ListContainer({items, myfunc}) {
-    console.log(items);
     return(
         <div className="listContainer">
             {

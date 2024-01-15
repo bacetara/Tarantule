@@ -7,12 +7,12 @@ import Container from "../Container";
 import {useEffect, useState} from "react";
 
 export default function LijecnikPocetna() {
-    const [parents, setParents] = useState(null);
+    const [data, setData] = useState(null);
 
     useEffect(() => {
         fetch('api/doctor/me')
             .then(data => data.json())
-            .then(data => setParents(data.pacijenti))
+            .then(data => setData(data))
     }, []);
     return (
         <>
@@ -24,7 +24,7 @@ export default function LijecnikPocetna() {
                     </div>
                 </div>
 
-                <div className="profileName">doctor [989898899]</div>
+                <div className="profileName">doktor {data?.doktor.ime} {data?.doktor.prezime}[{data?.doktor.oib}]</div>
             </div>
 
 
@@ -36,9 +36,9 @@ export default function LijecnikPocetna() {
 
                 <div className="listContainer">
                     <ul>
-                        {parents && (
-                            parents.map((item) => (
-                                    <li><Link className="link_na_stranicu" to={`/doctor/${item.oib}`}> {item.oib} {item.ime} {item.prezime}</Link></li>
+                        {data && (
+                            data.pacijenti.map((item) => (
+                                    <li key={item.oib}><Link className="link_na_stranicu" to={`/doctor/${item.oib}`}> {item.oib} {item.ime} {item.prezime}</Link></li>
                                 ))
                         )}
 

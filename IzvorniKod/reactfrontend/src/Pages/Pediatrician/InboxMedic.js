@@ -10,32 +10,10 @@ import ReadEmail from "../Messages/ReadEmail";
 import {Link, useParams} from "react-router-dom";
 
 
-export default function InboxMedic() {
-    const { oib } = useParams();
-    const [user, setUser] = useState(null); //parent's/child's profile
-    const [medical, setMedical] = useState(null); //loged in user == doctor/pediatrician
+export default function InboxMedic({user, medical, emails}) {
     const [selectedEmail, setSelectedEmail] = useState(null);
     const [createEmail, setCreateEmail] = useState(false);
-    const [emails, setEmails] = useState(null);
-    /*const emails = [
-        { sender: 'john@example.com', receiver:'netko@mail.com', title: 'prvi mail', messageBody: 'Hi, let\'s discuss the agenda for tomorrow\'s meeting.', id:1, type: 'obicna' },
-        { sender: 'john1111@example.com', receiver:'netko2@mail.com', title: 'drugi mail', messageBody: 'Bok ja sam drugi mail', id:2, type: 'bolovanje'},
-        { sender: 'john12213123@example.com', receiver:'netko3333@mail.com', title: 'treci mail', messageBody: 'Hi, ja sam treci mail.' , id: 3, type: 'obicna'}
-    ];*/
 
-    useEffect(() => {
-        fetch(`/api/doctor/inbox/${oib}`)
-            .then(data => data.json())
-            .then(data => {
-                setEmails(data);
-            })
-
-        fetch(`/api/doctor/me`)
-            .then(data => data.json())
-            .then(data => {
-                setMedical(data.doktor);
-            })
-    }, [oib]);
 
 
 
@@ -93,7 +71,7 @@ export default function InboxMedic() {
                 createEmail === false ? emails ?
                     (<ListContainer items={emails} myfunc={openEmail}/>) : null :
                     (<div className="listContainer">
-                        <PediatricianEmail sender={medical ? medical: ""} receiver={oib ? oib : ""}/>
+                        <PediatricianEmail sender={medical ? medical.oib : ""} receiver={user ? user.oib : ""}/>
                     </div>)}
 
 

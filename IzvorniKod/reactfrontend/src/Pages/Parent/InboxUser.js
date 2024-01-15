@@ -1,66 +1,17 @@
 import './Inbox.css'
 import Container from "../Container";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import ListContainer from "../ListContainer";
 import ComposeEmail from "../Messages/ComposeEmail";
 import * as React from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowRightFromBracket, faHouse, faUser} from "@fortawesome/free-solid-svg-icons";
 import ReadEmail from "../Messages/ReadEmail";
-import {Link, useParams} from "react-router-dom";
+import {Link} from "react-router-dom";
 
-export default function InboxUser() {
-    const { oib } = useParams();
+export default function InboxUser({user, emails, medical}) {
     const [selectedEmail, setSelectedEmail] = useState(null);
     const [createEmail, setCreateEmail] = useState(false);
-    const [info, setInfo] = useState(null);
-    const [user, setUser] = useState(null);
-    const [medical, setMedical] = useState({});
-    const [emails, setEmails] = useState({});
-
-
-    useEffect(() => {
-        fetch('/api/parent/me')
-            .then(data => data.json())
-            .then(data => {
-                setInfo(data);
-
-                if (data.roditelj.oib === oib) {
-                    setUser(data.roditelj);
-                } else {
-                    for (var i = 0; i < data.djeca.length; i++) {
-                        if (data.djeca[i].oib === oib) {
-                            setUser(data.djeca[i]);
-                            break;
-                        }
-                    }
-                }
-
-                if (user) {
-                    setMedical(user.doktor);
-                }
-
-            })
-
-    }, [oib, user]);
-
-    useEffect(() => {
-        if (user) {
-            fetch(user.uloga === "roditelj" ? `/api/parent/${oib}` : `/api/parent/child/${oib}`)
-                .then(data => data.json())
-                .then(data => {
-                    if (data)
-                        setEmails(data)
-                    console.log(emails)
-                })
-                .catch(error => {
-                    console.error('Error fetching child data:', error);
-                });
-        }
-    }, [emails, oib, user]);
-
-
-
 
     const openEmail = (email) => {
         setSelectedEmail(email);
@@ -74,11 +25,8 @@ export default function InboxUser() {
 
 
 
-    return(
-
-
+    return (
         <>
-
             <div className="header">
 
                 <div className="backOptions">
