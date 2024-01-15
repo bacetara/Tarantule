@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/api/parent/")
@@ -97,4 +98,34 @@ public class RoditeljController {
         return porukaService.findByOib(oib);
     }
 
+    @Secured("roditelj")
+    @PostMapping(path = "me", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void postOsoba(@RequestBody Osoba newData, HttpServletRequest request, HttpServletResponse response) {
+        Osoba o = SecurityHelper.getAuthenticatedOsoba(request);
+        if (o == null) {
+            throw new InvalidAuthorizationException();
+        }
+
+        if (!o.getOib().equals(newData.getOib())) {
+            throw new AccessDeniedException("You don't have access to this OIB");
+        }
+
+        osobaService.updateOsoba(newData);
+    }
+
+    @Secured("roditelj")
+    @PostMapping(path = "child/{oib}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void postOsobaChild(@PathVariable("oib") String oib, @RequestBody Osoba newData, HttpServletRequest request, HttpServletResponse response) {
+        Osoba o = SecurityHelper.getAuthenticatedOsoba(request);
+        if (o == null) {
+            throw new InvalidAuthorizationException();
+        }
+
+        Osoba p = osobaService.findByOib(oib).orElseThrow(() -> new AccessDeniedException("You don't have access to this OIB"));
+        if (!p.getUloga().equals("dijete") || p.getRoditelj() == null || !p.getRoditelj().getOib().equals(o.getOib())) {
+            throw new AccessDeniedException("You don't have access to this OIB");
+        }
+
+        osobaService.updateOsoba(newData);
+    }
 }
