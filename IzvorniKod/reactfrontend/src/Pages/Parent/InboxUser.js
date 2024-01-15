@@ -51,7 +51,7 @@ export default function InboxUser({user, emails, medical}) {
 
             <div className="AdditionalInfo">
                 <div className="profilePhoto">
-                    <Link to="/updateInfo">
+                    <Link to={`/updateInfo/${user ? user.oib : ""}`}>
                         <FontAwesomeIcon id="profileIcon" icon={faUser} />
                     </Link>
                 </div>
