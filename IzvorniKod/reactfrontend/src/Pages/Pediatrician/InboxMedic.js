@@ -72,7 +72,7 @@ export default function InboxMedic({user, medical, emails}) {
                 createEmail === false ? emails ?
                     (<ListContainer items={emails} myfunc={openEmail}/>) : null :
                     (<div className="listContainer">
-                        <PediatricianEmail sender={medical ? medical.oib : ""} receiver={user ? user.oib : ""}/>
+                        <PediatricianEmail sender={medical ? medical : ""} receiver={user ? user : ""}/>
                     </div>)}
 
 
