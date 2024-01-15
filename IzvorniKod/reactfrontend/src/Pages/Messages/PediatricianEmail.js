@@ -82,7 +82,7 @@ const PediatricianEmail = ({sender, receiver}) => {
                     }
                 }
 
-            } else if (emailData.naslov === "dijanoza" || emailData.naslov === "nalaz") {
+            } else if (emailData.naslov === "dijagnoza" || emailData.naslov === "nalaz") {
                 messageData[0] = {
                     naslov: emailData.naslov,
                     tijelo: emailData.bolovanje ? emailData.tijelo +  "\n\nOdobreno bolovanje\n" : emailData.tijelo,
@@ -192,11 +192,8 @@ const PediatricianEmail = ({sender, receiver}) => {
             }
         }
 
-
-
-
+        
         for (let i = 0; i < messageData.length; i++) {
-            console.log(messageData[i]);
 
             const options = {
                 method: 'PUT',
