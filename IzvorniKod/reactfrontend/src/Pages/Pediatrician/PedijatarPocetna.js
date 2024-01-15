@@ -38,7 +38,7 @@ export default function PedijatarPocetna() {
                 <div className="listContainer">
                     <ul>
                         {data && data.pacijenti.length > 0 &&(data.pacijenti.map((item) => (
-                                <li key={item?.oib}><Link className="link_na_stranicu" to="/pediatrician/${oib_pacijenta}">[{item.oib}] {item.ime} {item.prezime}</Link></li>
+                                <li key={item?.oib}><Link className="link_na_stranicu" to={`/pediatrician/${item.oib}`}>[{item.oib}] {item.ime} {item.prezime}</Link></li>
                         )))}
 
                     </ul>

@@ -18,6 +18,8 @@ import PediatricianEmail from "./Pages/Messages/PediatricianEmail";
 import DoctorParentSite from "./Pages/Doctor/doctorParentSite";
 import ParentSite from "./Pages/Parent/PersonalSite";
 import ChildSite from "./Pages/Parent/ChildSite";
+import PediatricianChildSite from "./Pages/Pediatrician/pediatricianChildSite";
+import MapHelp from "./Pages/Messages/mapHelp";
 
 function App() {
     return (
@@ -27,6 +29,7 @@ function App() {
                 <Route path="/inbox/:oib" element={<ParentSite/>} />
                 <Route path="/inbox/child/:oib" element={<ChildSite/>} />
                 <Route  path="/doctor/:oib" element={<DoctorParentSite />} />
+                <Route path="/pediatrician/:oib" element={<PediatricianChildSite/>}/>
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/admin" element={<AdminPocetna />} />
@@ -38,9 +41,11 @@ function App() {
                 <Route path="/addPatient2" element={<DodavanjePacijenta2 />}/>
                 <Route path="/pediatrician" element={<PedijatarPocetna />}/>
                 <Route path="/addPatient1" element={<DodavanjePacijenta1 />}/>
-                <Route path="/updateInfo" element={<AzuriranjePodataka />}/>
+                <Route path="/updateInfo/:oib" element={<AzuriranjePodataka />}/>
                 <Route path="/parentInfo" element={<RoditeljPocetna />} />
                 <Route path="/pediatricianEmail" element={<PediatricianEmail/>}/>
+                <Route path="/mapEmail" element={<MapHelp/>}/>
+
             </Routes>
         </BrowserRouter>
 

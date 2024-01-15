@@ -39,13 +39,14 @@ export default function InboxMedic({user, medical, emails}) {
 
                 <div className="logOut">
                     <FontAwesomeIcon icon={faHouse} style={{color: "#fcfcfd",}} />
-                    <Link to={user && user.role==="pedijatar" ? "/pediatrician" : "/doctor"} id="logOutText">switch profiles</Link>
+                    <Link to={medical && medical.uloga==="pedijatar" ? "/pediatrician" : "/doctor"} id="logOutText">switch profiles</Link>
                 </div>
             </div>
 
 
             <div className="profileName">
-                {medical ? medical.ime: ""} {medical ? medical.prezime : ""} [{medical ? medical.oib : ""}]
+                <div>{user?.ime} {user?.prezime} {user?.oib}</div>
+                <div>({medical?.uloga} {medical ? medical.oib : ""})</div>
             </div>
 
         </div>
@@ -69,9 +70,9 @@ export default function InboxMedic({user, medical, emails}) {
                     </div>
                 ) :
                 createEmail === false ? emails ?
-                    (<ListContainer items={emails} myfunc={openEmail}/>) : null :
+                    (<ListContainer items={emails} myfunc={openEmail} currentUser={medical? medical.oib : ""}/>) : null :
                     (<div className="listContainer">
-                        <PediatricianEmail sender={medical ? medical.oib : ""} receiver={user ? user.oib : ""}/>
+                        <PediatricianEmail sender={medical ? medical : ""} receiver={user ? user : ""}/>
                     </div>)}
 
 

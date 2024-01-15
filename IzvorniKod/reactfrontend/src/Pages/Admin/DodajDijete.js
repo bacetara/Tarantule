@@ -89,19 +89,19 @@ const DodajDijete = () => {
                 <div className="info"><label>IME: </label><input name="ime" type="text" value={dijeteForm.ime} onChange={onChange}/></div>
                 <div className="info"><label>PREZIME: </label><input name="prezime" type="text" value={dijeteForm.prezime} onChange={onChange}/></div>
                 <div className="info"><label>OIB: </label><input name="oib" type="text" value={dijeteForm.oib} onChange={onChange}/></div>
-                <div className="info"><label>DOKTOR: </label><select id="dropdown" onChange={handleSelectChange}
-                                                                     value="nes">
-                    <option value="m"
-                            disabled>select someone</option>
+                <div className="info"><label>OIB RODITELJA: </label><select id="dropdown" onChange={handleSelectChange}
+                                                                     value={dijeteForm.rodOib}>
+                    <option value={dijeteForm.rodOib}
+                            disabled>{dijeteForm.rodOib}</option>
                     {/* Map through the 'osoba' array to create dropdown options */}
                     {parents.map((person) => (
                         <option key={person.oib} value={person.oib}>
-                            {person.ime} {person.prezime}
+                            {person.oib}
                         </option>
                     ))}
                 </select>
                 </div>
-                <div className="info"><label>OIB RODITELJA: </label><input name="rodOib" type="text" value={dijeteForm.rodOib} onChange={onChange}/></div>
+                {/*<div className="info"><label>OIB RODITELJA: </label><input name="rodOib" type="text" value={dijeteForm.rodOib} onChange={onChange}/></div>*/}
                 <div className="info"><label>DATUM RODJENJA: </label><input name="datumRod" type="datetime-local" value={dijeteForm.datumRod} onChange={onChange}/></div>
 
 
@@ -112,6 +112,9 @@ const DodajDijete = () => {
                     <div className="addChild">
                         <Link className="link_na_stranicu" to="/admin">Dodaj osobu</Link>
                     </div>
+                    <button onSubmit={onSubmit} disabled={false} className="addChild">
+                        spremi
+                    </button>
                 </div>
             </form>
         </>
