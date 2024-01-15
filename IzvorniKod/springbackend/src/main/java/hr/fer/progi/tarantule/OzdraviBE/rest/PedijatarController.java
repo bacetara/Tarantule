@@ -1,14 +1,17 @@
 package hr.fer.progi.tarantule.OzdraviBE.rest;
 
 import hr.fer.progi.tarantule.OzdraviBE.domain.Osoba;
+import hr.fer.progi.tarantule.OzdraviBE.domain.Poruka;
 import hr.fer.progi.tarantule.OzdraviBE.rest.dto.AssignPatientDTO;
 import hr.fer.progi.tarantule.OzdraviBE.rest.dto.GetDoctorDTO;
 import hr.fer.progi.tarantule.OzdraviBE.service.OsobaService;
+import hr.fer.progi.tarantule.OzdraviBE.service.PorukaService;
 import hr.fer.progi.tarantule.OzdraviBE.service.exceptions.InvalidAuthorizationException;
 import hr.fer.progi.tarantule.OzdraviBE.service.exceptions.NoSuchOsobaException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,6 +22,9 @@ import java.util.List;
 public class PedijatarController {
     @Autowired
     private OsobaService osobaService;
+
+    @Autowired
+    private PorukaService porukaService;
 
     @Secured("pedijatar")
     @GetMapping("me")
@@ -50,5 +56,21 @@ public class PedijatarController {
         patient.setDoktor(o);
 
         return osobaService.updateOsoba(patient);
+    }
+
+    @Secured("pedijatar")
+    @GetMapping("inbox/{oib}")
+    public List<Poruka> findByOibChild(@PathVariable("oib") String oib, HttpServletRequest request, HttpServletResponse response) {
+        Osoba o = SecurityHelper.getAuthenticatedOsoba(request);
+        if (o == null) {
+            throw new InvalidAuthorizationException();
+        }
+
+        Osoba p = osobaService.findByOib(oib).orElseThrow(() -> new AccessDeniedException("You don't have access to this OIB"));
+        if (!p.getUloga().equals("dijete") || !p.getDoktor().getOib().equals(o.getOib())) {
+            throw new AccessDeniedException("You don't have access to this OIB");
+        }
+
+        return porukaService.findBetween(o.getOib(), p.getOib());
     }
 }
