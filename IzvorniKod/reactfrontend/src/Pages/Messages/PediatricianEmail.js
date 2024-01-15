@@ -192,7 +192,7 @@ const PediatricianEmail = ({sender, receiver}) => {
             }
         }
 
-        
+
         for (let i = 0; i < messageData.length; i++) {
 
             const options = {
