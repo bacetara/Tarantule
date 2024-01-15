@@ -56,12 +56,21 @@ body {
 
 .header .profileName {
     display: flex;
+    flex-flow: column;
     align-items: center;
-    justify-content: end;
+    justify-content: center;
     margin-right: 2%;
     color: white;
     font-size: 1.5rem;
     font-weight: bold;
+    max-width: 40%;
+    text-align: end;
+
+}
+
+.header .profileName div {
+    text-align: end;
+    align-self: flex-end;
 }
 
 /*----*/
@@ -134,5 +143,19 @@ body {
 
     .login {
         min-width: 50%;
+    }
+
+    .header {
+        flex-flow: column;
+        flex: 1;
+    }
+
+    .header .profileName {
+        font-size: 1rem;
+        max-width: 100%;
+    }
+
+    .header .profileName * {
+        align-self: flex-start;
     }
 }
