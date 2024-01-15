@@ -5,15 +5,15 @@ import {useNavigate} from 'react-router-dom';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowRightFromBracket} from "@fortawesome/free-solid-svg-icons";
 
-const ReadEmail = ({email}) => {
+const ReadEmail = ({email, user}) => {
 
     const history = useNavigate();
     const [emailData, setEmailData] = useState({
         // Initialize state for form fields
-        sender: email.sender || '',
-        receiver: email.receiver || '',
-        title: email.title || '',
-        messageBody: email.messageBody || '',
+        sender: email.posoib || '',
+        receiver: email.prioib || '',
+        title: email.naslov || '',
+        messageBody: email.tijelo || '',
     });
     const [createReplyEmail, setCreateReplyEmail] = useState(false);
 
@@ -57,7 +57,7 @@ const ReadEmail = ({email}) => {
                     {email.type === 'bolovanje' &&
                         <button id="odobriBolovanje" type="button"> Odobri bolovanje </button>}
                     <button id="reject" type="button" onClick={handleBack}>zatvori</button>
-                    <button id="createReply" type="button" onClick={createReply}>odgovori</button>
+                    <button id="createReply" type="button" onClick={createReply} disabled={user.oib === emailData.sender}>odgovori</button>
                 </div>
 
             </div>

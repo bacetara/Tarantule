@@ -90,6 +90,7 @@ public class AdminController {
         o.setDatumRod(parentData.datumRod());
         o.setUloga("roditelj");
 
+
         osobaService.createOsoba(o);
     }
 

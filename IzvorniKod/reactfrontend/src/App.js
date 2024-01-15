@@ -14,18 +14,19 @@ import PedijatarPocetna from "./Pages/Pediatrician/PedijatarPocetna";
 import DodavanjePacijenta1 from "./Pages/Pediatrician/DodavanjePacijenta1";
 import AzuriranjePodataka from "./Pages/Parent/AzuriranjePodataka";
 import RoditeljPocetna from './Pages/Parent/RoditeljPocetna';
-import InboxUser from "./Pages/Parent/InboxUser";
-import InboxMedic from "./Pages/Pediatrician/InboxMedic"
 import PediatricianEmail from "./Pages/Messages/PediatricianEmail";
-
+import DoctorParentSite from "./Pages/Doctor/doctorParentSite";
+import ParentSite from "./Pages/Parent/PersonalSite";
+import ChildSite from "./Pages/Parent/ChildSite";
 
 function App() {
     return (
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/inbox/:oib" element={<InboxUser/>} />
-                <Route  path="/:role/:oib" element={<InboxMedic />} />
+                <Route path="/inbox/:oib" element={<ParentSite/>} />
+                <Route path="/inbox/child/:oib" element={<ChildSite/>} />
+                <Route  path="/doctor/:oib" element={<DoctorParentSite />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/admin" element={<AdminPocetna />} />

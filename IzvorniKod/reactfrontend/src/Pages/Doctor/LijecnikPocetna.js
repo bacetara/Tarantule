@@ -4,8 +4,16 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowRightFromBracket} from "@fortawesome/free-solid-svg-icons";
 import * as React from "react";
 import Container from "../Container";
+import {useEffect, useState} from "react";
 
 export default function LijecnikPocetna() {
+    const [data, setData] = useState(null);
+
+    useEffect(() => {
+        fetch('api/doctor/me')
+            .then(data => data.json())
+            .then(data => setData(data))
+    }, []);
     return (
         <>
             <div className="header">
@@ -16,7 +24,7 @@ export default function LijecnikPocetna() {
                     </div>
                 </div>
 
-                <div className="profileName">doctor [989898899]</div>
+                <div className="profileName">doktor {data?.doktor.ime} {data?.doktor.prezime}[{data?.doktor.oib}]</div>
             </div>
 
 
@@ -28,10 +36,13 @@ export default function LijecnikPocetna() {
 
                 <div className="listContainer">
                     <ul>
-                        {/*{items.map((item, index) => (
-                            <li key={index}>{item}</li>
-                        ))}*/}
-                        <li><Link className="link_na_stranicu" to="/doctor/${oib_pacijenta}">OIB ime prezime</Link></li>
+                        {data && (
+                            data.pacijenti.map((item) => (
+                                    <li key={item.oib}><Link className="link_na_stranicu" to={`/doctor/${item.oib}`}> {item.oib} {item.ime} {item.prezime}</Link></li>
+                                ))
+                        )}
+
+
                     </ul>
                 </div>
             </Container>

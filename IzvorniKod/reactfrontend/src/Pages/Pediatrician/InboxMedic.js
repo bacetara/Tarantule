@@ -1,25 +1,22 @@
 import './InboxPedijatar.css'
 import Container from "../Container";
 import ListContainer from "../ListContainer";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import * as React from "react";
 import PediatricianEmail from "../Messages/PediatricianEmail";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowRightFromBracket, faHouse, faUserDoctor} from "@fortawesome/free-solid-svg-icons";
 import ReadEmail from "../Messages/ReadEmail";
-import {Link} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 
 
-export default function InboxMedic() {
-    const user = {oib: 9090909, name: "Ivan", surname: "Lucić", role: 'pediatrician'};
-    const patient = {oib: 999902020202, name: "Jakov", surname: "Župančić"};
+export default function InboxMedic({user, medical, emails}) {
     const [selectedEmail, setSelectedEmail] = useState(null);
     const [createEmail, setCreateEmail] = useState(false);
-    const emails = [
-        { sender: 'john@example.com', receiver:'netko@mail.com', title: 'prvi mail', messageBody: 'Hi, let\'s discuss the agenda for tomorrow\'s meeting.', id:1, type: 'obicna' },
-        { sender: 'john1111@example.com', receiver:'netko2@mail.com', title: 'drugi mail', messageBody: 'Bok ja sam drugi mail', id:2, type: 'bolovanje'},
-        { sender: 'john12213123@example.com', receiver:'netko3333@mail.com', title: 'treci mail', messageBody: 'Hi, ja sam treci mail.' , id: 3, type: 'obicna'}
-    ];
+
+
+
+
     const openEmail = (email) => {
         setSelectedEmail(email);
         setCreateEmail(false);
@@ -42,13 +39,13 @@ export default function InboxMedic() {
 
                 <div className="logOut">
                     <FontAwesomeIcon icon={faHouse} style={{color: "#fcfcfd",}} />
-                    <Link to={user.role==="pediatrician" ? "/pediatrician" : "/doctor"} id="logOutText">switch profiles</Link>
+                    <Link to={user && user.role==="pedijatar" ? "/pediatrician" : "/doctor"} id="logOutText">switch profiles</Link>
                 </div>
             </div>
 
 
             <div className="profileName">
-                {patient.name} {patient.surname} [{patient.oib}]
+                {medical ? medical.ime: ""} {medical ? medical.prezime : ""} [{medical ? medical.oib : ""}]
             </div>
 
         </div>
@@ -66,15 +63,15 @@ export default function InboxMedic() {
             {selectedEmail != null ? (
                 //treba promijenit za specijalista da se mail s kartom iscrta!!!
                     <div className="listContainer">
-                        {selectedEmail.type === 'obicna' && <ReadEmail email={selectedEmail} />}
-                        {selectedEmail.type === 'specialist' && <ReadEmail email={selectedEmail} />}
-                        {selectedEmail.type === 'bolovanje' && <ReadEmail email={selectedEmail}/>}
+                        {selectedEmail.tip === '1' && <ReadEmail email={selectedEmail} user={medical}/>}
+                        {selectedEmail.tip === '4' && <ReadEmail email={selectedEmail} user={medical}/>}
+                        {selectedEmail.tip === '3' && <ReadEmail email={selectedEmail} user={medical}/>}
                     </div>
                 ) :
-                createEmail === false ?
-                    (<ListContainer items={emails} myfunc={openEmail}/>) :
+                createEmail === false ? emails ?
+                    (<ListContainer items={emails} myfunc={openEmail}/>) : null :
                     (<div className="listContainer">
-                        <PediatricianEmail sender={user} receiver={patient}/>
+                        <PediatricianEmail sender={medical ? medical.oib : ""} receiver={user ? user.oib : ""}/>
                     </div>)}
 
 

@@ -8,14 +8,15 @@ const PediatricianEmail = ({sender, receiver}) => {
     const history = useNavigate();
     const [emailData, setEmailData] = useState({
         // Initialize state for form fields
-        receiver: 'automatski 09320940390',
-        sender: 'taj pedijatar',
+        receiver: receiver || '',
+        sender: sender || '',
         title: '',
         disease: '',
         messageBody: '',
         ispricnica: false,
         bolovanje: false,
     });
+    console.log(emailData);
 
     const handleBack = () => {
         history(0);
@@ -63,13 +64,13 @@ const PediatricianEmail = ({sender, receiver}) => {
             <form className="message" onSubmit={sendMessage}>
                 <div className="inputs" id="receiverField">
                     <label htmlFor="receiver">Primatelj (OIB)</label>
-                    <input type="text" name="receiver" id="receiver" onChange={handleChange} value={receiver.oib}
+                    <input type="text" name="receiver" id="receiver" onChange={handleChange} value={emailData.receiver}
                            readOnly={true}/>
                 </div>
 
                 <div className="inputs" id="senderField">
                     <label htmlFor="sender">Pošiljatelj</label>
-                    <input type="text" name="sender" id="sender" onChange={handleChange} value={sender.oib}
+                    <input type="text" name="sender" id="sender" onChange={handleChange} value={emailData.sender}
                            readOnly={true}/>
                 </div>
 
@@ -96,7 +97,7 @@ const PediatricianEmail = ({sender, receiver}) => {
 
                 <div className="inputs" id="messageButtons">
 
-                    {sender.role === 'pediatrician' && <label className="check"> ispričnica
+                    {sender.role === 'pedijatar' && <label className="check"> ispričnica
                         <input id="ispricnica" type="checkbox"
                                checked={emailData.ispricnica}
                                onChange={() => handleCheckBoxChange('ispricnica')}/>
