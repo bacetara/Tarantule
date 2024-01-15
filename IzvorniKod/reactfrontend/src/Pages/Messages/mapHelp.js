@@ -9,7 +9,7 @@ import { Loader } from "@googlemaps/js-api-loader"
 import axios from 'axios';
 
 
-const MapEmail = ({sender, receiver}) => {
+const MapHelp = ({sender, receiver}) => {
     const [hospitals, setHospitals] = useState([]);
     const [center, setCenter] = useState([0, 0]);
 
@@ -115,7 +115,7 @@ const MapEmail = ({sender, receiver}) => {
             <div className="header">
                 <div className="backOptions">
                     <div className="logOut">
-                    <FontAwesomeIcon id="logOutIcon" icon={faArrowRightFromBracket} style={{color: "white"}}/>
+                        <FontAwesomeIcon id="logOutIcon" icon={faArrowRightFromBracket} style={{color: "white"}}/>
                         <p id="logOutText">log out</p>
                     </div>
                 </div>
@@ -181,4 +181,4 @@ const MapEmail = ({sender, receiver}) => {
 }
 
 
-//export default MapEmail;
+export default MapHelp;
