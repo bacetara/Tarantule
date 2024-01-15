@@ -97,7 +97,7 @@ export default function DodavanjePacijenta2() {
                 <div className="listContainer2">
                     <ul>
                         {unassigned && (unassigned.map((item) => (
-                            <li key={item.oib} onClick={() => selectUser(item.oib)} id={isClicked ? "selectedUser" : ""}> [{item.oib}] {item.ime} {item.prezime}</li>
+                            <li key={item.oib} onClick={() => selectUser(item.oib)} id={selected === item.oib ? "selectedUser" : ""}> [{item.oib}] {item.ime} {item.prezime}</li>
                         )))}
                     </ul>
                 </div>
