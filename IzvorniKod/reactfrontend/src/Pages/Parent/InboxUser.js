@@ -66,8 +66,8 @@ export default function InboxUser({user, emails, medical}) {
                     {selectedEmail.tip === "3" && <ReadEmail email={selectedEmail} user={user}/>}
                 </div>
             ) :createEmail === false ?
-                    (<ListContainer items={emails} myfunc={openEmail}/>) :
-                    (<div className="listContainer"><ComposeEmail email={{sender: user ? user.oib : "", receiver: medical ? medical.oib : ""}}/></div>)}
+                    (<ListContainer items={emails} myfunc={openEmail} currentUser={user? user.oib : ""}/>) :
+                    (<div className="listContainer"><ComposeEmail email={{sender: user ? user.oib : "", receiver: medical ? medical.oib : ""}} /></div>)}
 
         </Container>
 
