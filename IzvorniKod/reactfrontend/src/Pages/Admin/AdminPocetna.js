@@ -16,15 +16,15 @@ export default function AdminPocetna() {
         fetch('/api/admin/me')
             .then(data => data.json())
             .then(user => setUser(user))
-            .then(console.log(user))
+            //.then(console.log(user))
     }, []);
 
     React.useEffect(()=>{
         fetch('api/admin/listAll?unregistered=true')
             .then(data => data.json())
             .then(data => setItems(data))
-            .then(console.log(items))
-    })
+            //.then(console.log(items))
+    }, []);
     return (
         <>
             <div className="header">
