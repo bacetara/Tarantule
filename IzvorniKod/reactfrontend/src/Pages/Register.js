@@ -1,6 +1,8 @@
 import React from 'react';
 import './Login.css'
 import {useNavigate} from "react-router-dom";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faArrowRightFromBracket, faStaffSnake} from "@fortawesome/free-solid-svg-icons";
 
 const Register = ()  => {
     const [loginForm, setLoginForm] = React.useState({oib : '', password: ''});
@@ -74,15 +76,27 @@ const Register = ()  => {
 
 
     return (
-        <form className="container" onSubmit={onSubmit}>
-            <div className="text">OIB
+        <>
+        <div className="header">
+            <FontAwesomeIcon className="logo" icon={faStaffSnake} style={{color: "#65b58a",}} />
+            <div className="backOptions">
+                <div className="logOut">
+                    {/*<FontAwesomeIcon id="logOutIcon" icon={faArrowRightFromBracket} style={{color: "white"}}/>*/}
+                    {/*<p id="logOutText">log out</p>*/}
+                </div>
             </div>
-            <div>
-                <input name='oib' value={loginForm.oib} onChange={onChange} className="oib" type="text" />
-            </div>
-            <div className="text">lozinka</div>
-            <div>
-                <input name='password' value={loginForm.password} onChange={onChange} className="lozinka" type="password" />
+
+            <div className="profileName">Nema ulogiranog profila</div>
+        </div>
+    <form className="container" onSubmit={onSubmit}>
+        <div className="text">OIB
+        </div>
+        <div>
+            <input name='oib' value={loginForm.oib} onChange={onChange} className="oib" type="text"/>
+        </div>
+        <div className="text">lozinka</div>
+        <div>
+            <input name='password' value={loginForm.password} onChange={onChange} className="lozinka" type="password" />
             </div>
             <div className="error" >
                 {error}
@@ -97,6 +111,7 @@ const Register = ()  => {
             </div>
 
         </form>
+        </>
     );
 };
 export default Register;

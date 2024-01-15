@@ -28,6 +28,7 @@ export default function AdminPocetna() {
     return (
         <>
             <div className="header">
+
                 <div className="backOptions">
                     <div className="logOut">
                         <FontAwesomeIcon id="logOutIcon" icon={faArrowRightFromBracket} style={{color: "white"}}/>
@@ -53,7 +54,6 @@ export default function AdminPocetna() {
                         ))}
 
 
-                        <li><Link className="link_na_stranicu" to="/Information/">OIB ime prezime</Link></li>
                     </ul>
                 </div>
 
