@@ -4,10 +4,12 @@ import hr.fer.progi.tarantule.OzdraviBE.domain.Osoba;
 import hr.fer.progi.tarantule.OzdraviBE.domain.Poruka;
 import hr.fer.progi.tarantule.OzdraviBE.rest.dto.AddBolovanjeMessageDTO;
 import hr.fer.progi.tarantule.OzdraviBE.rest.dto.AddMessageDTO;
+import hr.fer.progi.tarantule.OzdraviBE.rest.dto.AssignPatientDTO;
 import hr.fer.progi.tarantule.OzdraviBE.rest.dto.GetDoctorDTO;
 import hr.fer.progi.tarantule.OzdraviBE.service.OsobaService;
 import hr.fer.progi.tarantule.OzdraviBE.service.PorukaService;
 import hr.fer.progi.tarantule.OzdraviBE.service.exceptions.InvalidAuthorizationException;
+import hr.fer.progi.tarantule.OzdraviBE.service.exceptions.NoSuchOsobaException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,6 +55,21 @@ public class LijecnikController {
         }
 
         return new GetDoctorDTO(o, osobaService.findByDoctor(o.getOib()));
+    }
+
+    @Secured("doktor")
+    @PostMapping("assign")
+    public Osoba assignPatient(@RequestBody AssignPatientDTO data, HttpServletRequest request, HttpServletResponse response) {
+        Osoba o = SecurityHelper.getAuthenticatedOsoba(request);
+        if (o == null) {
+            throw new InvalidAuthorizationException();
+        }
+
+        Osoba patient = osobaService.findByOib(data.oib()).orElseThrow(NoSuchOsobaException::new);
+
+        patient.setDoktor(o);
+
+        return osobaService.updateOsoba(patient);
     }
 
     @Secured("doktor")
