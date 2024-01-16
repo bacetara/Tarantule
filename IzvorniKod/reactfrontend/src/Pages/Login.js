@@ -4,7 +4,7 @@ import {useNavigate} from "react-router-dom";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowRightFromBracket, faStaffSnake} from "@fortawesome/free-solid-svg-icons";
 
-const Login = ()  => {
+const Login = ({onLogin})  => {
     const [loginForm, setLoginForm] = React.useState({oib : '', password: ''});
     const [error, setError] = React.useState('');
 
@@ -75,7 +75,8 @@ const Login = ()  => {
             })
             .then(data => {
                 if (data) {
-                    console.log(data.uloga)
+                    console.log(data.uloga);
+                    onLogin(data.uloga);
                     if(data.uloga === "roditelj"){
                         navigate("/parentInfo");
                     }else if(data.uloga === "admin"){

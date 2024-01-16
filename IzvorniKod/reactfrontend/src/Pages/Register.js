@@ -59,15 +59,7 @@ const Register = ()  => {
             })
             .then(data => {
                 //console.log(data.uloga)
-                if(data.uloga === "roditelj"){
-                    navigate("/parentInfo");
-                }else if(data.uloga === "admin"){
-                    navigate("/admin")
-                }else if(data.uloga === "pedijatar"){
-                    navigate("/pediatrician")
-                }else if(data.uloga === "doktor"){
-                    navigate("/doctor")
-                }
+                navigate("/");
             })
             .catch(error => {
                 console.error (error);

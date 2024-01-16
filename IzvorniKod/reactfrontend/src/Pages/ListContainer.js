@@ -6,7 +6,6 @@ export default function ListContainer({items, myfunc, currentUser}) {
         <div className="listContainer">
             {
                 <ul>
-                    {console.log(items)}
                     {items.length > 0 ?
                         items.map((email) => (
                         <li key={email.id} onClick={() => myfunc(email)}>
