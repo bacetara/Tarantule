@@ -19,6 +19,7 @@ import ParentSite from "./Pages/Parent/PersonalSite";
 import ChildSite from "./Pages/Parent/ChildSite";
 import PediatricianChildSite from "./Pages/Pediatrician/pediatricianChildSite";
 import MapHelp from "./Pages/Messages/mapHelp";
+import DoctorInternalInbox from "./Pages/Doctor/DoctorInternalInbox";
 
 import * as React from "react";
 import {useEffect, useState} from "react";
@@ -54,6 +55,7 @@ function App() {
                 <Route  path="/doctor/:oib" element={<DoctorParentSite />} />
                 <Route path="/doctor" element={<LijecnikPocetna />}/>
                 <Route path="/addPatient2" element={<DodavanjePacijenta2 />}/>
+                <Route path="/doktor/inbox" element={<DoctorInternalInbox/>}/>
 
                 <Route path="/pediatrician/:oib" element={<PediatricianChildSite/> }/>
                 <Route path="/pediatrician" element={<PedijatarPocetna />}/>
@@ -66,7 +68,7 @@ function App() {
 
 
 
-                <Route path="/pediatricianEmail" element={isLoggedIn && (userRole === "pedijatar" || userRole === "doktor") ? <PediatricianEmail/> : <Navigate to = "/"/>}/>
+                <Route path="/pediatricianEmail" element={<PediatricianEmail/>}/>
 
 
             </Routes>

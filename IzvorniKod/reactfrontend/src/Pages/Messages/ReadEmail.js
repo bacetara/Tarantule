@@ -33,6 +33,10 @@ const ReadEmail = ({email, user}) => {
         setCreateReplyEmail(true);
     };
 
+    const odobriBolovanje = () => {
+
+    }
+
     return (
         <>
 
@@ -54,7 +58,7 @@ const ReadEmail = ({email, user}) => {
                           onChange={handleChange} readOnly={true}/>
 
                 <div className="inputs" id="messageButtons">
-                    {email.type === 'bolovanje' &&
+                    {email.tip === '3' &&
                         <button id="odobriBolovanje" type="button"> Odobri bolovanje </button>}
                     <button id="reject" type="button" onClick={handleBack}>zatvori</button>
                     <button id="createReply" type="button" onClick={createReply} disabled={user.oib === emailData.sender}>odgovori</button>

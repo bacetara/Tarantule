@@ -5,6 +5,7 @@ import {faArrowRightFromBracket} from "@fortawesome/free-solid-svg-icons";
 import * as React from "react";
 import Container from "../Container";
 import {useEffect, useState} from "react";
+import DoctorInternalInbox from "./DoctorInternalInbox";
 
 export default function LijecnikPocetna() {
     const [data, setData] = useState(null);
@@ -14,6 +15,7 @@ export default function LijecnikPocetna() {
             .then(data => data.json())
             .then(data => setData(data))
     }, []);
+
     return (
         <>
             <div className="header">
@@ -36,13 +38,13 @@ export default function LijecnikPocetna() {
 
                 <div className="listContainer">
                     <ul>
+                        <li key={"doktor"} id="myInbox"><Link className="link_na_stranicu" to={'/doktor/inbox'}>Osobni mailovi</Link></li>
+
                         {data && (
                             data.pacijenti.map((item) => (
                                     <li key={item.oib}><Link className="link_na_stranicu" to={`/doctor/${item.oib}`}> {item.oib} {item.ime} {item.prezime}</Link></li>
                                 ))
                         )}
-
-
                     </ul>
                 </div>
             </Container>
