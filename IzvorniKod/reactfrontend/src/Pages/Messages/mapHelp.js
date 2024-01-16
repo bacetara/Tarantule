@@ -1,19 +1,34 @@
 import React, {useEffect, useState} from 'react';
-import './Message.css'
+import './Map.css'
 import {useNavigate} from 'react-router-dom';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowRightFromBracket} from "@fortawesome/free-solid-svg-icons";
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-import { Helmet } from 'react-helmet';
-import { Loader } from "@googlemaps/js-api-loader"
-import axios from 'axios';
+import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
+import L from 'leaflet';
+import {
+    setKey,
+    setDefaults,
+    setLanguage,
+    setRegion,
+    fromAddress,
+    fromLatLng,
+    fromPlaceId,
+    setLocationType,
+    geocode,
+    RequestType,
+} from "react-geocode";
 
+setKey("AIzaSyBLdrbKjSj03iK9wCvrDe1l8dIOAa5-t54");
 
 const MapHelp = ({sender, receiver}) => {
     const [hospitals, setHospitals] = useState([]);
     const [center, setCenter] = useState([0, 0]);
 
+    let defaultCenter;
+    const defaultZoom = 10;
 
+    const locations = [{ latitude: 45.815, longitude: 15.9819 },
+        {latitude: 45.81553645875624, longitude: 15.953084517025411}];
 
     const history = useNavigate();
     const [emailData, setEmailData] = useState({
@@ -57,60 +72,67 @@ const MapHelp = ({sender, receiver}) => {
 
 
 
+    const markerIcon = L.icon({
+        iconUrl: 'src/Pages/Messages/marker.png',
+
+
+        iconSize:     [38, 95], // size of the icon
+        shadowSize:   [50, 64], // size of the shadow
+        iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+        shadowAnchor: [4, 62],  // the same for the shadow
+        popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+    });
+    
+
+
+    
+
+
+    /*async function callFromAdress(){
+        await fromAddress(adress)
+            .then(({ results }) => {
+                const { lat, lng } = results[0].geometry.location;
+                defaultCenter=[lat,lng];
+                console.log(defaultCenter);
+            })
+            .catch(console.error);
+    }*/
+
+
+
+    const adress = "Kamenarka 10, Zagreb";
 
     useEffect(() => {
-
-        const loader = new Loader({
-            apiKey: "AIzaSyBLdrbKjSj03iK9wCvrDe1l8dIOAa5-t54",
-            version: "weekly"
-        });
-        const getGeocode = async (address) => {
+        async function callFromAdress(adress) {
+            let forReturn;
             try {
-                await loader.load();
-                const geocoder = new window.google.maps.Geocoder();
-                geocoder.geocode({ address }, (results, status) => {
-                    if (status === 'OK' && results.length > 0) {
-                        const location = results[0].geometry.location;
-                        setCenter([location.lat(), location.lng()]);
-                        console.log(location.lat());
-
-                        // Dohvati bolnice na temelju geokodiranih koordinata
-                        const placesService = new window.google.maps.places.PlacesService(document.createElement('div'));
-                        const request = {
-                            location: new window.google.maps.LatLng(location.lat(), location.lng(), true),
-                            radius: 20000,
-                            type: 'hospital'
-                        };
-
-                        placesService.nearbySearch(request, (results, status) => {
-                            if (status === 'OK') {
-                                // Postavljanje bolnica u stanje
-                                setHospitals(results);
-                            }
-                        });
-                    }
-                });
+                const { results } = await fromAddress(adress);
+                const { lat, lng } = results[0].geometry.location;
+                let newCenter = [lat, lng];
+                setCenter(newCenter);
+                console.log(newCenter);
+                return forReturn;
             } catch (error) {
-                console.error('Greška prilikom geokodiranja adrese', error);
+                console.error(error);
+                return null;
             }
-        };
+        }
 
-        // Postavite stvarnu adresu koju želite geokodirati
-        const address = 'Kamenarka 10, Zagreb, Croatia';
+        callFromAdress(adress)
+    }, [])
 
-        // Pozovite funkciju za geokodiranje
-        getGeocode(address);
-    }, []);
+
+
+
+
+
+
 
 
 
     return(
+
         <>
-            <Helmet>
-                <script
-                    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBLdrbKjSj03iK9wCvrDe1l8dIOAa5-t54&libraries=places"
-                    defer></script>
-            </Helmet>
 
             <div className="header">
                 <div className="backOptions">
@@ -139,31 +161,23 @@ const MapHelp = ({sender, receiver}) => {
 
                 <div className="inputs" id="titleField">
                     <label htmlFor="title">Bolest:</label>
-                    <select name="title" id="title" value={emailData.title} onChange={handleChange}>
-                        <option value="dijagnoza">Dijagnoza</option>
-                        <option value="specijalist">Specijalistički pregled</option>
-                        <option value="nalaz">Nalaz iz laboratorija</option>
-                    </select>
+                    <input type="text" name="sender" id="sender" onChange={handleChange} value={"Dijagnoza"/*sender.oib*/}
+                           readOnly={true}/>
                 </div>
 
-                <div className="inputs" id="messageBody">
-                    <MapContainer center={center} zoom={13} style={{height: '500px', width: '100%'}}>
+
+                    <div className="inputs" id="messageBody">
+                    <MapContainer center={center} zoom={13} scrollWheelZoom={false}>
                         <TileLayer
-                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                         />
-                        {hospitals.map((hospital) => (
-                            <Marker
-                                key={hospital.id}
-                                position={[hospital.latitude, hospital.longitude]}
-                            >
-                                <Popup>
-                                    <strong>{hospital.name}</strong>
-                                    <br/>
-                                    {hospital.address}
-                                </Popup>
-                            </Marker>
-                        ))}
+                        <Marker position={[locations[1].latitude, locations[1].longitude]} icon={markerIcon}
+                        >
+                            <Popup>
+                                A pretty CSS3 popup. <br /> Easily customizable.
+                            </Popup>
+                        </Marker>
                     </MapContainer>
                 </div>
 
@@ -175,7 +189,9 @@ const MapHelp = ({sender, receiver}) => {
                     <button id="sendMessage" type="submit">pošalji</button>
                 </div>
             </form>
-        </>);
+        </>
+
+    );
 
 
 }
