@@ -19,9 +19,7 @@ const PediatricianEmail = ({sender, receiver}) => {
         bolovanje: false
     });
     const [bolesti, setBolesti] = useState([]);
-    console.log(emailData);
-    console.log(receiver);
-    console.log(receiver.roditelj.doktor.oib);
+    
     useEffect(() => {
         fetch('/api/diagnosis')
             .then(data => data.json())
