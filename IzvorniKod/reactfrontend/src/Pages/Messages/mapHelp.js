@@ -23,12 +23,14 @@ setKey("AIzaSyBLdrbKjSj03iK9wCvrDe1l8dIOAa5-t54");
 const MapHelp = ({sender, receiver}) => {
     const [hospitals, setHospitals] = useState([]);
     const [center, setCenter] = useState([0, 0]);
+    const [hospitalCoordinates, sethospitalCoordinates] = useState([]);
 
-    let defaultCenter;
-    const defaultZoom = 10;
+    useEffect(() => {
+        fetch('/api/hospital')
+            .then(data => data.json())
+            .then(data => setHospitals(data))
+    }, []);
 
-    const locations = [{ latitude: 45.815, longitude: 15.9819 },
-        {latitude: 45.81553645875624, longitude: 15.953084517025411}];
 
     const history = useNavigate();
     const [emailData, setEmailData] = useState({
@@ -82,35 +84,27 @@ const MapHelp = ({sender, receiver}) => {
         shadowAnchor: [4, 62],  // the same for the shadow
         popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
     });
+
+    const adress = receiver.adresa;
+    const locations = [];
     
-
-
-    
-
-
-    /*async function callFromAdress(){
-        await fromAddress(adress)
-            .then(({ results }) => {
-                const { lat, lng } = results[0].geometry.location;
-                defaultCenter=[lat,lng];
-                console.log(defaultCenter);
-            })
-            .catch(console.error);
-    }*/
-
-
-
-    const adress = "Kamenarka 10, Zagreb";
-
     useEffect(() => {
         async function callFromAdress(adress) {
             let forReturn;
             try {
                 const { results } = await fromAddress(adress);
                 const { lat, lng } = results[0].geometry.location;
-                let newCenter = [lat, lng];
+                const newCenter = [lat, lng];
                 setCenter(newCenter);
-                console.log(newCenter);
+                for (let i = 0; i < hospitals.length; i++) {
+                    const { results } = await fromAddress(hospitals.at(i));
+                    const { lat, lng } = results[0].geometry.location;
+                    locations.push({latitude: lat,longitude: lng });
+                }
+                
+                sethospitalCoordinates(locations);
+                //console.log(center);
+                
                 return forReturn;
             } catch (error) {
                 console.error(error);
@@ -119,16 +113,15 @@ const MapHelp = ({sender, receiver}) => {
         }
 
         callFromAdress(adress)
-    }, [])
+    }, [adress, hospitals, locations])
 
-
-
-
-
-
-
-
-
+    const markers = hospitalCoordinates.map((coord, index) => (
+        <Marker position={[coord.latitude(), coord.longitude()]} icon={markerIcon}>
+            <Popup>
+                A pretty CSS3 popup. <br /> Easily customizable.
+            </Popup>
+        </Marker>
+    ));
 
     return(
 
@@ -167,18 +160,17 @@ const MapHelp = ({sender, receiver}) => {
 
 
                     <div className="inputs" id="messageBody">
-                    <MapContainer center={center} zoom={13} scrollWheelZoom={false}>
-                        <TileLayer
-                            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                        />
-                        <Marker position={[locations[1].latitude, locations[1].longitude]} icon={markerIcon}
-                        >
-                            <Popup>
-                                A pretty CSS3 popup. <br /> Easily customizable.
-                            </Popup>
-                        </Marker>
-                    </MapContainer>
+                        {center[0] !== 0 && center[1] !== 0 && (
+                            <MapContainer center={center} zoom={13} scrollWheelZoom={false}>
+                                <TileLayer
+                                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                                />
+
+                                {markers}
+
+                            </MapContainer>
+                        )}
                 </div>
 
 
