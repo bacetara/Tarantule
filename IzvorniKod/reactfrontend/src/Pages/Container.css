@@ -113,6 +113,14 @@ li:hover {
     margin-left: 1%;
 }
 
+#myInbox {
+    background-color: #b6d5c3;/*#71a3a4*/
+    font-weight: bolder;
+    font-size: 1rem;
+    margin-bottom: 2%;
+    margin-top: 0;
+}
+
 @media screen and (max-width: 720px) {
     li {
         justify-content: space-between;

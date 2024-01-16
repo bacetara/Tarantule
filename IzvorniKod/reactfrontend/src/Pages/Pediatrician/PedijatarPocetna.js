@@ -7,7 +7,7 @@ import * as React from "react";
 import {useEffect, useState} from "react";
 
 export default function PedijatarPocetna() {
-    const[data, setData] = useState(null);
+    const [data, setData] = useState(null);
 
     useEffect(() => {
         fetch('api/pediatrician/me')
