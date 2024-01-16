@@ -8,6 +8,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowRightFromBracket, faHouse, faUser} from "@fortawesome/free-solid-svg-icons";
 import ReadEmail from "../Messages/ReadEmail";
 import {Link} from "react-router-dom";
+import MapHelp from "../Messages/mapHelp";
 
 export default function InboxUser({user, emails, medical}) {
     const [selectedEmail, setSelectedEmail] = useState(null);
@@ -59,11 +60,10 @@ export default function InboxUser({user, emails, medical}) {
             </div>
 
             {selectedEmail != null ? (
-                //treba promijenit za specijalista da se mail s kartom iscrta!!!
+                //treba promijenit za specijalista da se mail s kartom iscrta!!!!!!!!!!!!!!!!!!!!
                 <div className="listContainer">
                     {selectedEmail.tip === "1" && <ReadEmail email={selectedEmail} user={user}/>}
-                    {selectedEmail.tip === "4" && <ReadEmail email={selectedEmail} user={user}/>}
-                    {selectedEmail.tip === "3" && <ReadEmail email={selectedEmail} user={user}/>}
+                    {selectedEmail.tip === "4" && <MapHelp sender={medical} receiver={user} email={selectedEmail} />}
                 </div>
             ) :createEmail === false ?
                     (<ListContainer items={emails} myfunc={openEmail} currentUser={user? user.oib : ""}/>) :

@@ -16,7 +16,7 @@ public class DiagnosisController {
     @Autowired
     private BolestService bolestService;
 
-    @Secured({"doktor", "pedijatar"})
+    @Secured({"doktor", "pedijatar", "roditelj"})
     @GetMapping
     public List<Bolest> getAllDiagnoses() {
         return bolestService.listAll();
