@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './Message.css'
 import {useNavigate} from 'react-router-dom';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -18,7 +18,13 @@ const PediatricianEmail = ({sender, receiver}) => {
         ispricnica: false,
         bolovanje: false
     });
+    const [bolesti, setBolesti] = useState([]);
     console.log(emailData);
+    useEffect(() => {
+        fetch('/api/diagnosis')
+            .then(data => data.json())
+            .then(data => setBolesti(data))
+    }, []);
 
     const handleBack = () => {
         history(0);
@@ -253,6 +259,9 @@ const PediatricianEmail = ({sender, receiver}) => {
                         <option value="bolest1">Bolest 1</option>
                         <option value="bolest2">Bolest 2</option>
                         <option value="bolest3">Bolest 3</option>
+                        {bolesti && (bolesti.map(item => (
+                            <option value="item.naziv">{item.naziv}</option>
+                        )))}
                     </select>
                 </div>
 
