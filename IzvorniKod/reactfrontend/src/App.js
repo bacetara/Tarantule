@@ -65,8 +65,8 @@ function App() {
                 <Route path="/information/:oib" element={ <PregledajOsobu /> }/>
 
 
-                <Route path="/pediatricianEmail" element={ <PediatricianEmail/>}/>
-                <Route path="/mapEmail" element={<MapHelp receiver={{adresa:"Trg Franje Tuđmana, Zagreb"}} sender={null}/>}/>
+
+                <Route path="/pediatricianEmail" element={isLoggedIn && (userRole === "pedijatar" || userRole === "doktor") ? <PediatricianEmail/> : <Navigate to = "/"/>}/>
 
 
             </Routes>
@@ -74,5 +74,6 @@ function App() {
 
     );
 }
+//                <Route path="/mapEmail" element={<MapHelp receiver={{adresa:"Trg Franje Tuđmana, Zagreb", oib:"1233"}} sender={{oib:"etotioib"}} email={null}/>}/>
 
 export default App;
