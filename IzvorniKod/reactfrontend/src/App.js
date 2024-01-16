@@ -27,19 +27,6 @@ function App() {
     const [isLoggedIn, setIsLoggedIn] = React.useState(false);
     const [userRole, setUserRole] = useState("");
 
-    useEffect(() => {
-        fetch('/api/login/currentRole')
-            .then(data => data.text())
-            .then(data => {
-                setUserRole(data);
-                if (data !== "") {
-                    setIsLoggedIn(true);
-                } else {
-                    setIsLoggedIn(false);
-                }
-            })
-
-    }, []);
 
     function onLogin(role) {
         setIsLoggedIn(true);
@@ -59,27 +46,28 @@ function App() {
                 <Route path="/login" element={<Login onLogin={onLogin}/>} />
                 <Route path="/register" element={<Register />} />
 
-                <Route path="/parentInfo" element={isLoggedIn && userRole === "roditelj" ? <RoditeljPocetna /> : <Navigate to = "/"/>} />
-                <Route path="/inbox/:oib" element={isLoggedIn && userRole === "roditelj" ? <ParentSite/> : <Navigate to="/"/>} />
-                <Route path="/inbox/child/:oib" element={isLoggedIn && userRole === "roditelj" ? <ChildSite/> : <Navigate to="/"/>} />
-                <Route path="/updateInfo/:oib" element={isLoggedIn && userRole === "roditelj" ? <AzuriranjePodataka /> : <Navigate to="/"/> }/>
+                <Route path="/parentInfo" element= {<RoditeljPocetna />} />
+                <Route path="/inbox/:oib" element={ <ParentSite/>} />
+                <Route path="/inbox/child/:oib" element={<ChildSite/>} />
+                <Route path="/updateInfo/:oib" element={ <AzuriranjePodataka />  }/>
 
-                <Route  path="/doctor/:oib" element={isLoggedIn && userRole === "doktor" ? <DoctorParentSite /> : <Navigate to = "/"/>} />
-                <Route path="/doctor" element={isLoggedIn && userRole === "doktor" ? <LijecnikPocetna /> : <Navigate to = "/"/>}/>
-                <Route path="/addPatient2" element={isLoggedIn && userRole === "doktor" ? <DodavanjePacijenta2 /> : <Navigate to = "/"/>}/>
+                <Route  path="/doctor/:oib" element={<DoctorParentSite />} />
+                <Route path="/doctor" element={<LijecnikPocetna />}/>
+                <Route path="/addPatient2" element={<DodavanjePacijenta2 />}/>
 
-                <Route path="/pediatrician/:oib" element={isLoggedIn && userRole === "pedijatar" ? <PediatricianChildSite/> : <Navigate to = "/"/>}/>
-                <Route path="/pediatrician" element={isLoggedIn && userRole === "pedijatar" ? <PedijatarPocetna /> : <Navigate to = "/"/>}/>
-                <Route path="/addPatient1" element={isLoggedIn && userRole === "pedijatar" ? <DodavanjePacijenta1 /> : <Navigate to = "/"/>}/>
+                <Route path="/pediatrician/:oib" element={<PediatricianChildSite/> }/>
+                <Route path="/pediatrician" element={<PedijatarPocetna />}/>
+                <Route path="/addPatient1" element={<DodavanjePacijenta1 /> }/>
 
-                <Route path="/admin" element={isLoggedIn && userRole === "admin" ? <AdminPocetna /> : <Navigate to = "/"/>} />
-                <Route path="/addparent" element={isLoggedIn && userRole === "admin" ? <DodajRoditelja />: <Navigate to = "/"/>} />
-                <Route path="/addchild" element={isLoggedIn && userRole === "admin" ? <DodajDijete /> : <Navigate to = "/"/>} />
-                <Route path="/information/:oib" element={isLoggedIn && userRole === "admin" ? <PregledajOsobu /> : <Navigate to = "/"/>}/>
+                <Route path="/admin" element={<AdminPocetna /> } />
+                <Route path="/addparent" element={<DodajRoditelja />} />
+                <Route path="/addchild" element={ <DodajDijete /> } />
+                <Route path="/information/:oib" element={ <PregledajOsobu /> }/>
 
 
-                <Route path="/pediatricianEmail" element={isLoggedIn && (userRole === "pedijatar" || userRole === "doktor") ? <PediatricianEmail/> : <Navigate to = "/"/>}/>
+                <Route path="/pediatricianEmail" element={ <PediatricianEmail/>}/>
                 <Route path="/mapEmail" element={<MapHelp receiver={{adresa:"Trg Franje Tuđmana, Zagreb"}} sender={null}/>}/>
+
 
             </Routes>
         </BrowserRouter>
