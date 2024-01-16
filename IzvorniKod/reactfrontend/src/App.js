@@ -79,7 +79,7 @@ function App() {
 
 
                 <Route path="/pediatricianEmail" element={isLoggedIn && (userRole === "pedijatar" || userRole === "doktor") ? <PediatricianEmail/> : <Navigate to = "/"/>}/>
-                <Route path="/mapEmail" element={<MapHelp/>}/>
+                <Route path="/mapEmail" element={<MapHelp receiver={{adresa:"Trg Franje Tuđmana, Zagreb"}} sender={null}/>}/>
 
             </Routes>
         </BrowserRouter>

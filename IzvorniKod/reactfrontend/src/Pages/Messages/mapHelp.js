@@ -18,7 +18,7 @@ import {
     RequestType,
 } from "react-geocode";
 
-setKey("AIzaSyBLdrbKjSj03iK9wCvrDe1l8dIOAa5-t54");
+setKey("AIzaSyBLdrbKjSj03iK9wCvrDe1l8dIOAa5-t54");  //OVDJE KLJUČ AK NETKO UZME SVOJ!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 const MapHelp = ({sender, receiver}) => {
     const [hospitals, setHospitals] = useState([]);
@@ -89,7 +89,7 @@ const MapHelp = ({sender, receiver}) => {
     const locations = [];
     
     useEffect(() => {
-        async function callFromAdress(adress) {
+        async function callFromAdress() {
             let forReturn;
             try {
                 const { results } = await fromAddress(adress);
@@ -97,14 +97,16 @@ const MapHelp = ({sender, receiver}) => {
                 const newCenter = [lat, lng];
                 setCenter(newCenter);
                 for (let i = 0; i < hospitals.length; i++) {
-                    const { results } = await fromAddress(hospitals.at(i));
+                    //console.log(hospitals.at(i).adresaBolnice);
+                    const { results } = await fromAddress(hospitals.at(i).adresaBolnice);
                     const { lat, lng } = results[0].geometry.location;
                     locations.push({latitude: lat,longitude: lng });
+                    //console.log(locations[i])
                 }
-                
+
                 sethospitalCoordinates(locations);
                 //console.log(center);
-                
+
                 return forReturn;
             } catch (error) {
                 console.error(error);
@@ -112,11 +114,11 @@ const MapHelp = ({sender, receiver}) => {
             }
         }
 
-        callFromAdress(adress)
+        callFromAdress()
     }, [adress, hospitals, locations])
 
     const markers = hospitalCoordinates.map((coord, index) => (
-        <Marker position={[coord.latitude(), coord.longitude()]} icon={markerIcon}>
+        <Marker position={[coord.latitude, coord.longitude]} icon={markerIcon}>
             <Popup>
                 A pretty CSS3 popup. <br /> Easily customizable.
             </Popup>
