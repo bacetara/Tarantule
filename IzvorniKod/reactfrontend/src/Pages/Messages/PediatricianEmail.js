@@ -20,6 +20,8 @@ const PediatricianEmail = ({sender, receiver}) => {
     });
     const [bolesti, setBolesti] = useState([]);
     console.log(emailData);
+    console.log(receiver);
+    console.log(receiver.roditelj.doktor.oib);
     useEffect(() => {
         fetch('/api/diagnosis')
             .then(data => data.json())
@@ -66,13 +68,13 @@ const PediatricianEmail = ({sender, receiver}) => {
                 numberOfMessages = 1;
 
                 messageData[0] = {
-                    naslov: emailData.title,
+                    naslov: emailData.naslov,
                     tijelo: "",
                     prilog: null,
                     tip: 4,
                     prioib: emailData.prioib,
                     posoib: emailData.posoib,
-                    dijagnozaID: emailData.dijagnozaID
+                    dijagnozaID: parseInt(emailData.dijagnozaID, 10)
                 }
 
                 if (emailData.bolovanje === true) {
@@ -113,8 +115,8 @@ const PediatricianEmail = ({sender, receiver}) => {
                 }
 
                 if (emailData.ispricnica) {
-                    numberOfMessages++;
-                    messageData[1] = {
+
+                    messageData[numberOfMessages] = {
                         naslov: emailData.naslov,
                         tijelo: "\n\nPoslana ispričnica\n",
                         prilog: null,
@@ -123,17 +125,8 @@ const PediatricianEmail = ({sender, receiver}) => {
                         posoib: emailData.posoib,
                         dijagnozaID: null
                     }
-
-                    messageData[numberOfMessages] = {
-                        naslov: emailData.naslov,
-                        tijelo: "\n\nPoslana ispričnica\n",
-                        prilog: null,
-                        tip: 1,
-                        prioib: emailData.prioib,
-                        posoib: emailData.posoib,
-                        dijagnozaID: null
-                    }
                     numberOfMessages++;
+
                 }
 
                 if (emailData.bolovanje) {
@@ -146,6 +139,7 @@ const PediatricianEmail = ({sender, receiver}) => {
                         posoib: emailData.posoib,
                         dijagnozaID: null
                     }
+
                     numberOfMessages++;
                 }
             } else if (emailData.naslov === 'specijalist') {
@@ -199,6 +193,7 @@ const PediatricianEmail = ({sender, receiver}) => {
         }
 
 
+        console.log(messageData.length);
         for (let i = 0; i < messageData.length; i++) {
 
             const options = {
@@ -209,7 +204,7 @@ const PediatricianEmail = ({sender, receiver}) => {
                 body: JSON.stringify(messageData[i])
             };
 
-            fetch('/api/doctor/newMessage', options)
+            fetch(sender.uloga === "doktor" ? '/api/doctor/newMessage' : '/api/pediatrician/newMessage', options)
                 .then(response => {
                     if (response.ok) {
                         console.log("uspjeh");
@@ -256,11 +251,8 @@ const PediatricianEmail = ({sender, receiver}) => {
                 <div className={emailData.naslov === 'specijalist' ? "inputs" : "hiddenField"} id="diseaseField">
                     <label htmlFor="disease">Bolest</label>
                     <select name="dijagnozaID" id="disease" value={emailData.dijagnozaID} onChange={handleChange}>
-                        <option value="bolest1">Bolest 1</option>
-                        <option value="bolest2">Bolest 2</option>
-                        <option value="bolest3">Bolest 3</option>
                         {bolesti && (bolesti.map(item => (
-                            <option value="item.naziv">{item.naziv}</option>
+                            <option value={item.idBolest} key={item.idBolest}>{item.naziv}</option>
                         )))}
                     </select>
                 </div>

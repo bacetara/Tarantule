@@ -27,7 +27,7 @@ export default function ChildSite({osoba}) {
         fetch(pathChild)
             .then(data => data.json())
             .then(data => {
-                setEmails(data);
+                setEmails(data.poruke);
             })
     }, [pathChild]);
 
