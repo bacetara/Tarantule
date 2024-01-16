@@ -9,8 +9,9 @@ const AzuriranjePodataka= () => {
     const { oib } = useParams();
     const navigate = useNavigate();
     const [user, setUser] = React.useState({});
+    const [dijete, setDijete] = React.useState(false);
 
-    var dijete = 0;
+
 
     React.useEffect(() => {
         fetch(`/api/parent/me`)
@@ -18,12 +19,13 @@ const AzuriranjePodataka= () => {
             .then(data => {
                 if (data.roditelj.oib === oib){
                     setUser(data.roditelj)
-                    dijete = 0
+                    // eslint-disable-next-line react-hooks/exhaustive-deps
+                    setDijete(false);
                 }else{
                 for (var i = 0; i < data.djeca.length; i++) {
                     if (data.djeca[i].oib === oib) {
                         setUser(data.djeca[i]);
-                        dijete=1;
+                        setDijete(true);
                         break
                     }
                 }
@@ -33,7 +35,6 @@ const AzuriranjePodataka= () => {
     }, [oib]);
 
     function onChange(event) {
-        console.log("jdksjfh")
         const {name, value} = event.target;
         const updatedValue = value === null ? '' : value;
         setUser(oldForm => ({...oldForm, [name]: updatedValue}));
@@ -45,7 +46,7 @@ const AzuriranjePodataka= () => {
 
     function onSubmit(e){
         e.preventDefault();
-        console.log(user.adresa)
+
         // setError("");
         const data = {
             oib: user.oib,
@@ -58,10 +59,13 @@ const AzuriranjePodataka= () => {
             doktor: user.doktor,
             adminPrav: user.adminPrav,
             lozinkaHash: user.lozinkaHash,
-            roditelj: dijete===1? user.roditelj:null
+            roditelj: user.roditelj
 
         }
         console.log(data);
+        console.log(user)
+
+
 
         const options = {
             method: 'POST',
@@ -70,7 +74,7 @@ const AzuriranjePodataka= () => {
             },
             body: JSON.stringify(data)
         };
-        return fetch(`/api/parent/${dijete === 1?`child/${oib}`:"me"}`, options)
+        return fetch(`/api/parent/${dijete === true?`child/${oib}`:"me"}`, options)
             .then(response => {
                 if (response.status === 200) {
                     console.log("usojeh")
@@ -108,7 +112,11 @@ const AzuriranjePodataka= () => {
                 <div className="info"><label>IME: </label><input  name="ime" type="text" value={user.ime} disabled={true} /></div>
                 <div className="info"><label>PREZIME: </label><input name="prezime" type="text" value={user.prezime} disabled={true} /></div>
                 <div className="info"><label>OIB: </label><input name="oib" type="text" value={user.oib} disabled={true}/></div>
-                <div className="info"><label>DATUM ROĐENJA: </label><input name="datumRod" type="text" value={user.datumRod} disabled={true}/></div>
+                <div className="info"><label>DATUM ROĐENJA: </label><input name="datumRod" type="text" value={new Date(user.datumRod).toLocaleDateString('en-GB', {
+                    year: 'numeric',
+                    month: '2-digit',
+                    day: '2-digit',
+                })} disabled={true}/></div>
                 <div className="info"><label>ADRESA: </label><input name="adresa" type="text" value={user.adresa} onChange={onChange}/></div>
                 <div className="info"><label>MAIL USTANOVE: </label><input name="mail" type="text" value={user.mail} onChange={onChange}/></div>
 

@@ -2,6 +2,7 @@ package hr.fer.progi.tarantule.OzdraviBE.rest;
 
 import hr.fer.progi.tarantule.OzdraviBE.domain.Osoba;
 import hr.fer.progi.tarantule.OzdraviBE.domain.Poruka;
+import hr.fer.progi.tarantule.OzdraviBE.rest.dto.AddMessageDTO;
 import hr.fer.progi.tarantule.OzdraviBE.rest.dto.AssignPatientDTO;
 import hr.fer.progi.tarantule.OzdraviBE.rest.dto.GetDoctorDTO;
 import hr.fer.progi.tarantule.OzdraviBE.service.OsobaService;
@@ -11,6 +12,7 @@ import hr.fer.progi.tarantule.OzdraviBE.service.exceptions.NoSuchOsobaException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +27,22 @@ public class PedijatarController {
 
     @Autowired
     private PorukaService porukaService;
+
+    @Secured("pedijatar")
+    @PutMapping(path = "newMessage", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void addMessage(@RequestBody AddMessageDTO messageData, HttpServletRequest request, HttpServletResponse response) {
+        Poruka p = new Poruka();
+        p.setNaslov(messageData.naslov());
+        p.setTijelo(messageData.tijelo());
+        p.setPrilog(messageData.prilog());
+        p.setTip(messageData.tip());
+        p.setDijagnozaID(messageData.dijagnozaID());
+        p.setPrioib(messageData.prioib());
+        p.setPosoib(messageData.posoib());
+
+
+        porukaService.createPoruka(p);
+    }
 
     @Secured("pedijatar")
     @GetMapping("me")

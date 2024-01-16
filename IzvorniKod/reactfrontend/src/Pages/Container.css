@@ -134,6 +134,7 @@ li:hover {
 
     .upisPacijenta {
         padding: 8px 12px;
+        width: fit-content;
     }
 
 }
