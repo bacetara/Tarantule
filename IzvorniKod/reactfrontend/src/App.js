@@ -21,11 +21,25 @@ import PediatricianChildSite from "./Pages/Pediatrician/pediatricianChildSite";
 import MapHelp from "./Pages/Messages/mapHelp";
 
 import * as React from "react";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 function App() {
     const [isLoggedIn, setIsLoggedIn] = React.useState(false);
     const [userRole, setUserRole] = useState("");
+
+    useEffect(() => {
+        fetch('/api/login/currentRole')
+            .then(data => data.text())
+            .then(data => {
+                setUserRole(data);
+                if (data !== "") {
+                    setIsLoggedIn(true);
+                } else {
+                    setIsLoggedIn(false);
+                }
+            })
+
+    }, []);
 
     function onLogin(role) {
         setIsLoggedIn(true);
