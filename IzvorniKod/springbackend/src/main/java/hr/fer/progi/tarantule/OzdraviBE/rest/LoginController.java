@@ -3,6 +3,7 @@ package hr.fer.progi.tarantule.OzdraviBE.rest;
 import hr.fer.progi.tarantule.OzdraviBE.domain.Osoba;
 import hr.fer.progi.tarantule.OzdraviBE.rest.dto.LoginDTO;
 import hr.fer.progi.tarantule.OzdraviBE.service.OsobaService;
+import hr.fer.progi.tarantule.OzdraviBE.service.exceptions.InvalidAuthorizationException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,16 @@ public class LoginController {
     private final SecurityContextHolderStrategy securityContextHolderStrategy = SecurityContextHolder.getContextHolderStrategy();
 
     AuthenticationManager authenticationManager = authenticationManager(userDetailsService(), passwordEncoder());
+
+    @GetMapping("currentRole")
+    public String getCurrentRole(HttpServletRequest request, HttpServletResponse response) {
+        Osoba o = SecurityHelper.getAuthenticatedOsoba(request);
+        if (o == null) {
+            return "";
+        }
+
+        return o.getUloga();
+    }
 
     @PostMapping(
             path="",

@@ -18,7 +18,7 @@ public class WebSecurityBasic {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests((authorize) -> authorize
-                .requestMatchers("/api/login", "/api/register")
+                .requestMatchers("/api/login/**", "/api/register")
                 .permitAll().anyRequest().authenticated()
         );
 
