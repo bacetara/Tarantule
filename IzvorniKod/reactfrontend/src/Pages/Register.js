@@ -58,7 +58,7 @@ const Register = ()  => {
                 }
             })
             .then(data => {
-                console.log(data.uloga)
+                //console.log(data.uloga)
                 if(data.uloga === "roditelj"){
                     navigate("/parentInfo");
                 }else if(data.uloga === "admin"){
