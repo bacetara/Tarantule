@@ -29,5 +29,5 @@ public interface PorukaService {
 
     List<Poruka> findByOib(String OIB);
 
-    Integer findMaxId();
+    List<Poruka> findReceivedFromDoctors(String oib);
 }

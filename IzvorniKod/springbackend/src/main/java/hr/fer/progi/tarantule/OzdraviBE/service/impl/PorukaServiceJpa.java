@@ -63,14 +63,14 @@ public class PorukaServiceJpa implements PorukaService {
     public List<Poruka> findByOib(String OIB) {
         return porukaRepository.findByOib(OIB);
     }
-    @Override
-    public Integer findMaxId(){
-        return porukaRepository.findMaxId();
-    }
 
     @Override
     public List<Poruka> findBetween(String oib1, String oib2) {
         return porukaRepository.findBetweenPersons(oib1, oib2);
+    }
+
+    public List<Poruka> findReceivedFromDoctors(String oib) {
+        return porukaRepository.findReceivedFromDoctors(oib);
     }
 
     private void validate(Poruka poruka) {

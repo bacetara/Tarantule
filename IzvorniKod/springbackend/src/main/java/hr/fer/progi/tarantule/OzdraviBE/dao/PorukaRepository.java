@@ -24,6 +24,6 @@ public interface PorukaRepository extends JpaRepository<Poruka, Integer> {
     @Query("select p from Poruka p where (p.prioib = :oib1 and p.posoib = :oib2) or (p.prioib = :oib2 and p.posoib = :oib1)")
     List<Poruka> findBetweenPersons(@Param("oib1") String oib1, @Param("oib2") String oib2);
 
-    @Query("SELECT MAX(p.id) FROM Poruka p")
-    Integer findMaxId();
+    @Query("select p from Poruka p join Osoba o on p.posoib = o.oib where p.prioib = :oib and (o.uloga = 'pedijatar' or o.uloga = 'doktor')")
+    List<Poruka> findReceivedFromDoctors(@Param("oib") String oib);
 }

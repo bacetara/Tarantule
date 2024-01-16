@@ -95,6 +95,17 @@ public class LijecnikController {
     }
 
     @Secured("doktor")
+    @GetMapping("inbox/internal")
+    public List<Poruka> findDoctorMessages(HttpServletRequest request, HttpServletResponse response) {
+        Osoba o = SecurityHelper.getAuthenticatedOsoba(request);
+        if (o == null) {
+            throw new InvalidAuthorizationException();
+        }
+
+        return porukaService.findReceivedFromDoctors(o.getOib());
+    }
+
+    @Secured("doktor")
     @PutMapping(path = "enable", consumes = MediaType.APPLICATION_JSON_VALUE)
     public void enable(@RequestBody AddBolovanjeMessageDTO messageData, HttpServletRequest request, HttpServletResponse response) {
         Poruka p = new Poruka();
