@@ -199,12 +199,15 @@
 			\textit{Razred }\textbf{LoginController}
 			 služi za obradu zahtjeva za prijavu (login).
 			Pamti referencu na apstraktni OsobaService kako bi mogao raditi operacije nad bazom Osoba.
-			Također mora imati referencu na objekt tipa PasswordEncoder čiji je zadatak primijeniti hash algoritam
-			na dobivenu lozinku kako bi se mogla usporediti sa hashem koji je spremljen u bazi. Članske funkcije 
+			Članske funkcije 
 			ove klase izvršavaju se prilikom primanja HTTP zahtjeva, što vrijedi općenito za Controller klase
 			(tj. njihove objekte) u Springu. Članska funkcija login će na POST zahtjev s odgovarajućim podatcima
-			obaviti prijavu korisnika. Članska funkcija getAllOsoba postoji isključivo za svrhe testiranja i ona će na GET zahtjev vratiti popis svih osoba
-			u JSON formatu. 
+			obaviti prijavu korisnika. 
+			Iz tijela requesta izvlače se OIB i lozinka te se pomoću Authentication Managera provjerava njihova točnost. Authentication Manager koristi Password Encoder koji primljenu lozinku hashira te će se to usporedit s hashiranom lozinkom u bazi. Ako je sve u redu, postavlja se context i time je stvoren session. Informacije o sessionu pohranjuju se u obliku UserDetails objekta. Ovaj controller ima podržane i GET zahtjeve kojima se mogu vratiti OIB ili uloga trenutno ulogirane osobe.
+			
+			\textit{Razred }\textbf{LogoutController} služi za obradu zahtjeva za odjavu (logout). Primljenim GET zahtjevom na putanju /api/logout brišu se podaci o trenutnom session-u.
+			
+			\textit{Razred }\textbf{Security Helper} je razred koji sadrži pomoćnu funkciju kojom se iz requesta izvlače podaci o session-u. Preko njih se može pristupati odgovarajućem UserDetails objektu koji onda iz baze izvlači i vraća odgovarajući Osoba objekt (kao rezultat poziva funkcije).
 
 			\textit{Razred }\textbf{RegisterController}
 			 služi za obradu zahtjeva za registraciju (register).
@@ -223,7 +226,7 @@
 			pogrešnim podatcima za prijavu ili registraciju i vratiti HTTP odgovor sa smislenom porukom.
 
 			\textit{Razred }\textbf{WebSecurityBasic}
-			 služi za konfiguriranje sigurnosnih postavki. U ovom trenutku su one najosnovnije.
+			 služi za konfiguriranje sigurnosnih postavki. U razredu je specificirano da su zahtjevi mapirani na putanjama /api/login/* i /api/register/* dozvoljeni neovisno o tome je li osoba prijavljena. Ostale putanje su dostupne samo prijavljenim osobama.
 
 			\textit{Razred }\textbf{OzdraviBeApplication}
 			 je automatski generiran od strane Springa i sadrži ulaznu točku za izvršavanje programa.
