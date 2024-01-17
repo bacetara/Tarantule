@@ -128,9 +128,6 @@ const AzuriranjePodataka= ({onLogout}) => {
                     <div className="addChild" onClick={handleClick}>
                         <span className="link_na_stranicu">Odustani</span>
                     </div>
-                    <div className="addChild" onClick={handleClick}>
-                        <span className="link_na_stranicu">Ažuriraj</span>
-                    </div>
                     <button onSubmit={onSubmit} disabled={false} className="addChild">
                         spremi
                     </button>
