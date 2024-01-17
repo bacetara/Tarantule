@@ -4,6 +4,7 @@ import hr.fer.progi.tarantule.OzdraviBE.domain.Osoba;
 import hr.fer.progi.tarantule.OzdraviBE.rest.dto.LoginDTO;
 import hr.fer.progi.tarantule.OzdraviBE.service.OsobaService;
 import hr.fer.progi.tarantule.OzdraviBE.service.exceptions.InvalidAuthorizationException;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -113,7 +114,7 @@ public class LoginController {
         return new UserDetailsService() {
             @Override
             public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-                UserDetails ud = new MyUserDetails(osobaService.fetch(username));
+                UserDetails ud = new MyUserDetails(osobaService.fetch(username), osobaService);
                 return ud;
             }
 
@@ -127,27 +128,50 @@ public class LoginController {
     }
 
     public static class MyUserDetails implements UserDetails {
-        Osoba o;
+        private final OsobaService osobaService;
+
+        private final String oib;
 
         @Override
         public Collection<? extends GrantedAuthority> getAuthorities() {
+            String role = null;
+            try {
+                role = osobaService.fetch(oib).getUloga();
+            }
+            catch (EntityNotFoundException ex) {
+                throw new BadCredentialsException("User OIB doesn't exist");
+            }
+
             HashSet<GrantedAuthority> hs = new HashSet<>();
-            hs.add(new SimpleGrantedAuthority(o.getUloga()));
+            hs.add(new SimpleGrantedAuthority(role));
             return hs;
         }
 
-        public MyUserDetails(Osoba o) {
-            this.o = o;
+        public MyUserDetails(Osoba o, OsobaService osobaService) {
+            this.oib = o.getOib();
+            this.osobaService = osobaService;
+
+            try {
+                osobaService.fetch(oib);
+            }
+            catch (EntityNotFoundException ex) {
+                throw new BadCredentialsException("User OIB doesn't exist");
+            }
         }
 
         @Override
         public String getPassword() {
-            return o.getLozinkaHash();
+            try {
+                return osobaService.fetch(oib).getLozinkaHash();
+            }
+            catch (EntityNotFoundException ex) {
+                throw new BadCredentialsException("User OIB doesn't exist");
+            }
         }
 
         @Override
         public String getUsername() {
-            return o.getOib();
+            return oib;
         }
 
         @Override
@@ -171,7 +195,12 @@ public class LoginController {
         }
 
         public Osoba getOsoba() {
-            return o;
+            try {
+                return osobaService.fetch(oib);
+            }
+            catch (EntityNotFoundException ex) {
+                throw new BadCredentialsException("User OIB doesn't exist");
+            }
         }
     }
 }
