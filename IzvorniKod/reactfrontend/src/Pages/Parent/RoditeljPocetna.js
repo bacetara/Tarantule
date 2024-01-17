@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
-import { Link } from 'react-router-dom'; // Import Link from react-router-dom
+import {Link, useNavigate} from 'react-router-dom'; // Import Link from react-router-dom
 import './RoditeljPocetna.css';
 import json from './../../testing.json';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faArrowRightFromBracket, faUser, faUserDoctor} from '@fortawesome/free-solid-svg-icons';
 import * as React from 'react';
-export default function RoditeljPocetna() {
+export default function RoditeljPocetna({onLogout}) {
 	const [user, setUser] = React.useState(null);
 	React.useEffect(() => {
         fetch('/api/parent/me')
@@ -14,11 +14,17 @@ export default function RoditeljPocetna() {
 
     }, []);
 
+	const navigate = useNavigate();
+	const onLogOutFunction = () => {
+		onLogout();
+		navigate("/");
+	}
+
 	return (
 		<>
 			<div className="header">
 				<div className="backOptions">
-					<div className="logOut">
+					<div className="logOut" onClick={() => onLogOutFunction()}>
 						<FontAwesomeIcon
 							id="logOutIcon"
 							icon={faArrowRightFromBracket}

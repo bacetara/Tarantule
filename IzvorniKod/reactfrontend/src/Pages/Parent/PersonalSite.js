@@ -3,7 +3,7 @@ import {useEffect, useState} from "react";
 import * as React from "react";
 import {useParams} from "react-router-dom";
 import InboxUser from "./InboxUser";
-export default function ParentSite() {
+export default function ParentSite({onLogout}) {
     const { oib } = useParams();
     const pathParent = `/api/parent/${oib}`;
     const [user, setUser] = useState(null);
@@ -28,7 +28,7 @@ export default function ParentSite() {
     }, [pathParent]);
 
     return (
-        <InboxUser user={user} emails={emails} medical={medical}/>
+        <InboxUser user={user} emails={emails} medical={medical} onLogout={onLogout}/>
     )
 }
 

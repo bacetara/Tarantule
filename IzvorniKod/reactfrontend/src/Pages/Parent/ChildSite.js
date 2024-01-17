@@ -3,7 +3,7 @@ import {useEffect, useState} from "react";
 import * as React from "react";
 import {useParams} from "react-router-dom";
 import InboxUser from "./InboxUser";
-export default function ChildSite({osoba}) {
+export default function ChildSite({osoba, onLogout}) {
     const {oib } = useParams();
     const pathChild = `/api/parent/child/${oib}`;
     const [user, setUser] = useState(null);
@@ -32,7 +32,7 @@ export default function ChildSite({osoba}) {
     }, [pathChild]);
 
     return (
-        <InboxUser user={user} emails={emails} medical={medical}/>
+        <InboxUser user={user} emails={emails} medical={medical} onLogout={onLogout}/>
     )
 }
 

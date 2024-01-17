@@ -7,13 +7,13 @@ import PediatricianEmail from "../Messages/PediatricianEmail";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowRightFromBracket, faHouse, faUserDoctor} from "@fortawesome/free-solid-svg-icons";
 import ReadEmail from "../Messages/ReadEmail";
-import {Link, useParams} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 
 
-export default function InboxMedic({user, medical, emails}) {
+export default function InboxMedic({user, medical, emails, onLogout}) {
     const [selectedEmail, setSelectedEmail] = useState(null);
     const [createEmail, setCreateEmail] = useState(false);
-
+    const navigate = useNavigate();
 
 
 
@@ -27,12 +27,17 @@ export default function InboxMedic({user, medical, emails}) {
         setSelectedEmail(null);
     }
 
+    const onLogOutFunction = () => {
+        onLogout();
+        navigate("/");
+    }
+
     return(
         <>
         <div className="header">
 
             <div className="backOptions">
-                <div className="logOut">
+                <div className="logOut" onClick={() => onLogOutFunction()}>
                     <FontAwesomeIcon id="logOutIcon" icon={faArrowRightFromBracket} style={{color: "white"}} />
                     <p id="logOutText">log out</p>
                 </div>

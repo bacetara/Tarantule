@@ -1,13 +1,13 @@
 import {useEffect, useState} from "react";
 import * as React from "react";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import InboxMedic from "../Pediatrician/InboxMedic";
-export default function PediatricianChildSite() {
+export default function PediatricianChildSite({onLogout}) {
     const { oib } = useParams();
     const path = `/api/pediatrician/inbox/${oib}`;
     const [user, setUser] = useState(null);
     const [medical, setMedical] = useState(null);
-     const [emails, setEmails] = useState(null);
+    const [emails, setEmails] = useState(null);
 
     useEffect(() => {
         fetch(path)
@@ -28,7 +28,9 @@ export default function PediatricianChildSite() {
             })
     }, [oib, path]);
 
+
+
     return(
-        <InboxMedic user={user} medical={medical} emails={emails}/>
+        <InboxMedic user={user} medical={medical} emails={emails} onLogout={onLogout}/>
     )
 }

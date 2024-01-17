@@ -4,7 +4,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowRightFromBracket} from "@fortawesome/free-solid-svg-icons";
 import * as React from "react";
 
-const DodajRoditelja = () => {
+const DodajRoditelja = ({onLogout}) => {
     const [roditeljForm, setRoditeljForm] = React.useState({ime : '', prezime: '', oib: '', datumRod: ''});
 
     function onChange(event) {
@@ -50,10 +50,16 @@ const DodajRoditelja = () => {
             });
     }
 
+    const onLogOutFunction = () => {
+        onLogout();
+        navigate("/");
+    }
+
+
     return (
         <>
             <div className="header">
-                <div className="backOptions">
+                <div className="backOptions" onClick={() => onLogOutFunction()}>
                     <div className="logOut">
                         <FontAwesomeIcon id="logOutIcon" icon={faArrowRightFromBracket} style={{color: "white"}}/>
                         <p id="logOutText">log out</p>

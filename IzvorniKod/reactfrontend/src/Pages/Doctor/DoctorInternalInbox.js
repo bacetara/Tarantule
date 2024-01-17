@@ -5,13 +5,14 @@ import * as React from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowRightFromBracket, faHouse} from "@fortawesome/free-solid-svg-icons";
 import ReadEmail from "../Messages/ReadEmail";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 
-export default function DoctorInternalInbox() {
+export default function DoctorInternalInbox({onLogout}) {
     const [selectedEmail, setSelectedEmail] = useState(null);
     const [medicEmails, setMedicEmails] = useState([]);
     const [user, setUser] = useState(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetch('/api/doctor/me')
@@ -30,13 +31,17 @@ export default function DoctorInternalInbox() {
         console.log(email)
     }
 
+    const onLogOutFunction = () => {
+        onLogout();
+        navigate("/");
+    }
 
     return(
         <>
             <div className="header">
 
                 <div className="backOptions">
-                    <div className="logOut">
+                    <div className="logOut" onClick={() => onLogOutFunction()}>
                         <FontAwesomeIcon id="logOutIcon" icon={faArrowRightFromBracket} style={{color: "white"}} />
                         <p id="logOutText">log out</p>
                     </div>

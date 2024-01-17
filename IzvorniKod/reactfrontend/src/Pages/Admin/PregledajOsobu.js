@@ -5,7 +5,7 @@ import {faArrowRightFromBracket} from "@fortawesome/free-solid-svg-icons";
 import * as React from "react";
 import {useState} from "react";
 
-const PregledajOsobu = () => {
+const PregledajOsobu = ({onLogout}) => {
     const { oib } = useParams();
     const [user, setUser] = React.useState({});
     const [current, setCurrent] = React.useState({});
@@ -150,11 +150,16 @@ const PregledajOsobu = () => {
             });
     }
 
+    const onLogOutFunction = () => {
+        onLogout();
+        navigate("/");
+    }
+
     return (
         <>
             <div className="header">
                 <div className="backOptions">
-                    <div className="logOut">
+                    <div className="logOut" onClick={() => onLogOutFunction()}>
                         <FontAwesomeIcon id="logOutIcon" icon={faArrowRightFromBracket} style={{color: "white"}}/>
                         <p id="logOutText">log out</p>
                     </div>

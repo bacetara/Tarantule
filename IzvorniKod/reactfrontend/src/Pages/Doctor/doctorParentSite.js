@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import * as React from "react";
 import {useParams} from "react-router-dom";
 import InboxMedic from "../Pediatrician/InboxMedic";
-export default function DoctorParentSite() {
+export default function DoctorParentSite({onLogout}) {
     const { oib } = useParams();
     const path = `/api/doctor/inbox/${oib}`;
     const [user, setUser] = useState(null); //parent's/child's profile
@@ -30,7 +30,7 @@ export default function DoctorParentSite() {
     }, [path, oib]);
 
     return(
-        <InboxMedic user={user} medical={medical} emails={emails}/>
+        <InboxMedic user={user} medical={medical} emails={emails} onLogout={onLogout}/>
     )
 
 }

@@ -4,7 +4,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowRightFromBracket} from "@fortawesome/free-solid-svg-icons";
 import * as React from "react";
 
-const DodajDijete = () => {
+const DodajDijete = ({onLogout}) => {
     const [dijeteForm, setDijeteForm] = React.useState({ime : '', prezime: '', oib: '', datumRod: '', rodOib:''});
     const [parents, setParents] = React.useState([]);
 
@@ -71,11 +71,17 @@ const DodajDijete = () => {
             });
     }
 
+    const onLogOutFunction = () => {
+        onLogout();
+        navigate("/");
+    }
+
+
     return (
         <>
             <div className="header">
                 <div className="backOptions">
-                    <div className="logOut">
+                    <div className="logOut" onClick={() => onLogOutFunction()}>
                         <FontAwesomeIcon id="logOutIcon" icon={faArrowRightFromBracket} style={{color: "white"}}/>
                         <p id="logOutText">log out</p>
                     </div>

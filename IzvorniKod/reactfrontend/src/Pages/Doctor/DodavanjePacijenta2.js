@@ -6,11 +6,12 @@ import {faArrowRightFromBracket, faHouse} from "@fortawesome/free-solid-svg-icon
 import * as React from "react";
 import {useEffect, useState} from "react";
 
-export default function DodavanjePacijenta2() {
+export default function DodavanjePacijenta2({onLogout}) {
     const [unassigned, setUnassigned] = useState([]);
     const [selected, setSelected] = useState(null);
     const [isClicked, setIsClicked] = useState(false);
     const [doctor, setDoctor] = useState(null);
+    const navigate = useNavigate();
 
     function selectUser(id) {
 
@@ -28,7 +29,6 @@ export default function DodavanjePacijenta2() {
 
     }
 
-    const navigate = useNavigate();
 
 
     function sendData() {
@@ -69,13 +69,17 @@ export default function DodavanjePacijenta2() {
             .then(data => setDoctor(data.doktor))
     }, []);
 
+    const onLogOutFunction = () => {
+        onLogout();
+        navigate("/");
+    }
 
 
     return (
         <>
             <div className="header">
                 <div className="backOptions">
-                    <div className="logOut">
+                    <div className="logOut" onClick={() => onLogOutFunction()}>
                         <FontAwesomeIcon id="logOutIcon" icon={faArrowRightFromBracket} style={{color: "white"}}/>
                         <p id="logOutText">log out</p>
                     </div>

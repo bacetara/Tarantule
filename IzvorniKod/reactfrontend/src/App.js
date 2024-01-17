@@ -1,4 +1,4 @@
-import {BrowserRouter, Routes, Route, Navigate} from "react-router-dom";
+import {BrowserRouter, Routes, Route, Navigate, useNavigate} from "react-router-dom";
 
 import Login from "./Pages/Login";
 import Home from "./Pages/Home"
@@ -29,13 +29,26 @@ function App() {
     const [userRole, setUserRole] = useState("");
 
 
+
     function onLogin(role) {
         setIsLoggedIn(true);
         setUserRole(role);
     }
 
     function onLogout() {
-        setIsLoggedIn(false);
+
+        fetch('/api/logout')
+            .then(response => {
+                if (response.status === 200)
+                    setIsLoggedIn(false)
+                else {
+                    throw new Error("Unable to logout")
+                }
+            })
+            .catch(error => {
+                console.error (error);
+            });
+
     }
 
 
@@ -47,30 +60,25 @@ function App() {
                 <Route path="/login" element={<Login onLogin={onLogin}/>} />
                 <Route path="/register" element={<Register />} />
 
-                <Route path="/parentInfo" element= {<RoditeljPocetna />} />
-                <Route path="/inbox/:oib" element={ <ParentSite/>} />
-                <Route path="/inbox/child/:oib" element={<ChildSite/>} />
-                <Route path="/updateInfo/:oib" element={ <AzuriranjePodataka />  }/>
+                <Route path="/parentInfo" element= {<RoditeljPocetna onLogout={onLogout}/>} />
+                <Route path="/inbox/:oib" element={ <ParentSite onLogout={onLogout}/>} />
+                <Route path="/inbox/child/:oib" element={<ChildSite onLogout={onLogout}/>} />
+                <Route path="/updateInfo/:oib" element={ <AzuriranjePodataka onLogout={onLogout}/>  }/>
 
-                <Route  path="/doctor/:oib" element={<DoctorParentSite />} />
-                <Route path="/doctor" element={<LijecnikPocetna />}/>
-                <Route path="/addPatient2" element={<DodavanjePacijenta2 />}/>
-                <Route path="/doktor/inbox" element={<DoctorInternalInbox/>}/>
+                <Route  path="/doctor/:oib" element={<DoctorParentSite onLogout={onLogout}/>} />
+                <Route path="/doctor" element={<LijecnikPocetna onLogout={onLogout}/>}/>
+                <Route path="/addPatient2" element={<DodavanjePacijenta2 onLogout={onLogout}/>}/>
+                <Route path="/doktor/inbox" element={<DoctorInternalInbox onLogout={onLogout}/>}/>
 
-                <Route path="/pediatrician/:oib" element={<PediatricianChildSite/> }/>
-                <Route path="/pediatrician" element={<PedijatarPocetna />}/>
-                <Route path="/addPatient1" element={<DodavanjePacijenta1 /> }/>
+                <Route path="/pediatrician/:oib" element={<PediatricianChildSite onLogout={onLogout}/> }/>
+                <Route path="/pediatrician" element={<PedijatarPocetna onLogout={onLogout}/>}/>
+                <Route path="/addPatient1" element={<DodavanjePacijenta1 onLogout={onLogout}/> }/>
 
-                <Route path="/admin" element={<AdminPocetna /> } />
-                <Route path="/addparent" element={<DodajRoditelja />} />
-                <Route path="/addchild" element={ <DodajDijete /> } />
-                <Route path="/information/:oib" element={ <PregledajOsobu /> }/>
-
-
-
-                <Route path="/pediatricianEmail" element={<PediatricianEmail/>}/>
-
-
+                <Route path="/admin" element={<AdminPocetna onLogout={onLogout}/> } />
+                <Route path="/addparent" element={<DodajRoditelja onLogout={onLogout}/>} />
+                <Route path="/addchild" element={ <DodajDijete onLogout={onLogout}/> } />
+                <Route path="/information/:oib" element={ <PregledajOsobu onLogout={onLogout}/> }/>
+                
             </Routes>
         </BrowserRouter>
 
