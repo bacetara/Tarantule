@@ -78,7 +78,7 @@ function App() {
                 <Route path="/addparent" element={<DodajRoditelja onLogout={onLogout}/>} />
                 <Route path="/addchild" element={ <DodajDijete onLogout={onLogout}/> } />
                 <Route path="/information/:oib" element={ <PregledajOsobu onLogout={onLogout}/> }/>
-                
+
             </Routes>
         </BrowserRouter>
 
