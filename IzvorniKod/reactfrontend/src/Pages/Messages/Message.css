@@ -82,6 +82,7 @@
     margin: 3px;
     background-color: #A7B8D8;
     border-color: #A7B8D8;
+    border-style: hidden;
 }
 
 #messageButtons button:hover {
