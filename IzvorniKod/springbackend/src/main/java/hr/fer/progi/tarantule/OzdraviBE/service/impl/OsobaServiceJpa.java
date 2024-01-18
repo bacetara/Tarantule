@@ -41,17 +41,17 @@ public class OsobaServiceJpa implements OsobaService {
 
     @Override
     public List<Osoba> findByParent(String parentOib) {
-        return osobaRepository.findOsobaByRoditeljOib(parentOib);
+        return osobaRepository.findOsobaByRoditeljOibOrderByPrezimeAscImeAsc(parentOib);
     }
 
     @Override
     public List<Osoba> findByDoctor(String doctorOib) {
-        return osobaRepository.findOsobaByDoktorOib(doctorOib);
+        return osobaRepository.findOsobaByDoktorOibOrderByPrezimeAscImeAsc(doctorOib);
     }
 
     @Override
     public List<Osoba> findUnassigned(String role) {
-        return osobaRepository.findOsobaByUlogaAndDoktorNull(role);
+        return osobaRepository.findOsobaByUlogaAndDoktorNullOrderByPrezimeAscImeAsc(role);
     }
 
     @Override

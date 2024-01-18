@@ -11,15 +11,15 @@ import java.util.List;
 import java.util.function.Function;
 
 public interface OsobaRepository extends JpaRepository<Osoba, String> {
-    @Query("select o from Osoba o where o.uloga = :type")
+    @Query("select o from Osoba o where o.uloga = :type order by o.prezime asc, o.ime asc")
     List<Osoba> findByType(@Param("type") String type);
 
-    @Query("select o from Osoba o where o.lozinkaHash != null")
+    @Query("select o from Osoba o where o.lozinkaHash != null order by o.prezime asc, o.ime asc")
     List<Osoba> listRegistered();
 
-    List<Osoba> findOsobaByRoditeljOib(String roditeljOib);
+    List<Osoba> findOsobaByRoditeljOibOrderByPrezimeAscImeAsc(String roditeljOib);
 
-    List<Osoba> findOsobaByDoktorOib(String doktorOib);
+    List<Osoba> findOsobaByDoktorOibOrderByPrezimeAscImeAsc(String doktorOib);
 
-    List<Osoba> findOsobaByUlogaAndDoktorNull(String uloga);
+    List<Osoba> findOsobaByUlogaAndDoktorNullOrderByPrezimeAscImeAsc(String uloga);
 }
