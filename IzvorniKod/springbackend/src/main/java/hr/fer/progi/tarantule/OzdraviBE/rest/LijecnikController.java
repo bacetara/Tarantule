@@ -19,6 +19,7 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/api/doctor/")
@@ -44,6 +45,22 @@ public class LijecnikController {
 
 
         porukaService.createPoruka(p);
+    }
+
+    @Secured("doktor")
+    @PostMapping(path = "deleteMessage", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void deleteMessage(@RequestBody Integer id, HttpServletRequest request, HttpServletResponse response) {
+        Osoba o = SecurityHelper.getAuthenticatedOsoba(request);
+        if (o == null) {
+            throw new InvalidAuthorizationException();
+        }
+
+        Poruka p = porukaService.findById(id).orElse(null);
+        if (p == null || !Objects.equals(p.getPosoib(), o.getOib())) {
+            throw new AccessDeniedException("You don't have access to this message");
+        }
+
+        porukaService.deletePoruka(id);
     }
 
     @Secured("doktor")

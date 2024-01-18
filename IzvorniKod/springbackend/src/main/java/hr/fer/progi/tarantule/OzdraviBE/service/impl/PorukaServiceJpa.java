@@ -35,8 +35,9 @@ public class PorukaServiceJpa implements PorukaService {
     }
 
     public Poruka deletePoruka(Integer id) {
-        // todo: ...
-        return null;
+        Poruka p = fetch(id);
+        porukaRepository.delete(p);
+        return p;
     }
 
     public Poruka createPoruka(Poruka poruka) {
