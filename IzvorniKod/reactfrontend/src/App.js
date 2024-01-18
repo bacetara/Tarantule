@@ -65,7 +65,7 @@ function App() {
                 <Route path="/inbox/child/:oib" element={<ChildSite onLogout={onLogout}/>} />
                 <Route path="/updateInfo/:oib" element={ <AzuriranjePodataka onLogout={onLogout}/>  }/>
 
-                <Route  path="/doctor/:oib" element={<DoctorParentSite onLogout={onLogout}/>} />
+                <Route path="/doctor/:oib" element={<DoctorParentSite onLogout={onLogout}/>} />
                 <Route path="/doctor" element={<LijecnikPocetna onLogout={onLogout}/>}/>
                 <Route path="/addPatient2" element={<DodavanjePacijenta2 onLogout={onLogout}/>}/>
                 <Route path="/doktor/inbox" element={<DoctorInternalInbox onLogout={onLogout}/>}/>

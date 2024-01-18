@@ -66,7 +66,7 @@ const PediatricianEmail = ({sender, receiver}) => {
                 numberOfMessages = 1;
 
                 messageData[0] = {
-                    naslov: emailData.naslov,
+                    naslov: "Naručen pregled",
                     tijelo: "",
                     prilog: null,
                     tip: 4,
@@ -90,7 +90,7 @@ const PediatricianEmail = ({sender, receiver}) => {
 
             } else if (emailData.naslov === "dijagnoza" || emailData.naslov === "nalaz") {
                 messageData[0] = {
-                    naslov: emailData.naslov,
+                    naslov: emailData.naslov === "dijagnoza" ? "Obavljeni pregled" : "Nalaz iz laboratorija",
                     tijelo: emailData.bolovanje ? emailData.tijelo +  "\n\nOdobreno bolovanje\n" : emailData.tijelo,
                     prilog: null,
                     tip: 1,
@@ -103,7 +103,7 @@ const PediatricianEmail = ({sender, receiver}) => {
         else if (sender.uloga === "pedijatar") {
             if (emailData.naslov === "dijagnoza" || emailData.naslov === "nalaz") {
                 messageData[0] = {
-                    naslov: emailData.naslov,
+                    naslov: emailData.naslov === "dijagnoza" ? "Obavljeni pregled" : "Nalaz iz laboratorija",
                     tijelo: emailData.ispricnica ? emailData.tijelo +  "\n\nPoslana ispričnica\n" : emailData.tijelo,
                     prilog: null,
                     tip: 1,
@@ -115,7 +115,7 @@ const PediatricianEmail = ({sender, receiver}) => {
                 if (emailData.ispricnica) {
 
                     messageData[numberOfMessages] = {
-                        naslov: emailData.naslov,
+                        naslov: "Poslana ispričnica",
                         tijelo: "\n\nPoslana ispričnica\n",
                         prilog: null,
                         tip: 1,
@@ -129,7 +129,7 @@ const PediatricianEmail = ({sender, receiver}) => {
 
                 if (emailData.bolovanje) {
                     messageData[numberOfMessages] = {
-                        naslov: emailData.naslov,
+                        naslov: "Preporuka bolovanja",
                         tijelo: "\n\nTraži se bolovanje za roditelja\n",
                         prilog: null,
                         tip: 3,
@@ -142,7 +142,7 @@ const PediatricianEmail = ({sender, receiver}) => {
                 }
             } else if (emailData.naslov === 'specijalist') {
                 messageData[0] = {
-                    naslov: emailData.naslov,
+                    naslov: "Naručen pregled",
                     tijelo: "",
                     prilog: null,
                     tip: 4,
@@ -154,7 +154,7 @@ const PediatricianEmail = ({sender, receiver}) => {
                 if (emailData.ispricnica) {
                     numberOfMessages++;
                     messageData[1] = {
-                        naslov: emailData.naslov,
+                        naslov: "Poslana ispričnica",
                         tijelo: "\n\nPoslana ispričnica\n",
                         prilog: null,
                         tip: 1,
@@ -164,7 +164,7 @@ const PediatricianEmail = ({sender, receiver}) => {
                     }
 
                     messageData[numberOfMessages] = {
-                        naslov: emailData.naslov,
+                        naslov: "Poslana ispričnica",
                         tijelo: "\n\nPoslana ispričnica\n",
                         prilog: null,
                         tip: 1,

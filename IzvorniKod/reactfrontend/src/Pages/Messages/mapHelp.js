@@ -157,7 +157,7 @@ const MapHelp = ({sender, receiver, email}) => {
 
 
                     <div className="inputs" id="messageBody">
-                        {center[0] !== 0 && center[1] !== 0 && (
+                        {adress && center[0] !== 0 && center[1] !== 0 && (
                             <MapContainer center={center} zoom={13} scrollWheelZoom={true}>
                                 <TileLayer
                                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -167,6 +167,9 @@ const MapHelp = ({sender, receiver, email}) => {
                                 {markers}
 
                             </MapContainer>
+                        )}
+                        {!adress && (
+                            <div className="upozorenje">Potrebno je ažurirati osobne podatke</div>
                         )}
                 </div>
 

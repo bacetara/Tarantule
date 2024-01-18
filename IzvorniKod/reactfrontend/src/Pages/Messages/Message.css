@@ -71,6 +71,8 @@
     width: 100%;
 }
 
+
+
 #messageButtons {
     justify-content: end;
     flex-direction: row;
@@ -97,6 +99,14 @@
 
 #messageButtons #odobriBolovanje {
     background-color: rgba(84, 199, 84, 0.89);
+}
+
+.upozorenje {
+    justify-self: center;
+    align-self: center;
+    color: red;
+    text-align: center;
+    margin-top: 20vh;
 }
 
 
