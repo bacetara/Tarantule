@@ -2,10 +2,7 @@ package hr.fer.progi.tarantule.OzdraviBE.rest;
 
 import hr.fer.progi.tarantule.OzdraviBE.domain.Osoba;
 import hr.fer.progi.tarantule.OzdraviBE.domain.Poruka;
-import hr.fer.progi.tarantule.OzdraviBE.rest.dto.AddBolovanjeMessageDTO;
-import hr.fer.progi.tarantule.OzdraviBE.rest.dto.AddMessageDTO;
-import hr.fer.progi.tarantule.OzdraviBE.rest.dto.AssignPatientDTO;
-import hr.fer.progi.tarantule.OzdraviBE.rest.dto.GetDoctorDTO;
+import hr.fer.progi.tarantule.OzdraviBE.rest.dto.*;
 import hr.fer.progi.tarantule.OzdraviBE.service.OsobaService;
 import hr.fer.progi.tarantule.OzdraviBE.service.PorukaService;
 import hr.fer.progi.tarantule.OzdraviBE.service.exceptions.InvalidAuthorizationException;
@@ -48,19 +45,25 @@ public class LijecnikController {
     }
 
     @Secured("doktor")
-    @PostMapping(path = "deleteMessage", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void deleteMessage(@RequestBody Integer id, HttpServletRequest request, HttpServletResponse response) {
+    @PostMapping(path = "markMessage", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void deleteMessage(@RequestBody MarkMessageDTO data, HttpServletRequest request, HttpServletResponse response) {
         Osoba o = SecurityHelper.getAuthenticatedOsoba(request);
         if (o == null) {
             throw new InvalidAuthorizationException();
         }
 
-        Poruka p = porukaService.findById(id).orElse(null);
-        if (p == null || !Objects.equals(p.getPosoib(), o.getOib())) {
+        Poruka p = porukaService.findById(data.id()).orElse(null);
+        if (p == null || (!Objects.equals(p.getPosoib(), o.getOib()) && !Objects.equals(p.getPrioib(), o.getOib()))) {
             throw new AccessDeniedException("You don't have access to this message");
         }
 
-        porukaService.deletePoruka(id);
+        if (data.type() < 1 || data.type() > 6) {
+            throw new IllegalArgumentException("Invalid message type");
+        }
+
+        p.setTip(String.valueOf(data.type()));
+
+        porukaService.updatePoruka(p);
     }
 
     @Secured("doktor")

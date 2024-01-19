@@ -18,6 +18,7 @@ const PediatricianEmail = ({sender, receiver}) => {
         ispricnica: false,
         bolovanje: false
     });
+    console.log(receiver);
     const [bolesti, setBolesti] = useState([]);
 
     useEffect(() => {
@@ -130,10 +131,10 @@ const PediatricianEmail = ({sender, receiver}) => {
                 if (emailData.bolovanje) {
                     messageData[numberOfMessages] = {
                         naslov: "Preporuka bolovanja",
-                        tijelo: "\n\nTraži se bolovanje za roditelja\n",
+                        tijelo: "\n\nTraži se bolovanje za roditelja " + receiver.roditelj.oib + " " + receiver.roditelj.ime + " " + receiver.roditelj.prezime,
                         prilog: null,
                         tip: 3,
-                        prioib: receiver.roditelj.doktor.oib,
+                        prioib: receiver.roditelj.doktor ? receiver.roditelj.doktor.oib : "",
                         posoib: emailData.posoib,
                         dijagnozaID: null
                     }
@@ -178,10 +179,10 @@ const PediatricianEmail = ({sender, receiver}) => {
                 if (emailData.bolovanje) {
                     messageData[numberOfMessages] = {
                         naslov: emailData.naslov,
-                        tijelo: "\n\nTraži se bolovanje za roditelja\n",
+                        tijelo: "\n\nTraži se bolovanje za roditelja " + receiver.roditelj.oib + " " + receiver.roditelj.ime + " " + receiver.roditelj.prezime,
                         prilog: null,
                         tip: 3,
-                        prioib: receiver.roditelj.doktor.oib,
+                        prioib: receiver.roditelj.doktor ? receiver.roditelj.doktor.oib : "",
                         posoib: emailData.posoib,
                         dijagnozaID: null
                     }

@@ -70,9 +70,10 @@ export default function DoctorInternalInbox({onLogout}) {
                     ) :
                     (<ul> {
                     medicEmails.length > 0 && (medicEmails.map((item) => (
+                        item.tip !== "6" && (
                         <li key={item.id} onClick={() => openEmail(item)}>
                             <span id="emailSender"> {user && user.oib === item.posoib ? "To: " : "From: "} {user && user.oib === item.posoib ? item.prioib : item.posoib} </span>
-                            <span id="emailTitle">{item.naslov}</span></li>
+                            <span id="emailTitle">{item.naslov}</span></li>)
                     )))
                     } </ul>)
                 }

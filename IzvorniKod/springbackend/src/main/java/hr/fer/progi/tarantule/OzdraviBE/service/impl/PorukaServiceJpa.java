@@ -30,8 +30,7 @@ public class PorukaServiceJpa implements PorukaService {
     }
 
     public Poruka updatePoruka(Poruka poruka) {
-        // todo: ...
-        return poruka;
+        return porukaRepository.save(poruka);
     }
 
     public Poruka deletePoruka(Integer id) {
