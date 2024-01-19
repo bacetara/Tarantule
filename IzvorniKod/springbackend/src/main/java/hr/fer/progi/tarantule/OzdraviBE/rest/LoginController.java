@@ -65,8 +65,6 @@ public class LoginController {
             throw new BadCredentialsException("Invalid login");
         }
 
-        System.out.println("Starting");
-
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(data.oib(), data.password()));
 
         SecurityContext context = securityContextHolderStrategy.createEmptyContext();
@@ -98,7 +96,7 @@ public class LoginController {
     public AuthenticationManager authenticationManager(
             UserDetailsService userDetailsService,
             PasswordEncoder passwordEncoder) {
-        System.out.println("In Aut manager");
+
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
         authenticationProvider.setUserDetailsService(userDetailsService);
         authenticationProvider.setPasswordEncoder(passwordEncoder);

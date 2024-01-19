@@ -74,9 +74,6 @@ public class AdminController {
             return (unregistered ? osobaService.listAll() : osobaService.listRegistered());
         }
 
-        System.out.println("tu sam u listAll");
-        System.out.println(request.getUserPrincipal().getName());
-
         return osobaService.findByType(type).stream().filter((o) -> unregistered || o.getLozinkaHash() != null).toList();
     }
 
