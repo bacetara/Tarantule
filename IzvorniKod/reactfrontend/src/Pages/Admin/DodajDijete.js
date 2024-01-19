@@ -35,9 +35,18 @@ const DodajDijete = ({onLogout}) => {
     };
 
     const navigate = useNavigate();
+
+    const isValidOIB = (oib) => {
+        // Regular expression for 11-digit numeric input
+        const oibPattern = /^\d{11}$/;
+        return (oibPattern.test(oib) || oib === "" || oib === null);
+    };
+
     function onSubmit(e) {
         e.preventDefault();
         // setError("");
+
+        if(isValidOIB(dijeteForm.oib)){
         console.log("tu")
         const data = {
             oib: dijeteForm.oib,
@@ -68,7 +77,7 @@ const DodajDijete = ({onLogout}) => {
             .then(navigate("/admin"))
             .catch(error => {
                 console.error(error);
-            });
+            });}
     }
 
     const onLogOutFunction = () => {
@@ -95,6 +104,7 @@ const DodajDijete = ({onLogout}) => {
                 <div className="info"><label>IME: </label><input name="ime" type="text" value={dijeteForm.ime} onChange={onChange}/></div>
                 <div className="info"><label>PREZIME: </label><input name="prezime" type="text" value={dijeteForm.prezime} onChange={onChange}/></div>
                 <div className="info"><label>OIB: </label><input name="oib" type="text" value={dijeteForm.oib} onChange={onChange}/></div>
+                {isValidOIB(dijeteForm.oib) ? null : <p style={{ color: 'red' }}>OIB mora imati 11 znamenki</p>}
                 <div className="info"><label>OIB RODITELJA: </label><select id="dropdown" onChange={handleSelectChange}
                                                                      value={dijeteForm.rodOib}>
                     <option value={dijeteForm.rodOib}

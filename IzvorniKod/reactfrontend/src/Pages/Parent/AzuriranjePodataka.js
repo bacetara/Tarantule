@@ -44,9 +44,15 @@ const AzuriranjePodataka= ({onLogout}) => {
         navigate(-1);
     };
 
+    const isValidEmail = (email) => {
+        // Regular expression for a basic email validation
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return (emailPattern.test(email) || email === "" || email === null);
+    };
+
     function onSubmit(e){
         e.preventDefault();
-
+        if(isValidEmail(user.mail)){
         // setError("");
         const data = {
             oib: user.oib,
@@ -90,7 +96,7 @@ const AzuriranjePodataka= ({onLogout}) => {
             )
             .catch(error => {
                 // console.error (error);
-            });
+            });}
     }
 
     const onLogOutFunction = () => {
@@ -123,7 +129,7 @@ const AzuriranjePodataka= ({onLogout}) => {
                 })} disabled={true}/></div>
                 <div className="info"><label>ADRESA: </label><input name="adresa" type="text" value={user.adresa} onChange={onChange}/></div>
                 <div className="info"><label>MAIL USTANOVE: </label><input name="mail" type="text" value={user.mail} onChange={onChange}/></div>
-
+                {isValidEmail(user.mail) ? null : <p style={{ color: 'red' }}>Krivo napisan email</p>}
                 <div className="buttons_horizontal">
                     <div className="addChild" onClick={handleClick}>
                         <span className="link_na_stranicu">Odustani</span>
