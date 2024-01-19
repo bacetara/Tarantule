@@ -109,6 +109,13 @@
     margin-top: 20vh;
 }
 
+.upozorenje2 {
+    justify-self: center;
+    align-self: center;
+    color: red;
+    text-align: center;
+}
+
 
 @media screen and (max-width: 720px) {
     .message {

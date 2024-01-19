@@ -115,9 +115,7 @@ const DodajDijete = ({onLogout}) => {
                     <div className="addChild">
                         <Link className="link_na_stranicu" to="/admin">Odustani</Link>
                     </div>
-                    <div className="addChild">
-                        <Link className="link_na_stranicu" to="/admin">Dodaj osobu</Link>
-                    </div>
+
                     <button onSubmit={onSubmit} disabled={false} className="addChild">
                         spremi
                     </button>
