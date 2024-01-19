@@ -20,6 +20,8 @@ body {
     flex-wrap: wrap;
 }
 
+
+
 .header .logo {
     margin: 5px;
     align-self: center;
@@ -158,4 +160,15 @@ body {
     .header .profileName * {
         align-self: flex-start;
     }
+
+    .textbox {
+        top: 12em;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .textbox{
+        top: 16em;
+    }
+
 }
