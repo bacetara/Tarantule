@@ -22,4 +22,7 @@ public interface OsobaRepository extends JpaRepository<Osoba, String> {
     List<Osoba> findOsobaByDoktorOibOrderByPrezimeAscImeAsc(String doktorOib);
 
     List<Osoba> findOsobaByUlogaAndDoktorNullOrderByPrezimeAscImeAsc(String uloga);
+
+    @Query("select o from Osoba o order by o.prezime asc, o.ime asc")
+    List<Osoba> findAllOrdered();
 }
