@@ -173,44 +173,98 @@
 			
 		\section{Dijagram razreda}
 			
-			Dijagram razreda strukturni je dijagram koji prikazuje razrede, njihove atribute te veze između razreda. Na slici \ref{fig:dijagramdto} prikazana je struktura DTO razreda. Na slici \ref{fig:dijagramdomain} prikazana je struktura domain razreda (modela). Na slici ... prikazani su Controlleri, Service razredi te Repository razredi.
+			Dijagram razreda strukturni je dijagram koji prikazuje razrede, njihove atribute te veze između razreda. Na slici \ref{fig:dijagramdto} prikazana je struktura DTO razreda. Na slici \ref{fig:dijagramdomain} prikazana je struktura domain razreda (modela). Na slici \ref{fig:dijagramcontroll} prikazani su Controlleri, Service razredi te Repository razredi.
 			
-
-			\textit{Sučelje }\textbf{OsobaRepository}
-			 daje sučelje za pristup entitetu Osoba u bazi podataka preko JPA.
-
-			\textit{Sučelje }\textbf{OsobaService}
-			 opisuje operacije kojima se pristupa entitetu Osoba, 
-			ne oslanjajući se na konkretnu implementaciju (tj. na Repository),
-			što je u skladu sa objektnom paradigmom i omogućuje primjenu dependency injectiona.
 			
-			\textit{Razred }\textbf{OsobaServiceJpa}
-			 predstavlja konkretnu implementaciju sučelja OsobaService koja entitetu Osoba
-			pristupa preko repozitorija (tipa OsobaRepository) na kojeg pamti referencu.
-
-			\textit{Razred }\textbf{LoginController}
-			 služi za obradu zahtjeva za prijavu (login).
-			Pamti referencu na apstraktni OsobaService kako bi mogao raditi operacije nad bazom Osoba.
-			Članske funkcije 
-			ove klase izvršavaju se prilikom primanja HTTP zahtjeva, što vrijedi općenito za Controller klase
-			(tj. njihove objekte) u Springu. Članska funkcija login će na POST zahtjev s odgovarajućim podatcima
-			obaviti prijavu korisnika. 
-			Iz tijela requesta izvlače se OIB i lozinka te se pomoću Authentication Managera provjerava njihova točnost. Authentication Manager koristi Password Encoder koji primljenu lozinku hashira te će se to usporedit s hashiranom lozinkom u bazi. Ako je sve u redu, postavlja se context i time je stvoren session. Informacije o sessionu pohranjuju se u obliku UserDetails objekta. Ovaj controller ima podržane i GET zahtjeve kojima se mogu vratiti OIB ili uloga trenutno ulogirane osobe.
+			\begin{figure}[H]
+				\includegraphics[width=\textwidth]{dijagrami/Class Diagram3.png} %veličina u odnosu na širinu linije
+				\caption{Dijagram Controllera, Servica i Repository-a}
+				\label{fig:dijagramcontroll} %label mora biti drugaciji za svaku sliku
+			\end{figure}
 			
-			\textit{Razred }\textbf{LogoutController} služi za obradu zahtjeva za odjavu (logout). Primljenim GET zahtjevom na putanju /api/logout brišu se podaci o trenutnom session-u.
+			\textit{Sučelje }\textbf{DiagnosisController}
+			služi za obradu zahtjeva za pregled bolesti. Pomoću GET zahtjeva se može dobiti lista svih bolesti.
 			
-			\textit{Razred }\textbf{Security Helper} je razred koji sadrži pomoćnu funkciju kojom se iz requesta izvlače podaci o session-u. Preko njih se može pristupati odgovarajućem UserDetails objektu koji onda iz baze izvlači i vraća odgovarajući Osoba objekt (kao rezultat poziva funkcije).
-
+			\textit{Sučelje }\textbf{BolestRepository}
+			 daje sučelje za pristup entitetu Bolest u bazi podataka preko JPA.
+			
+			\textit{Sučelje }\textbf{BolestService}
+			 opisuje operaciju kojom se pristupa svim entitetima Bolest.
+			
+			\textit{Razred }\textbf{BolestServiceJpa}
+			 predstavlja konkretnu implementaciju sučelja BolestService koja entitetu Bolest
+			pristupa preko repozitorija (tipa BolestRepository) na kojeg pamti referencu.
+			
+			\textit{Sučelje }\textbf{HospitalController}
+			služi za obradu zahtjeva za pregled bolnica. Pomoću GET zahtjeva se može dobiti lista svih bolnica.
+			
+			\textit{Sučelje }\textbf{BolnicaRepository}
+			daje sučelje za pristup entitetu Bolnica u bazi podataka preko JPA.
+			
+			\textit{Sučelje }\textbf{BolnicaService}
+			opisuje operaciju kojom se pristupa svim entitetima Bolnica.
+			
+			\textit{Razred }\textbf{BolnicaServiceJpa}
+			predstavlja konkretnu implementaciju sučelja BolnicaService koja entitetu Bolnica
+			pristupa preko repozitorija (tipa BolnicaRepository) na kojeg pamti referencu.
+			
+			\textit{Razred }\textbf{PedijatarController}
+			 služi za obradu zahtjeva za račun pedijatra. Ovime se omogućuje pregled i slanje poruka, dodavanje novih pacijenata te pregled već postojećih pacijenata. Također pomoću GET zahtjeva mogu se dobiti podaci o trenutnom pedijatru te listu djece bez dodijeljenog pedijatra.
+			
 			\textit{Razred }\textbf{RegisterController}
 			 služi za obradu zahtjeva za registraciju (register).
 			Isto kao i razred LoginController, drži referencu na OsobaService radi pristupa bazi i na PasswordEncoder
 			kako bi dobivene lozinke mogao hashirati prije spremanja u bazu. Članska funkcija register će na POST
 			zahtjev s odgovarajućim podatcima pokušati izvršiti registraciju novog korisnika. 
- 
-
-		
-
-			\
+			
+			\textit{Razred }\textbf{AdminController}
+			 služi za obradu zahtjeva za račun admina. Ovo omogućuje korisnicima sa admin privilegijama da dodaju nove osobe i djecu u sustav, te dobiju listu svih osoba u sustavu. Također pomoću GET zahtjeva je moguće dobiti entitet osobe preko njenog OIB-a, te podatke trenutno ulogiranog korisnika. Pomoću POST zahtjeva mogu se ažurirati podaci o osobama u sustavu.
+			 
+			 \textit{Razred }\textbf{LijecnikController}
+			 služi za obradu zahtjeva za račun liječnika. Ovime se omogućuje pregled, slanje i brisanje poruka te pregled poruka poslanih pedijatrima, dodavanje novih pacijenata te pregled već postojećih pacijenata i odobravanje bolovanja. Također pomoću GET zahtjeva mogu se dobiti podaci o trenutnom liječniku te listu ljudi bez dodijeljenog liječnika.
+			 
+			 \textit{Razred }\textbf{RoditeljController}
+			  služi za obradu zahtjeva za račun odraslih. Ovime se omogućuje pregled i slanje poruka i pregled svoje djece. Također pomoću GET zahtjeva mogu se dobiti podaci o trenutno ulogiranom odraslom. Pomomoću POST zahtjeva, osoba može ažurirati svoje i podatke svoje djece.
+			  
+			  \textit{Razred }\textbf{LoginController}
+			  služi za obradu zahtjeva za prijavu (login).
+			  Pamti referencu na apstraktni OsobaService kako bi mogao raditi operacije nad bazom Osoba.
+			  Članske funkcije 
+			  ove klase izvršavaju se prilikom primanja HTTP zahtjeva, što vrijedi općenito za Controller klase
+			  (tj. njihove objekte) u Springu. Članska funkcija login će na POST zahtjev s odgovarajućim podatcima
+			  obaviti prijavu korisnika. 
+			  Iz tijela requesta izvlače se OIB i lozinka te se pomoću Authentication Managera provjerava njihova točnost. Authentication Manager koristi Password Encoder koji primljenu lozinku hashira te će se to usporedit s hashiranom lozinkom u bazi. Ako je sve u redu, postavlja se context i time je stvoren session. Informacije o sessionu pohranjuju se u obliku UserDetails objekta. Ovaj controller ima podržane i GET zahtjeve kojima se mogu vratiti OIB ili uloga trenutno ulogirane osobe.
+			  
+			  \textit{Razred }\textbf{LogoutController} služi za obradu zahtjeva za odjavu (logout). Primljenim GET zahtjevom na putanju /api/logout brišu se podaci o trenutnom session-u.
+			  
+			  \textit{Razred }\textbf{Security Helper} je razred koji sadrži pomoćnu funkciju kojom se iz requesta izvlače podaci o session-u. Preko njih se može pristupati odgovarajućem UserDetails objektu koji onda iz baze izvlači i vraća odgovarajući Osoba objekt (kao rezultat poziva funkcije).
+			  
+			  \textit{Sučelje }\textbf{OsobaRepository}
+			  daje sučelje za pristup entitetu Osoba u bazi podataka preko JPA.
+			  
+			  \textit{Sučelje }\textbf{OsobaService}
+			  opisuje operacije kojima se pristupa entitetu Osoba, 
+			  ne oslanjajući se na konkretnu implementaciju (tj. na Repository),
+			  što je u skladu sa objektnom paradigmom i omogućuje primjenu dependency injectiona.
+			  
+			  \textit{Razred }\textbf{OsobaServiceJpa}
+			  predstavlja konkretnu implementaciju sučelja OsobaService koja entitetu Osoba
+			  pristupa preko repozitorija (tipa OsobaRepository) na kojeg pamti referencu.
+			  
+			  \textit{Sučelje }\textbf{SpecialistController}
+			  služi za obradu zahtjeva za pregled specijalista za danu bolest. Pomoću GET zahtjeva se može dobiti lista svih bolnica gdje se dana bolest može liječiti.
+			  
+			  \textit{Sučelje }\textbf{PregledRepository}
+			  daje sučelje za pristup entitetu Bolnica u bazi podataka preko JPA.
+			  
+			  \textit{Sučelje }\textbf{PregledService}
+			  opisuje operaciju kojom se pristupa svim entitetima Bolnica koji su povezani sa id-em dane bolesti.
+			  
+			  \textit{Razred }\textbf{PregledServiceJpa}
+			  predstavlja konkretnu implementaciju sučelja PregledService koja entitetu Bolnica
+			  pristupa preko repozitorija (tipa PregledRepository) na kojeg pamti referencu.	 
+			
+	
 
 			\begin{figure}[H]
 				\includegraphics[width=\textwidth]{dijagrami/DijagramDTO.PNG} %veličina u odnosu na širinu linije
