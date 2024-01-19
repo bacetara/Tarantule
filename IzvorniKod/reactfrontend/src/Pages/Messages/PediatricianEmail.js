@@ -76,11 +76,11 @@ const PediatricianEmail = ({sender, receiver}) => {
                     dijagnozaID: parseInt(emailData.dijagnozaID, 10)
                 }
 
-                if (emailData.bolovanje === true) {
+                if (emailData.bolovanje === true && receiver.mail) {
                     numberOfMessages = 2;
                     messageData[1] = {
                         naslov: "Bolovanje",
-                        tijelo: "Odobreno bolovanje" + receiver.mail ? ("\nMail poslan poslodavcu " + receiver.mail) : "",
+                        tijelo: "Odobreno bolovanje" + (receiver.mail ? ("\nMail poslan poslodavcu " + receiver.mail) : ""),
                         prilog: null,
                         tip: 1,
                         prioib: emailData.prioib,
