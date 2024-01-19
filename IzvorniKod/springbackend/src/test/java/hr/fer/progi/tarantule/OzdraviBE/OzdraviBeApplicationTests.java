@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.Date;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -87,6 +88,7 @@ class OzdraviBeApplicationTests {
 		o.setPrezime("prezime");
 		o.setOib("87631723612");
 		o.setUloga("roditelj");
+		o.setDatumRod(new Date());
 
 		if (osobaService.findByOib(o.getOib()).isPresent()) {
 			osobaService.deleteOsoba(o.getOib());
