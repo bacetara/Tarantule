@@ -4,7 +4,7 @@ module.exports = function (app) {
   app.use(
     "/api",
     createProxyMiddleware({
-      target: "https://ozdraviapp-be.onrender.com:8080",
+      target: process.env.REACT_APP_PROXY_HOST,
       changeOrigin: true,
     })
   );
