@@ -51,6 +51,8 @@ class OzdraviBeApplicationTests {
 		p.setPrioib("12345678900");
 
 		assertEquals(p, porukaService.createPoruka(p));
+
+		porukaService.deletePoruka(p.getId());
 	}
 
 	@Test
@@ -79,6 +81,8 @@ class OzdraviBeApplicationTests {
 		int id = porukaService.createPoruka(p).getId();
 
 		assertTrue(porukaService.findBetween("01020304050", "12345678900").stream().map(Poruka::getId).toList().contains(id));
+
+		porukaService.deletePoruka(p.getId());
 	}
 
 	@Test
@@ -102,5 +106,7 @@ class OzdraviBeApplicationTests {
 		osobaService.updateOsoba(o);
 
 		assertFalse(osobaService.findUnassigned("roditelj").stream().map(Osoba::getOib).toList().contains(o.getOib()));
+
+		osobaService.deleteOsoba(o.getOib());
 	}
 }
