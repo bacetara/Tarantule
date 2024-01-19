@@ -7,6 +7,7 @@ import hr.fer.progi.tarantule.OzdraviBE.service.PorukaService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
 import java.util.List;
 import java.util.Optional;
@@ -30,6 +31,8 @@ public class PorukaServiceJpa implements PorukaService {
     }
 
     public Poruka updatePoruka(Poruka poruka) {
+        validate(poruka);
+
         return porukaRepository.save(poruka);
     }
 
@@ -74,6 +77,20 @@ public class PorukaServiceJpa implements PorukaService {
     }
 
     private void validate(Poruka poruka) {
-        // todo: ...
+        Assert.hasText(poruka.getNaslov(), "Message must have a title");
+        Assert.notNull(poruka.getPosoib(), "Message must have sender OIB");
+        Assert.notNull(poruka.getPrioib(), "Message must have recipient OIB");
+        Assert.hasText(poruka.getTijelo(), "Message must have body");
+        Assert.hasText(poruka.getTip(), "Message must have type");
+
+        int type = 0;
+        try {
+            type = Integer.parseInt(poruka.getTip());
+        }
+        catch (NumberFormatException ex) {
+            Assert.isTrue(false, "Invalid message type");
+        }
+
+        Assert.isTrue(type < 6 && type > 1, "Invalid message type");
     }
 }

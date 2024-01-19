@@ -9,6 +9,7 @@ import hr.fer.progi.tarantule.OzdraviBE.service.OsobaService;
 import hr.fer.progi.tarantule.OzdraviBE.service.PorukaService;
 import hr.fer.progi.tarantule.OzdraviBE.service.exceptions.InvalidAuthorizationException;
 import hr.fer.progi.tarantule.OzdraviBE.service.exceptions.NoSuchOsobaException;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/api/pediatrician/")
@@ -31,6 +33,11 @@ public class PedijatarController {
     @Secured("pedijatar")
     @PutMapping(path = "newMessage", consumes = MediaType.APPLICATION_JSON_VALUE)
     public void addMessage(@RequestBody AddMessageDTO messageData, HttpServletRequest request, HttpServletResponse response) {
+        Osoba o = SecurityHelper.getAuthenticatedOsoba(request);
+        if (o == null) {
+            throw new InvalidAuthorizationException();
+        }
+
         Poruka p = new Poruka();
         p.setNaslov(messageData.naslov());
         p.setTijelo(messageData.tijelo());
@@ -40,6 +47,13 @@ public class PedijatarController {
         p.setPrioib(messageData.prioib());
         p.setPosoib(messageData.posoib());
 
+        if (!Objects.equals(p.getPosoib(), o.getOib())) {
+            throw new AccessDeniedException("You can't send messages as another person");
+        }
+
+        if (osobaService.findByOib(p.getPrioib()).isEmpty()) {
+            throw new EntityNotFoundException("Invalid recipient OIB");
+        }
 
         porukaService.createPoruka(p);
     }

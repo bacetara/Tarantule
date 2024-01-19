@@ -51,7 +51,12 @@ public class RoditeljController {
 
     @Secured("roditelj")
     @PutMapping(path = "newMessage", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void addMessage(@RequestBody AddMessageDTO messageData) {
+    public void addMessage(@RequestBody AddMessageDTO messageData, HttpServletRequest request, HttpServletResponse response) {
+        Osoba o = SecurityHelper.getAuthenticatedOsoba(request);
+        if (o == null) {
+            throw new InvalidAuthorizationException();
+        }
+
         Poruka p = new Poruka();
         p.setNaslov(messageData.naslov());
         p.setTijelo(messageData.tijelo());
@@ -60,6 +65,12 @@ public class RoditeljController {
         p.setDijagnozaID(messageData.dijagnozaID());
         p.setPrioib(messageData.prioib());
         p.setPosoib(messageData.posoib());
+
+        if (!Objects.equals(p.getPosoib(), o.getOib()) &&
+            (osobaService.findByOib(p.getPosoib()).isEmpty() ||
+            Objects.equals(osobaService.fetch(p.getPosoib()).getRoditelj().getOib(), o.getOib()))) {
+            throw new AccessDeniedException("You can't send messages as another person");
+        }
 
 
         porukaService.createPoruka(p);
