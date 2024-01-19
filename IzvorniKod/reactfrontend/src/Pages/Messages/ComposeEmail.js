@@ -5,6 +5,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowRightFromBracket} from "@fortawesome/free-solid-svg-icons";
 
 const ComposeEmail = ({email}) => {
+    const [messageError, setMessageError] = useState(null);
 
     console.log(email);
     const history = useNavigate();
@@ -29,42 +30,50 @@ const ComposeEmail = ({email}) => {
         history(0);
     }
     function sendMessage(e) {
-        e.preventDefault();
 
 
-        const data = {
-            naslov: emailData.title,
-            tijelo: emailData.messageBody,
-            prilog: null,
-            tip: 1,
-            prioib: emailData.receiver,
-            posoib: emailData.sender,
-            dijagnozaID: null
-        };
+        if (messageError == null) {
+            e.preventDefault();
+            const data = {
+                naslov: emailData.title,
+                tijelo: emailData.messageBody,
+                prilog: null,
+                tip: 1,
+                prioib: emailData.receiver,
+                posoib: emailData.sender,
+                dijagnozaID: null
+            };
 
-        console.log("data");
-        console.log(JSON.stringify(data));
-        const options = {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        };
+            console.log("data");
+            console.log(JSON.stringify(data));
+            const options = {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            };
 
-        fetch('/api/parent/newMessage', options)
-            .then(response => {
-                if (response.ok)
-                    console.log("uspjeh");
-                else
-                    console.log("neuspjeh");
+            fetch('/api/parent/newMessage', options)
+                .then(response => {
+                    if (response.ok)
+                        console.log("uspjeh");
+                    else
+                        console.log("neuspjeh");
 
-                handleBack();
-            })
-            .catch(error => {
-                console.error('Error sending message:', error);
-            })
+                    handleBack();
+                })
+                .catch(error => {
+                    console.error('Error sending message:', error);
+                })
 
+        }
+
+    }
+
+    function isValid () {
+
+        return emailData.receiver && emailData.title !== '' && emailData.messageBody !== '';
     }
 
     return (
@@ -86,9 +95,10 @@ const ComposeEmail = ({email}) => {
                 <textarea className="inputs" id="messageBody" name="messageBody" value={emailData.messageBody}
                           onChange={handleChange}/>
 
+
                 <div className="inputs" id="messageButtons">
                     <button id="reject" type="button" onClick={handleBack}>zatvori</button>
-                    <button id="sendMessage" type="submit">pošalji</button>
+                    <button id="sendMessage" type="submit" disabled={!isValid()}>pošalji</button>
                 </div>
             </form>
         </>

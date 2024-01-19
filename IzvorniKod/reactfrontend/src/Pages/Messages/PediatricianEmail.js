@@ -222,6 +222,16 @@ const PediatricianEmail = ({sender, receiver}) => {
 
     }
 
+    function doctorExists() {
+        if (sender.uloga === "pedijatar") {
+            if (!receiver.roditelj.doktor) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     return(
         <>
 
@@ -268,9 +278,10 @@ const PediatricianEmail = ({sender, receiver}) => {
                     </label>}
 
                     <label className="check"> bolovanje roditelja
-                        <input id="bolovanje" type="checkbox"
+                        <input id="bolovanje" type="checkbox" title="potrebno je imati roditeljevog doktora u sustavu"
                                checked={emailData.bolovanje}
-                               onChange={() => handleCheckBoxChange('bolovanje')}/>
+                               onChange={() => handleCheckBoxChange('bolovanje')}
+                        disabled={!doctorExists()}/>
                     </label>
 
                     <button id="reject" type="button" onClick={handleBack}>zatvori</button>
