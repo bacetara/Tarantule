@@ -4,6 +4,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowRightFromBracket} from "@fortawesome/free-solid-svg-icons";
 import * as React from "react";
 import {useState} from "react";
+import dodajRoditelja from "./DodajRoditelja";
 
 const PregledajOsobu = ({onLogout}) => {
     const { oib } = useParams();
@@ -105,12 +106,25 @@ const PregledajOsobu = ({onLogout}) => {
                 // console.error (error);
             });
     }
+    const isValidEmail = (email) => {
+        // Regular expression for a basic email validation
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return (emailPattern.test(email) || email === "" || email === null);
+    };
 
+    const isValidOIB = (oib) => {
+        // Regular expression for 11-digit numeric input
+        const oibPattern = /^\d{11}$/;
+        return oibPattern.test(oib);
+    };
 
     function onSubmit(e){
         e.preventDefault();
         //console.log(user.adresa)
         // setError("");
+
+        if(isValidEmail(user.mail) && isValidEmail(user.oib)){
+
         const data = {
             oib: user.oib,
             ime: user.ime,
@@ -147,7 +161,7 @@ const PregledajOsobu = ({onLogout}) => {
             )
             .catch(error => {
                 // console.error (error);
-            });
+            });}
     }
 
     const onLogOutFunction = () => {
@@ -173,12 +187,14 @@ const PregledajOsobu = ({onLogout}) => {
                 <div className="info"><label>IME: </label><input onChange={onChange} name="ime" type="text" value={user.ime}/> </div>
                 <div className="info"><label>PREZIME: </label><input onChange={onChange} name="prezime" type="text" value={user.prezime}/> </div>
                 <div className="info"><label>OIB: </label><input onChange={onChange} name="oib" type="text" value={user.oib}/> </div>
-                <div className="info"><label>ADRESA: </label><input onChange={onChange} name="adresa" type="text" value={user.adresa}/> </div>
+                {isValidOIB(user.oib) ? null : <p style={{ color: 'red' }}>OIB more imati 11 znamenki</p>}
+                <div className="info"><label>ADRESA: </label><input onChange={onChange} name="adresa" type="text" value={user.adresa} /> </div>
                 <div className="info"><label>DATUM ROĐENJA: </label><input onChange={onChange} name="datumRod" type="datetime-local"
                                                                            value={user && user.datumRod ? user.datumRod.slice(0, 16) : ''}/></div>
                 {user.uloga === "dijete" || user.uloga ==="roditelj" ?
                     <><div className="info"><label>MAIL USTANOVE: </label><input onChange={onChange} name="mail" type="text" value={user.mail}/></div>
-                    <div className="info"><label>DOKTOR: </label><select id="dropdown" onChange={handleSelectChange}
+                        {isValidEmail(user.mail) ? null : <p style={{ color: 'red' }}>Krivo napisan email</p>}
+                        <div className="info"><label>DOKTOR: </label><select id="dropdown" onChange={handleSelectChange}
                                                                          value={user.doktor ? `${user.doktor.ime} ${user.doktor.prezime}` : ''}>
                         <option value={user.doktor ? `${user.doktor.ime} ${user.doktor.prezime}` : ''}
                                 disabled>{user.doktor ? `${user.doktor.ime} ${user.doktor.prezime}` : 'select someone'}</option>

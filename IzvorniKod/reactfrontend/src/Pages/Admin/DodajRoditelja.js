@@ -15,10 +15,19 @@ const DodajRoditelja = ({onLogout}) => {
     }
 
     const navigate = useNavigate();
+
+    const isValidOIB = (oib) => {
+        // Regular expression for 11-digit numeric input
+        const oibPattern = /^\d{11}$/;
+        return (oibPattern.test(oib) || oib === "" || oib === null);
+    };
+
     function onSubmit(e) {
         e.preventDefault();
         // setError("");
-        console.log("tu")
+
+        if(isValidOIB(roditeljForm.oib)){
+        //console.log("tu")
         const data = {
             oib: roditeljForm.oib,
             prezime: roditeljForm.prezime,
@@ -47,7 +56,7 @@ const DodajRoditelja = ({onLogout}) => {
             .then(navigate("/admin"))
             .catch(error => {
                 console.error(error);
-            });
+            });}
     }
 
     const onLogOutFunction = () => {
@@ -73,6 +82,8 @@ const DodajRoditelja = ({onLogout}) => {
                 <div className="info"><label>IME: </label><input name="ime" type="text" value={roditeljForm.ime} onChange={onChange}/></div>
                 <div className="info"><label>PREZIME: </label><input name="prezime" type="text" value={roditeljForm.prezime} onChange={onChange}/></div>
                 <div className="info"><label>OIB: </label><input name="oib" type="text" value={roditeljForm.oib} onChange={onChange}/></div>
+                {isValidOIB(roditeljForm.oib) ? null : <p style={{ color: 'red' }}>OIB mora imati 11 znamenki</p>}
+
                 <div className="info"><label>DATUM RODJENJA: </label><input name="datumRod" type="datetime-local" value={roditeljForm.datumRod} onChange={onChange}/></div>
                 <div className="buttons_horizontal">
                     <div className="addChild">
