@@ -100,7 +100,7 @@ public class AdminController {
 
         Osoba roditelj = osobaService.findByOib(childData.rodOib()).orElse(null);
         if (roditelj == null) {
-            throw new NoSuchOsobaException();
+            throw new EntityNotFoundException();
         }
 
         Osoba o = new Osoba();

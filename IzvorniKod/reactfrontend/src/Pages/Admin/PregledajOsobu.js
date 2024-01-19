@@ -123,7 +123,7 @@ const PregledajOsobu = ({onLogout}) => {
         //console.log(user.adresa)
         // setError("");
 
-        if(isValidEmail(user.mail) && isValidEmail(user.oib)){
+        if(isValidEmail(user.mail) && isValidOIB(user.oib)){
 
         const data = {
             oib: user.oib,
