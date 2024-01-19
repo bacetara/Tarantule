@@ -1,27 +1,69 @@
 import './AdminPocetna.css'
-import {Outlet, Link} from "react-router-dom";
+import {Outlet, Link, useNavigate} from "react-router-dom";
+import Container from "../Container";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faArrowRightFromBracket} from "@fortawesome/free-solid-svg-icons";
+import {useEffect} from 'react';
+import *  as React from "react";
 
-export default function AdminPocetna() {
+
+
+export default function AdminPocetna({onLogout}) {
+    const [user, setUser] = React.useState({});
+    const [items, setItems] = React.useState([]);
+    const navigate = useNavigate();
+
+    React.useEffect(() => {
+        fetch('/api/admin/me')
+            .then(data => data.json())
+            .then(user => setUser(user))
+            //.then(console.log(user))
+    }, []);
+
+    React.useEffect(()=>{
+        fetch('api/admin/listAll?unregistered=true')
+            .then(data => data.json())
+            .then(data => setItems(data))
+            //.then(console.log(items))
+    }, []);
+
+    const onLogOutFunction = () => {
+        onLogout();
+        navigate("/");
+    }
     return (
         <>
-            <div className="containeradmin">
+            <div className="header">
+
+                <div className="backOptions">
+                    <div className="logOut" onClick={() => onLogOutFunction()}>
+                        <FontAwesomeIcon id="logOutIcon" icon={faArrowRightFromBracket} style={{color: "white"}}/>
+                        <p id="logOutText">log out</p>
+                    </div>
+                </div>
+
+                <div className="profileName">{user.ime} [{user.oib}]</div>
+            </div>
+            <Container>
+                <div className="buttons">
+                    <div className="addParent"><Link className="link_na_stranicu" to="/addchild">Dodaj dijete</Link>
+                    </div>
+                    <div className="addParent"><Link className="link_na_stranicu" to="/addparent">Dodaj roditelja</Link>
+                    </div>
+                </div>
+
                 <div className="listContainer">
                     <ul>
-                        {/*{items.map((item, index) => (
-                            <li key={index}>{item}</li>
-                        ))}*/}
-                        <li><Link className="link_na_stranicu" to="/Informacije">OIB ime prezime</Link></li>
+
+                        {items.map((osoba) => (
+                            <li key={osoba.oib}><Link className="link_na_stranicu" to={`/information/${osoba.oib}`}>{osoba.oib} {osoba.ime} {osoba.prezime}</Link></li>
+                        ))}
+
+
                     </ul>
                 </div>
 
-
-
-
-            <div className="buttons">
-                <div className="addChild" > <Link className="link_na_stranicu" to="/addchild">Dodaj dijete</Link></div>
-                <div className="addParent"> <Link className="link_na_stranicu" to="/addparent">Dodaj roditelja</Link> </div>
-            </div>
-        </div>
+            </Container>
 
             <Outlet/>
         </>

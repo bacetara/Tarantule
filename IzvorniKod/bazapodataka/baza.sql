@@ -67,7 +67,7 @@ INSERT INTO Osoba (OIB,Ime,Prezime,mail,datumRod,adresa,adminPrava,lozinkaHash,U
 --pedijatar bez pacijenata 
 INSERT INTO Osoba (OIB,Ime,Prezime,mail,datumRod,adresa,adminPrava,lozinkaHash,Uloga,rodOIB,dokOIB) values ('98602316389','Krešimir','Vukić',NULL,'1995-05-09',NULL,0,NULL,'pedijatar',NULL,NULL);
 --ADMIN,roditelj s doktrom bez djece
-INSERT INTO Osoba (OIB,Ime,Prezime,mail,datumRod,adresa,adminPrava,lozinkaHash,Uloga,rodOIB,dokOIB) values ('34365097959','Domagoj','Hranilović',NULL,'1968-02-12',NULL,1,NULL,'roditelj',NULL,'12345678900');
+INSERT INTO Osoba (OIB,Ime,Prezime,mail,datumRod,adresa,adminPrava,lozinkaHash,Uloga,rodOIB,dokOIB) values ('34365097959','Domagoj','Hranilović',NULL,'1968-02-12',NULL,1,NULL,'admin',NULL,'12345678900');
 --pedijatar s više pacijenata
 INSERT INTO Osoba (OIB,Ime,Prezime,mail,datumRod,adresa,adminPrava,lozinkaHash,Uloga,rodOIB,dokOIB) values ('04693058344','Jelena','Markušić',NULL,'1978-03-11',NULL,0,NULL,'pedijatar',NULL,NULL);
 --dijete nema pedijatra
@@ -82,3 +82,63 @@ INSERT INTO Osoba (OIB,Ime,Prezime,mail,datumRod,adresa,adminPrava,lozinkaHash,U
 INSERT INTO Osoba (OIB,Ime,Prezime,mail,datumRod,adresa,adminPrava,lozinkaHash,Uloga,rodOIB,dokOIB) values ('13544256655','Jumila','Zarac',NULL,'2008-06-07',NULL,0,NULL,'dijete','44272065343','04693058344');
 --dijete ima pedijatra
 INSERT INTO Osoba (OIB,Ime,Prezime,mail,datumRod,adresa,adminPrava,lozinkaHash,Uloga,rodOIB,dokOIB) values ('09440999985','Ivo','Zarac',NULL,'2006-07-08',NULL,0,NULL,'dijete','44272065343','04693058344');
+
+--doktori bez pacijenata
+INSERT INTO Osoba (OIB,Ime,Prezime,mail,datumRod,adresa,adminPrava,lozinkaHash,Uloga,rodOIB,dokOIB) values ('52424925677','Nino','Horvat',NULL,'1975-06-18',NULL,0,NULL,'doktor',NULL,NULL);
+INSERT INTO Osoba (OIB,Ime,Prezime,mail,datumRod,adresa,adminPrava,lozinkaHash,Uloga,rodOIB,dokOIB) values ('64375832605','Roko','Adamić',NULL,'1976-01-09',NULL,0,NULL,'doktor',NULL,NULL);
+INSERT INTO Osoba (OIB,Ime,Prezime,mail,datumRod,adresa,adminPrava,lozinkaHash,Uloga,rodOIB,dokOIB) values ('59460710627','Nela','Antić',NULL,'1979-11-01',NULL,0,NULL,'doktor',NULL,NULL);
+INSERT INTO Osoba (OIB,Ime,Prezime,mail,datumRod,adresa,adminPrava,lozinkaHash,Uloga,rodOIB,dokOIB) values ('16083840799','Barbara','Vlašić',NULL,'1981-08-16',NULL,0,NULL,'doktor',NULL,NULL);
+INSERT INTO Osoba (OIB,Ime,Prezime,mail,datumRod,adresa,adminPrava,lozinkaHash,Uloga,rodOIB,dokOIB) values ('03979513475','Marino','Preković',NULL,'1981-09-26',NULL,0,NULL,'doktor',NULL,NULL);
+--pedijatri bez pacijenata
+INSERT INTO Osoba (OIB,Ime,Prezime,mail,datumRod,adresa,adminPrava,lozinkaHash,Uloga,rodOIB,dokOIB) values ('28551028893','Lorena','Vlastić',NULL,'1981-12-11',NULL,0,NULL,'pedijatar',NULL,NULL);
+INSERT INTO Osoba (OIB,Ime,Prezime,mail,datumRod,adresa,adminPrava,lozinkaHash,Uloga,rodOIB,dokOIB) values ('17132209185','Lukas','Jurić',NULL,'1984-09-18',NULL,0,NULL,'pedijatar',NULL,NULL);
+INSERT INTO Osoba (OIB,Ime,Prezime,mail,datumRod,adresa,adminPrava,lozinkaHash,Uloga,rodOIB,dokOIB) values ('82448294231','Nina','Perić',NULL,'1986-10-01',NULL,0,NULL,'pedijatar',NULL,NULL);
+INSERT INTO Osoba (OIB,Ime,Prezime,mail,datumRod,adresa,adminPrava,lozinkaHash,Uloga,rodOIB,dokOIB) values ('43332760214','Antonio','Košar',NULL,'1986-12-14',NULL,0,NULL,'pedijatar',NULL,NULL);
+INSERT INTO Osoba (OIB,Ime,Prezime,mail,datumRod,adresa,adminPrava,lozinkaHash,Uloga,rodOIB,dokOIB) values ('09292348271','Vanja','Vlaković',NULL,'1987-07-22',NULL,0,NULL,'pedijatar',NULL,NULL);
+
+INSERT INTO Bolest(idBolest, naziv) values 
+  (1, 'Prijelom kosti'), 
+  (2, 'Gripa'),
+  (3, 'Migrena'),
+  (4, 'Upala pluća'),
+  (5, 'Hipertenzija'),
+  (6, 'Dijabetes'),
+  (7, 'Artritis'),
+  (8, 'Astma'),
+  (9, 'Depresija'),
+  (10, 'Anemija'),
+  (11, 'Upala bubrega'),
+  (12, 'Upala sinusa'),
+  (13, 'Osteoporoza'),
+  (14, 'Ciroza jetre'),
+  (16, 'Alergijski rinitis'),
+  (17, 'Parkinsonova bolest'),
+  (18, 'HIV/AIDS'),
+  (19, 'Oštećenje vida'),
+  (20, 'Epilepsija'),
+  (21, 'Autizam'),
+  (22, 'Šećerna bolest'),
+  (23, 'Reumatoidni artritis'),
+  (26, 'Osteoartritis'),
+  (27, 'Bipolarni poremećaj'),
+  (28, 'Infarkt miokarda'),
+  (29, 'Anksioznost'),
+  (30, 'Crohnova bolest'),
+  (31, 'Poremećaj spavanja');
+
+INSERT INTO Bolnica(idBolnica, naziv, adresaBolnice) values 
+  (1, 'Klinički bolnički centar Zagreb', 'Kišpatićeva ul. 12, 10000 Zagreb'),
+  (2, 'Klinički bolnički centar Rijeka', 'Krešimirova ul. 42, 51000 Rijeka'),
+  (3, 'Klinički bolnički centar Split', 'Spinčićeva ul. 1, 21000 Split'),
+  (4, 'Klinički bolnički centar Osijek', 'J. Huttlera 4, 31000 Osijek'),
+  (5, 'Opća bolnica Zadar', 'Ul. Bože Peričića 5, 23000 Zadar'),
+  (6, 'Opća bolnica Pula', 'Santoriova ul. 24a, 52100 Pula'),
+  (7, 'Opća bolnica Dubrovnik', 'Dr. Roka Mišetića 2, 20000 Dubrovnik'),
+  (8, 'Opća bolnica Varaždin', 'Ul. Ivana Meštrovića 1, 42000 Varaždin'),
+  (9, 'Klinički bolnički centar "Sestre milosrdnice", Zagreb', 'Vinogradska cesta 29, 10000 Zagreb'),
+  (10, 'Klinika za dječje bolesti Zagreb (KBC Zagreb)', 'Klaićeva ul. 16, 10000 Zagreb'),
+  (11, 'KBC Sveti Duh, Zagreb', 'Sveti Duh 64, 10000 Zagreb'),
+  (12, 'KBC Merkur, Zagreb', 'Zajčeva ul. 19, 10000 Zagreb'),
+  (13, 'Opća bolnica Karlovac', 'Ul. Andrije Štampara 3, 47000 Karlovac'),
+  (14, 'Opća bolnica Vukovar', 'Županijska ul. 35, 32000 Vukovar'),
+  (15, 'Opća bolnica Bjelovar', 'Ul. Antuna Mihanovića 8, 43000 Bjelovar'); 

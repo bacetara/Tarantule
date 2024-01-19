@@ -1,0 +1,148 @@
+.containerOutlet {
+    margin: 0 auto; /* Center horizontally */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: white;
+    border-radius: 10px;
+    height: 90vh;
+    width: 100%;
+    position: absolute;
+    transform: translateY(2%);
+
+}
+
+.listContainer {
+    display: flex;
+    background-color: white;
+    height: 100%;
+    width: 85%;
+    margin: 1%;
+    border-radius: 10px;
+    position: relative;
+}
+
+.listContainer ul {
+    list-style-type: none;
+    position: absolute;
+    top: 0;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    max-height: 100%;
+}
+
+.listContainer ul li {
+
+    background-color: #b6c8e0;
+    border-radius: 10px;
+    width: auto;
+    height: 10%;
+    padding: 2rem;
+    margin: 2px;
+    display: flex;
+    align-items: center;
+}
+
+li:hover {
+    transform: scale(1.02);
+}
+
+#emailSender {
+    position: absolute;
+    width: 50%;
+    left: 0;
+    padding-left: 2%;
+}
+
+#emailTitle {
+    position: absolute;
+    width: 50%;
+    right: 0;
+    font-weight: bold;
+}
+
+.listContainer2 {
+    display: flex;
+    background-color: white;
+    height: 100%;
+    width: 100%;
+    margin: 1%;
+    border-radius: 10px;
+    position: relative;
+}
+
+
+.listContainer2 ul {
+    list-style-type: none;
+    position: absolute;
+    top: 0;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    max-height: 100%;
+}
+
+.listContainer2 ul li {
+
+    background-color: #b6c8e0;
+    border-radius: 10px;
+    width: auto;
+    height: 10%;
+    padding: 2rem;
+    margin: 2px;
+    display: flex;
+    align-items: center;
+}
+
+#selectedUser {
+    background-color: #355643;
+    color: white;
+}
+
+.upisPacijenta{
+    width: 15%;
+    background-color: #7882ae;
+    border-radius: 8px;
+    min-width: 10%;
+    height: 10%;
+    align-self: start;
+    margin-top: 2%;
+    padding: 10px 1px;
+    text-align: center;
+    margin-left: 1%;
+}
+
+#myInbox {
+    background-color: #b6d5c3;/*#71a3a4*/
+    font-weight: bolder;
+    font-size: 1rem;
+    margin-bottom: 2%;
+    margin-top: 0;
+}
+
+@media screen and (max-width: 720px) {
+    li {
+        justify-content: space-between;
+    }
+
+    #emailTitle {
+        text-align: end;
+        padding-right: 1%;
+    }
+
+    .containerOutlet {
+        flex-flow: column;
+    }
+
+    .listContainer {
+        width: 100%;
+        margin: 0;
+    }
+
+    .upisPacijenta {
+        padding: 8px 12px;
+        width: fit-content;
+    }
+
+}

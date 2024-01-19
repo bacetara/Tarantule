@@ -9,14 +9,14 @@ body {
 
 
 .header {
-    position: absolute;
+    position: relative;
     display: flex;
     justify-content: space-between;
-    background: #112a47;
+    background: #27355d;
     align-content: center;
 
-    width: 100%;
-    min-height: 10%;
+    width: auto;
+    min-height: 10vh;
     flex-wrap: wrap;
 }
 
@@ -25,6 +25,52 @@ body {
     align-self: center;
     min-height: 50px;
     min-width: 80px;
+}
+
+.logOut {
+    margin: 5px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    width: 100%;
+}
+
+.header .backOptions .logOut #logOutText {
+    font-size: 1rem;
+    color: white;
+    margin: 0 10px;
+    text-decoration: none;
+}
+
+.header .backOptions {
+    display: flex;
+    flex-flow: column;
+    min-width: 40%;
+    align-items: flex-start;
+}
+
+.header .backOptions .logOut #logOutText:hover {
+    color: #ee1818;
+    cursor: pointer;
+}
+
+.header .profileName {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+    margin-right: 2%;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    max-width: 40%;
+    text-align: end;
+
+}
+
+.header .profileName div {
+    text-align: end;
+    align-self: flex-end;
 }
 
 /*----*/
@@ -66,6 +112,7 @@ body {
 
 .link_na_stranicu:hover{
     color: white;
+    cursor: pointer;
 }
 
 
@@ -96,5 +143,19 @@ body {
 
     .login {
         min-width: 50%;
+    }
+
+    .header {
+        flex-flow: column;
+        flex: 1;
+    }
+
+    .header .profileName {
+        font-size: 1rem;
+        max-width: 100%;
+    }
+
+    .header .profileName * {
+        align-self: flex-start;
     }
 }

@@ -8,9 +8,23 @@ import java.util.Optional;
 public interface OsobaService {
     List<Osoba> listAll();
 
+    List<Osoba> listRegistered();
+
     Osoba fetch(String oib);
 
     Optional<Osoba> findByOib(String oib);
 
     Osoba updateOsoba(Osoba osoba);
+
+    Osoba deleteOsoba(String oib);
+
+    Osoba createOsoba(Osoba osoba);
+
+    List<Osoba> findByType(String type);
+
+    List<Osoba> findByParent(String parentOib);
+
+    List<Osoba> findByDoctor(String doctorOib);
+
+    List<Osoba> findUnassigned(String role);
 }

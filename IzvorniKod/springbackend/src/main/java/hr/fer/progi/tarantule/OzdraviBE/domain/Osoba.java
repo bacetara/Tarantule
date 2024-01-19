@@ -28,7 +28,7 @@ public class Osoba {
 
     @NotNull
     @Column(name = "adminprava")
-    private Integer adminPrava;
+    private Integer adminPrava = 0;
 
     @Column(name = "lozinkahash")
     private String lozinkaHash;
