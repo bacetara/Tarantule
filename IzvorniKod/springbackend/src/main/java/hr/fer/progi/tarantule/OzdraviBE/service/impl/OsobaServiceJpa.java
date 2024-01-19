@@ -92,6 +92,7 @@ public class OsobaServiceJpa implements OsobaService {
     private void validate(Osoba osoba) {
         Assert.hasText(osoba.getIme(), "Person must have non-empty first name");
         Assert.hasText(osoba.getPrezime(), "Person must have non-empty last name");
+        Assert.notNull(osoba.getOib(), "Person must have OIB");
         Assert.isTrue(osoba.getOib().matches("\\d{11}"), "OIB must have 11 digits");
 
         if (osoba.getMail() != null) {

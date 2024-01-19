@@ -84,7 +84,6 @@ public class PorukaServiceJpa implements PorukaService {
         Assert.hasText(poruka.getNaslov(), "Message must have a title");
         Assert.notNull(poruka.getPosoib(), "Message must have sender OIB");
         Assert.notNull(poruka.getPrioib(), "Message must have recipient OIB");
-        Assert.hasText(poruka.getTijelo(), "Message must have body");
         Assert.hasText(poruka.getTip(), "Message must have type");
 
         int type = 0;
