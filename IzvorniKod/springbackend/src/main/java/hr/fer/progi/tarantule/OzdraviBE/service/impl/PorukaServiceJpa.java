@@ -2,6 +2,7 @@ package hr.fer.progi.tarantule.OzdraviBE.service.impl;
 
 import hr.fer.progi.tarantule.OzdraviBE.dao.PorukaRepository;
 import hr.fer.progi.tarantule.OzdraviBE.domain.Poruka;
+import hr.fer.progi.tarantule.OzdraviBE.service.OsobaService;
 import hr.fer.progi.tarantule.OzdraviBE.service.exceptions.PorukaAlreadyExistsException;
 import hr.fer.progi.tarantule.OzdraviBE.service.PorukaService;
 import jakarta.persistence.EntityNotFoundException;
@@ -16,6 +17,9 @@ import java.util.Optional;
 public class PorukaServiceJpa implements PorukaService {
     @Autowired
     private PorukaRepository porukaRepository;
+
+    @Autowired
+    private OsobaService osobaService;
 
     public List<Poruka> listAll() {
         return porukaRepository.findAll();
@@ -91,6 +95,9 @@ public class PorukaServiceJpa implements PorukaService {
             Assert.isTrue(false, "Invalid message type");
         }
 
-        Assert.isTrue(type < 6 && type > 1, "Invalid message type");
+        Assert.isTrue(type <= 6 && type >= 1, "Invalid message type");
+
+        Assert.isTrue(osobaService.findByOib(poruka.getPosoib()).isPresent(), "Invalid sender OIB");
+        Assert.isTrue(osobaService.findByOib(poruka.getPrioib()).isPresent(), "Invalid recipient OIB");
     }
 }

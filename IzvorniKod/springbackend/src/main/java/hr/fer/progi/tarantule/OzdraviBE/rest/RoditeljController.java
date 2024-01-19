@@ -68,7 +68,7 @@ public class RoditeljController {
 
         if (!Objects.equals(p.getPosoib(), o.getOib()) &&
             (osobaService.findByOib(p.getPosoib()).isEmpty() ||
-            Objects.equals(osobaService.fetch(p.getPosoib()).getRoditelj().getOib(), o.getOib()))) {
+            !Objects.equals(osobaService.fetch(p.getPosoib()).getRoditelj().getOib(), o.getOib()))) {
             throw new AccessDeniedException("You can't send messages as another person");
         }
 
