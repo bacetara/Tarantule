@@ -87,8 +87,8 @@ INSERT INTO Osoba (OIB,Ime,Prezime,mail,datumRod,adresa,adminPrava,lozinkaHash,U
 INSERT INTO Osoba (OIB,Ime,Prezime,mail,datumRod,adresa,adminPrava,lozinkaHash,Uloga,rodOIB,dokOIB) values ('52424925677','Nino','Horvat',NULL,'1975-06-18',NULL,0,NULL,'doktor',NULL,NULL);
 INSERT INTO Osoba (OIB,Ime,Prezime,mail,datumRod,adresa,adminPrava,lozinkaHash,Uloga,rodOIB,dokOIB) values ('64375832605','Roko','Adamić',NULL,'1976-01-09',NULL,0,NULL,'doktor',NULL,NULL);
 INSERT INTO Osoba (OIB,Ime,Prezime,mail,datumRod,adresa,adminPrava,lozinkaHash,Uloga,rodOIB,dokOIB) values ('59460710627','Nela','Antić',NULL,'1979-11-01',NULL,0,NULL,'doktor',NULL,NULL);
-INSERT INTO Osoba (OIB,Ime,Prezime,mail,datumRod,adresa,adminPrava,lozinkaHash,Uloga,rodOIB,dokOIB) values ('16083840799','Barbara','Vlašić',NULL,'1981-08-16',NULL,0,NULL,'doktor',NULL,NULL)
-INSERT INTO Osoba (OIB,Ime,Prezime,mail,datumRod,adresa,adminPrava,lozinkaHash,Uloga,rodOIB,dokOIB) values ('03979513475','Marino','Preković',NULL,'1981-09-26',NULL,0,NULL,'doktor',NULL,NULL)
+INSERT INTO Osoba (OIB,Ime,Prezime,mail,datumRod,adresa,adminPrava,lozinkaHash,Uloga,rodOIB,dokOIB) values ('16083840799','Barbara','Vlašić',NULL,'1981-08-16',NULL,0,NULL,'doktor',NULL,NULL);
+INSERT INTO Osoba (OIB,Ime,Prezime,mail,datumRod,adresa,adminPrava,lozinkaHash,Uloga,rodOIB,dokOIB) values ('03979513475','Marino','Preković',NULL,'1981-09-26',NULL,0,NULL,'doktor',NULL,NULL);
 --pedijatri bez pacijenata
 INSERT INTO Osoba (OIB,Ime,Prezime,mail,datumRod,adresa,adminPrava,lozinkaHash,Uloga,rodOIB,dokOIB) values ('28551028893','Lorena','Vlastić',NULL,'1981-12-11',NULL,0,NULL,'pedijatar',NULL,NULL);
 INSERT INTO Osoba (OIB,Ime,Prezime,mail,datumRod,adresa,adminPrava,lozinkaHash,Uloga,rodOIB,dokOIB) values ('17132209185','Lukas','Jurić',NULL,'1984-09-18',NULL,0,NULL,'pedijatar',NULL,NULL);
