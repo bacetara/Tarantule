@@ -37,61 +37,77 @@ const ReadEmail = ({email, user}) => {
         const oibRegex = /\b\d{11}\b/;
         const match = oibRegex.exec(emailData.messageBody);
 
+        fetch(`/api/doctor/viewPerson/${match[0]}`)
+            .then(data => data.json())
+            .then(data => {
+
+                console.log(data);
+
+                const messageData = {
+                    naslov: "Bolovanje",
+                    tijelo: data && data.mail ? "Odobreno bolovanje\n\nPoslan mail poslodavcu na " + data.mail : "",
+                    prilog: null,
+                    tip: 1,
+                    prioib: match ? match[0] : "", //primatelj -> roditelj
+                    posoib: emailData.receiver, //posilatelj -> doktor
+                    dijagnozaID: null
+                }
+
+                const options = {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(messageData)
+                };
+
+                const options2 = {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({id: email.id, type: 6}),
+                }
+
+
+                if (data && data.mail) {
+                    fetch('/api/doctor/newMessage', options)
+                        .then(response => {
+                            if (response.ok) {
+                                console.log("uspjeh");
+                            }
+                            else {
+                                throw new Error(response.statusText)
+                            }
+
+                        })
+                        .catch(error => {
+                            console.error('Error sending message:', error);
+                        })
+
+                    fetch('/api/doctor/markMessage', options2)
+                        .then(response => {
+                            if (response.ok) {
+                                console.log("uspjeh2");
+                                handleBack();
+                            } else {
+                                throw new Error(response.statusText)
+                            }
+                        })
+                        .catch(error => {
+                            console.log(error)
+                        })
+                }
+
+            })
+
+
 
         console.log(match[0]);
 
-        const messageData = {
-            naslov: "Bolovanje",
-            tijelo: "Odobreno bolovanje",
-            prilog: null,
-            tip: 1,
-            prioib: match ? match[0] : "", //primatelj -> roditelj
-            posoib: emailData.receiver, //posilatelj -> doktor
-            dijagnozaID: null
-        }
-        const options = {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(messageData)
-        };
 
-        const options2 = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({id: email.id, type: 6}),
-        }
-
-        fetch('/api/doctor/newMessage', options)
-            .then(response => {
-                if (response.ok) {
-                    console.log("uspjeh");
-                }
-                else {
-                    throw new Error(response.statusText)
-                }
-
-            })
-            .catch(error => {
-                console.error('Error sending message:', error);
-            })
-
-        fetch('/api/doctor/markMessage', options2)
-            .then(response => {
-                if (response.ok) {
-                    console.log("uspjeh2");
-                    handleBack();
-                } else {
-                    throw new Error(response.statusText)
-                }
-            })
-            .catch(error => {
-                console.log(error)
-            })
     }
+
 
     return (
         <>

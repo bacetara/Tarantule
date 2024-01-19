@@ -73,7 +73,7 @@ const ComposeEmail = ({email}) => {
 
     function isValid () {
 
-        return emailData.receiver && emailData.title !== '' && emailData.messageBody !== '';
+        return emailData.receiver && emailData.title !== '';
     }
 
     return (

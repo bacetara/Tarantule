@@ -92,12 +92,24 @@ const PediatricianEmail = ({sender, receiver}) => {
             } else if (emailData.naslov === "dijagnoza" || emailData.naslov === "nalaz") {
                 messageData[0] = {
                     naslov: emailData.naslov === "dijagnoza" ? "Obavljeni pregled" : "Nalaz iz laboratorija",
-                    tijelo: emailData.bolovanje ? emailData.tijelo +  "\n\nOdobreno bolovanje\n" : emailData.tijelo,
+                    tijelo: emailData.tijelo,
                     prilog: null,
                     tip: 1,
                     prioib: emailData.prioib,
                     posoib: emailData.posoib,
                     dijagnozaID: null
+                }
+
+                if (emailData.bolovanje && receiver.mail) {
+                    messageData[1] = {
+                        naslov: "Bolovanje",
+                        tijelo: "\n\nOdobreno bolovanje\nPoslan mail poslodavcu na " + receiver.mail,
+                        prilog: null,
+                        tip: 1,
+                        prioib: emailData.prioib,
+                        posoib: emailData.posoib,
+                        dijagnozaID: null
+                    }
                 }
             }
         }

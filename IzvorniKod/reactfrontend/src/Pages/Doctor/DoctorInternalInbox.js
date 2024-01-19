@@ -25,7 +25,6 @@ export default function DoctorInternalInbox({onLogout}) {
             .then(data => data.json())
             .then(data => setMedicEmails(data))
     }, []);
-
     const openEmail = (email) => {
         setSelectedEmail(email);
         console.log(email)
