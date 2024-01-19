@@ -27,9 +27,56 @@
 	
 			
 			\subsection{Ispitivanje komponenti}
-			\textit{Potrebno je provesti ispitivanje jedinica (engl. unit testing) nad razredima koji implementiraju temeljne funkcionalnosti. Razraditi \textbf{minimalno 6 ispitnih slučajeva} u kojima će se ispitati redovni slučajevi, rubni uvjeti te izazivanje pogreške (engl. exception throwing). Poželjno je stvoriti i ispitni slučaj koji koristi funkcionalnosti koje nisu implementirane. Potrebno je priložiti izvorni kôd svih ispitnih slučajeva te prikaz rezultata izvođenja ispita u razvojnom okruženju (prolaz/pad ispita). }
+			Ispitivanje komponenti provedeno je koristeći radni okvir \textit{JUnit 5}. Testovi se u tom radnom okviru pišu jednostavno kao zasebne metode. Ako testna metoda dođe do svog kraja, to znači da je test prošao, a ako se dogodi iznimka, test je pao. Osim toga, \textit{JUnit 5} daje velik broj \textit{assertion} metoda koje provjeravaju dane uvjete i bacaju iznimku (ruše test) ako isti nisu ispunjeni. Ovdje je navedeno 7 testova, od jednostavnijih prema složenijima. \\
 			
+			\noindent \textbf{Prvi test} [\textit{testFetchNonexistentOsoba}] provjerava baca li se odgovarajuća iznimka pri pokušaju dohvaćanja nepostojeće osobe po OIB-u iz baze podataka. 
+			\begin{figure}[H]
+				\includegraphics[width=\textwidth]{slike/junit_1.png}
+				\caption{Prvi ispitni slučaj}
+				\label{fig:junit_1}
+			\end{figure}
+			% C:\github\Tarantule\dokumentacija\slike
+			\noindent \textbf{Drugi test} [\textit{testFetchExistingOsoba}] provjerava dohvaća li se osoba odgovarajućeg imena i prezimena pri dohvaćanju postojeće osobe po OIB-u iz baze podataka.
+			\begin{figure}[H]
+				\includegraphics[width=\textwidth]{slike/junit_2.png}
+				\caption{Drugi ispitni slučaj}
+				\label{fig:junit_2}
+			\end{figure}
 			
+			\noindent \textbf{Treći test} [\textit{testFindOsobaByParentOib}] provjerava funkcionira li metoda za dohvaćanje djece po OIB-u njihovog roditelja na način da usporedi jesu li dobiveni točni OIB-i.
+			\begin{figure}[H]
+				\includegraphics[width=\textwidth]{slike/junit_3.png}
+				\caption{Treći ispitni slučaj}
+				\label{fig:junit_3}
+			\end{figure}
+			
+			\noindent \textbf{Četvrti test} [\textit{testCreatePoruka}] provjerava može li se dodati validna poruka i hoće li funkcija za stvaranje poruke vratiti dodani objekt.
+			\begin{figure}[H]
+				\includegraphics[width=\textwidth]{slike/junit_4.png}
+				\caption{Četvrti ispitni slučaj}
+				\label{fig:junit_4}
+			\end{figure}
+			
+		 	\noindent \textbf{Peti test} [\textit{testDeletePoruka}] provjerava funkcionira li metoda za brisanje poruke iz baze na način da provjeri vraća li ista objekt s točnim identifikatorom te hoće li nakon toga pokušaj dohvaćanja poruke sa (sada nepostojećim) identifikatorom uzrokovati iznimku jer objekta više nema.
+		 	\begin{figure}[H]
+		 		\includegraphics[width=\textwidth]{slike/junit_5.png}
+		 		\caption{Peti ispitni slučaj}
+		 		\label{fig:junit_5}
+		 	\end{figure}
+		 	
+		 	\noindent \textbf{Šesti test} [\textit{testPorukaBetweenPeople}] provjerava je li moguće ispravno dohvatiti poruke u razgovoru između dvoje ljudi tako da stvori novu poruku između dvoje ljudi i zatim provjeri je li ona među porukama koje vraća testirana metoda. 
+		 	\begin{figure}[H]
+		 		\includegraphics[width=\textwidth]{slike/junit_6.png}
+		 		\caption{Šesti ispitni slučaj}
+		 		\label{fig:junit_6}
+		 	\end{figure}
+		 	
+		 	\noindent \textbf{Sedmi test} [\textit{testFindUnassignedOsoba}] provjerava metodu koja služi za pronalaženje svih osoba bez doktora/pedijatra. U bazu se doda osoba bez doktora, provjeri se da testirana metoda vraća tu osobu, zatim se osobi doda doktor i konačno se opet poziva testirana metoda i provjeri se da ona ovaj puta ne vraća osobu (jer ona sada ima doktora). 
+		 	\begin{figure}[H]
+		 		\includegraphics[width=\textwidth]{slike/junit_7.png}
+		 		\caption{Sedmi ispitni slučaj}
+		 		\label{fig:junit_7}
+		 	\end{figure}
 			
 			\subsection{Ispitivanje sustava}
 			
