@@ -119,10 +119,10 @@
 						
 						\item[] \begin{packed_enum}
 	
-							\item Korisnik na početnoj stranici odabire opciju "Registriraj se".
+							\item Korisnik na početnoj stranici odabire opciju "Registracija".
 							\item Sustav otvara ekran registracije.
 							\item Korisnik unosi svoj OIB te željenu lozinku
-							\item Korisnik potvrđuje unos podataka odabirom akcije "Potvrdi".
+							\item Korisnik potvrđuje unos podataka odabirom akcije "registracija".
 							\item Sustav provjerava i utvrđuje da je unos uspješan te obavještava korisnika o uspješnoj registraciji.
 						\end{packed_enum}
 						
@@ -138,10 +138,16 @@
 								
 							\end{packed_enum}
 							
-							\item[5.a] Odabir OIB-a za koji je zabilježeno da se osoba već registrirala u sustav
+							\item[5.a] Korisnik je unio krivi format traženih podataka (kriva duljina ili format OIB-a ili lozinke).
 							\item[] \begin{packed_enum}
 								
-								\item Sustav obavještava korisnika o neuspjeloj registraciji i prikaže mu poruku greške te ga vraća na stranicu registracije s praznim poljima (korak 3)
+								\item Sustav obaviještava korisnika da je došlo do greške te ostaje na stranici registracije (ne briše unesene podatke).
+							\end{packed_enum}
+							
+							\item[5.b] Odabir OIB-a za koji je zabilježeno da se osoba već registrirala u sustav
+							\item[] \begin{packed_enum}
+								
+								\item Sustav obavještava korisnika o neuspjeloj registraciji i prikaže mu poruku greške te ostaje na stranici registracije (ne briše unesene podatke).
 								
 								
 							\end{packed_enum}
@@ -161,10 +167,10 @@
 						
 						\item[] \begin{packed_enum}
 							
-							\item Korisnik na početnoj stranici odabire opciju "Prijavi se".
+							\item Korisnik na početnoj stranici odabire opciju "Prijava".
 							\item Sustav otvara ekran prijave.
 							\item Korisnik unosi svoj OIB te odgovarajuću lozinku.
-							\item Korisnik odabere opciju "Potvrdi".
+							\item Korisnik odabere opciju "prijava".
 							\item Sustav provjerava ispravnost unesenih podataka i utvrđuje da je unos uspješan te prikazuje korisniku ekran njegovih profila.
 						\end{packed_enum}
 						
@@ -180,10 +186,16 @@
 								
 							\end{packed_enum}
 							
-							\item[5.a] Sustav provjerava podatke i utvrđuje da je uneseni par OIB - lozinka netočan.
+								\item[5.a] Korisnik je unio krivi format traženih podataka (kriva duljina ili format OIB-a ili lozinke).
 							\item[] \begin{packed_enum}
 								
-								\item Sustav korisnika vraća na stranicu prijave s praznim poljima (korak 3).
+								\item Sustav obaviještava korisnika da je došlo do greške te ostaje na stranici prijave (ne briše unesene podatke).
+							\end{packed_enum}
+							
+							\item[5.b] Sustav provjerava podatke i utvrđuje da je uneseni par OIB - lozinka netočan.
+							\item[] \begin{packed_enum}
+								
+								\item Sustav obavještava korisnika o neuspjeloj prijavi i prikaže mu poruku greške te ostaje na stranici prijave (ne briše unesene podatke).
 								
 								
 							\end{packed_enum}
@@ -222,7 +234,7 @@
 							
 							\item Roditelj na početnoj stranici odabere svoj profil označen natpisom "Moj profil". 
 							\item Sustav roditelju prikazuje profil s pristiglim porukama.
-							\item Roditelj odabere opciju "Pregled osobnih podataka".
+							\item Roditelj stisne na ikonu profila.
 							\item Aplikacija prikazuje osobne podatke roditelja (ime, prezime, OIB, adresa, mail poslodavca, liječnik obiteljske medicine).
 						\end{packed_enum}
 						
@@ -242,7 +254,7 @@
 							
 							\item Roditelj na početnoj stranici odabere profil djeteta čiji profil želi pregledati. 
 							\item Sustav roditelju prikazuje profil s pristiglim porukama.
-							\item Roditelj odabere opciju "Pregled osobnih podataka".
+							\item Roditelj stisne na ikonu profila.
 							\item Aplikacija prikazuje osobne podatke djeteta (ime, prezime, OIB, adresa, mail škole/vrtića, pedijatar)
 						\end{packed_enum}
 						
@@ -273,9 +285,9 @@
 						
 						\item[] \begin{packed_enum}
 							
-							\item Roditelj na početnoj stranici odabere profil čije osobne podatke želi mijenjati (svoj ili od djeteta).
+							\item Roditelj na početnoj stranici odabere profil čije osobne podatke želi mijenjati (svoj ili djetetov).
 							\item Sustav roditelju vraća pregled pristiglih poruka na odabranom profilu. 
-							\item Roditelj odabere opciju "Pregled osobnih podataka".
+							\item Roditelj stisne na ikonu profila.
 							\item Sustav roditelju vraća pregled osobnih podataka za taj profil.
 							\item Na stranici s podacima roditelj bira opciju za promjenu podataka.
 							\item Sustav vraća prozor u kojem roditelj može izmijeniti podatke.
@@ -311,7 +323,7 @@
 							
 							\item Roditelj na početnoj stranici bira profil osobe čiji nalaz želi učitati.
 							\item Sustav roditelju vraća stranicu koja sadrži pregled poruka na tom profilu.
-							\item Roditelj na stranici bira opciju "Učitaj nalaz".
+							\item Roditelj na stranici bira opciju "Naruči".
 							\item Sustav roditelju prikazuje prozor u koji roditelj može učitati privitak ili pisati.
 							\item Roditelj učita nalaz u sustav i opiše ga ili postavlja pitanje ako to želi.
 							\item Roditelj odabere opciju "Pošalji" čime se nalaz šalje liječniku obiteljske medicine ili pedijatru (ovisno o tome s čijeg se profila šalje).
@@ -323,10 +335,16 @@
 						
 						\item[] \begin{packed_item}
 							
-							\item[6.a] Roditelj učita nalaz ali odabere opciju "Odustani".
+							\item[6.a] Roditelj učita nalaz ali odabere opciju "Zatvori".
 							\item[] \begin{packed_enum}
 								
 								\item Nalaz se neće poslati i sustav će vratit roditelja na pregled poruka na profilu.
+							\end{packed_enum}
+							
+							\item[6.b] Roditelj nije prijavljen ni kod jednog liječnika ili dijete nije prijavljeno ni kod jednog pedijatra.
+							\item[] \begin{packed_enum}
+								
+								\item Roditelju neće biti omogućena opcija "Pošalji".
 							\end{packed_enum}
 							
 							
@@ -358,7 +376,7 @@
 							\item[4.a] Roditelj nije unio svoju adresu u sustav.
 							\item[] \begin{packed_enum}
 								
-								\item Sustav obavještava roditelja da za prikaz mogućih zdravstvenih institucija na mapi roditelj mora ažurirati podatak o svojoj adresi na svom profilu.
+								\item Sustav umjesto karte prikazuje poruku pogreške.
 							\end{packed_enum}
 							
 							
@@ -381,7 +399,7 @@
 							\item Roditelj na početnoj stranici bira opciju "Moj profil".
 							\item Sustav roditelju vraća pregled poruka na njegovom profilu.
 							\item Roditelj odabere jednu od poruka s naslovom "[BOLOVANJE]".
-							\item Sustav roditelju vraća pregled poruke - roditelj može vidjeti razlog bolovanja (bolest roditelja ili bolest djeteta), trajanje bolovanja te informacija da je odgovarajući mail poslan poslodavcu.
+							\item Sustav roditelju vraća pregled poruke - roditelj može vidjeti poruku liječnika te informaciju da je odgovarajući mail poslan poslodavcu.
 						\end{packed_enum}
 						
 						\item  \textbf{Opis mogućih odstupanja:}
@@ -391,7 +409,7 @@
 							\item[4.a] Roditelj nije unio mail adresu svog poslodavca.
 							\item[] \begin{packed_enum}
 								
-								\item Unutar obavijesti će biti naznačeno da mail nije poslan poslodavcu jer roditelj u sustav nije unio taj mail.
+								\item Unutar obavijesti neće biti naznačeno da je mail poslan poslodavcu.
 							\end{packed_enum}
 							
 							
@@ -419,7 +437,7 @@
 						
 						\item[] \begin{packed_item}
 							
-							\item[4.a] Roditelj nije unio mail adresu vrtića/škole na profilu djeteta.
+							\item[3.a] Roditelj nije unio mail adresu vrtića/škole na profilu djeteta.
 							\item[] \begin{packed_enum}
 								
 								\item Ispričnica neće biti poslana (a time roditelj neće nikada ni dobiti obavijest o poslanoj ispričnici).
@@ -446,6 +464,19 @@
 							\item Roditelj odabere jednu od poruka s naslovom "[OBAVLJENI PREGLED]".
 							\item Sustav vraća pregled poruke roditelju - roditelj može vidjeti informacije o obavljenom pregledu te dijagnozi.
 						\end{packed_enum}
+						
+						\item  \textbf{Opis mogućih odstupanja:}
+						
+						\item[] \begin{packed_item}
+							
+							\item[3.a] Roditelj ili dijete nisu obavili nijedan pregled ili pregled čije informacije želimo vidjeti još nije zapisan u sustav od strane liječnika ili pedijatra.
+							\item[] \begin{packed_enum}
+								
+								\item Roditelju se neće prikazati nijedna poruka s naslovom [OBAVLJENI PREGLED], tj. neće se prikazati poruka koja odgovara pregledu čine informacije želi vidjeti.
+							\end{packed_enum}
+							
+							
+						\end{packed_item}
 						
 						
 					\end{packed_item}
@@ -477,7 +508,7 @@
 						
 						\item[] \begin{packed_item}
 							
-							\item[7.a] Roditelj odabere opciju "Odustani".
+							\item[7.a] Roditelj odabere opciju "Zatvori".
 							\item[] \begin{packed_enum}
 								
 								\item Odgovor neće biti poslan i sustav vraća roditelja na pregled poruka profila.
@@ -508,7 +539,7 @@
 						
 					\end{packed_item}
 					
-					\noindent \underbar{\textbf{UC13 - Prijava novog djeteta kod pedijatra}}
+					\noindent \underbar{\textbf{UC13 - Prijavi novo dijete kod pedijatra}}
 					\begin{packed_item}
 						
 						\item \textbf{Glavni sudionik: }Pedijatar
@@ -519,9 +550,9 @@
 						
 						\item[] \begin{packed_enum}
 							
-							\item Pedijatar na početnoj stranici bira opciju "Prijavi novo dijete".
+							\item Pedijatar na početnoj stranici bira opciju "Dodaj pacijenta".
 							\item Sustav pedijatru vraća popis djece koja još nisu prijavljena kod nekog pedijatra.
-							\item Pedijatar u popisu neprijavljene djece pronalazi dijete koje želi prijaviti kod sebe i odabere opciju "Prijavi".
+							\item Pedijatar u popisu neprijavljene djece pronalazi dijete koje želi prijaviti kod sebe, stisne na njega te odabere opciju "Upiši".
 							\item Sustav bilježi da je to dijete sada prijavljeno kod tog pedijatra i vraća pedijatra na popis djece prijavljene kod njega.
 						\end{packed_enum}
 						
@@ -541,9 +572,9 @@
 							
 							\item Pedijatar na početnoj stranici iz popisa djece prijavljene kod njega bira dijete čiji pregled želi unijeti.
 							\item Sustav pedijatru vraća pregled poruka s profilom djeteta.
-							\item Pedijatar bira opciju "Dijagnoza".
+							\item Pedijatar bira opciju "Nova poruka".
 							\item Sustav pedijatru vraća prozor u kojem pedijatar može unijeti podatke o pregledu.
-							\item Pedijatar opiše pregled i dijagnozu te opcionalno može odabrati šalje li se ispričnica i preporuka za bolovanje roditelja.
+							\item Pedijatar bira kao naslov poruke "Dijagnoza", opiše pregled i dijagnozu te opcionalno može odabrati šalje li se ispričnica i preporuka za bolovanje roditelja.
 							\item Pedijatar bira opciju "Pošalji".
 							\item Pregled je zabilježen i sustav vraća pedijatra na pregled poruka s profilom djeteta.
 						\end{packed_enum}
@@ -552,7 +583,7 @@
 						
 						\item[] \begin{packed_item}
 							
-							\item[6.a] Pedijatar bira opciju "Odustani".
+							\item[6.a] Pedijatar bira opciju "Zatvori".
 							\item[] \begin{packed_enum}
 								
 								\item Podaci neće biti upisani i sustav vraća pedijatra na pregled poruka s profilom djeteta.
@@ -578,9 +609,9 @@
 							
 							\item Pedijatar na početnoj stranici iz popisa djece prijavljene kod njega bira dijete čijem roditelju želi izdati preporuku za bolovanje.
 							\item Sustav pedijatru vraća pregled poruka s profilom djeteta.
-							\item Pedijatar bira opciju "Dijagnoza".
+							\item Pedijatar bira opciju "Nova poruka".
 							\item Sustav pedijatru vraća prozor u kojem može opisati dijagnozu djeteta.
-							\item Pedijatar opiše razlog izdavanja preporuke te bira opciju "Preporuka za bolovanje roditelja" i opciju "Ispričnica školi/vrtiću".
+							\item Pedijatar bira naslov "Dijagnoza", opiše razlog izdavanja preporuke te bira opciju "Bolovanje roditelja" i opciju "Ispričnica".
 							\item Pedijatar bira opciju "Pošalji".
 							\item Sustav pošalje poruku liječniku, a pedijatra vraća na pregled poruka s profilom djeteta.
 						\end{packed_enum}
@@ -589,7 +620,7 @@
 						
 						\item[] \begin{packed_item}
 							
-							\item[6.a] Pedijatar bira opciju "Odustani".
+							\item[6.a] Pedijatar bira opciju "Zatvori".
 							\item[] \begin{packed_enum}
 								
 								\item Preporuka neće biti upisana i sustav vraća pedijatra na pregled poruka s profilom djeteta.
@@ -614,9 +645,9 @@
 							
 							\item Pedijatar na početnoj stranici iz popisa djece prijavljene kod njega bira dijete čiji pregled želi unijeti.
 							\item Sustav pedijatru vraća pregled poruka s profilom djeteta.
-							\item Pedijatar bira opciju "Nalaz iz laboratorija".
+							\item Pedijatar bira opciju "Nova poruka".
 							\item Sustav pedijatru vraća prozor u kojem pedijatar može opisati te priložiti nalaz.
-							\item Pedijatar opiše nalaz te može priložiti dokument biranjem opcije "Prilog" te opcionalno može odabrati šalje li se ispričnica i preporuka za bolovanje roditelja.
+							\item Pedijatar bira kao naslov "Nalaz iz laboratorija", opiše nalaz, može priložiti dokument biranjem opcije "Prilog" te opcionalno može odabrati šalje li se ispričnica i preporuka za bolovanje roditelja.
 							\item Pedijatar bira opciju "Pošalji".
 							\item Sustav šalje poruku roditelju i pedijatra vraća na pregled poruka s profilom djeteta.
 						\end{packed_enum}
@@ -625,7 +656,7 @@
 						
 						\item[] \begin{packed_item}
 							
-							\item[6.a] Pedijatar bira opciju "Odustani".
+							\item[6.a] Pedijatar bira opciju "Zatvori".
 							\item[] \begin{packed_enum}
 								
 								\item Nalaz neće biti poslan i sustav vraća pedijatra na pregled poruka s profilom djeteta.
@@ -650,7 +681,7 @@
 							
 							\item Pedijatar na početnoj stranici iz popisa djece prijavljene kod njega bira dijete čije nalaze želi vidjeti.
 							\item Sustav pedijatru vraća pregled poruka s profilom djeteta.
-							\item Pedijatar bira jednu od poruka s naslovom "[UČITAN NALAZ]".
+							\item Pedijatar bira jednu od poruka koje je primio od roditelja.
 							\item Sustav pedijatru vraća pregled odabrane poruke.
 							\item Pedijatar može pregledati nalaz te dodatna pitanja ili informacije koje je roditelj priložio.
 						\end{packed_enum}
@@ -683,7 +714,7 @@
 						
 						\item[] \begin{packed_item}
 							
-							\item[7.a] Pedijatar odabere opciju "Odustani".
+							\item[7.a] Pedijatar odabere opciju "Zatvori".
 							\item[] \begin{packed_enum}
 								
 								\item Odgovor neće biti poslan i sustav vraća pedijatra na pregled poruka s profilom djeteta.
@@ -708,9 +739,9 @@
 							
 							\item Pedijatar na početnoj stranici iz popisa djece prijavljene kod njega bira dijete koje želi naručiti na specijalistički pregled.
 							\item Sustav pedijatru vraća pregled poruka s profilom djeteta.
-							\item Pedijatar odabere opciju "Naručivanje specijalističkog pregleda".
+							\item Pedijatar odabere opciju "Nova poruka".
 							\item Sustav pedijatru vraća prozor u kojem pedijatar bira vrstu pregleda te može utipkati napomenu.
-							\item Pedijatar odabere vrstu pregleda te dodaje napomenu ako to želi.
+							\item Pedijatar kao naslov poruke odabere "Specijalistički pregled", odabere vrstu bolesti te dodaje napomenu ako to želi.
 							\item Pedijatar odabere opciju "Pošalji".
 							\item Sustav šalje poruku roditelju i pedijatra vraća na pregled poruka s profilom djeteta.
 						\end{packed_enum}
@@ -719,7 +750,7 @@
 						
 						\item[] \begin{packed_item}
 							
-							\item[6.a] Pedijatar bira opciju "Odustani".
+							\item[6.a] Pedijatar bira opciju "Zatvori".
 							\item[] \begin{packed_enum}
 								
 								\item Dijete neće biti naručeno i sustav vraća pedijatra na pregled poruka s profilom djeteta.
@@ -759,9 +790,9 @@
 						
 						\item[] \begin{packed_enum}
 							
-							\item Liiečnik na početnoj stranici bira opciju "Prijavi novog pacijenta".
+							\item Liiečnik na početnoj stranici bira opciju "Dodaj pacijenta".
 							\item Sustav liječniku vraća popis roditelja koji još nisu prijavljeni kod nekog liječnika.
-							\item Liječnik u popisu neprijavljenih roditelja pronalazi osobu koje želi prijaviti kod sebe i odabere opciju "Prijavi".
+							\item Liječnik u popisu neprijavljenih roditelja pronalazi osobu koje želi prijaviti kod sebe, stisne na nju i odabere opciju "Upiši".
 							\item Sustav zabilježi da je roditelj sada prijavljen kod tog liječnika i vraća liječnika na popis roditelja prijavljenih kod njega.
 						\end{packed_enum}
 						
@@ -781,9 +812,9 @@
 							
 							\item Liječnik na početnoj stranici iz popisa roditelja prijavljenih kod njega bira roditelja čiji pregled želi unijeti.
 							\item Sustav liječniku vraća pregled poruka s profilom roditelja.
-							\item Liječnik bira opciju "Dijagnoza".
+							\item Liječnik bira opciju "Nova poruka".
 							\item Sustav liječniku vraća prozor u kojem liječnik može upisati podatke o pregledu.
-							\item Liječnik opiše pregled i dijagnozu te opcionalno može odabrati izdaje li se bolovanje za roditelja.
+							\item Liječnik kao naslov bira "Dijagnoza", opiše pregled i dijagnozu te opcionalno može odabrati izdaje li se bolovanje za roditelja.
 							\item Liječnik bira opciju "Pošalji".
 							\item Sustav šalje poruku roditelju i liječnika vraća na pregled roditelja prijavljenih kod njega.
 						\end{packed_enum}
@@ -792,7 +823,7 @@
 						
 						\item[] \begin{packed_item}
 							
-							\item[6.a] Liječnik bira opciju "Odustani".
+							\item[6.a] Liječnik bira opciju "Zatvori".
 							\item[] \begin{packed_enum}
 								
 								\item Pregled neće biti upisan i sustav će vratiti liječnika na pregled roditelja upisanih kod njega.
@@ -821,19 +852,11 @@
 							\item Sustav liječniku vraća pregled poruka s profilom roditelja.
 							\item Liječnik bira poruku s naslovom "[PREPORUKA BOLOVANJA]".
 							\item Sustav liječniku vraća pregled poruke.
-							\item Liječnik u novootvorenom prozoru bira opciju "Omogući bolovanje".
+							\item Liječnik u novootvorenom prozoru bira opciju "Odobri bolovanje".
 							\item Bolovanje se odobri roditelju i sustav vraća liječnika na pregled poruka s profilom roditelja.
 						\end{packed_enum}
-						\item[] \begin{packed_item}
-							
-							\item[5.a] Liječnik odabere opciju "Odbij".
-							\item[] \begin{packed_enum}
-								
-								\item Bolovanje se neće odobriti roditelju i sustav vraća liječnika na pregled poruka s profilom roditelja.
-							\end{packed_enum}
-							
-							
-						\end{packed_item}
+						
+						
 						
 						
 						
@@ -853,9 +876,9 @@
 							
 							\item Liječnik na početnoj stranici iz popisa roditelja prijavljenih kod njega bira roditelja kojem želi propisati bolovanje.
 							\item Sustav liječniku vraća pregled poruka s profilom roditelja.
-							\item Liječnik bira opciju "Dijagnoza".
+							\item Liječnik bira opciju "Nova poruka".
 							\item Sustav liječniku vraća prozor u kojem liječnik može upisati razloge propisivanja bolovanja.
-							\item Liječnik opiše razlog propisivanja bolovanja te bira opciju "Bolovanje".
+							\item Liječnik kao naslov bira "Dijagnoza", opiše razlog propisivanja bolovanja te bira opciju "Bolovanje roditelja".
 							\item Liječnik bira opciju "Pošalji".
 							\item Sustav pošalje poruku roditelju te liječnika vraća na pregled poruka s profilom roditelja.
 						\end{packed_enum}
@@ -864,7 +887,7 @@
 						
 						\item[] \begin{packed_item}
 							
-							\item[6.a] Liječnik odabere opciju "Odustani".
+							\item[6.a] Liječnik odabere opciju "Zatvori".
 							\item[] \begin{packed_enum}
 								
 								\item Preporuka za bolovanje neće biti izdana i sustav vraća liječnika na pregled roditelja upisanih kod njega.
@@ -889,9 +912,9 @@
 							
 							\item Liječnik na početnoj stranici iz popisa roditelja prijavljenih kod njega bira roditelja čiji nalaz želi unijeti.
 							\item Sustav liječniku vraća pregled poruka s profilom roditelja.
-							\item Liječnik bira opciju "Nalaz iz laboratorija".
+							\item Liječnik bira opciju "Nova poruka".
 							\item Sustav liječniku vraća prozor u kojem liječnik može opisati i priložiti nalaz.
-							\item Liječnik opiše nalaz te može priložiti dokument biranjem opcije "Prilog" te opcionalno može odabrati i opciju za izdavanje bolovanja.
+							\item Liječnik bira kao naslov "Nalaz iz laboratorija", opiše nalaz, može priložiti dokument biranjem opcije "Prilog" te opcionalno može odabrati i opciju za izdavanje bolovanja.
 							\item Liječnik bira opciju "Pošalji".
 							\item Sustav pošalje poruku roditelji i vraća liječnika na pregled poruka s profilom roditelja.
 						\end{packed_enum}
@@ -900,7 +923,7 @@
 						
 						\item[] \begin{packed_item}
 							
-							\item[6.a] Liječnik odabere opciju "Odustani".
+							\item[6.a] Liječnik odabere opciju "Zatvori".
 							\item[] \begin{packed_enum}
 								
 								\item Nalaz neće biti poslan i sustav vraća liječnika na pregled poruka s profilom roditelja.
@@ -925,7 +948,7 @@
 							
 							\item Liječnik na početnoj stranici iz popisa roditelja prijavljenih kod njega bira onog čije nalaze želi vidjeti.
 							\item Sustav liječniku vraća pregled poruka s profilom roditelja.
-							\item Liječnik bira jednu od obavijesti s naslovom "[UČITAN NALAZ]".
+							\item Liječnik bira jednu od poruka koju je poslao roditelj.
 							\item Sustav liječniku vraća pregled poruke.
 							\item Liječnik može pregledati nalaz te dodatna pitanja ili informacije koje je roditelj priložio.
 						\end{packed_enum}
@@ -982,9 +1005,9 @@
 							
 							\item Liječnik na početnoj stranici iz popisa roditelja prijavljenih kod njega bira roditelja kojeg želi naručiti na specijalistički pregled.
 							\item Sustav liječniku vrača pregled poruka s profilom roditelja.
-							\item Liječnik odabere opciju "Naručivanje specijalističkog pregleda".
-							\item Sustav liječniku vraća prozor u kojem liječnik može odabrati vrstu pregleda te dodati napomenu.
-							\item Liječnik odabere vrstu pregleda te dodaje napomenu ako to želi.
+							\item Liječnik odabere opciju "Nova poruka".
+							\item Sustav liječniku vraća prozor u kojem liječnik može odabrati vrstu bolesti te dodati napomenu.
+							\item Liječnik kao naslov bira "Specijalistički pregled", odabere vrstu bolesti te dodaje napomenu ako to želi.
 							\item Liječnik odabere opciju "Pošalji".
 							\item Sustav pošalje poruku roditelju i vraća liječnika na pregled poruka s profilom roditelja.
 						\end{packed_enum}
@@ -993,7 +1016,7 @@
 						
 						\item[] \begin{packed_item}
 							
-							\item[6.a] Liječnik odabere opciju "Odustani".
+							\item[6.a] Liječnik odabere opciju "Zatvori".
 							\item[] \begin{packed_enum}
 								
 								\item Roditelj neće biti naručen na pregled i sustav vraća liječnika na pregled poruka s profilom roditelja.
@@ -1050,7 +1073,7 @@
 							\item Administrator na početnoj stranici bira opciju "Dodaj roditelja".
 							\item Sustav administratoru vraća novi prozor u kojem se mogu upisati podaci roditelja.
 							\item Administrator upisuje ime, prezime, OIB i datum rođenja roditelja.
-							\item Administrator odabere opciju "Dodaj".
+							\item Administrator odabere opciju "Spremi".
 							\item Baza podataka se ažurira.
 							\item Sustav vraća administratora na popis svih prijavljenih osoba.
 						\end{packed_enum}
@@ -1085,7 +1108,7 @@
 							\item Administrator na početnoj stranici bira opciju "Dodaj dijete".
 							\item Sustav administratoru vraća novi prozor u kojem se mogu upisati podaci djeteta.
 							\item Administrator upisuje ime, prezime, OIB djeteta, OIB roditelja (iz liste postojećih OIB-a roditelja u sustavu) i datum rođenja djeteta.
-							\item Administrator odabere opciju "Dodaj".
+							\item Administrator odabere opciju "Spremi".
 							\item Baza podataka se ažurira.
 							\item Sustav vraća administratora na popis svih prijavljenih osoba.
 						\end{packed_enum}
@@ -1121,7 +1144,7 @@
 							\item Administrator na početnoj stranici bira iz liste prijavljenih osobu čije osobne podatke želi promijeniti.
 							\item Sustav administratoru vraća prozor u kojem se nalaze osobni podaci osobe.
 							\item Administrator u novootvorenom prozoru može mijenjati podatke osobe: ime, prezime, OIB, adresu, mail poslodavca/vrtića te može osobi pridijeliti liječnika/pedijatra.
-							\item Administrator odabere opciju "Pohrani".
+							\item Administrator odabere opciju "Spremi".
 							\item Baza podataka se ažurira.
 							\item Sustav vraća administratora na popis prijavljenih osoba.
 						\end{packed_enum}
@@ -1146,7 +1169,7 @@
 				
 					
 				\subsubsection{Dijagrami obrazaca uporabe}
-					\textbf{\textit{dio 1. revizije}}\\
+					
 						\begin{figure}[H]
 						\includegraphics[width=\textwidth]{dijagrami/UCroditelj.PNG} %veličina u odnosu na širinu linije
 						\caption{UML dijagram koji opisuje obrasce uporabe korisnika i roditelja}
@@ -1182,9 +1205,9 @@
 				
 			\subsection{Sekvencijski dijagrami}
 				
-				\textbf{\textit{dio 1. revizije}}\\
 				
-					\textbf{Obrazac uporabe UC6.2 - Učitavanje nalaza djeteta u sustav, UC14 - Upis podataka o pregledu djeteta obavljenom kod pedijatra i dijagnoza, UC15 - Izdavanje preporuke za bolovanje za roditelja bolesnog djeteta, UC16 - Slanje nalaza iz laboratorija djeteta, Pregled učitanih nalaza djeteta od strane roditelja, UC23 - Odobrenje preporuke za bolovanje za roditelja bolesnog djeteta}\\
+				
+					\textbf{Obrazac uporabe UC6 - Učitaj nalaz u sustav, UC14 - Upiši podatke o pregledu djeteta obavljenom kod pedijatra i dijagnoza, UC15 - Izdaj preporuku za bolovanje za roditelja bolesnog djeteta, UC16 - Pošalji nalaz iz laboratorija djeteta, UC17 - Pregledaj učitane nalaze djeteta od strane roditelja, UC23 - Odobri preporuku za bolovanje za roditelja bolesnog djeteta}\\
 				
 				
 				Ulogirani roditelj učitava nalaz svog bolesnog djeteta u web aplikaciju koja ga prosljeđuje pedijatru koji dijete naručuje na pregled te nakon pregleda roditelju šalje laboratorijski nalaz te po mogućnosti šalje ispričnicu za školu/vrtić roditelju te preporuku za bolovanje liječniku. Ako liječnik odobri bolovanje roditelju, preko aplikacije mu pošalje potvrdu.
@@ -1198,7 +1221,7 @@
 				\eject
 				
 				
-				\textbf{Obrazac uporabe UC30.1 - Prijavljivanje novog roditelja u sustav, UC30.2 - Prijavljivanje novog djeteta u sustav}\\
+				\textbf{Obrazac uporabe UC30.1 - Prijavi novog roditelja u sustav, UC30.2 - Prijavi novo dijete u sustav}\\
 				
 				Administrator se ulogirava u sustav i na početnoj stranici bira opciju dodaj roditelja te upisuje njegovo ime, prezime, OIB i datum rođenja. Pritiskom na opciju dodaj u bazu podataka se taj roditelj dodaje. Potom Administrator pokuša upisati novo dijete upisom njegovog imena, prezimena OIB-a, datuma rođenja djeteta te iz liste koja mu se aplikaciji proslijedi iz baze podataka odabere OIB roditelja djeteta kojeg želi upisati u sustav. Potom odabere opciju Dodaj te se baza podataka obnovi.
 				\eject
@@ -1212,7 +1235,7 @@
 				\eject
 				
 				
-				\textbf{Obrazac uporabe UC5.1 - Promjena osobnih podataka roditelja, UC5.2 - Promjena osobnih podataka djeteta}\\
+				\textbf{Obrazac uporabe UC5 - Promjeni osobne podatke}\\
 			
 				
 				Klijent se ulogirava u sustav unosom OIB-a i korisničke lozinke. Nakon provjere postoji li korisnički profil s danim podatcima u bazi, popis dostupnih profila se dohvaća iz baze i ispisuje korisniku. Korisnik odabire profil (vlastiti ili djetetov) te poslužitelj dohvaća podatke iz baze i ispisuje korisnički profil. Odabirom opcije "Pregled osobnih podataka" poslužitelj će iz baze dohvatiti osobne podatke korisnika te ih ispisati na ekran. Korisnik potom uređuje podatke te odabirom opcije "spremi" promjene pohranjuje u bazu. Preglednik će zatim dohvatiti početnu stranicu profila i prikazati ju korisniku.
@@ -1221,7 +1244,7 @@
 				\begin{figure}[H]
 					\includegraphics[scale=0.6]{dijagrami/OsobniPodatci.PNG} %veličina slike u odnosu na originalnu datoteku i pozicija slike
 					\centering
-					\caption{Sekvencijski dijagram za UC5.1 i UC5.2}
+					\caption{Sekvencijski dijagram za UC5}
 					\label{fig:sekvencijski1}
 				\end{figure}
 				
@@ -1229,7 +1252,7 @@
 				
 				
 				
-					\textbf{Obrazac uporabe UC13 - Prijava novog djeteta kod pedijatra, UC21 - Prijava novog roditelja kod liječnika}\\
+					\textbf{Obrazac uporabe UC13 - Prijavi novo dijete kod pedijatra, UC21 - Prijavi novog roditelja kod liječnika}\\
 				
 				
 				Liječnik (pedijatar) se ulogirava u sustav unosom OIB-a i korisničke lozinke. Preglednik poziva bazu i provjerava postoji li korisnički profil u bazi nakon čega iz baze dohvaća upisane pacijente dotičnog korisnika te ih ispisuje na ekran. Korisnik odabire opciju "Prijavi novo(g) dijete/roditelja". Preglednik iz baze dohvaća popis neupisanih pacijenata te ih ispisuje na ekran. Odabirom pacijenta preglednik u bazu upisuje novog pacijenta liječniku/pedijatru, dohvaća osvježenu tablicu upisanih pacijenata te korisniku ispisuje početnu stranicu s upisanim pacijentima.

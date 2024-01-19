@@ -27,9 +27,21 @@
 		 	
 		 Razvojni okvir koji smo odabrali za razvijanje backend dijela aplikacije jest Spring (programski jezik Java). Za razvoj frontend dijela aplikacije odlučili smo se za razvojni okvir React (programski jezik JavaScript). Odabrano razvojno okruženje je IntelliJ IDEA. Baza podataka napravljena je koristeći PostgreSQL.\\
 		 
+		 Za razvoj backenda se koristio razvojni okvir Spring MVC (Model - Pogled - Nadglednik) koji je dio Springa. Backend je po tome organiziran u 3 sloja koja međusobno komuniciraju:
+		 \begin{itemize}
+		 	\item Controller
+		 	\item Service
+		 	\item Repository
+		 \end{itemize} 
+		 \underbar{Controller} predstavlja vanjsko sučelje web aplikacije. Ovaj sloj prihvaća nadolazeće HTTP zahtjeve, poziva potrebne usluge koristeći razrede Service te vraća odgovor klijentu. \\
+		 \underbar{Service} ostvaruje funkcionalnosti koje nudi aplikacija, predstavlja logiku programa. Ostvaruje usluge, a pritom može koristiti i druge Service razrede te može zatražiti podatke od sloja Repository.\\
+		 \underbar{Repository} omogućuje komunikaciju s bazom podataka te izvlačenje podataka iz nje. Korišteno je sučelje JpaRepository koje omogućuje da se s bazom komunicira bez SQL upita - umjesto njih se koriste i modeli domene podataka. To su razredi koji predstavljaju strukturu tablica baze (entities).\\
+		 Prilikom korištenja Spring MVC-a, klijentska strana predstavlja pogled, Controller sloj predstavlja nadglednika, a model je ostvaren slojevima Service i Repository. \\
+		 
+		 
 		 Arhitektura web aplikacije temelji se na single-page application principu kojeg omogućuje razvojni okvir React. Pri početnom otvaranju web aplikacije, web preglednik korisnika uputi zahtjev frontend serveru koji mu vraća sve odgovarajuće datoteke potrebne za prikaz stranice u pregledniku (koristi se princip client-side rendering). Ovisno o prosljeđenim podacima, web preglednik prilikom obrađivanja ulaznih podataka korisnika (klik na pojedini gumb, otvaranje nove stranice) šalje zahtjeve backend serveru (ako su potrebni određeni podaci za prikaz React komponente) ili frontend serveru (za dohvat datoteka potrebnih za prikaz novog dijela stranice).
 		 
-		  	
+		 
 		  
 
 	
@@ -160,91 +172,184 @@
 			
 			
 		\section{Dijagram razreda}
-		
-			\begin{figure}[H]
-				\includegraphics[width=\textwidth]{dijagrami/classDiagram1.png} %veličina u odnosu na širinu linije
-				\caption{Dijagram razreda}
-				\label{fig:promjene10} %label mora biti drugaciji za svaku sliku
-			\end{figure}
-			\
-
-			\textit{Razred }\textbf{Osoba}
-			 predstavlja entitet Osoba baze podataka. 
-			Sadrži sve njegove atribute odgovarajućih tipova s pripadnim integritetskim ograničenjima, kao i gettere i settere za sve njih kako bi im Springov ORM mogao pristupiti.
-
-			\textit{Sučelje }\textbf{OsobaRepository}
-			 daje sučelje za pristup entitetu Osoba u bazi podataka preko JPA.
-
-			\textit{Sučelje }\textbf{OsobaService}
-			 opisuje operacije kojima se pristupa entitetu Osoba, 
-			ne oslanjajući se na konkretnu implementaciju (tj. na Repository),
-			što je u skladu sa objektnom paradigmom i omogućuje primjenu dependency injectiona.
 			
-			\textit{Razred }\textbf{OsobaServiceJpa}
-			 predstavlja konkretnu implementaciju sučelja OsobaService koja entitetu Osoba
-			pristupa preko repozitorija (tipa OsobaRepository) na kojeg pamti referencu.
-
-			\textit{Razred }\textbf{LoginController}
-			 služi za obradu zahtjeva za prijavu (login).
-			Pamti referencu na apstraktni OsobaService kako bi mogao raditi operacije nad bazom Osoba.
-			Također mora imati referencu na objekt tipa PasswordEncoder čiji je zadatak primijeniti hash algoritam
-			na dobivenu lozinku kako bi se mogla usporediti sa hashem koji je spremljen u bazi. Članske funkcije 
-			ove klase izvršavaju se prilikom primanja HTTP zahtjeva, što vrijedi općenito za Controller klase
-			(tj. njihove objekte) u Springu. Članska funkcija login će na POST zahtjev s odgovarajućim podatcima
-			obaviti prijavu korisnika. Članska funkcija getAllOsoba postoji isključivo za svrhe testiranja i ona će na GET zahtjev vratiti popis svih osoba
-			u JSON formatu. 
-
+			Dijagram razreda strukturni je dijagram koji prikazuje razrede, njihove atribute te veze između razreda. Na slici \ref{fig:dijagramdto} prikazana je struktura DTO razreda. Na slici \ref{fig:dijagramcontroll} prikazani su Controlleri, Service razredi te Repository razredi. Na slici \ref{fig:dijagramdomain} prikazana je struktura domain razreda (modela). 
+			
+			
+			\begin{figure}[H]
+				\includegraphics[width=\textwidth]{dijagrami/Class Diagram3.png} %veličina u odnosu na širinu linije
+				\caption{Dijagram Controllera, Servica i Repository-a}
+				\label{fig:dijagramcontroll} %label mora biti drugaciji za svaku sliku
+			\end{figure}
+			
+			\textit{Sučelje }\textbf{DiagnosisController}
+			služi za obradu zahtjeva za pregled bolesti. Pomoću GET zahtjeva se može dobiti lista svih bolesti.
+			
+			\textit{Sučelje }\textbf{BolestRepository}
+			 daje sučelje za pristup entitetu Bolest u bazi podataka preko JPA.
+			
+			\textit{Sučelje }\textbf{BolestService}
+			 opisuje operaciju kojom se pristupa svim entitetima Bolest.
+			
+			\textit{Razred }\textbf{BolestServiceJpa}
+			 predstavlja konkretnu implementaciju sučelja BolestService koja entitetu Bolest
+			pristupa preko repozitorija (tipa BolestRepository) na kojeg pamti referencu.
+			
+			\textit{Sučelje }\textbf{HospitalController}
+			služi za obradu zahtjeva za pregled bolnica. Pomoću GET zahtjeva se može dobiti lista svih bolnica.
+			
+			\textit{Sučelje }\textbf{BolnicaRepository}
+			daje sučelje za pristup entitetu Bolnica u bazi podataka preko JPA.
+			
+			\textit{Sučelje }\textbf{BolnicaService}
+			opisuje operaciju kojom se pristupa svim entitetima Bolnica.
+			
+			\textit{Razred }\textbf{BolnicaServiceJpa}
+			predstavlja konkretnu implementaciju sučelja BolnicaService koja entitetu Bolnica
+			pristupa preko repozitorija (tipa BolnicaRepository) na kojeg pamti referencu.
+			
+			\textit{Razred }\textbf{PedijatarController}
+			 služi za obradu zahtjeva za račun pedijatra. Ovime se omogućuje pregled i slanje poruka, dodavanje novih pacijenata te pregled već postojećih pacijenata. Također pomoću GET zahtjeva mogu se dobiti podaci o trenutnom pedijatru te listu djece bez dodijeljenog pedijatra.
+			
 			\textit{Razred }\textbf{RegisterController}
 			 služi za obradu zahtjeva za registraciju (register).
 			Isto kao i razred LoginController, drži referencu na OsobaService radi pristupa bazi i na PasswordEncoder
 			kako bi dobivene lozinke mogao hashirati prije spremanja u bazu. Članska funkcija register će na POST
 			zahtjev s odgovarajućim podatcima pokušati izvršiti registraciju novog korisnika. 
+			
+			\textit{Razred }\textbf{AdminController}
+			 služi za obradu zahtjeva za račun admina. Ovo omogućuje korisnicima sa admin privilegijama da dodaju nove osobe i djecu u sustav, te dobiju listu svih osoba u sustavu. Također pomoću GET zahtjeva je moguće dobiti entitet osobe preko njenog OIB-a, te podatke trenutno ulogiranog korisnika. Pomoću POST zahtjeva mogu se ažurirati podaci o osobama u sustavu.
+			 
+			 \textit{Razred }\textbf{LijecnikController}
+			 služi za obradu zahtjeva za račun liječnika. Ovime se omogućuje pregled, slanje i brisanje poruka te pregled poruka poslanih pedijatrima, dodavanje novih pacijenata te pregled već postojećih pacijenata i odobravanje bolovanja. Također pomoću GET zahtjeva mogu se dobiti podaci o trenutnom liječniku te listu ljudi bez dodijeljenog liječnika.
+			 
+			 \textit{Razred }\textbf{RoditeljController}
+			  služi za obradu zahtjeva za račun odraslih. Ovime se omogućuje pregled i slanje poruka i pregled svoje djece. Također pomoću GET zahtjeva mogu se dobiti podaci o trenutno ulogiranom odraslom. Pomomoću POST zahtjeva, osoba može ažurirati svoje i podatke svoje djece.
+			  
+			  \textit{Razred }\textbf{LoginController}
+			  služi za obradu zahtjeva za prijavu (login).
+			  Pamti referencu na apstraktni OsobaService kako bi mogao raditi operacije nad bazom Osoba.
+			  Članske funkcije 
+			  ove klase izvršavaju se prilikom primanja HTTP zahtjeva, što vrijedi općenito za Controller klase
+			  (tj. njihove objekte) u Springu. Članska funkcija login će na POST zahtjev s odgovarajućim podatcima
+			  obaviti prijavu korisnika. 
+			  Iz tijela requesta izvlače se OIB i lozinka te se pomoću Authentication Managera provjerava njihova točnost. Authentication Manager koristi Password Encoder koji primljenu lozinku hashira te će se to usporedit s hashiranom lozinkom u bazi. Ako je sve u redu, postavlja se context i time je stvoren session. Informacije o sessionu pohranjuju se u obliku UserDetails objekta. Ovaj controller ima podržane i GET zahtjeve kojima se mogu vratiti OIB ili uloga trenutno ulogirane osobe.
+			  
+			  \textit{Razred }\textbf{LogoutController} služi za obradu zahtjeva za odjavu (logout). Primljenim GET zahtjevom na putanju /api/logout brišu se podaci o trenutnom session-u.
+			  
+			  \textit{Razred }\textbf{Security Helper} je razred koji sadrži pomoćnu funkciju kojom se iz requesta izvlače podaci o session-u. Preko njih se može pristupati odgovarajućem UserDetails objektu koji onda iz baze izvlači i vraća odgovarajući Osoba objekt (kao rezultat poziva funkcije).
+			  
+			  \textit{Sučelje }\textbf{OsobaRepository}
+			  daje sučelje za pristup entitetu Osoba u bazi podataka preko JPA.
+			  
+			  \textit{Sučelje }\textbf{OsobaService}
+			  opisuje operacije kojima se pristupa entitetu Osoba, 
+			  ne oslanjajući se na konkretnu implementaciju (tj. na Repository),
+			  što je u skladu sa objektnom paradigmom i omogućuje primjenu dependency injectiona.
+			  
+			  \textit{Razred }\textbf{OsobaServiceJpa}
+			  predstavlja konkretnu implementaciju sučelja OsobaService koja entitetu Osoba
+			  pristupa preko repozitorija (tipa OsobaRepository) na kojeg pamti referencu.
+			  
+			  \textit{Sučelje }\textbf{SpecialistController}
+			  služi za obradu zahtjeva za pregled specijalista za danu bolest. Pomoću GET zahtjeva se može dobiti lista svih bolnica gdje se dana bolest može liječiti.
+			  
+			  \textit{Sučelje }\textbf{PregledRepository}
+			  daje sučelje za pristup entitetu Bolnica u bazi podataka preko JPA.
+			  
+			  \textit{Sučelje }\textbf{PregledService}
+			  opisuje operaciju kojom se pristupa svim entitetima Bolnica koji su povezani sa id-em dane bolesti.
+			  
+			  \textit{Razred }\textbf{PregledServiceJpa}
+			  predstavlja konkretnu implementaciju sučelja PregledService koja entitetu Bolnica
+			  pristupa preko repozitorija (tipa PregledRepository) na kojeg pamti referencu.	 
+			
+	
 
-			\textit{Zapis }\textbf{LoginDTO}
-			 je pomoćni Data Transfer Object zapis, koji, kao što mu ime nalaže, služi za pakiranje
-			dobivenih podataka pri prijavi ili registraciji u Java objekt. 
-
+			\begin{figure}[H]
+				\includegraphics[width=\textwidth]{dijagrami/DijagramDTO.PNG} %veličina u odnosu na širinu linije
+				\caption{Dijagram DTO}
+				\label{fig:dijagramdto} %label mora biti drugaciji za svaku sliku
+			\end{figure}
+			
+			Razredi DTO su pomoćni Data Transfer Object zapisi koji služe za pakiranje podataka dobivenih iz HTTP zahtjeva u Java objekt ili obratno. Koriste se u Controllerima. 
+			
+			\textit{Zapis }\textbf{LoginDTO} iz zahtjeva izvlači OIB i lozinku kako bi se osoba mogla registrirati ili prijaviti. Njega prima npr. LoginController.
+			
+			\textit{Zapis }\textbf{GetParentDTO} se koristi za vraćanje podataka kao odgovor na zahtjev za dohvaćanje djece. Taj objekt se tada pretvara u JSON.  
+			
+			Razredi \textbf{GetDoctorDTO} i \textbf{GetChildDTO} koriste se također za vraćanje podataka kao odgovor na zahtjev, a razredi \textbf{AssignPatientDTO}, \textbf{AddParentDTO}, \textbf{AddMessageDTO}, \textbf{AddChildDTO} i \textbf{AddBolovanjeMessageDTO} za izvlačenje podataka iz zahtjeva.
+			
+			\begin{figure}[H]
+				\includegraphics[width=\textwidth]{dijagrami/DijagramDomain.PNG} %veličina u odnosu na širinu linije
+				\caption{Dijagram modela}
+				\label{fig:dijagramdomain} %label mora biti drugaciji za svaku sliku
+			\end{figure}
+			
+			Na dijagramu modela razredi predstavljaju entitete iz baze podataka zajedno s njihovim atributima te njihovim vezama.
+			
+			\textit{Razred }\textbf{Osoba}
+			predstavlja entitet Osoba baze podataka. 
+			Osim glavnih atributa koji predstavljaju općenite podatke o osobi (oim, ime, prezime itd.) sadrži i referencu na objekt Osoba koji predstavlja roditelja osobe te na objekt Osoba koji predstavlja doktora (oboje mogu biti null).
+			
+			\textit{Razred }\textbf{Poruka} predstavlja poruku u bazi podataka. 
+			
+			\textit{Razred }\textbf{Pregled} predstavlja povezanost između određene bolesti i bolnice u kojoj se ta bolest liječi. Ovaj razred koristi se pomoćnim razredom PregledId koji ne predstavlja entitet u bazi već je korišten zato što razred Pregled ima kompozitni ključ u bazi.
+			
+			\textit{Razred }\textbf{Bolest} predstavlja bolest.
+			
+			\textit{Razred }\textbf{Bolnica} predstavlja bolnicu.
+			
+			
+			Osim razreda prikazanih na dijagramima, korišteni su i drugi razredi od kojih su najbitniji:
+			
 			\textit{Razred }\textbf{RestExceptionHandler}
-			 služi za hvatanje iznimki koje mogu biti bačene prilikom obrade HTTP zahtjeva u Controllerima i ovisno o iznimki
+			služi za hvatanje iznimki koje mogu biti bačene prilikom obrade HTTP zahtjeva u Controllerima i ovisno o iznimki
 			vraća pravilan HTTP odgovor (npr. odgovor ne smije biti 500 ako se dogodi iznimka pri obradi zahtjeva jer je korisnika
 			unio nepravilne podatke). Članska funkcija handleInvalidPassword će uhvatiti iznimke uzrokovane
 			pogrešnim podatcima za prijavu ili registraciju i vratiti HTTP odgovor sa smislenom porukom.
-
+			
 			\textit{Razred }\textbf{WebSecurityBasic}
-			 služi za konfiguriranje sigurnosnih postavki. U ovom trenutku su one najosnovnije.
-
+			služi za konfiguriranje sigurnosnih postavki. U razredu je specificirano da su zahtjevi mapirani na putanjama /api/login/* i /api/register/* dozvoljeni neovisno o tome je li osoba prijavljena. Ostale putanje su dostupne samo prijavljenim osobama.
+			
 			\textit{Razred }\textbf{OzdraviBeApplication}
-			 je automatski generiran od strane Springa i sadrži ulaznu točku za izvršavanje programa.
-
-			\
-
-			\textbf{\textit{dio 2. revizije}}\\			
-			
-			\textit{Prilikom druge predaje projekta dijagram razreda i opisi moraju odgovarati stvarnom stanju implementacije}
-			
-			
+			je automatski generiran od strane Springa i sadrži ulaznu točku za izvršavanje programa.
 			
 			\eject
 		
 		\section{Dijagram stanja}
 			
 			
-			\textbf{\textit{dio 2. revizije}}\\
+			Dijagram stanja opisuje dinamičko ponašanje dijela sustava. Na slici \ref{fig:dijagramstanja} prikazan je dijagram stanja za prijavljenog roditelja. Roditelju se nakon prijave prikazuje popis profila kojima može pristupati (profil roditelja i profili njegove djece). Odabirom pojedinog profila aplikacija roditelju prikaže poruke tog profila. Klikom na gumb za prikaz osobnih podataka profila, aplikacija roditelju pokaže iste te roditelj ima daljnju opciju promjene podataka. Ako roditelj na stranici s prikazanim porukama profila odabere pojedinu poruku, otvori se novi prozor u kojem se prikazuje poruka te karta ako se radi o obavijesti za naručeni pregled. Roditelj može na svaku poruku odgovoriti te mu se tada otvori novi prozor za sastavljanje poruke u kojem je automatski postavljen i primatelj poruke. Roditelju se prozor za sastavljanje poruke otvara i ako na stranici gdje su prikazane poruke tog profila klikne na gumb za učitavanje nalaza. Roditelj se u svakom trenutku može odjaviti ili vratiti na stranicu s popisom dostupnih profila.
 			
-			\textit{Potrebno je priložiti dijagram stanja i opisati ga. Dovoljan je jedan dijagram stanja koji prikazuje \textbf{značajan dio funkcionalnosti} sustava. Na primjer, stanja korisničkog sučelja i tijek korištenja neke ključne funkcionalnosti jesu značajan dio sustava, a registracija i prijava nisu. }
+			\begin{figure}[H]
+				\includegraphics[width=\textwidth]{dijagrami/Dijagram stanja.PNG} %veličina u odnosu na širinu linije
+				\caption{Dijagram stanja}
+				\label{fig:dijagramstanja} %label mora biti drugaciji za svaku sliku
+			\end{figure}
 			
 			
 			\eject 
 		
 		\section{Dijagram aktivnosti}
 			
-			\textbf{\textit{dio 2. revizije}}\\
-			
-			 \textit{Potrebno je priložiti dijagram aktivnosti s pripadajućim opisom. Dijagram aktivnosti treba prikazivati značajan dio sustava.}
+			 
+			 Dijagram aktivnosti primjenjuje se za modeliranje upravljačkog i podatkovnog toka. Na slici \ref{fig:dijagramaktivnosti} prikazan je dijagram aktivnosti za upisivanje podataka o obavljenom pregledu kod pedijatra. Nakon što pedijatar upiše podatke za prijavu u sustav, web aplikacija iz baze podataka izvlači potrebne informacije za provjeru ispravnosti podataka. Ako su podaci neispravni, prikazuje se poruka greške, a ako su ispravni web aplikacija prijavljenom pedijatru prikaže popis djece prijavljene kod njega. Pedijatar potom bira dijete za kojeg želi upisati pregled (preduvjet za to je da je dijete prijavljeno kod njega). Nakon odabira djeteta web aplikacija pedijatru prikaže poruke s profilom tog djeteta. Pedijatar sad može odabrati opciju za unos pregleda nakon čega se otvara novi prozor u kojem pedijatar može unijeti potrebne podatke. Kada je gotov s unosom podataka, pedijatar bira opciju za slanje dijagnoze. Web aplikacija novostvorenu poruku koja sadrži podatke o pregledu pohranjuje u bazu, a pedijatru se opet prikažu poruke s profilom djeteta.
+			 
+			 \begin{figure}[H]
+			 	\includegraphics[width=\textwidth]{dijagrami/Dijagram aktivnosti.PNG} %veličina u odnosu na širinu linije
+			 	\caption{Dijagram aktivnosti}
+			 	\label{fig:dijagramaktivnosti} %label mora biti drugaciji za svaku sliku
+			 \end{figure}
 			
 			\eject
 		\section{Dijagram komponenti}
 		
-			\textbf{\textit{dio 2. revizije}}\\
-		
-			 \textit{Potrebno je priložiti dijagram komponenti s pripadajućim opisom. Dijagram komponenti treba prikazivati strukturu cijele aplikacije.}
+			 
+			 Dijagram komponenti strukturni je UML dijagram koji je dio specifikacije arhitekture programske potpore. Prikazuje organizaciju i međuovisnost između implementacijskih komponenata. Na slici \ref{fig:dijagramkomponenti} prikazan je dijagram komponenti aplikacije. React komponente frontenda preko REST zahtjeva šalju upite backend dijelu. Zahtjev prvo dolazi do Controllers razreda koji je zaštićen zahvaljujući WebSecurityBasic implementaciji. Data transfer object (DTO) omogućuje lagan pristup podacima koji su poslani u sklopu REST zahtjeva backendu. Controllers razredi preko Service implementacija mogu pozvati potrebne usluge. Service preko Repository-ja može pristupati podacima u bazi. Controllers razredi u sebi sadrže referencu na sučelje Service, a ne na konkretnu implementaciju. Tako i Service razredi u sebi sadrže referencu na sučelje Repository. To omogućuje tzv. dependency injection (Spring automatski spaja na odgovarajuću implementaciju). Radi lakšeg rada s entitetima iz baze, framework se automatski pobrine za object relational mapping. Domain klase predstavljaju strukture i atribute entiteta iz baze. SQL baza podataka nudi sučelje za dohvat podataka.
+			 
+			 \begin{figure}[H]
+			 	\includegraphics[width=\textwidth]{dijagrami/Dijagram komponenti.PNG} %veličina u odnosu na širinu linije
+			 	\caption{Dijagram komponenti}
+			 	\label{fig:dijagramkomponenti} %label mora biti drugaciji za svaku sliku
+			 \end{figure}
