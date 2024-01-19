@@ -30,6 +30,26 @@ public class LijecnikController {
     private OsobaService osobaService;
 
     @Secured("doktor")
+    @GetMapping("viewPerson/{oib}")
+    public Osoba getOsoba(@PathVariable("oib") String oib, HttpServletRequest request, HttpServletResponse response) {
+        Osoba o = SecurityHelper.getAuthenticatedOsoba(request);
+        if (o == null) {
+            throw new InvalidAuthorizationException();
+        }
+
+        Osoba res = osobaService.findByOib(oib).orElse(null);
+        if (res == null) {
+            throw new EntityNotFoundException("OIB doesn't exist");
+        }
+
+        if (!Objects.equals(res.getDoktor().getOib(), o.getOib())) {
+            throw new AccessDeniedException("You don't have access to this person");
+        }
+
+        return res;
+    }
+
+    @Secured("doktor")
     @PutMapping(path = "newMessage", consumes = MediaType.APPLICATION_JSON_VALUE)
     public void addMessage(@RequestBody AddMessageDTO messageData, HttpServletRequest request, HttpServletResponse response) {
         Osoba o = SecurityHelper.getAuthenticatedOsoba(request);
