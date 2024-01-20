@@ -218,6 +218,23 @@
 			 
 			 Na kraju, servis se pokreće klikom na opciju “manual deploy - deploy latest commit”, no ovo se treba napraviti tek nakon namještanja baze podataka.
 			 
+			 \begin{figure}[H]
+				\includegraphics[width=\textwidth]{slike/beDeploy1.png} %veličina u odnosu na širinu linije
+				\caption{Postavke za backend instancu, prvi dio}
+				\label{fig:beDeploy1} %label mora biti drugaciji za svaku sliku
+			 \end{figure}
+
+			 \begin{figure}[H]
+				\includegraphics[width=\textwidth]{slike/beDeploy2.png} %veličina u odnosu na širinu linije
+				\caption{Postavke za backend instancu, drugi dio}
+				\label{fig:beDeploy2} %label mora biti drugaciji za svaku sliku
+			 \end{figure}
+
+			 \begin{figure}[H]
+				\includegraphics[width=\textwidth]{slike/environmentBe.png} %veličina u odnosu na širinu linije
+				\caption{Varijable okruženja za backend}
+				\label{fig:beEnv} %label mora biti drugaciji za svaku sliku
+			 \end{figure}
 			 
 			 \textbf{Baza podataka}
 			 
@@ -227,6 +244,11 @@
 			 
 			 Pri radu s bazom podataka treba obratiti pozornost na kodne stranice. Zato je važno (vrijedi za Windows okruženje) prije spajanja na bazu podataka unijeti naredbu “\textit{chcp 65001}”, a nakon spajanja na bazu unijeti SQL naredbu “\textit{set client\_encoding = ‘UTF8’}”, kako bi se hrvatska slova ispravno prikazivala.
 			 
+			 \begin{figure}[H]
+				\includegraphics[width=\textwidth]{slike/bazaDeploy.png} %veličina u odnosu na širinu linije
+				\caption{Postavke za instancu baze podataka}
+				\label{fig:bazaDeploy} %label mora biti drugaciji za svaku sliku
+			 \end{figure}
 			 
 			 \textbf{Frontend}
 			 
@@ -237,8 +259,23 @@
 			 
 			 Aplikaciji se sada može pristupiti koristeći URL frontenda (\href{ozdraviapp-fe.onrender.com}{što se tiče ove aplikacije ovdje}). Valja napomenuti da se nakon perioda nekorištenja render instance same gase, pa je zato prvo pokretanje nakon nekoliko sati obično vrlo sporo.
 			
+			 \begin{figure}[H]
+				\includegraphics[width=\textwidth]{slike/feDeploy1.png} %veličina u odnosu na širinu linije
+				\caption{Postavke za frontend instancu, prvi dio}
+				\label{fig:feDeploy1} %label mora biti drugaciji za svaku sliku
+			 \end{figure}
+
+			 \begin{figure}[H]
+				\includegraphics[width=\textwidth]{slike/feDeploy2.png} %veličina u odnosu na širinu linije
+				\caption{Postavke za frontend instancu, drugi dio}
+				\label{fig:feDeploy2} %label mora biti drugaciji za svaku sliku
+			 \end{figure}
 			 
-			 
+			 \begin{figure}[H]
+				\includegraphics[width=\textwidth]{slike/environmentFe.png} %veličina u odnosu na širinu linije
+				\caption{Varijable okruženja za frontend}
+				\label{fig:environmentFe} %label mora biti drugaciji za svaku sliku
+			 \end{figure}
 			
 			
 			\eject 
