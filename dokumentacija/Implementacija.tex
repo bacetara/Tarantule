@@ -195,14 +195,14 @@
 		
 		\section{Upute za puštanje u pogon}
 			 
-			 Za deploy aplikacije se koristi servis Render\footnote{https://render.com/} koji nudi opciju korištenja besplatnih instanci na cloudu. Naravno, one nude malo procesorske snage i takoder imaju neka druga ograničenja ali je to sasvim dovoljno za ovaj projekt. Potrebno je napraviti tri instance na Renderu: na jednoj će biti upogonjen backend, druga ce posluživati frontend, a treća PostgreSQL bazu podataka.
+			 Za deploy aplikacije se koristi servis Render\footnote{https://render.com/} koji nudi opciju korištenja besplatnih instanci na cloudu. Naravno, one nude malo procesorske snage i također imaju neka druga ograničenja ali je to sasvim dovoljno za ovaj projekt. Potrebno je napraviti tri instance na Renderu: na jednoj će biti upogonjen backend, druga ce posluživati frontend, a treća PostgreSQL bazu podataka.
 			 
 			 
 			 \textbf{Backend}
 			 
-			 Napraviti instancu tipa “web service”. Povezati ju s git repozitorijem u kojemu se nalazi projekt. Ime odabrati proizvoljno (ovdje je ozdraviapp-be), regiju postaviti na geografski najbližu (Frankfurt), za granu izabrati master, a za korijenski direktorij onaj u kojemu se nalazi java projekt za backend. Konačno, runtime će biti Docker, a zbog toga je potrebno napraviti još nekoliko koraka prije nego se aplikacija može deployati.
+			 Napraviti instancu tipa “web service”. Povezati ju s git repozitorijem u kojemu se nalazi projekt. Ime odabrati proizvoljno (ovdje \textit{ozdraviapp-be}), regiju postaviti na geografski najbližu (Frankfurt), za granu izabrati master, a za korijenski direktorij onaj u kojemu se nalazi Java projekt za backend. Konačno, runtime će biti Docker, a zbog toga je potrebno napraviti još nekoliko koraka prije nego se aplikacija može deployati.
 			 
-			 Kako bi se docker mogao koristiti pri deployu, potrebno  je u korijenski direktorij backend projekta dodati novi direktorij docker i u njemu Dockerfile. Njegov sadržaj vidljiv je na slici \ref{fig:docker1}.
+			 Kako bi se Docker mogao koristiti pri deployu, potrebno je u korijenski direktorij backend projekta dodati novi direktorij \textit{docker} i u njemu Dockerfile. Njegov sadržaj vidljiv je na slici \ref{fig:docker1}.
 			 
 			 \begin{figure}[H]
 			 	\includegraphics[width=\textwidth]{slike/docker.PNG} %veličina u odnosu na širinu linije
@@ -210,11 +210,11 @@
 			 	\label{fig:docker1} %label mora biti drugaciji za svaku sliku
 			 \end{figure}
 			 
-			 Ukratko, Dockerfile će napraviti okruženje u koje će kopirati izvorni kod backenda i sve potrebne datoteke te kompajlirati taj kod, a zatim u drugo okruženje kopirati dobiveni .jar. Na kraju, definira se da se pri pokretanju kontejnera pokreće upravo taj .jar pomoću JVM. Koriste se docker slike openjdk:21-jdk, zbog toga što je potreban JDK kako bi se kompajlirao Java projekt.
+			 Ukratko, Dockerfile će napraviti okruženje u koje će kopirati izvorni kod backenda i sve potrebne datoteke te kompajlirati taj kod, a zatim u drugo okruženje kopirati dobiveni \textit{.jar}. Na kraju, definira se da se pri pokretanju kontejnera pokreće upravo taj \textit{.jar} pomoću JVM. Koriste se Docker slike openjdk:21-jdk, zbog toga što je potreban JDK kako bi se kompajlirao Java projekt.
 			 
-			 Sada se na renderu može izabrati besplatna verzija instance te stvoriti web servis. Potrebno je namjestiti varijable okruženja, što se može pronaći u kartici “Environment”.
+			 Sada se na Renderu može izabrati besplatna verzija instance te stvoriti web servis. Potrebno je namjestiti varijable okruženja, što se može pronaći u kartici “Environment”.
 			 
-			 Spring za spajanje na bazu podataka koristi varijable SPRING\_DATASOURCE\_URL, SPRING\_DATASOURCE\_NAME, SPRING\_DATASOURCE\_PASSWORD. Sve one moraju biti postavljene na odgovarajuće vrijednosti kako bi aplikacija funkcionirala. Ove varijable se mogu definirati tek kad se stvori render instanca za posluživanje baze podataka.
+			 Spring za spajanje na bazu podataka koristi varijable \textit{SPRING\_DATASOURCE\_URL}, \textit{SPRING\_DATASOURCE\_NAME}, \textit{SPRING\_DATASOURCE\_PASSWORD}. Sve one moraju biti postavljene na odgovarajuće vrijednosti kako bi aplikacija funkcionirala. Ove varijable se mogu definirati tek kad se stvori Render instanca za posluživanje baze podataka.
 			 
 			 Na kraju, servis se pokreće klikom na opciju “manual deploy - deploy latest commit”, no ovo se treba napraviti tek nakon namještanja baze podataka.
 			 
@@ -225,14 +225,14 @@
 			 
 			 U postavkama instance se sada može pronaći URL baze podataka na poslužitelju, kao i lozinka za kreiranog korisnika. Ove podatke valja zapisati u odgovarajuće varijable okruženja u instanci za backend. Osim toga, prikazana je i naredba koja se može iskoristiti za povezivanje na bazu podataka. Sada je dovoljno iskoristiti tu naredbu za spajanje na bazu podataka i dalje je sve isto kao i kad se radi lokalno. Sa “\textbackslash i  \textit{imeSqlSkripte}” se može pokrenuti skripta za stvaranje tablica i sl.
 			 
-			 Pri radu s bazom podataka treba obratiti pozornost na kodne stranice. Zato je važno (vrijedi za Windows okruženje) prije spajanje na bazu podataka unijeti naredbu “chcp 65001”, a nakon spajanja na bazu unijeti SQL naredbu “set client\_encoding = ‘UTF8’”, kako bi se hrvatska slova ispravno prikazivala.
+			 Pri radu s bazom podataka treba obratiti pozornost na kodne stranice. Zato je važno (vrijedi za Windows okruženje) prije spajanja na bazu podataka unijeti naredbu “\textit{chcp 65001}”, a nakon spajanja na bazu unijeti SQL naredbu “\textit{set client\_encoding = ‘UTF8’}”, kako bi se hrvatska slova ispravno prikazivala.
 			 
 			 
 			 \textbf{Frontend}
 			 
-			 Opet, stvoriti render instancu, ovog puta tipa “web servis”, kao i za backend. Povezati s git repozitorijem. Postavke izabrati na analogan način kao i za backend. Ime proizvoljno (ovdje “ozdraviapp-fe”), regija geografski najbliža, grana master, korijenski direktorij frontend projekta i besplatna verzija. No, ovdje runtime neće biti Docker već Node.js.
+			 Opet, stvoriti Render instancu, ovog puta tipa “web servis”, kao i za backend. Povezati s git repozitorijem. Postavke izabrati na analogan način kao i za backend. Ime proizvoljno (ovdje \textit{ozdraviapp-fe}), regija geografski najbliža, grana master, korijenski direktorij frontend projekta i besplatna verzija. No, ovdje runtime neće biti Docker već Node.js. U polje \textit{Build command} upisati "\textit{yarn build}", a u polje \textit{Start command} upisati "\textit{npm start}".
 			 
-			 Kako bi frontend funkcionirao, treba mu dati do znanja gdje se nalazi backend. To treba postaviti u datoteci setupProxy.js. Za lokalno testiranje, postavljeno je da svi pozivi prema putanjama /api/… budu preusmjereni na localhost:8080 (port na kojemu je backend). Analogno tome, za deploy ovi pozivi trebaju ići na URL na kojemu se nalazi backend (npr. ozdraviapp-be.onrender.com), a koji se može pronaći u postavkama instance na kojoj je backend.
+			 Kako bi frontend funkcionirao, treba mu dati do znanja gdje se nalazi backend. To treba postaviti u datoteci setupProxy.js. Za lokalno testiranje, postavljeno je da svi pozivi prema putanjama /api/… budu preusmjereni na localhost:8080 (port na kojemu je backend). Analogno tome, za deploy ovi pozivi trebaju ići na URL na kojemu se nalazi backend (npr. \textit{ozdraviapp-be.onrender.com}), a koji se može pronaći u postavkama instance na kojoj je backend.
 			 Taj se URL može ili kodirati u samu datoteku setupProxy.js ili postaviti kao varijabla okruženja na render instanci za frontend (što je bolja opcija) i onda se u kodu dohvatiti pomoću “process.env.IME\_VARIJABLE”. Sada se frontend može pokrenuti na isti način kao i backend, opcijom “manual deploy - deploy latest commit”.
 			 
 			 Aplikaciji se sada može pristupiti koristeći URL frontenda (\href{ozdraviapp-fe.onrender.com}{što se tiče ove aplikacije ovdje}). Valja napomenuti da se nakon perioda nekorištenja render instance same gase, pa je zato prvo pokretanje nakon nekoliko sati obično vrlo sporo.
