@@ -16,3 +16,7 @@ Osobe u bazi koje su registrirane (za testiranje prijave direktno):
 - OIB: 04693058344, lozinka: jasamjelena, pedijatar s pacijentima
 
 link: https://ozdraviapp-fe.onrender.com
+
+## Početna stranica
+![image of front page](assets/example1.jpeg)
+![image of front page 2](assets/example2.jpeg)
