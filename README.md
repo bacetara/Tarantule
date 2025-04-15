@@ -18,5 +18,5 @@ Osobe u bazi koje su registrirane (za testiranje prijave direktno):
 link: https://ozdraviapp-fe.onrender.com
 
 ## Početna stranica
-![image of front page](assets/example1.jpeg)
-![image of front page 2](assets/example2.jpeg)
+![image of front page](assets/example2.jpeg)
+![image of front page 2](assets/example1.jpeg)
